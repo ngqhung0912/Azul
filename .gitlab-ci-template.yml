@@ -30,7 +30,7 @@ PlayerTest:
   script:
     - pwd
     - cd Azul/
-    - mvn verify
+    - mvn -e -X verify
   artifacts:
     when: always
     reports:
