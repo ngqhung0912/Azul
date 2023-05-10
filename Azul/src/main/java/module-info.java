@@ -1,8 +1,9 @@
-module com.example.azul {
+module pppp.group14project.azul {
   requires javafx.controls;
   requires javafx.fxml;
+  requires static lombok;
 
 
-  opens com.example.azul to javafx.fxml;
-  exports com.example.azul;
+  opens pppp.group14project.azul to javafx.fxml;
+  exports pppp.group14project.azul;
 }
