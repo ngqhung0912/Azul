@@ -24,18 +24,18 @@ build-job:
     - echo "The University has general runners that will execute the pipeline available, but you must specify which docker image it needs to use as the environment to run in."
     - echo "See https://hub.docker.com/ for a listing of available images"
 
-test-job1:
+PlayerTest:
   image: maven
   stage: test
   script:
     - echo "script lines are executed as bash commands in the main repository folder."
-    - cd java-test-project2/Demo-Project
+    - cd Azul/
     - mvn verify
   artifacts:
     when: always
     reports:
       junit:
-        - java-test-project2/Demo-Project/target/surefire-reports/TEST-*.xml
+        - Azul/target/surefire-reports/TEST-*.xml
 
 test-job2:
   image: alpine
