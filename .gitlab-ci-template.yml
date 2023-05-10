@@ -28,7 +28,7 @@ PlayerTest:
   image: maven
   stage: test
   script:
-    - echo "script lines are executed as bash commands in the main repository folder."
+    - pwd
     - cd Azul/
     - mvn verify
   artifacts:
