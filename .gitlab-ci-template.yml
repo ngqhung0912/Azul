@@ -17,6 +17,8 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 build-job:
+  tags:
+    - pppp
   image: openjdk:17
   stage: build
   script:
@@ -25,6 +27,8 @@ build-job:
     - echo "See https://hub.docker.com/ for a listing of available images"
 
 modelTest-job:
+  tags:
+    - pppp
   image: maven
   stage: test
   script:
@@ -35,11 +39,14 @@ modelTest-job:
     when: always
     reports:
       junit:
-        - target/surefire-reports/TEST-*.xml
-
+        - Azul/Model/target/surefire-reports/TEST-*.xml
 
 # deploy-prod:
 #   image: alpine
 #   stage: deploy
 #   script:
 #     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+
+
+
+
