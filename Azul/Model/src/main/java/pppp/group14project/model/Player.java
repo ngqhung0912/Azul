@@ -1,4 +1,4 @@
-package pppp.group14project.azul.Model;
+package pppp.group14project.model;
 
 import lombok.Getter;
 import lombok.Setter;

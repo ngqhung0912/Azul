@@ -2,7 +2,7 @@ package UnitTest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pppp.group14project.azul.Model.Player;
+import pppp.group14project.model.Player;
 
 import static org.junit.jupiter.api.Assertions.*;
 
