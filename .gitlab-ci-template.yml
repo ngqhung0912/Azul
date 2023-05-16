@@ -16,6 +16,12 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
+stages:
+  - build
+  - test
+  - deploy
+  - report
+
 build-job:
   image: alpine
   stage: build
@@ -51,3 +57,42 @@ deploy-prod:
   stage: deploy
   script:
     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+
+
+sigridci:
+  stage: report
+  image:
+    name: softwareimprovementgroup/sigridci
+  tags:
+    - pppp
+
+  script:
+    - sigridci.py --customer utst --system P42023T14 --source . 
+  allow_failure: true
+  artifacts:
+    paths:
+      - "sigrid-ci-output/*"
+    reports:
+      junit: "sigrid-ci-output/sigridci-junit-format-report.xml"
+    expire_in: 1 week
+    when: always
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+    
+sigridpublish:
+  stage: report
+  image:
+    name: softwareimprovementgroup/sigridci
+  tags:
+    - pppp
+
+  script:
+    - sigridci.py --customer utst --system P42023T14 --source . --publish
+  allow_failure: true
+  artifacts:
+    paths:
+      - "sigrid-ci-output/*"
+    expire_in: 1 week
+    when: always
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
