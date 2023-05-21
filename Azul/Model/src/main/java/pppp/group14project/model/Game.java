@@ -25,6 +25,10 @@ public class Game {
   }
 
   public Boolean addBoard(Board board) {
+    if (boardlist.size() < 4) {
+      boardlist.add(board);
+      return true;
+    }
     return false;
   }
 }
