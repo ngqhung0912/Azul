@@ -14,5 +14,6 @@
 
     <Label fx:id="welcomeText" id="welcomeText"/>
     <TextField fx:id="usernameTextField" promptText="Enter your username"/>
-    <Button text="Start Game!" onAction="#onStartGameButtonClick"/>
+    <Button text="Add player!" onAction="#onAddPlayerButtonClick"/>
+    <Button text="Start game!" onAction="#onStartGameButtonClick"/>
 </VBox>
