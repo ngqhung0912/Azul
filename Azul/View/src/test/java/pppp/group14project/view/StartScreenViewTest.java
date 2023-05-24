@@ -22,7 +22,6 @@ public class StartScreenViewTest extends ApplicationTest {
     public void start (Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("start-screen-view.fxml"));
         stage.setScene(new Scene(root,320, 240));
-//        stage.setTitle("Azul is the best game ever!");
         stage.show();
         stage.toFront();
     }
