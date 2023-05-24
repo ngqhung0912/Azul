@@ -17,15 +17,15 @@ public class GameBoardController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("player-board-view.fxml"));
-      VBox playerBoard1 = loader.load();
-      VBox playerBoard2 = loader.load();
-      gameBoardGrid.add(playerBoard1, 0, 0);
-      gameBoardGrid.add(playerBoard2, 0, 300);
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+//    try {
+//      FXMLLoader loader = new FXMLLoader(getClass().getResource("player-board-view.fxml"));
+//      VBox playerBoard1 = loader.load();
+//      VBox playerBoard2 = loader.load();
+//      gameBoardGrid.add(playerBoard1, 0, 0);
+//      gameBoardGrid.add(playerBoard2, 0, 300);
+//
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
   }
 }

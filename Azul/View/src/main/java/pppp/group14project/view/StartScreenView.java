@@ -10,7 +10,7 @@ import java.io.IOException;
 public class StartScreenView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(StartScreenView.class.getResource("start-screen-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartScreenView.class.getResource("/start-screen-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Azul is the best game ever!");
         stage.setScene(scene);

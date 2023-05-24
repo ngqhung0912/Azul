@@ -30,7 +30,11 @@ public class GameController {
   }
 
   public void onStartGameButtonClick() {
-    System.out.println("Start game button clicked!");
-    // TODO: switch to game board scene using scene manager
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("/game-board-view.fxml"));
+      usernameTextField.getScene().setRoot(root);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
