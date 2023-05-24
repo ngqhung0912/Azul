@@ -11,4 +11,6 @@
             fx:controller="pppp.group14project.controller.PlayerBoardController"
             prefHeight="200.0" prefWidth="300.0">
 
+    <Label fx:id="playerName"/>
+
 </AnchorPane>
