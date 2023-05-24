@@ -8,6 +8,8 @@ import pppp.group14project.model.TileContainer;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 class TileContainerTest {
 
     private TileContainer tileContainer;
@@ -47,7 +49,7 @@ class TileContainerTest {
 
         List<Tile> result = tileContainer.grabBagTiles(110);
         assertEquals(tileContainer.getBagTiles().size(), 100);
-        assertEquals(result, null);
+        assertNull(result);
 
     }
 

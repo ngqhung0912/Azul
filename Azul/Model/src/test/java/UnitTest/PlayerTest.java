@@ -24,6 +24,4 @@ class PlayerTest {
     void TestPlayerCreation() {
         assertEquals(player.getName(), playerName);
     }
-
-
 }

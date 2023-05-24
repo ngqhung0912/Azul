@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class TileContainer {
 
-    private static Integer DEFAULT_NUMBER_OF_TILES_PER_COLOR = 20;
+    private static final int DEFAULT_NUMBER_OF_TILES_PER_COLOR = 20;
     private static TileContainer tileContainer = new TileContainer();
 
     public static TileContainer getTileContainer() {
@@ -31,7 +31,7 @@ public class TileContainer {
     public void reset() {
         this.bagTiles = new ArrayList<>();
         this.discardedTiles = new ArrayList<>();
-        for (Integer i = 0; i < DEFAULT_NUMBER_OF_TILES_PER_COLOR; i++ ) {
+        for (int i = 0; i < DEFAULT_NUMBER_OF_TILES_PER_COLOR; i++ ) {
             this.bagTiles.add(Tile.BLACK);
             this.bagTiles.add(Tile.BLUE);
             this.bagTiles.add(Tile.WHITE);
@@ -45,10 +45,10 @@ public class TileContainer {
      * @param numberOfTiles the number of tiles to get from the bag
      * @return a list of the tiles
      */
-    public List<Tile> grabBagTiles(Integer numberOfTiles) {
+    public List<Tile> grabBagTiles(int numberOfTiles) {
         List<Tile> returnedTiles = new ArrayList<>();
         Random rand = new Random();
-        for (Integer i = 0; i < numberOfTiles; i++) {
+        for (int i = 0; i < numberOfTiles; i++) {
             try {
                 Tile t = this.bagTiles.remove(rand.nextInt(this.bagTiles.size()));
                 returnedTiles.add(t);
