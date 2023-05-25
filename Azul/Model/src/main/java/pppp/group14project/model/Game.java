@@ -1,7 +1,6 @@
 package pppp.group14project.model;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ public class Game {
     return false;
   }
 
-  public List<String> getUsernameList() {
+  public List<String> getPlayerNameList() {
     List<String> usernameList = new ArrayList<String>();
     for (Board board : boardlist) {
       usernameList.add(board.getPlayer().getName());

@@ -26,7 +26,7 @@ public class GameController {
     Board board = new Board(player);
     game.addBoard(board);
 
-    welcomeText.setText("Welcome " + game.getUsernameList() + "!");
+    welcomeText.setText("Welcome " + game.getPlayerNameList() + "!");
   }
 
   public void onStartGameButtonClick() {
