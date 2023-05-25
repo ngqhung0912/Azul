@@ -22,9 +22,7 @@ build-job:
   image: openjdk:17
   stage: build
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
-    - echo "The University has general runners that will execute the pipeline available, but you must specify which docker image it needs to use as the environment to run in."
-    - echo "See https://hub.docker.com/ for a listing of available images"
+    - echo "Hello"
 
 modelTest-job:
   tags:
@@ -32,7 +30,6 @@ modelTest-job:
   image: maven
   stage: test
   script:
-    - pwd
     - cd Azul/Model
     - mvn verify
   artifacts:
@@ -40,6 +37,24 @@ modelTest-job:
     reports:
       junit:
         - Azul/Model/target/surefire-reports/TEST-*.xml
+
+viewTest-job:
+  tags:
+    - pppp
+  image: maven
+  stage: test
+  script:
+    - cd Azul/Model
+    - mvn clean install
+    - cd ../Controller
+    - mvn clean install
+    - cd ../View
+    - mvn verify
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - Azul/View/target/surefire-reports/TEST-*.xml
 
 # deploy-prod:
 #   image: alpine
