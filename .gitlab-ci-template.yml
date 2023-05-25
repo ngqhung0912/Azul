@@ -46,7 +46,9 @@ viewTest-job:
   image: maven
   stage: test
   script:
-    - cd Azul/View
+    - cd Azul/Controller
+    - mvn clean install
+    - cd ../View
     - mvn verify
   artifacts:
     when: always
