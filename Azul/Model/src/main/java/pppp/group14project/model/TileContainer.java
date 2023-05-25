@@ -2,6 +2,7 @@ package pppp.group14project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import pppp.group14project.model.exceptions.EmptyException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class TileContainer {
      * @param numberOfTiles the number of tiles to get from the bag
      * @return a list of the tiles
      */
-    public List<Tile> grabBagTiles(int numberOfTiles) {
+    public List<Tile> grabBagTiles(int numberOfTiles) throws EmptyException {
         List<Tile> returnedTiles = new ArrayList<>();
         Random rand = new Random();
         for (int i = 0; i < numberOfTiles; i++) {
@@ -54,7 +55,7 @@ public class TileContainer {
                 returnedTiles.add(t);
             } catch(IndexOutOfBoundsException | IllegalArgumentException e) {
                 this.bagTiles = returnedTiles;
-                return null;
+                throw new EmptyException("No more tiles left in the tile bag");
             }
         }
         return returnedTiles;
@@ -67,12 +68,6 @@ public class TileContainer {
     public void moveDiscardedTiles() {
         bagTiles.addAll(discardedTiles);
         discardedTiles = new ArrayList<>();
-    }
-
-    public static void main(String[] args) {
-        TileContainer tileContainer = new TileContainer();
-        System.out.println(tileContainer.grabBagTiles(66));
-        System.out.println(tileContainer.getBagTiles().size());
     }
 
 }

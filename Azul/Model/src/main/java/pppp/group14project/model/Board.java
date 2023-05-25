@@ -16,8 +16,10 @@ public class Board {
     @Setter
     private Floor floor;
     @Getter
-    @Setter
     private Player player;
+    @Getter
+    @Setter
+    private int score;
 
     public Board(Player player) {
         this.player = player;
@@ -26,4 +28,10 @@ public class Board {
     public void placeOnWall() {}
 
     public void destroyAll() {}
+
+
+  public Board(Player player) {
+    this.player = player;
+    this.score = 0;
+  }
 }

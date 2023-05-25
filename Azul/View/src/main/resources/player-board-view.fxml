@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pppp.group14project.controller.PlayerBoardController"
+            prefHeight="200.0" prefWidth="300.0">
+
+    <Label fx:id="playerName"/>
+
+</GridPane>
