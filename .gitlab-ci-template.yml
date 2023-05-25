@@ -32,8 +32,21 @@ modelTest-job:
   image: maven
   stage: test
   script:
-    - pwd
     - cd Azul/Model
+    - mvn verify
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - Azul/Model/target/surefire-reports/TEST-*.xml
+
+viewTest-job:
+  tags:
+    - pppp
+  image: maven
+  stage: test
+  script:
+    - cd Azul/View
     - mvn verify
   artifacts:
     when: always
