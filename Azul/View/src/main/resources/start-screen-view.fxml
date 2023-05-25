@@ -12,7 +12,8 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="welcomeText" id="welcomeText"/>
+    <Label fx:id="welcomeText"/>
     <TextField fx:id="usernameTextField" promptText="Enter your username"/>
-    <Button fx:id="startButton" text="Start Game!" onAction="#onStartGameButtonClick"/>
+    <Button fx:id="addPlayerButton" text="Add player!" onAction="#onAddPlayerButtonClick"/>
+    <Button fx:id="startButton" text="Start game!" onAction="#onStartGameButtonClick"/>
 </VBox>

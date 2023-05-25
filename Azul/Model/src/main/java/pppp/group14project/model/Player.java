@@ -9,13 +9,8 @@ public class Player {
     @Setter
     private String name;
 
-    @Getter
-    @Setter
-    private int score;
-
     public Player(String name) {
         this.name = name;
-        this.score = 0;
     }
 
     public static void main(String[] args) {
