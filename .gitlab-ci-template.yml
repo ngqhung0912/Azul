@@ -46,6 +46,8 @@ viewTest-job:
   image: maven
   stage: test
   script:
+    - cd Azul/Model
+    - mvn clean install
     - cd Azul/Controller
     - mvn clean install
     - cd ../View
