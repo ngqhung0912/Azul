@@ -21,6 +21,8 @@ build-job:
     - pppp
   image: openjdk:17
   stage: build
+  script:
+    - echo "Hello"
 
 modelTest-job:
   tags:
