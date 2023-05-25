@@ -21,10 +21,6 @@ public class Board {
     @Setter
     private int score;
 
-    public Board(Player player) {
-        this.player = player;
-    }
-
     public void placeOnWall() {}
 
     public void destroyAll() {}
