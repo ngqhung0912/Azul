@@ -52,7 +52,7 @@ viewTest-job:
     when: always
     reports:
       junit:
-        - Azul/Model/target/surefire-reports/TEST-*.xml
+        - Azul/View/target/surefire-reports/TEST-*.xml
 
 # deploy-prod:
 #   image: alpine
