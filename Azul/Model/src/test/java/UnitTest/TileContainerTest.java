@@ -4,10 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.TileContainer;
+import pppp.group14project.model.exceptions.EmptyException;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
 class TileContainerTest {
 
     private TileContainer tileContainer;
@@ -31,7 +33,7 @@ class TileContainerTest {
      * Test grabbing tiles from the bag in the TileContainer
      */
     @Test
-    void TestTileGrabbing() {
+    void TestTileGrabbing() throws EmptyException {
 
         List<Tile> result = tileContainer.grabBagTiles(10);
         assertEquals(tileContainer.getBagTiles().size(), 90);
@@ -45,9 +47,10 @@ class TileContainerTest {
     @Test
     void TestTileGrabbingError() {
 
-        List<Tile> result = tileContainer.grabBagTiles(110);
-        assertEquals(tileContainer.getBagTiles().size(), 100);
-        assertEquals(result, null);
+        EmptyException thrown = assertThrows(
+                EmptyException.class,
+                () -> tileContainer.grabBagTiles(110)
+        );
 
     }
 
