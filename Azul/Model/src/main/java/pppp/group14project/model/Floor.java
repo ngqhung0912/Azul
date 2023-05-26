@@ -14,7 +14,14 @@ public class Floor {
     this.tiles = new ArrayList<>();
   }
 
-  public void addTile(Tile tile) {}
+  public void addTile(Tile tile) {
+    // if the floor line is full, additional tiles are discarded to the box lid
+    if (this.tiles.size() < 7) {
+      this.tiles.add(tile);
+    } else {
+      // TODO: call box lid method to add tiles
+    }
+  }
 
-  public void emptyFloor() {}
+  public void emptyFloor() { this.tiles.clear(); }
 }
