@@ -5,9 +5,10 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="floorGridPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.FloorController">
+<GridPane fx:id="floorGridPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.FloorController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -22,13 +23,6 @@
       <RowConstraints percentHeight="50.0" />
    </rowConstraints>
    <children>
-      <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="6" GridPane.rowIndex="1" />
       <Label alignment="CENTER" text="-1" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -63,5 +57,14 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="30.0" GridPane.rowIndex="1" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="30.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="30.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="30.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="30.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="30.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+<!--      Button exists only for testing purposes-->
+      <Button onAction="#onFloorButtonClick" text="Button" GridPane.columnIndex="6" GridPane.rowIndex="1" />
    </children>
 </GridPane>

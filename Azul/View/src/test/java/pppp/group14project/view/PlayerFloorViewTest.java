@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Assert;
@@ -72,7 +73,7 @@ public class PlayerFloorViewTest extends ApplicationTest {
     GridPane floorGridPane = lookup("#floorGridPane").query();
 
     for (Node node : floorGridPane.getChildren()) {
-      if (node instanceof Button) {
+      if (node instanceof Rectangle) {
         displayedBoxes++;
       }
     }
