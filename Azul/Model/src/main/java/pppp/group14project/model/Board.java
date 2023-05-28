@@ -26,9 +26,6 @@ public class Board {
     public void destroyAll() {}
 
 
-  @Getter
-  private Floor floor;
-
   public Board(Player player) {
     this.player = player;
     this.score = 0;

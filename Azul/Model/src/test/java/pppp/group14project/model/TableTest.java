@@ -1,4 +1,4 @@
-package UnitTest;
+package pppp.group14project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
