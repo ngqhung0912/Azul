@@ -1,5 +1,7 @@
 module pppp.group14project.view {
     requires javafx.controls;
+    requires javafx.graphics;
+
     requires javafx.fxml;
 
 

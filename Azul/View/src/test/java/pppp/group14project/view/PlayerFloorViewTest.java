@@ -11,12 +11,14 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.testfx.api.FxToolkit;
-import org.testfx.framework.junit.ApplicationTest;
+import org.testfx.framework.junit5.ApplicationTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterAll;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
@@ -30,12 +32,12 @@ public class PlayerFloorViewTest extends ApplicationTest {
     stage.toFront();
   }
 
-  @Before
+  @BeforeEach
   public void setUp () throws Exception {
 
   }
 
-  @After
+  @AfterEach
   public void tearDown () throws Exception {
     FxToolkit.hideStage();
     release(new KeyCode[]{});
@@ -61,7 +63,7 @@ public class PlayerFloorViewTest extends ApplicationTest {
       }
     }
 
-    Assert.assertEquals(expectedLabels, displayedLabels);
+    assertEquals(expectedLabels, displayedLabels);
   }
 
   @Test
@@ -78,7 +80,7 @@ public class PlayerFloorViewTest extends ApplicationTest {
       }
     }
 
-    Assert.assertEquals(displayedBoxes, expectedBoxes);
+    assertEquals(displayedBoxes, expectedBoxes);
   }
 
   @Test
@@ -89,7 +91,7 @@ public class PlayerFloorViewTest extends ApplicationTest {
     for (Node node : floorGridPane.getChildren()) {
       if (node instanceof Label) {
         String textPoints = ((Label) node).getText();
-        Assert.assertTrue(textPoints.equals("-1") || textPoints.equals("-2") || textPoints.equals("-3"));
+        assertTrue(textPoints.equals("-1") || textPoints.equals("-2") || textPoints.equals("-3"));
       }
     }
   }
