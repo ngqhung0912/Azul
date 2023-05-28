@@ -7,18 +7,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.testfx.api.FxToolkit;
-import org.testfx.framework.junit.ApplicationTest;
+import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.controller.WallController;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.Wall;
 
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterAll;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerWallViewTest extends ApplicationTest {
     @Override
@@ -29,12 +30,12 @@ public class PlayerWallViewTest extends ApplicationTest {
         stage.toFront();
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         FxToolkit.hideStage();
     }
@@ -56,7 +57,7 @@ public class PlayerWallViewTest extends ApplicationTest {
                 displayedTiles++;
             }
         }
-        Assert.assertEquals(displayedTiles, expectedTiles);
+        assertEquals(displayedTiles, expectedTiles);
     }
 
     @Test
@@ -74,7 +75,7 @@ public class PlayerWallViewTest extends ApplicationTest {
                 }
             }
         }
-        Assert.assertEquals(displayedTiles, expectedTiles);
+        assertEquals(displayedTiles, expectedTiles);
     }
 
     @Test
@@ -94,7 +95,7 @@ public class PlayerWallViewTest extends ApplicationTest {
                 }
             }
         }
-        Assert.assertEquals(displayedTiles, expectedTiles);
+        assertEquals(displayedTiles, expectedTiles);
     }
 
     @Test
@@ -119,7 +120,7 @@ public class PlayerWallViewTest extends ApplicationTest {
                 }
             }
         }
-        Assert.assertEquals(expectedTiles, displayedTilesFirst);
+        assertEquals(expectedTiles, displayedTilesFirst);
         wallController.resetWallView(wallGridPane);
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
@@ -128,7 +129,7 @@ public class PlayerWallViewTest extends ApplicationTest {
                 }
             }
         }
-        Assert.assertEquals(expectedTilesAfterReset, displayedTilesAfterReset);
+        assertEquals(expectedTilesAfterReset, displayedTilesAfterReset);
 
     }
 }
