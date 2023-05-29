@@ -10,7 +10,6 @@ import pppp.group14project.model.Wall;
 public class WallController {
 
 
-
     public void addTileToWall(Wall wall, Tile tile, int row, GridPane wallGridPane) {
         Rectangle tileToWall = findTileLocationInRow(row, tile, wallGridPane);
         if (tileToWall != null) {
@@ -37,9 +36,9 @@ public class WallController {
         return tileToWall;
     }
 
-    public void resetWallView(GridPane wallGridPane){
-        for(Node node : wallGridPane.getChildren()){
-            if (node instanceof Rectangle){
+    public void resetWallView(GridPane wallGridPane) {
+        for (Node node : wallGridPane.getChildren()) {
+            if (node instanceof Rectangle) {
                 node.setOpacity(0.3);
                 ((Rectangle) node).setWidth(50);
                 ((Rectangle) node).setHeight(50);

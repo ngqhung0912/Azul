@@ -3,8 +3,6 @@ package pppp.group14project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class WallTest {
@@ -32,7 +30,7 @@ class WallTest {
     }
 
     @Test
-    void tileIsAlreadyInRow(){
+    void tileIsAlreadyInRow() {
         wall.addTile(Tile.RED, 3, 3);
         assertTrue(wall.isTileInRow(Tile.RED, 3));
     }
@@ -79,27 +77,27 @@ class WallTest {
 
 
     @Test
-    void scoreOfOneTile(){
-        wall.addTile(Tile.RED ,3, 2);
+    void scoreOfOneTile() {
+        wall.addTile(Tile.RED, 3, 2);
         assertEquals(1, wall.wallScore);
     }
 
     @Test
-    void scoreTwoNotConnectedTiles(){
-        wall.addTile(Tile.RED ,3, 2);
+    void scoreTwoNotConnectedTiles() {
+        wall.addTile(Tile.RED, 3, 2);
         wall.addTile(Tile.BLUE, 4, 3);
         assertEquals(2, wall.wallScore);
     }
 
     @Test
-    void scoreTwoConnectedTiles(){
-        wall.addTile(Tile.RED ,3, 2);
+    void scoreTwoConnectedTiles() {
+        wall.addTile(Tile.RED, 3, 2);
         wall.addTile(Tile.BLUE, 4, 2);
         assertEquals(3, wall.wallScore);
     }
 
     @Test
-    void getFullColumnsandRows(){
+    void getFullColumnsandRows() {
         wall.addTile(Tile.BLACK, 0, 1);
         wall.addTile(Tile.BLUE, 1, 1);
         wall.addTile(Tile.WHITE, 2, 1);

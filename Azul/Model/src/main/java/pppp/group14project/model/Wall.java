@@ -69,7 +69,7 @@ public class Wall {
     public boolean isTileInRow(Tile tile, int row) {
         ArrayList<Tile> targetRow = this.wall.get(row);
         for (Tile t : targetRow) {
-            if (t == tile) { // Assuming Tile is an enum representing colors
+            if (t == tile) {
                 return true;
             }
         }
@@ -148,5 +148,3 @@ public class Wall {
     }
 
 }
-
-//get all tiles in the wall as a list and then check it size

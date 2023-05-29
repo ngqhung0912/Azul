@@ -16,12 +16,13 @@ import pppp.group14project.model.Wall;
 
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterAll;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PlayerWallViewTest extends ApplicationTest {
+class PlayerWallViewTest extends ApplicationTest {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/player-wall-view.fxml"));
@@ -30,23 +31,18 @@ public class PlayerWallViewTest extends ApplicationTest {
         stage.toFront();
     }
 
-    @BeforeEach
-    public void setUp() throws Exception {
-
-    }
-
     @AfterEach
     public void tearDown() throws Exception {
         FxToolkit.hideStage();
     }
 
     @Test
-    public void wallTileGridIsDisplayed() {
+    void wallTileGridIsDisplayed() {
         verifyThat("#wallGridPane", isVisible());
     }
 
     @Test
-    public void correctNumberOfTilesIsDisplayed() {
+    void correctNumberOfTilesIsDisplayed() {
         int expectedTiles = 25;
         int displayedTiles = 0;
 
@@ -61,7 +57,7 @@ public class PlayerWallViewTest extends ApplicationTest {
     }
 
     @Test
-    public void correctInitialTileOpacity() {
+    void correctInitialTileOpacity() {
         int expectedTiles = 25;
         int displayedTiles = 0;
         double initialOpacity = 0.3;
@@ -79,7 +75,7 @@ public class PlayerWallViewTest extends ApplicationTest {
     }
 
     @Test
-    public void addTilesToWall() {
+    void addTilesToWall() {
         int expectedTiles = 1;
         int displayedTiles = 0;
         double finalOpacity = 1;
@@ -99,7 +95,7 @@ public class PlayerWallViewTest extends ApplicationTest {
     }
 
     @Test
-    public void resetWallView(){
+    void resetWallView() {
         int expectedTiles = 3;
         int expectedTilesAfterReset = 25;
         int displayedTilesFirst = 0;
