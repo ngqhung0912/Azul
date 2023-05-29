@@ -49,7 +49,7 @@ viewTest-job:
     - cd ../Controller
     - mvn clean install
     - cd ../View
-    - mvn verify
+    - mvn -X verify
   artifacts:
     when: always
     reports:
