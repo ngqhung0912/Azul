@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.controller.WallController;
@@ -23,6 +24,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerWallViewTest extends ApplicationTest {
+
+    @BeforeAll
+    public static void headless() {
+        if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
+            GitlabCISupport.headless();
+        }
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/player-wall-view.fxml"));

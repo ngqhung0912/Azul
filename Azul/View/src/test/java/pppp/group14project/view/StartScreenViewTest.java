@@ -6,19 +6,23 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.*;
 import org.testfx.api.FxToolkit;
 import org.testfx.util.NodeQueryUtils;
 import org.testfx.util.WaitForAsyncUtils;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterAll;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.testfx.api.FxAssert.*;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 import org.testfx.framework.junit5.ApplicationTest;
 
 public class StartScreenViewTest extends ApplicationTest {
+    @BeforeAll
+    public static void headless() {
+        if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
+            GitlabCISupport.headless();
+        }
+    }
 
     @Override
     public void start (Stage stage) throws Exception {

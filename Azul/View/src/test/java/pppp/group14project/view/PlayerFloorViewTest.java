@@ -21,6 +21,14 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class PlayerFloorViewTest extends ApplicationTest {
+  @BeforeAll
+  public static void headless() {
+    if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
+      GitlabCISupport.headless();
+    }
+  }
+
+
   @Override
   public void start (Stage stage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("/player-floor-view.fxml"));
