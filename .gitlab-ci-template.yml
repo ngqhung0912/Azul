@@ -28,7 +28,9 @@ build-job:
 modelTest-job:
   tags:
     - pppp
-  image: maven
+  image: 
+    maven
+    openjdk:19-jdk-alpine
   stage: test
   script:
     - cd Azul/Model
@@ -42,7 +44,9 @@ modelTest-job:
 viewTest-job:
   tags:
     - pppp
-  image: maven
+  image: 
+    maven
+    openjdk:19-jdk-alpine
   stage: test
   script:
     - cd Azul/Model
