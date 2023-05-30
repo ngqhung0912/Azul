@@ -28,7 +28,8 @@ build-job:
 modelTest-job:
   tags:
     - pppp
-  image: maven:3.8.3-amazoncorretto-17
+  image: maven:3.8-eclipse-temurin-19-alpine
+
   stage: test
   script:
     - cd Azul/Model
@@ -42,7 +43,8 @@ modelTest-job:
 viewTest-job:
   tags:
     - pppp
-  image: maven:3.8.3-amazoncorretto-17
+  image: maven:3.8-eclipse-temurin-19-alpine
+
   stage: test
   script:
     - cd Azul/Model
