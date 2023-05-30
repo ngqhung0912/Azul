@@ -11,7 +11,6 @@ import org.testfx.api.FxToolkit;
 import org.testfx.util.NodeQueryUtils;
 import org.testfx.util.WaitForAsyncUtils;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.testfx.api.FxAssert.*;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 import org.testfx.framework.junit5.ApplicationTest;
