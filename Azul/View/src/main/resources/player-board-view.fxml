@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
 <GridPane fx:id="playerBoardGrid" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PlayerBoardController">
 
              <Label fx:id="playerName" GridPane.columnIndex="2">
@@ -20,7 +19,7 @@
       </GridPane.margin>
     </Label>
 
-             <StackPane fx:id="pattern" minHeight="100.0" minWidth="16.0" prefHeight="100.0" prefWidth="238.0" style="-fx-background-color: black;" styleClass="pattern-view" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+             <StackPane fx:id="pattern" minHeight="178.0" minWidth="178.0" prefHeight="178.0" prefWidth="178.0" style="-fx-background-color: black;" styleClass="pattern-view" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
           <columnConstraints>
       <ColumnConstraints />
