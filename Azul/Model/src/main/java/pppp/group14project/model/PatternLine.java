@@ -19,7 +19,7 @@ public class PatternLine {
     /**
      * Adds tiles to the PatternLine, returns the excess tiles to add to the floor
      * @param t the tiles to add
-     * @return the excess tiles
+     * @return the excess tiles, or an empty list if none
      */
     public List<Tile> addTiles(List<Tile> t) throws WrongTileException {
         // Throw exception if not all Tiles given are same color, or do not match the ones already in the list
@@ -33,7 +33,7 @@ public class PatternLine {
         // Moves Tiles from t to tiles
         for (int i = 0; i < tiles.size(); i++) {
             if (returnedTiles.size() == 0)
-                return null;
+                return returnedTiles;
             if (tiles.get(i) == null)
                 tiles.set(i, returnedTiles.remove(0));
         }
