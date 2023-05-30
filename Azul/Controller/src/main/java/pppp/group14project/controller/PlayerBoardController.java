@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +18,10 @@ public class PlayerBoardController implements Initializable {
   @FXML
   private GridPane playerBoardGrid;
 
+  @FXML
+  public StackPane pattern;
+
+
   public void setPlayerName(String playerName) {
     this.playerName.setText(playerName);
   }
@@ -24,8 +29,18 @@ public class PlayerBoardController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/player-floor-view.fxml"));
-      GridPane playerFloor = loader.load();
+      FXMLLoader floorLoader = new FXMLLoader(getClass().getResource("/player-floor-view.fxml"));
+      FXMLLoader patternLoader = new FXMLLoader(getClass().getResource("/player-pattern-view.fxml"));
+      StackPane playerPattern = patternLoader.load();
+      GridPane playerFloor = floorLoader.load();
+
+      playerBoardGrid.getChildren().remove(pattern);
+      int rowIndex = GridPane.getRowIndex(pattern);
+      int columnIndex = GridPane.getColumnIndex(pattern);
+      playerBoardGrid.add(playerPattern, columnIndex, rowIndex);
+
+      PatternController patternController = patternLoader.getController();
+
 //      FloorController floorController = loader.getController();
       playerBoardGrid.add(playerFloor, 0, 2);
 

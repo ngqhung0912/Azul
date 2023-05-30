@@ -5,27 +5,43 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="playerBoardGrid" prefHeight="200.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="pppp.group14project.controller.PlayerBoardController">
 
-    <Label fx:id="playerName">
+<GridPane fx:id="playerBoardGrid" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PlayerBoardController">
+
+             <Label fx:id="playerName" GridPane.columnIndex="2">
       <font>
          <Font name="System Bold" size="24.0" />
       </font>
       <GridPane.margin>
          <Insets />
-      </GridPane.margin></Label>
-   <columnConstraints>
+      </GridPane.margin>
+    </Label>
+
+             <StackPane fx:id="pattern" minHeight="100.0" minWidth="16.0" prefHeight="100.0" prefWidth="238.0" style="-fx-background-color: black;" styleClass="pattern-view" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+          <columnConstraints>
       <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" percentHeight="60.0" prefHeight="30.0" />
+      <RowConstraints maxHeight="28.0" minHeight="10.0" percentHeight="20.0" prefHeight="22.0" />
+      <RowConstraints maxHeight="106.0" minHeight="10.0" percentHeight="60.0" prefHeight="106.0" />
       <RowConstraints percentHeight="20.0" />
    </rowConstraints>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 
-</GridPane>
+      </GridPane>
