@@ -40,10 +40,8 @@ public class PatternLineTest {
     void TestAddingTooManyTiles() throws WrongTileException {
 
         assertFalse(patternLine.isFull());
-
         List<Tile> tilesToAdd = Arrays.asList(Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE);
         List<Tile> returnedTiles = patternLine.addTiles(tilesToAdd);
-
         assertEquals(returnedTiles.size(), 2);
 
     }
