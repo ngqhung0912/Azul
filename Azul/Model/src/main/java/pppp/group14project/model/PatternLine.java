@@ -1,5 +1,7 @@
 package pppp.group14project.model;
 
+import pppp.group14project.model.exceptions.WrongTileException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +20,7 @@ public class PatternLine {
      * @param t the tiles to add
      * @return the excess tiles
      */
-    public List<Tile> addTiles(List<Tile> t) {
+    public List<Tile> addTiles(List<Tile> t) throws WrongTileException {
         return null;
     }
 
