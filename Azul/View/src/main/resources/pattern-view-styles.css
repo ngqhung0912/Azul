@@ -1,0 +1,53 @@
+.pattern-tile-box {
+    -fx-min-width: 16;
+    -fx-min-height: 16;
+    -fx-background-color: rgb(222, 222, 222);
+}
+
+.pattern-row {
+    -fx-spacing: 5;
+}
+
+.pattern-rows {
+    -fx-spacing: 5;
+}
+
+.pattern-view {
+    -fx-pref-width: 100;
+    -fx-pref-height: 100;
+}
+
+/* Colors or images for the different tiles */
+
+.is-colored {}
+
+.BLACK {
+    -fx-background-color: rgb(34, 34, 34);
+}
+
+.BLUE {
+    -fx-background-color: rgb(13, 0, 255);
+}
+
+.WHITE {
+    -fx-background-color: rgb(230, 230, 230);
+}
+
+.ORANGE {
+    -fx-background-color: rgb(255, 111, 0);
+}
+
+.RED {
+    -fx-background-color: rgb(255, 0, 0);
+}
+
+
+/* Effects for tiles that the player can choose to place a tile on */
+.tile-option:hover {
+    -fx-effect: dropshadow(gaussian, rgb(170, 170, 170), 30, 0.4, 0, 0);
+}
+
+.tile-option {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgb(200, 200, 200), 30, 0.4, 0, 0);
+}
