@@ -9,11 +9,11 @@ import java.util.List;
 
 public class PatternLine {
 
-    private List<Tile> tiles;
+    private List<Tile> spaces;
 
     public PatternLine(int numberOfTiles) {
         // Constant number of elements
-        this.tiles = new ArrayList<>(Collections.nCopies(numberOfTiles, null));
+        this.spaces = new ArrayList<>(Collections.nCopies(numberOfTiles, null));
     }
 
     /**
@@ -24,18 +24,18 @@ public class PatternLine {
     public List<Tile> addTiles(List<Tile> t) throws WrongTileException {
         // Throw exception if not all Tiles given are same color, or do not match the ones already in the list
         boolean sameTilesInInput = Collections.frequency(t, t.get(0)) == t.size();
-        boolean sameTilesInputAndOutput = Collections.frequency(tiles, t.get(0)) > 0 || isEmpty();
+        boolean sameTilesInputAndOutput = Collections.frequency(spaces, t.get(0)) > 0 || isEmpty();
         if (!sameTilesInInput || !sameTilesInputAndOutput)
             throw new WrongTileException("Given tiles do not match");
 
 
         List<Tile> returnedTiles = new ArrayList(t);
         // Moves Tiles from t to tiles
-        for (int i = 0; i < tiles.size(); i++) {
+        for (int i = 0; i < spaces.size(); i++) {
             if (returnedTiles.size() == 0)
                 return returnedTiles;
-            if (tiles.get(i) == null)
-                tiles.set(i, returnedTiles.remove(0));
+            if (spaces.get(i) == null)
+                spaces.set(i, returnedTiles.remove(0));
         }
         return returnedTiles;
     }
@@ -47,7 +47,7 @@ public class PatternLine {
     public Tile moveTiles() throws NotFullException {
         if (!isFull())
             throw new NotFullException("The PatternLine is not yet full");
-        Tile tileToReturn = tiles.get(0);
+        Tile tileToReturn = spaces.get(0);
         empty();
         return tileToReturn;
     }
@@ -56,15 +56,15 @@ public class PatternLine {
      * Returns the color of the PatternLine, null if no tiles are in the PatternLine
      * @return
      */
-    public Tile getColor() {
-        return tiles.get(0);
+    public Tile getTileType() {
+        return spaces.get(0);
     }
 
     /**
      * Empties the PatternLine
      */
     public void empty() {
-        this.tiles = new ArrayList<>(Collections.nCopies(tiles.size(), null));
+        this.spaces = new ArrayList<>(Collections.nCopies(spaces.size(), null));
     }
 
     /**
@@ -72,7 +72,7 @@ public class PatternLine {
      * @return if the PatternLine is full
      */
     public boolean isFull() {
-        return Collections.frequency(tiles, tiles.get(0)) == tiles.size() && tiles.get(0) != null;
+        return Collections.frequency(spaces, getTileType()) == spaces.size() && getTileType() != null;
     }
 
     /**
@@ -80,7 +80,7 @@ public class PatternLine {
      * @return if the PatternLine is empty
      */
     public boolean isEmpty() {
-        return Collections.frequency(tiles, null) == tiles.size();
+        return Collections.frequency(spaces, null) == spaces.size();
     }
 
 }

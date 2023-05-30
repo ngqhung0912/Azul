@@ -1,6 +1,5 @@
 package pppp.group14project.controller;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -19,24 +18,80 @@ public class PatternController implements Initializable {
     @FXML
     private VBox rows;
 
-    private Button getButton(int rowNumber, int indexNumber) throws InvalidPositionException {
-        Button b;
+    private void highlightPossibleSpaces(Tile tile) throws InvalidPositionException {
+        for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
+            // Go to next row if the row has a tile, but it is not equal to the tile color given
+            if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile))
+                continue;
+
+            for (int tileIndex = 0; tileIndex < rowIndex; tileIndex++) {
+                if (!spaceHasTile(rowIndex, tileIndex)) {
+                    highlightSpace(rowIndex, tileIndex);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets a Space
+     * @param rowNumber row number, starting from 0 at the top
+     * @param indexNumber index number, starting from 0 at the right
+     * @return
+     * @throws InvalidPositionException
+     */
+    private Space getSpace(int rowNumber, int indexNumber) throws InvalidPositionException {
+        Space space;
         try {
-            HBox r = (HBox) rows.getChildren().get(rowNumber);
-            b = (Button) r.getChildren().get(indexNumber);
+            HBox row = (HBox) rows.getChildren().get(rowNumber);
+            int numberOfSpaces = row.getChildren().size();
+            space = (Space) row.getChildren().get(numberOfSpaces - 1 - indexNumber);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidPositionException();
         }
-        return b;
+        return space;
     }
 
-    private boolean isTileColor(int rowNumber, int indexNumber, Tile tileColor) throws InvalidPositionException {
-        System.out.println(getButton(rowNumber, indexNumber).getStyleClass());
-        return getButton(rowNumber, indexNumber).getStyleClass().contains(String.valueOf(tileColor));
+    private void highlightSpace(int rowNumber, int indexNumber) throws InvalidPositionException {
+        Space s = getSpace(rowNumber, indexNumber);
+        s.getStyleClass().add("tile-option");
+        s.setOnAction(e -> {
+            try {
+                setTiles(s.getRow(), 1, Tile.BLUE);
+            } catch (InvalidPositionException ex) {
+                throw new RuntimeException(ex);
+            }
+            unhighlightAllSpaces();
+        });
     }
 
-    private boolean isTileColor(int rowNumber, int indexNumber) throws InvalidPositionException {
-        return getButton(rowNumber, indexNumber).getStyleClass().contains("is-colored");
+    private void unhighlightAllSpaces() {
+        for (Node row : rows.getChildren()) {
+            HBox r = (HBox) row;
+            for (Node space : r.getChildren()) {
+                if (space.getStyleClass().contains("tile-option")) {
+                    Button b = (Button) space;
+                    b.setOnAction(null);
+                    b.getStyleClass().remove("tile-option");
+                }
+            }
+        }
+    }
+
+    private boolean spaceHasTile(int rowNumber, int indexNumber, Tile tileColor) throws InvalidPositionException {
+        return getSpace(rowNumber, indexNumber).getStyleClass().contains(String.valueOf(tileColor));
+    }
+
+    private boolean spaceHasTile(int rowNumber, int indexNumber) throws InvalidPositionException {
+        return getSpace(rowNumber, indexNumber).getStyleClass().contains("is-colored");
+    }
+
+    private boolean rowHasTile(int rowNumber, Tile tileColor) throws InvalidPositionException {
+        return getSpace(rowNumber, 0).getStyleClass().contains(String.valueOf(tileColor));
+    }
+
+    private boolean rowHasTile(int rowNumber) throws InvalidPositionException {
+        return getSpace(rowNumber, 0).getStyleClass().contains("is-colored");
     }
 
 
@@ -44,26 +99,19 @@ public class PatternController implements Initializable {
         for (int i = 0; i < numberOfTiles; i++) {
             HBox r = (HBox) rows.getChildren().get(rowNumber);
             final int maxNumberOfTiles = r.getChildren().size();
-            Button b = getButton(rowNumber, maxNumberOfTiles - 1 - i);
-            b.getStyleClass().add(String.valueOf(tileColor));
-            b.getStyleClass().add("is-colored");
+            Space s = getSpace(rowNumber, i);
+            s.getStyleClass().add(String.valueOf(tileColor));
+            s.getStyleClass().add("is-colored");
         }
     }
 
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Button b = getButton(0, 0);
-        // You can't use getStyle if the element uses style from a stylesheet
-//        b.setStyle("-fx-background-color: blue;");
-//        b.getStyleClass().add("tile-red");
 
-        System.out.println(isTileColor(4, 3, Tile.BLUE));
+        setTiles(4, 3, Tile.RED);
 
-        setTiles(4, 4, Tile.BLUE);
-
-        System.out.println(isTileColor(4, 3, Tile.BLUE));
-
+        highlightPossibleSpaces(Tile.BLUE);
     }
 }
 
