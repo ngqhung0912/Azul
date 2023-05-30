@@ -23,7 +23,9 @@ public class Pattern {
      * @return the excess tiles, or an empty list if none
      */
     public List<Tile> addTiles(int patternLineNumber, List<Tile> tiles) throws WrongTileException {
-        return null;
+        PatternLine line = patternLines.get(patternLineNumber);
+        List<Tile> returnedTiles = line.addTiles(tiles);
+        return returnedTiles;
     }
 
 }
