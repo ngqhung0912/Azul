@@ -50,7 +50,7 @@ viewTest-job:
     - cd ../Controller
     - mvn clean install
     - cd ../View
-    - mvn verify $MAVEN_CLI_OPTS
+    - mvn verify -X $MAVEN_CLI_OPTS
   artifacts:
     when: always
     reports:
