@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
 
-<StackPane styleClass="pattern-view" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PatternController">
+<?import pppp.group14project.controller.Space?>
+<StackPane prefHeight="0.0" prefWidth="0.0" styleClass="pattern-view" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PatternController">
     <stylesheets>
         <URL value="@player-pattern-view-styles.css" />
     </stylesheets>
@@ -15,37 +17,41 @@
             <children>
                 <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="10.0" styleClass="pattern-row">
                     <children>
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" row="0" index="0">
+                     <styleClass>
+                        <String fx:value="pattern-tile-box" />
+                        <String fx:value="tile-option" />
+                     </styleClass></Space>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="10.0" styleClass="pattern-row">
                     <children>
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="1" index="1"/>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="1" index="0"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="10.0" styleClass="pattern-row">
                     <children>
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="2" index="2"/>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="2" index="1"/>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="2" index="0"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="10.0" styleClass="pattern-row">
                     <children>
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="3" index="3"/>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="3" index="2"/>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="3" index="1"/>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="3" index="0"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="10.0" styleClass="pattern-row">
                     <children>
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
-                        <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" />
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="4" index="4"/>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="4" index="3"/>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="4" index="2"/>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="4" index="1"/>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="4" index="0"/>
                     </children>
                 </HBox>
             </children>
