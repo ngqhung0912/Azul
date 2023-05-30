@@ -20,7 +20,7 @@ variables:
 build-job:
   tags:
     - pppp
-  image: amazoncorretto:20
+  image: openjdk:19-jdk-alpine
   stage: build
   script:
     - echo "Hello"
