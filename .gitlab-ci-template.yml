@@ -44,9 +44,7 @@ modelTest-job:
 viewTest-job:
   tags:
     - pppp
-  image: 
-    maven
-    openjdk:19-jdk-alpine
+  image: yannoff/maven:3-openjdk-19
   stage: test
   script:
     - cd Azul/Model
