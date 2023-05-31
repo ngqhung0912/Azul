@@ -18,7 +18,7 @@ class WallTest {
     void addSpecificTile() {
         wall.addTile(Tile.RED, 3, 0);
         assertEquals(1, wall.countNonNullElementsInRow(wall.getRow(3)));
-        assertEquals(Tile.RED, wall.getRow(3).get(0));
+        assertEquals(Tile.RED, wall.getRow(3)[0]);
 
     }
 
@@ -43,7 +43,7 @@ class WallTest {
         wall.addTile(Tile.RED, 0, 3);
         wall.addTile(Tile.ORANGE, 0, 4);
         assertTrue(wall.isRowFull(wall.getRow(0)));
-        assertEquals(5, wall.getRow(0).size());
+        assertEquals(5, wall.getRow(0).length);
     }
 
     @Test
