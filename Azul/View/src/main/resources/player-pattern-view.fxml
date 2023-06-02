@@ -17,11 +17,7 @@
             <children>
                 <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="10.0" styleClass="pattern-row">
                     <children>
-                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" row="0" index="0">
-                     <styleClass>
-                        <String fx:value="pattern-tile-box" />
-                        <String fx:value="tile-option" />
-                     </styleClass></Space>
+                        <Space mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-tile-box" row="0" index="0"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="10.0" styleClass="pattern-row">

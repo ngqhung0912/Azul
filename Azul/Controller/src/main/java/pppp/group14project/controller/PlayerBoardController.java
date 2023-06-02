@@ -34,10 +34,10 @@ public class PlayerBoardController implements Initializable {
       StackPane playerPattern = patternLoader.load();
       GridPane playerFloor = floorLoader.load();
 
-      playerBoardGrid.getChildren().remove(pattern);
-      int rowIndex = GridPane.getRowIndex(pattern);
-      int columnIndex = GridPane.getColumnIndex(pattern);
-      playerBoardGrid.add(playerPattern, columnIndex, rowIndex);
+//      playerBoardGrid.getChildren().remove(pattern);
+//      int rowIndex = GridPane.getRowIndex(pattern);
+//      int columnIndex = GridPane.getColumnIndex(pattern);
+      playerBoardGrid.add(playerPattern, 0, 1);
 
       PatternController patternController = patternLoader.getController();
 
