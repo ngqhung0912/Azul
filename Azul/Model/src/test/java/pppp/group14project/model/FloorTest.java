@@ -44,4 +44,27 @@ class FloorTest {
     floor.addTile(Tile.RED);
     assertEquals(7, floor.getTiles().size());
   }
+
+  @Test
+  void whenFloorIsEmptyScoreIsZero() {
+    assertEquals(0, floor.getScore());
+  }
+
+  @Test
+  void whenFloorHasOneTileScoreIsMinusOne() {
+    floor.addTile(Tile.RED);
+    assertEquals(-1, floor.getScore());
+  }
+
+  @Test
+  void whenFloorIsFullScoreIsMinusFourteen() {
+    floor.addTile(Tile.RED);
+    floor.addTile(Tile.RED);
+    floor.addTile(Tile.ORANGE);
+    floor.addTile(Tile.BLACK);
+    floor.addTile(Tile.WHITE);
+    floor.addTile(Tile.STARTING);
+    floor.addTile(Tile.BLUE);
+    assertEquals(-14, floor.getScore());
+  }
 }
