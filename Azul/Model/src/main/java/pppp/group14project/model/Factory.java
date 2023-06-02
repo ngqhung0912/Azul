@@ -17,7 +17,6 @@ public class Factory {
     }
 
     private List<Tile> tiles;
-
     public Factory() {
         this.tiles = new ArrayList<>();
     }
@@ -52,7 +51,7 @@ public class Factory {
     /**
      * Adds tiles from a list to the factory
      * @param tiles the tiles to add to the factory
-     * @return whether the insert was successful
+     * @throws  FullException whether
      */
     public void addTiles(List<Tile> tiles) throws FullException {
 

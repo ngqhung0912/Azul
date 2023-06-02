@@ -82,5 +82,4 @@ public class PatternLine {
     public boolean isEmpty() {
         return Collections.frequency(spaces, null) == spaces.size();
     }
-
 }
