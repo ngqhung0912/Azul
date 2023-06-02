@@ -15,85 +15,55 @@
 # https://docs.gitlab.com/ee/development/cicd/templates.html
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
-
-stages:
-  - report
-  - build
-  - test
-  - deploy
-
-
+variables:
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -Dgitlab-ci=true -DCOMPILE_PANGO=true  -DtrimStackTrace=false"
 build-job:
-  image: alpine
+  tags:
+    - pppp
+  image: openjdk:19-jdk-alpine
   stage: build
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
-    - echo "The University has general runners that will execute the pipeline available, but you must specify which docker image it needs to use as the environment to run in."
-    - echo "See https://hub.docker.com/ for a listing of available images"
+    - echo "Hello"
 
-PlayerTest:
-  image: maven
+modelTest-job:
+  tags:
+    - pppp
+  image: maven:3.8-eclipse-temurin-19-alpine
+
   stage: test
   script:
-    - echo "script lines are executed as bash commands in the main repository folder."
-    - cd Azul/
+    - cd Azul/Model
     - mvn verify
   artifacts:
     when: always
     reports:
       junit:
-        - Azul/target/surefire-reports/TEST-*.xml
+        - Azul/Model/target/surefire-reports/TEST-*.xml
 
-test-job2:
-  image: alpine
+viewTest-job:
+  tags:
+    - pppp
+  image: maven:3.8-eclipse-temurin-19-alpine
   stage: test
   script:
-    - echo "This job tests something, but takes more time than test-job1."
-    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
-    - echo "which simulates a test that runs 20 seconds longer than test-job1"
-    - sleep 20
-
-deploy-prod:
-  image: alpine
-  stage: deploy
-  script:
-    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
-
-
-sigridci:
-  stage: report
-  image:
-    name: softwareimprovementgroup/sigridci
-  tags:
-    - pppp
-
-  script:
-    - sigridci.py --customer utst --system P42023T14 --source . 
-  allow_failure: true
+    - cd Azul/Model
+    - mvn clean install
+    - cd ../Controller
+    - mvn clean install
+    - cd ../View
+    - mvn verify -X $MAVEN_CLI_OPTS
   artifacts:
-    paths:
-      - "sigrid-ci-output/*"
+    when: always
     reports:
-      junit: "sigrid-ci-output/sigridci-junit-format-report.xml"
-    expire_in: 1 week
-    when: always
-  rules:
-    - if: $CI_MERGE_REQUEST_ID
-    
-sigridpublish:
-  stage: report
-  image:
-    name: softwareimprovementgroup/sigridci
-  tags:
-    - pppp
+      junit:
+        - Azul/View/target/surefire-reports/TEST-*.xml
 
-  script:
-    - sigridci.py --customer utst --system P42023T14 --source . --publish
-  allow_failure: true
-  artifacts:
-    paths:
-      - "sigrid-ci-output/*"
-    expire_in: 1 week
-    when: always
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+# deploy-prod:
+#   image: alpine
+#   stage: deploy
+#   script:
+#     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+
+
+
+
