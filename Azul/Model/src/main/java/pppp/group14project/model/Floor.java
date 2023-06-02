@@ -28,7 +28,9 @@ public class Floor {
   }
 
   public int getScore() {
-    return 0;
+    int numberOfTiles = tiles.size();
+    int score = Arrays.stream(tilePoints).limit(numberOfTiles).sum();
+    return score;
   }
 
   public void emptyFloor() { this.tiles.clear(); }
