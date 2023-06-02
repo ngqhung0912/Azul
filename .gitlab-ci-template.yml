@@ -29,7 +29,6 @@ variables:
 build-job:
   tags:
     - pppp
-#  image: openjdk:19-jdk-alpine
   stage: build
   script:
     - echo "Hello"
@@ -37,7 +36,6 @@ build-job:
 modelTest-job:
   tags:
     - pppp
-#  image: maven:3.8.7-eclipse-temurin-19-focal
   stage: test
   script:
     - cd Azul/Model
@@ -51,7 +49,6 @@ modelTest-job:
 viewTest-job:
  tags:
    - pppp
-# image: maven:3.8.7-eclipse-temurin-19-focal
  stage: test
  script:
    - cd Azul/Model
@@ -60,7 +57,7 @@ viewTest-job:
    - mvn clean install
    - cd ../View
    - mvn dependency:tree
-   - mvn verify -X $MAVEN_CLI_OPTS
+   - mvn verify $MAVEN_CLI_OPTS
 
  artifacts:
    when: always
