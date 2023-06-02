@@ -53,8 +53,8 @@ viewTest-job:
   image: maven:3.8.7-eclipse-temurin-19-focal
   stage: test
   script:
-    -  cd Azul/Model
-    - mvn verify
+    - cd Azul/Model
+    - mvn clean install
     - cd ../Controller
     - mvn clean install
     - cd ../View
