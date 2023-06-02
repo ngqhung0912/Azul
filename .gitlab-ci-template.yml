@@ -15,6 +15,14 @@
 # https://docs.gitlab.com/ee/development/cicd/templates.html
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
+
+stages:
+  - build
+  - test
+  - deploy
+  - report
+
+
 variables:
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -Dgitlab-ci=true -DCOMPILE_PANGO=true  -DtrimStackTrace=false"
 build-job:
@@ -28,8 +36,7 @@ build-job:
 modelTest-job:
   tags:
     - pppp
-  image: maven:3.8-eclipse-temurin-19-alpine
-
+  image: maven:3.8.7-eclipse-temurin-19-focal
   stage: test
   script:
     - cd Azul/Model
@@ -43,15 +50,15 @@ modelTest-job:
 viewTest-job:
   tags:
     - pppp
-  image: maven:3.8-eclipse-temurin-19-alpine
+  image: maven:3.8.7-eclipse-temurin-19-focal
   stage: test
   script:
-    - cd Azul/Model
-    - mvn clean install
     - cd ../Controller
     - mvn clean install
     - cd ../View
+    - mvn dependency:tree 
     - mvn verify -X $MAVEN_CLI_OPTS
+
   artifacts:
     when: always
     reports:
@@ -64,6 +71,43 @@ viewTest-job:
 #   script:
 #     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
 
+sigridci:
+  stage: report
+  image:
+    name: softwareimprovementgroup/sigridci
+  tags:
+    - pppp
+
+  script:
+    - sigridci.py --customer utst --system P42023T14 --source . 
+  allow_failure: true
+  artifacts:
+    paths:
+      - "sigrid-ci-output/*"
+    reports:
+      junit: "sigrid-ci-output/sigridci-junit-format-report.xml"
+    expire_in: 1 week
+    when: always
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+    
+sigridpublish:
+  stage: report
+  image:
+    name: softwareimprovementgroup/sigridci
+  tags:
+    - pppp
+
+  script:
+    - sigridci.py --customer utst --system P42023T14 --source . --publish
+  allow_failure: true
+  artifacts:
+    paths:
+      - "sigrid-ci-output/*"
+    expire_in: 1 week
+    when: always
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 
 
