@@ -16,19 +16,20 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
+image:  ngqhung0912/java19-maven3.8.7-monocle
+
 stages:
   - build
   - test
   - deploy
   - report
 
-
 variables:
-  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -Dgitlab-ci=true -DCOMPILE_PANGO=true  -DtrimStackTrace=false"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -Dgitlab-ci=true -DIS_COMPILE_PANGO=true  -DtrimStackTrace=false"
 build-job:
   tags:
     - pppp
-  image: openjdk:19-jdk-alpine
+#  image: openjdk:19-jdk-alpine
   stage: build
   script:
     - echo "Hello"
@@ -36,7 +37,7 @@ build-job:
 modelTest-job:
   tags:
     - pppp
-  image: maven:3.8.7-eclipse-temurin-19-focal
+#  image: maven:3.8.7-eclipse-temurin-19-focal
   stage: test
   script:
     - cd Azul/Model
@@ -47,25 +48,25 @@ modelTest-job:
       junit:
         - Azul/Model/target/surefire-reports/TEST-*.xml
 
-# viewTest-job:
-#   tags:
-#     - pppp
-#   image: maven:3.8.7-eclipse-temurin-19-focal
-#   stage: test
-#   script:
-#     - cd Azul/Model
-#     - mvn clean install
-#     - cd ../Controller
-#     - mvn clean install
-#     - cd ../View
-#     - mvn dependency:tree 
-#     - mvn verify -X $MAVEN_CLI_OPTS
+viewTest-job:
+ tags:
+   - pppp
+# image: maven:3.8.7-eclipse-temurin-19-focal
+ stage: test
+ script:
+   - cd Azul/Model
+   - mvn clean install
+   - cd ../Controller
+   - mvn clean install
+   - cd ../View
+   - mvn dependency:tree
+   - mvn verify -X $MAVEN_CLI_OPTS
 
-#   artifacts:
-#     when: always
-#     reports:
-#       junit:
-#         - Azul/View/target/surefire-reports/TEST-*.xml
+ artifacts:
+   when: always
+   reports:
+     junit:
+       - Azul/View/target/surefire-reports/TEST-*.xml
 
 # deploy-prod:
 #   image: alpine
