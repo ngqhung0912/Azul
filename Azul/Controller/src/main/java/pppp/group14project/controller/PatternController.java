@@ -24,7 +24,7 @@ public class PatternController implements Initializable {
             if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile))
                 continue;
 
-            for (int tileIndex = 0; tileIndex < rowIndex; tileIndex++) {
+            for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
                 if (!spaceHasTile(rowIndex, tileIndex)) {
                     highlightSpace(rowIndex, tileIndex);
                     break;
@@ -55,6 +55,7 @@ public class PatternController implements Initializable {
     private void highlightSpace(int rowNumber, int indexNumber) throws InvalidPositionException {
         Space s = getSpace(rowNumber, indexNumber);
         s.getStyleClass().add("tile-option");
+        System.out.println("Added event listener to " + rowNumber + ", " + indexNumber);
         s.setOnAction(e -> {
             try {
                 setTiles(s.getRow(), 1, Tile.BLUE);
@@ -96,6 +97,9 @@ public class PatternController implements Initializable {
 
 
     private void setTiles(int rowNumber, int numberOfTiles, Tile tileColor) throws InvalidPositionException {
+        System.out.println("Row: " + rowNumber);
+        System.out.println("NumTiles: " + numberOfTiles);
+
         for (int i = 0; i < numberOfTiles; i++) {
             HBox r = (HBox) rows.getChildren().get(rowNumber);
             final int maxNumberOfTiles = r.getChildren().size();

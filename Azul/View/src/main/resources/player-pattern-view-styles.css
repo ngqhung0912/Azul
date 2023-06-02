@@ -26,37 +26,42 @@
 /* Colors or images for the different tiles */
 
 .is-colored {
-    -fx-border-width: 0;
+    -fx-border-width: 2;
 }
 
 .BLACK {
-    -fx-background-color: rgb(34, 34, 34);
+    -fx-background-color: rgb(24, 32, 41);
+    -fx-border-color: rgb(6, 11, 15);
 }
 
 .BLUE {
-    -fx-background-color: rgb(13, 0, 255);
+    -fx-background-color: rgb(66, 137, 172);
+    -fx-border-color: rgb(31, 98, 124);
 }
 
 .WHITE {
-    -fx-background-color: rgb(230, 230, 230);
+    -fx-background-color: rgb(232, 247, 246);
+    -fx-border-color: rgb(163, 216, 209);
 }
 
 .ORANGE {
-    -fx-background-color: rgb(255, 111, 0);
+    -fx-background-color: rgb(238, 187, 92);
+    -fx-border-color: rgb(209, 143, 36);
 }
 
 .RED {
-    -fx-background-color: rgb(255, 0, 0);
+    -fx-background-color: rgb(221, 79, 80);
+    -fx-border-color: rgb(153, 46, 56);
 }
 
 
 /* Effects for tiles that the player can choose to place a tile on */
 .tile-option:hover {
     -fx-background-color: rgb(199, 178, 153);
-    -fx-effect: dropshadow(gaussian, rgb(170, 170, 170), 30, 0.4, 0, 0);
+    /*-fx-effect: dropshadow(gaussian, rgb(170, 170, 170), 30, 0.4, 0, 0);*/
 }
 
 .tile-option {
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgb(200, 200, 200), 30, 0.4, 0, 0);
+    /*-fx-effect: dropshadow(gaussian, rgb(200, 200, 200), 30, 0.4, 0, 0);*/
 }
