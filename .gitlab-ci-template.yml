@@ -50,7 +50,7 @@ modelTest-job:
 viewTest-job:
   tags:
     - pppp
-  image: flangknecht:javafx-maven-build
+  image: flangknecht/javafx-maven-build
 #   image: maven:3.8.7-eclipse-temurin-19-focal
   stage: test
   script:
