@@ -22,7 +22,8 @@ public class Game {
     }
     return instance;
   }
-
+  
+  //TODO (REFACTOR): This method should be throwing an exception if you want to notify that no more board can be added since its full.
   public Boolean addBoard(Board board) {
     if (boardlist.size() < 4) {
       boardlist.add(board);

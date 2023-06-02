@@ -24,7 +24,7 @@ public class GameBoardController implements Initializable {
     Pair<Integer, Integer>[] playerGridIndices = new Pair[4];
     playerGridIndices[0] = (new Pair<>(0,0));
     playerGridIndices[1] = (new Pair<>(0,2));
-    playerGridIndices[2] = (new Pair<>(1,2));
+    playerGridIndices[2] = (new Pair<>(1,0));
     playerGridIndices[3] = (new Pair<>(1,2));
     int gridIndex = 0;
 

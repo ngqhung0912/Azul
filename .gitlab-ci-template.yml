@@ -15,24 +15,23 @@
 # https://docs.gitlab.com/ee/development/cicd/templates.html
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
-
+variables:
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -Dgitlab-ci=true -DCOMPILE_PANGO=true  -DtrimStackTrace=false"
 build-job:
   tags:
     - pppp
-  image: openjdk:17
+  image: openjdk:19-jdk-alpine
   stage: build
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
-    - echo "The University has general runners that will execute the pipeline available, but you must specify which docker image it needs to use as the environment to run in."
-    - echo "See https://hub.docker.com/ for a listing of available images"
+    - echo "Hello"
 
 modelTest-job:
   tags:
     - pppp
-  image: maven
+  image: maven:3.8-eclipse-temurin-19-alpine
+
   stage: test
   script:
-    - pwd
     - cd Azul/Model
     - mvn verify
   artifacts:
@@ -40,6 +39,24 @@ modelTest-job:
     reports:
       junit:
         - Azul/Model/target/surefire-reports/TEST-*.xml
+
+viewTest-job:
+  tags:
+    - pppp
+  image: maven:3.8-eclipse-temurin-19-alpine
+  stage: test
+  script:
+    - cd Azul/Model
+    - mvn clean install
+    - cd ../Controller
+    - mvn clean install
+    - cd ../View
+    - mvn verify -X $MAVEN_CLI_OPTS
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - Azul/View/target/surefire-reports/TEST-*.xml
 
 # deploy-prod:
 #   image: alpine
