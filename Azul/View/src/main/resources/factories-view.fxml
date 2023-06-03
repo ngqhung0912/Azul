@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<?import javafx.scene.shape.Circle?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="pppp.group14project.controller.FactoriesController"
+          prefHeight="400.0" prefWidth="600.0">
+    <stylesheets>
+        <URL value="@factories-view-styles.css" />
+    </stylesheets>
+    <children>
+        <Circle layoutX="52.0" layoutY="52.0" radius="45.0" styleClass="factory" />
+        <Circle layoutX="162.0" layoutY="52.0" radius="45.0" styleClass="factory" />
+        <Circle layoutX="52.0" layoutY="163.0" radius="45.0" styleClass="factory" />
+        <Circle layoutX="160.0" layoutY="164.0" radius="45.0" styleClass="factory" />
+        <Circle layoutX="52.0" layoutY="385.0" radius="45.0" styleClass="factory" />
+        <Circle layoutX="51.0" layoutY="274.0" radius="45.0" styleClass="factory" />
+        <Circle layoutX="52.0" layoutY="496.0" radius="45.0" styleClass="factory" />
+        <Circle layoutX="161.0" layoutY="274.0" radius="45.0" styleClass="factory" />
+        <Circle layoutX="161.0" layoutY="385.0" radius="45.0" styleClass="factory" />
+        <Circle layoutX="162.0" layoutY="496.0" radius="45.0" styleClass="factory" />
+    </children>
+</GridPane>
