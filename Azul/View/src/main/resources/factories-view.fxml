@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
-<GridPane xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="pppp.group14project.controller.FactoriesController"
-          prefHeight="400.0" prefWidth="600.0">
+
+<GridPane prefHeight="700.0" prefWidth="233.33" styleClass="background" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.FactoriesController">
     <stylesheets>
         <URL value="@factories-view-styles.css" />
     </stylesheets>
+    <rowConstraints>
+        <RowConstraints percentHeight="20.0" />
+        <RowConstraints percentHeight="20.0" />
+        <RowConstraints percentHeight="20.0" />
+        <RowConstraints percentHeight="20.0" />
+        <RowConstraints percentHeight="20.0" />
+    </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints percentWidth="50.0" />
+        <ColumnConstraints percentWidth="50.0"/>
+    </columnConstraints>
     <children>
-        <Circle layoutX="52.0" layoutY="52.0" radius="45.0" styleClass="factory" />
-        <Circle layoutX="162.0" layoutY="52.0" radius="45.0" styleClass="factory" />
-        <Circle layoutX="52.0" layoutY="163.0" radius="45.0" styleClass="factory" />
-        <Circle layoutX="160.0" layoutY="164.0" radius="45.0" styleClass="factory" />
-        <Circle layoutX="52.0" layoutY="385.0" radius="45.0" styleClass="factory" />
-        <Circle layoutX="51.0" layoutY="274.0" radius="45.0" styleClass="factory" />
-        <Circle layoutX="52.0" layoutY="496.0" radius="45.0" styleClass="factory" />
-        <Circle layoutX="161.0" layoutY="274.0" radius="45.0" styleClass="factory" />
-        <Circle layoutX="161.0" layoutY="385.0" radius="45.0" styleClass="factory" />
-        <Circle layoutX="162.0" layoutY="496.0" radius="45.0" styleClass="factory" />
+        <Circle fx:id="factory1" radius="45.0" styleClass="factory" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+        <Circle fx:id="factory2" radius="45.0" styleClass="factory" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+        <Circle fx:id="factory3" radius="45.0" styleClass="factory" GridPane.rowIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+        <Circle fx:id="factory4" radius="45.0" styleClass="factory" GridPane.rowIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+        <Circle fx:id="factory5" radius="45.0" styleClass="factory" GridPane.rowIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+        <Circle fx:id="factory6" radius="45.0" styleClass="factory" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+        <Circle fx:id="factory7" radius="45.0" styleClass="factory" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+        <Circle fx:id="factory8" radius="45.0" styleClass="factory" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+        <Circle fx:id="factory9" radius="45.0" styleClass="factory" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
     </children>
 </GridPane>

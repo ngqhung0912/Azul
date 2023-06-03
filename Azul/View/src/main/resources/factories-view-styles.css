@@ -1,1 +1,6 @@
-
+/* Factory tile styling */
+.factory {
+    -fx-fill: #fefaf4;
+    -fx-stroke: #c7b299;
+    -fx-stroke-width: 3;
+}
