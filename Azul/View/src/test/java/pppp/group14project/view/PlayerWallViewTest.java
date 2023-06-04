@@ -35,7 +35,7 @@ class PlayerWallViewTest extends ApplicationTest {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/player-wall-view.fxml"));
-        stage.setScene(new Scene(root, 500, 500));
+        stage.setScene(new Scene(root, 180, 180));
         stage.show();
         stage.toFront();
     }
@@ -69,7 +69,7 @@ class PlayerWallViewTest extends ApplicationTest {
     void correctInitialTileOpacity() {
         int expectedTiles = 25;
         int displayedTiles = 0;
-        double initialOpacity = 0.3;
+        double initialOpacity = 0.5;
 
         GridPane wallGridPane = lookup("#wallGridPane").query();
 
@@ -95,7 +95,7 @@ class PlayerWallViewTest extends ApplicationTest {
         wallController.addTileToWall(wall, Tile.RED, row, wallGridPane);
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
-                if (node.getOpacity() == finalOpacity && ((Rectangle) node).getWidth() == 70 && ((Rectangle) node).getHeight() == 70) {
+                if (node.getOpacity() == finalOpacity && ((Rectangle) node).getStrokeWidth() == 3) {
                     displayedTiles++;
                 }
             }
@@ -104,12 +104,35 @@ class PlayerWallViewTest extends ApplicationTest {
     }
 
     @Test
+    void tilesAddedInCorrectSpot() {
+        GridPane wallGridPane = lookup("#wallGridPane").query();
+        WallController wallController = new WallController();
+        Wall wall = new Wall();
+        wallController.addTileToWall(wall, Tile.ORANGE, 2, wallGridPane);
+        int row = 0;
+        int col = 0;
+        for (Node node : wallGridPane.getChildren()) {
+            if (node instanceof Rectangle) {
+                if (node.getOpacity() == 1 && ((Rectangle) node).getStrokeWidth() == 3) {
+                    row = GridPane.getRowIndex(node);
+                    col = GridPane.getColumnIndex(node);
+                }
+            }
+        }
+        assertEquals(2, row);
+        //in row 2 the orange tile is on the 3rd column (starting from 0)
+        assertEquals(3, col);
+
+
+    }
+
+    @Test
     void resetWallView() {
         int expectedTiles = 3;
         int expectedTilesAfterReset = 25;
         int displayedTilesFirst = 0;
         int displayedTilesAfterReset = 0;
-        double initialOpacity = 0.3;
+        double initialOpacity = 0.5;
         double finalOpacity = 1;
         GridPane wallGridPane = lookup("#wallGridPane").query();
         WallController wallController = new WallController();
@@ -120,7 +143,7 @@ class PlayerWallViewTest extends ApplicationTest {
 
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
-                if (node.getOpacity() == finalOpacity && ((Rectangle) node).getWidth() == 70 && ((Rectangle) node).getHeight() == 70) {
+                if (node.getOpacity() == finalOpacity && ((Rectangle) node).getStrokeWidth() == 3) {
                     displayedTilesFirst++;
                 }
             }
@@ -129,7 +152,7 @@ class PlayerWallViewTest extends ApplicationTest {
         wallController.resetWallView(wallGridPane);
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
-                if (node.getOpacity() == initialOpacity && ((Rectangle) node).getWidth() == 50 && ((Rectangle) node).getHeight() == 50) {
+                if (node.getOpacity() == initialOpacity && ((Rectangle) node).getStrokeWidth() == 1) {
                     displayedTilesAfterReset++;
                 }
             }
