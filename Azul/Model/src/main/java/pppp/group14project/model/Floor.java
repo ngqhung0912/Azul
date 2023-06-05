@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Floor {
   @Getter
   private List<Tile> tiles;
+
+  private final int[] tilePoints = {-1, -1, -2,-2,-2, -3, -3};
 
   public Floor() {
     this.tiles = new ArrayList<>();
@@ -22,6 +25,12 @@ public class Floor {
     } else {
       // TODO: call box lid method to add tiles
     }
+  }
+
+  public int getScore() {
+    int numberOfTiles = tiles.size();
+    int score = Arrays.stream(tilePoints).limit(numberOfTiles).sum();
+    return score;
   }
 
   public void emptyFloor() { this.tiles.clear(); }
