@@ -9,7 +9,13 @@ import pppp.group14project.model.Wall;
 
 public class WallController {
 
-
+    /**
+     * Adds a tile to a wall
+     * @param wall the wall the tile should be added to
+     * @param tile the tile that should be added
+     * @param row on which row it should be added
+     * @param wallGridPane the GridPane used to show the wall
+     */
     public void addTileToWall(Wall wall, Tile tile, int row, GridPane wallGridPane) {
         Rectangle tileToWall = findTileLocationInRow(row, tile, wallGridPane);
         if (tileToWall != null) {
@@ -20,7 +26,13 @@ public class WallController {
         }
     }
 
-
+    /**
+     * Finds a Rectangle in GridPane for a given tile in a row
+     * @param rowNumber the number of the row for finding the tile
+     * @param tile the tile of which location is needed
+     * @param wallGridPane the GridPane associated with wall
+     * @return the Rectangle associated with that tile
+     */
     public Rectangle findTileLocationInRow(int rowNumber, Tile tile, GridPane wallGridPane) {
         String color = tile.toString();
         Rectangle tileToWall = null;
@@ -35,6 +47,10 @@ public class WallController {
         return tileToWall;
     }
 
+    /**
+     * resets all the tiles back to original look
+     * @param wallGridPane the GridPane on which the wall is shown
+     */
     public void resetWallView(GridPane wallGridPane) {
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {

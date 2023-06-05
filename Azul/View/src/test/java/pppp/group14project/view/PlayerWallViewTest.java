@@ -158,6 +158,5 @@ class PlayerWallViewTest extends ApplicationTest {
             }
         }
         assertEquals(expectedTilesAfterReset, displayedTilesAfterReset);
-
     }
 }
