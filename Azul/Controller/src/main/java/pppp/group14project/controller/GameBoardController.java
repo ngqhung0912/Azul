@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class GameBoardController implements Initializable {
   @FXML
-  private GridPane outerGrid;
+  private GridPane innerGridMid;
 
   @FXML
   private GridPane innerGridLeft;
@@ -61,7 +61,9 @@ public class GameBoardController implements Initializable {
       GridPane factories = factoryLoader.load();
       FactoriesController factoryController = factoryLoader.getController();
       factoryController.setNumberOfPlayers(playerList.size());
-      outerGrid.add(factories, 0, 1);
+      innerGridMid.add(factories, 0, 0);
+
+      // Also add the table at 0,1
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -24,12 +24,12 @@
         <ColumnConstraints percentWidth="50.0" />
     </columnConstraints>
     <children>
-        <Circle fx:id="factory1" radius="45.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-        <Circle fx:id="factory3" radius="45.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Circle fx:id="factory5" radius="45.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <Circle fx:id="factory7" radius="45.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-        <Circle fx:id="factory9" radius="45.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-        <Circle fx:id="factory2" radius="45.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory1" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory3" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory5" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory7" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory9" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory2" radius="45.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
         <Circle fx:id="factory4" radius="45.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
         <Circle fx:id="factory6" radius="45.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
         <Circle fx:id="factory8" radius="45.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
