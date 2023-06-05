@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import pppp.group14project.controller.Space?>
-<StackPane prefHeight="0.0" prefWidth="0.0" styleClass="pattern-view" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PatternController">
+<StackPane fx:id="pattern" prefHeight="0.0" prefWidth="0.0" styleClass="pattern-view" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PatternController">
     <stylesheets>
         <URL value="@player-pattern-view-styles.css" />
     </stylesheets>
