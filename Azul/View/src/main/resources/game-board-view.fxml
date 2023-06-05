@@ -9,9 +9,9 @@
       <RowConstraints minHeight="10.0" percentHeight="100.0" prefHeight="600.0" />
    </rowConstraints>
    <columnConstraints>
-      <ColumnConstraints minWidth="10.0" percentWidth="33.3" prefWidth="200.0" />
-      <ColumnConstraints minWidth="10.0" percentWidth="33.3" prefWidth="200.0" />
-      <ColumnConstraints minWidth="10.0" percentWidth="33.3" prefWidth="200.0" />
+      <ColumnConstraints minWidth="10.0" percentWidth="38.0" prefWidth="200.0" />
+      <ColumnConstraints minWidth="10.0" percentWidth="24.0" prefWidth="200.0" />
+      <ColumnConstraints minWidth="10.0" percentWidth="38.0" prefWidth="200.0" />
    </columnConstraints>
    <children>
       <GridPane fx:id="innerGridLeft">
@@ -25,8 +25,8 @@
       </GridPane>
       <GridPane fx:id="innerGridMid" GridPane.columnIndex="1">
          <columnConstraints>
-            <ColumnConstraints percentWidth="60"/>
-            <ColumnConstraints percentWidth="40"/>
+            <ColumnConstraints percentWidth="66"/>
+            <ColumnConstraints percentWidth="34"/>
          </columnConstraints>
          <rowConstraints>
             <RowConstraints percentHeight="100.0"/>
