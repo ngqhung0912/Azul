@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+
+<GridPane prefHeight="700.0" prefWidth="233.33" styleClass="background" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.FactoriesController">
+    <stylesheets>
+        <URL value="@factories-view-styles.css" />
+    </stylesheets>
+    <rowConstraints>
+        <RowConstraints percentHeight="20.0" />
+        <RowConstraints percentHeight="20.0" />
+        <RowConstraints percentHeight="20.0" />
+        <RowConstraints percentHeight="20.0" />
+        <RowConstraints percentHeight="20.0" />
+    </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints percentWidth="50.0" />
+        <ColumnConstraints percentWidth="50.0" />
+    </columnConstraints>
+    <children>
+        <Circle fx:id="factory1" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory3" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory5" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory7" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory9" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory2" radius="45.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory4" radius="45.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory6" radius="45.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <Circle fx:id="factory8" radius="45.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" />
+                <RowConstraints percentHeight="50.0" />
+            </rowConstraints>
+            <children>
+                <Rectangle fx:id="factory1_tile1" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                   <GridPane.margin>
+                      <Insets bottom="5.0" right="5.0" />
+                   </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory1_tile2" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                   <GridPane.margin>
+                      <Insets bottom="5.0" left="5.0" />
+                   </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory1_tile3" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                   <GridPane.margin>
+                      <Insets right="5.0" top="5.0" />
+                   </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory1_tile4" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                   <GridPane.margin>
+                      <Insets left="5.0" top="5.0" />
+                   </GridPane.margin>
+                </Rectangle>
+             </children>
+        </GridPane>
+        <GridPane GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" />
+                <RowConstraints percentHeight="50.0" />
+            </rowConstraints>
+            <children>
+                <Rectangle fx:id="factory2_tile1" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" right="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory2_tile2" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory2_tile3" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets right="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory2_tile4" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets left="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+            </children>
+        </GridPane>
+        <GridPane GridPane.rowIndex="1" GridPane.columnIndex="0">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" />
+                <RowConstraints percentHeight="50.0" />
+            </rowConstraints>
+            <children>
+                <Rectangle fx:id="factory3_tile1" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" right="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory3_tile2" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory3_tile3" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets right="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory3_tile4" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets left="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+            </children>
+        </GridPane>
+        <GridPane GridPane.rowIndex="1" GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" />
+                <RowConstraints percentHeight="50.0" />
+            </rowConstraints>
+            <children>
+                <Rectangle fx:id="factory4_tile1" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" right="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory4_tile2" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory4_tile3" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets right="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory4_tile4" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets left="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+            </children>
+        </GridPane>
+        <GridPane GridPane.rowIndex="2" GridPane.columnIndex="0">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" />
+                <RowConstraints percentHeight="50.0" />
+            </rowConstraints>
+            <children>
+                <Rectangle fx:id="factory5_tile1" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" right="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory5_tile2" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory5_tile3" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets right="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory5_tile4" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets left="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+            </children>
+        </GridPane>
+        <GridPane GridPane.rowIndex="2" GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" />
+                <RowConstraints percentHeight="50.0" />
+            </rowConstraints>
+            <children>
+                <Rectangle fx:id="factory6_tile1" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" right="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory6_tile2" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory6_tile3" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets right="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory6_tile4" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets left="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+            </children>
+        </GridPane>
+        <GridPane GridPane.rowIndex="3" GridPane.columnIndex="0">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" />
+                <RowConstraints percentHeight="50.0" />
+            </rowConstraints>
+            <children>
+                <Rectangle fx:id="factory7_tile1" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" right="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory7_tile2" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory7_tile3" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets right="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory7_tile4" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets left="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+            </children>
+        </GridPane>
+        <GridPane GridPane.rowIndex="3" GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" />
+                <RowConstraints percentHeight="50.0" />
+            </rowConstraints>
+            <children>
+                <Rectangle fx:id="factory8_tile1" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" right="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory8_tile2" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory8_tile3" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets right="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory8_tile4" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets left="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+            </children>
+        </GridPane>
+        <GridPane GridPane.rowIndex="4" GridPane.columnIndex="0">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" />
+                <RowConstraints percentHeight="50.0" />
+            </rowConstraints>
+            <children>
+                <Rectangle fx:id="factory9_tile1" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" right="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory9_tile2" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory9_tile3" height="30.0" width="30.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets right="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+                <Rectangle fx:id="factory9_tile4" height="30.0" width="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets left="5.0" top="5.0" />
+                    </GridPane.margin>
+                </Rectangle>
+            </children>
+        </GridPane>
+    </children>
+</GridPane>
