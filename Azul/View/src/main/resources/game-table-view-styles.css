@@ -1,0 +1,45 @@
+.is-full {
+    -fx-opacity: 1;
+}
+
+.is-empty {
+    -fx-opacity: 0;
+}
+
+.BLACK {
+    -fx-fill: rgb(24, 32, 41);
+    -fx-stroke: rgb(6, 11, 15);
+    -fx-stroke-width: 3px;
+}
+
+.BLUE {
+    -fx-fill: rgb(66, 137, 172);
+    -fx-stroke: rgb(31, 98, 124);
+    -fx-stroke-width: 3px;
+}
+
+.WHITE {
+    -fx-fill: rgb(232, 247, 246);
+    -fx-stroke: rgb(163, 216, 209);
+    -fx-stroke-width: 3px;
+}
+
+.ORANGE {
+    -fx-fill: rgb(238, 187, 92);
+    -fx-stroke: rgb(209, 143, 36);
+    -fx-stroke-width: 3px;
+}
+
+.RED {
+    -fx-fill: rgb(221, 79, 80);
+    -fx-stroke: rgb(153, 46, 56);
+    -fx-stroke-width: 3px;
+}
+
+.STARTING{
+    -fx-fill: rgb(247, 247, 247);
+    -fx-stroke: rgb(31, 98, 124);
+    -fx-stroke-width: 3px;
+}
+
+
