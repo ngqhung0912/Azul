@@ -24,6 +24,7 @@ public class TableController {
         if (tiles.isEmpty()){
             return;
         }
+
         int currentRow = 0;
         if (tiles.get(0) == Tile.STARTING) {
             Rectangle start = (Rectangle) tableGridPane.getChildren().get(0);

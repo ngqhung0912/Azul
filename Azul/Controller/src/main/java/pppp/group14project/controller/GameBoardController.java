@@ -6,9 +6,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.util.Pair;
 import pppp.group14project.model.Game;
+import pppp.group14project.model.Table;
+import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.FullException;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -41,6 +45,24 @@ public class GameBoardController implements Initializable {
       } catch (IOException e) {
         e.printStackTrace();
       }
+    }
+    try {
+      FXMLLoader tableLoader = new FXMLLoader((getClass().getResource("/game-table-view.fxml")));
+      GridPane table = tableLoader.load();
+      gameBoardGrid.add(table, 1, 1);
+      TableController tableController = new TableController();
+      Table tableA = new Table();
+      List<Tile> tiles = new ArrayList<>();
+      tiles.add(Tile.BLUE);
+      tiles.add(Tile.RED);
+      tableController.addTilesToTable(tableA, tiles, table);
+      table.getStylesheets().add("game-table-view-styles.css");
+
+
+    } catch (IOException | FullException e) {
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
 
