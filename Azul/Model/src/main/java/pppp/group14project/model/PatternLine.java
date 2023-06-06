@@ -86,6 +86,24 @@ public class PatternLine {
     }
 
     /**
+     * Used to get the number of free spaces
+     * @return the number of free spaces
+     */
+    public int numberOfFreeSpaces() {
+        return Collections.frequency(spaces, null);
+    }
+
+    /**
+     * Used to get the number of filled spaces
+     * @return the number of filled spaces
+     */
+    public int numberOfFullSpaces() {
+        return this.spaces.size() - numberOfFreeSpaces();
+    }
+
+
+
+    /**
      * Used to see if the PatternLine is empty
      * @return if the PatternLine is empty
      */

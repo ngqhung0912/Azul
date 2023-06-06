@@ -136,22 +136,38 @@ public class PatternController implements Initializable {
                  * HERE IS WHERE YOU SHOULD RERENDER YOUR VIEW, PROBABLY USING SOME METHOD LIKE SET_SPACES() WHICH
                  * UPDATES ALL OF THE TILE VIEWS
                  */
-                while (change.next()) {
-                    if (change.wasAdded()) {
-                        System.out.println(change.getAddedSubList().get(0)
-                                + " was added to the list!");
-                    } else if (change.wasRemoved()) {
-                        System.out.println(change.getRemoved().get(0)
-                                + " was removed from the list!");
+                for (int rowNumber = 0; rowNumber < pattern.getPatternLines().size(); rowNumber++) {
+                    int numberOfTiles = pattern.getPatternLines().get(rowNumber).numberOfFullSpaces();
+                    Tile tileColor = pattern.getPatternLines().get(rowNumber).getTileType();
+                    try {
+                        setTiles(rowNumber, numberOfTiles, tileColor);
+                    } catch (InvalidPositionException e) {
+                        throw new RuntimeException(e);
                     }
                 }
+                // Some other methods you can use:
+//                while (change.next()) {
+//                    if (change.wasAdded()) {
+//                        System.out.println(change.getAddedSubList().get(0)
+//                                + " was added to the list!");
+//                    } else if (change.wasRemoved()) {
+//                        System.out.println(change.getRemoved().get(0)
+//                                + " was removed from the list!");
+//                    }
+//                }
             });
         }
 
+        /**
+         * HERE WE UPDATE THE MODEL, WHICH UPDATES THE VIEW USING THE EVENTLISTENER ON THE MODEL ABOVE
+         */
         this.pattern.addTiles(0, Arrays.asList(Tile.BLUE));
         this.pattern.addTiles(1, Arrays.asList(Tile.RED));
 
 
+        /**
+         * DON'T UPDATE THE VIEW DIRECTLY LIKE THIS, THE MODEL TAKES CARE OF UPDATING THE VIEW
+         */
         setTiles(4, 3, Tile.RED);
 
         highlightPossibleSpaces(Tile.BLUE);
