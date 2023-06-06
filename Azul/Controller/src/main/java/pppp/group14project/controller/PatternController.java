@@ -125,6 +125,10 @@ public class PatternController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        /**
+         * THIS WILL NEED TO BE REPLACED BY THE ACTUAL PATTERN MODEL, WHICH SHOULD BE OBTAINED FROM THE SINGLETON GAME,
+         * AND PLAYERBOARD MODEL
+         */
         // Attach Pattern model
         this.pattern = new Pattern();
 
@@ -133,8 +137,8 @@ public class PatternController implements Initializable {
         for (PatternLine p : pattern.getPatternLines()) {
             p.getSpaces().addListener((ListChangeListener<Tile>) change -> {
                 /**
-                 * HERE IS WHERE YOU SHOULD RERENDER YOUR VIEW, PROBABLY USING SOME METHOD LIKE SET_SPACES() WHICH
-                 * UPDATES ALL OF THE TILE VIEWS
+                 * HERE IS WHERE YOU SHOULD DEFINE EVENT LISTENERS TO RERENDER YOUR VIEW,
+                 * PROBABLY USING SOME METHOD LIKE SET_SPACES() WHICH UPDATES ALL OF THE TILE VIEWS
                  */
                 for (int rowNumber = 0; rowNumber < pattern.getPatternLines().size(); rowNumber++) {
                     int numberOfTiles = pattern.getPatternLines().get(rowNumber).numberOfFullSpaces();
@@ -166,7 +170,8 @@ public class PatternController implements Initializable {
 
 
         /**
-         * DON'T UPDATE THE VIEW DIRECTLY LIKE THIS, THE MODEL TAKES CARE OF UPDATING THE VIEW
+         * DON'T UPDATE THE VIEW DIRECTLY LIKE THIS AS THAT WILL NOT UPDATE THE MODEL,
+         * THE MODEL TAKES CARE OF UPDATING THE VIEW
          */
         setTiles(4, 3, Tile.RED);
 
