@@ -12,12 +12,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PlayerBoardController implements Initializable {
+
+  /**
+   * FXML for updating the View
+   */
   @FXML
   public Label playerName;
-
   @FXML
   private GridPane playerBoardGrid;
-
   @FXML
   public StackPane pattern;
 
@@ -49,4 +51,8 @@ public class PlayerBoardController implements Initializable {
       e.printStackTrace();
     }
   }
+
+
+
+
 }

@@ -1,5 +1,6 @@
 package pppp.group14project.controller;
 
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -8,13 +9,24 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
+import pppp.group14project.model.Pattern;
+import pppp.group14project.model.PatternLine;
 import pppp.group14project.model.Tile;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class PatternController implements Initializable {
 
+    /**
+     * Pattern data model
+     */
+    Pattern pattern;
+
+    /**
+     * FXML for updating views
+     */
     @FXML
     private VBox rows;
 
@@ -112,6 +124,33 @@ public class PatternController implements Initializable {
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // Attach Pattern model
+        this.pattern = new Pattern();
+
+        System.out.println("Created event listeners for patternlines");
+        // Create event listeners on observable model attributes
+        for (PatternLine p : pattern.getPatternLines()) {
+            p.getSpaces().addListener((ListChangeListener<Tile>) change -> {
+                /**
+                 * HERE IS WHERE YOU SHOULD RERENDER YOUR VIEW, PROBABLY USING SOME METHOD LIKE SET_SPACES() WHICH
+                 * UPDATES ALL OF THE TILE VIEWS
+                 */
+                while (change.next()) {
+                    if (change.wasAdded()) {
+                        System.out.println(change.getAddedSubList().get(0)
+                                + " was added to the list!");
+                    } else if (change.wasRemoved()) {
+                        System.out.println(change.getRemoved().get(0)
+                                + " was removed from the list!");
+                    }
+                }
+            });
+        }
+
+        this.pattern.addTiles(0, Arrays.asList(Tile.BLUE));
+        this.pattern.addTiles(1, Arrays.asList(Tile.RED));
+
 
         setTiles(4, 3, Tile.RED);
 
