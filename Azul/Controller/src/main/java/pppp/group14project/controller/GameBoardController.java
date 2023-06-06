@@ -62,7 +62,7 @@ public class GameBoardController implements Initializable {
     try {
       FXMLLoader tableLoader = new FXMLLoader((getClass().getResource("/game-table-view.fxml")));
       GridPane table = tableLoader.load();
-      gameBoardGrid.add(table, 1, 1);
+      innerGridMid.add(table, 1, 1);
       TableController tableController = new TableController();
       Table tableA = new Table();
       List<Tile> tiles = new ArrayList<>();
