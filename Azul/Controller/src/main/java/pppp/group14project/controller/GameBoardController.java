@@ -3,10 +3,10 @@ package pppp.group14project.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.layout.*;
 import javafx.util.Pair;
 import pppp.group14project.model.Game;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,6 +55,7 @@ public class GameBoardController implements Initializable {
         e.printStackTrace();
       }
     }
+
 
     try {
       FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factories-view.fxml")));
