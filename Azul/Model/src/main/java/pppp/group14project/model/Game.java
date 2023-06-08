@@ -32,6 +32,10 @@ public class Game {
     return false;
   }
 
+  public void removeAllBoards() {
+    boardlist = new ArrayList<>();
+  }
+
   public List<String> getPlayerNameList() {
     List<String> usernameList = new ArrayList<String>();
     for (Board board : boardlist) {

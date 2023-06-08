@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<?import javafx.scene.shape.Circle?>
+
+<?import pppp.group14project.controller.ClickableTile?>
+<?import javafx.geometry.Insets?>
+
+<GridPane
+        fx:id="factoryGrid"
+        xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="pppp.group14project.controller.FactoryController"
+          prefHeight="400.0" prefWidth="600.0">
+    <stylesheets>
+        <URL value="@factory-view-styles.css" />
+        <URL value="@general-styles.css" />
+    </stylesheets>
+    <Circle fx:id="factoryCircle" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+    <GridPane >
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50.0" />
+            <ColumnConstraints percentWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints percentHeight="50.0" />
+            <RowConstraints percentHeight="50.0" />
+        </rowConstraints>
+        <children>
+            <ClickableTile GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                <GridPane.margin>
+                    <Insets bottom="5.0" right="5.0" />
+                </GridPane.margin>
+            </ClickableTile>
+            <ClickableTile GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                <GridPane.margin>
+                    <Insets bottom="5.0" left="5.0" />
+                </GridPane.margin>
+            </ClickableTile>
+            <ClickableTile GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                <GridPane.margin>
+                    <Insets right="5.0" top="5.0" />
+                </GridPane.margin>
+            </ClickableTile>
+            <ClickableTile GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                <GridPane.margin>
+                    <Insets left="5.0" top="5.0" />
+                </GridPane.margin>
+            </ClickableTile>
+        </children>
+    </GridPane>
+</GridPane>

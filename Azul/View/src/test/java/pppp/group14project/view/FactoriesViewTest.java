@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.controller.ClickableTile;
+import pppp.group14project.controller.FactoryController;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -49,13 +51,11 @@ public class FactoriesViewTest extends ApplicationTest {
         GridPane factory = lookup("#grid1").query();
         int expected = 4;
         int actual = 0;
-
         for(Node n: factory.getChildren()) {
             if(n instanceof ClickableTile) {
                 actual++;
             }
         }
-
         assertEquals(expected, actual);
     }
 

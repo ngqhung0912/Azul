@@ -23,6 +23,8 @@ public class GameBoardController implements Initializable {
   @FXML
   private GridPane innerGridRight;
 
+  @FXML
+  private GridPane factoriesGrid;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,17 +60,16 @@ public class GameBoardController implements Initializable {
 
 
     try {
-      FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factories-view.fxml")));
-      GridPane factories = factoryLoader.load();
-      FactoriesController factoryController = factoryLoader.getController();
-      factoryController.setNumberOfPlayers(playerList.size());
-      innerGridMid.add(factories, 0, 0);
+      for(Integer factoryNr = 0; factoryNr <= playerList.size()*2; factoryNr++) {
+        FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factory-view.fxml")));
+        GridPane factory = factoryLoader.load();
+        factoriesGrid.add(factory, factoryNr%2, factoryNr/2);
+      }
 
       // Also add the table at 0,1
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-
   }
+
 }
