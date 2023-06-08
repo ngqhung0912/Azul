@@ -30,7 +30,7 @@ public class FactoriesViewTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/factories-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/factory-view.fxml"));
         stage.setScene(new Scene(root, 500, 500));
         stage.show();
         stage.toFront();
@@ -42,13 +42,8 @@ public class FactoriesViewTest extends ApplicationTest {
     }
 
     @Test
-    public void factoryIsDisplayed() {
-        verifyThat("#factory1", isVisible());
-    }
-
-    @Test
     public void tilesAreClickable() {
-        GridPane factory = lookup("#grid1").query();
+        GridPane factory = lookup("#tileGrid").query();
         int expected = 4;
         int actual = 0;
         for(Node n: factory.getChildren()) {

@@ -23,7 +23,7 @@
         <URL value="@general-styles.css" />
     </stylesheets>
     <Circle fx:id="factoryCircle" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-    <GridPane >
+    <GridPane fx:id="tileGrid">
         <columnConstraints>
             <ColumnConstraints percentWidth="50.0" />
             <ColumnConstraints percentWidth="50.0" />
