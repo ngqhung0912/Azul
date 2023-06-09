@@ -12,6 +12,7 @@ import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Pattern;
 import pppp.group14project.model.PatternLine;
 import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -70,8 +71,8 @@ public class PatternController implements Initializable {
         System.out.println("Added event listener to " + rowNumber + ", " + indexNumber);
         s.setOnAction(e -> {
             try {
-                setTiles(s.getRow(), 1, Tile.BLUE);
-            } catch (InvalidPositionException ex) {
+                this.pattern.addTiles(rowNumber, Arrays.asList(Tile.BLUE, Tile.BLUE));
+            } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
             unhighlightAllSpaces();
@@ -144,6 +145,7 @@ public class PatternController implements Initializable {
                     int numberOfTiles = pattern.getPatternLines().get(rowNumber).numberOfFullSpaces();
                     Tile tileColor = pattern.getPatternLines().get(rowNumber).getTileType();
                     try {
+                        // Update views
                         setTiles(rowNumber, numberOfTiles, tileColor);
                     } catch (InvalidPositionException e) {
                         throw new RuntimeException(e);
@@ -165,7 +167,7 @@ public class PatternController implements Initializable {
         /**
          * HERE WE UPDATE THE MODEL, WHICH UPDATES THE VIEW USING THE EVENTLISTENER ON THE MODEL ABOVE
          */
-        this.pattern.addTiles(0, Arrays.asList(Tile.BLUE));
+//        this.pattern.addTiles(0, Arrays.asList(Tile.BLUE));
         this.pattern.addTiles(1, Arrays.asList(Tile.RED));
 
 
