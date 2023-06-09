@@ -67,7 +67,7 @@ public class GameBoardController implements Initializable {
       FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factories-view.fxml")));
       GridPane factories = factoryLoader.load();
       FactoriesController factoryController = factoryLoader.getController();
-      factoryController.setNumberOfPlayers(playerList.size());
+      factoryController.setNumberOfPlayers(boardList.size());
       innerGridMid.add(factories, 0, 0);
 
       // Also add the table at 0,1

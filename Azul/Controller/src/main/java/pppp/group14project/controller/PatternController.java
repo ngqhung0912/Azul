@@ -133,6 +133,8 @@ public class PatternController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        this.pattern = new Pattern(); // temporary!
+
         System.out.println("Created event listeners for patternlines");
         // Create event listeners on observable model attributes
         for (PatternLine p : pattern.getPatternLines()) {
