@@ -7,14 +7,23 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
+import lombok.Getter;
+import lombok.Setter;
 import pppp.group14project.model.Floor;
 import pppp.group14project.model.Game;
 import pppp.group14project.model.Tile;
 
-import java.awt.*;
+import java.util.List;
 import java.io.IOException;
 
 public class FloorController {
+
+  /**
+   * Floor data model
+   */
+  @Getter
+  @Setter
+  Floor floor;
 
   @FXML
   private GridPane floorGridPane;
@@ -41,17 +50,19 @@ public class FloorController {
     return leftmostEmptyTile;
   }
 
-  public void addTileToFloor(Floor floor, Tile tile) {
+  public void addTilesToFloor(List<Tile> tiles) {
 
-    Rectangle leftmostEmptyTile = findLeftmostEmptyTile();
-    if (leftmostEmptyTile != null) {
-      leftmostEmptyTile.setFill(javafx.scene.paint.Color.GREEN); // TODO: how to get color info from tile?
+    for (Tile tile : tiles) {
+      Rectangle leftmostEmptyTile = findLeftmostEmptyTile();
+      if (leftmostEmptyTile != null) {
+        leftmostEmptyTile.setFill(javafx.scene.paint.Color.GREEN); // TODO: how to get color info from tile?
+      }
+      floor.addTile(tile);
     }
-    floor.addTile(tile);
   }
 
   // Button exists only for testing purposes
   public void onFloorButtonClick() {
-    addTileToFloor(new Floor(), Tile.RED);
+    addTilesToFloor(List.of(Tile.RED, Tile.ORANGE));
   }
 }
