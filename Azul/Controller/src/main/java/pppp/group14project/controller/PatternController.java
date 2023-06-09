@@ -168,14 +168,14 @@ public class PatternController implements Initializable {
          * HERE WE UPDATE THE MODEL, WHICH UPDATES THE VIEW USING THE EVENTLISTENER ON THE MODEL ABOVE
          */
 //        this.pattern.addTiles(0, Arrays.asList(Tile.BLUE));
-        this.pattern.addTiles(1, Arrays.asList(Tile.RED));
+//        this.pattern.addTiles(1, Arrays.asList(Tile.RED));
 
 
         /**
          * DON'T UPDATE THE VIEW DIRECTLY LIKE THIS AS THAT WILL NOT UPDATE THE MODEL,
          * THE MODEL TAKES CARE OF UPDATING THE VIEW
          */
-        setTiles(4, 3, Tile.RED);
+//        setTiles(4, 3, Tile.RED);
 
         highlightPossibleSpaces(Tile.BLUE);
     }
