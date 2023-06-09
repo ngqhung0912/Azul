@@ -9,15 +9,16 @@ public class Wall {
 
 
     private Tile[][] wall;
-    private int wallSize;
+
+    //TODO: Refactoring candidate: This variable does not change. It should be final.
+    private final int WALLSIZE = 5;
 
     @Getter
     public int wallScore;
 
     public Wall() {
-        this.wallSize = 5;
         this.wallScore = 0;
-        this.wall = new Tile[wallSize][wallSize];
+        this.wall = new Tile[WALLSIZE][WALLSIZE];
     }
 
     /**
@@ -57,11 +58,11 @@ public class Wall {
 
     /**
      * Counts the number of tiles in a given row
-     *
+     * TODO then while the method is not named accordingly, i.e.: CountTilesInRow?
      * @param row row in which tiles should be counted
      * @return Number of tiles present in a row
      */
-    public int countNonNullElementsInRow(Tile[] row) {
+    public int countTilesInRow(Tile[] row) {
         int count = 0;
 
         for (Tile tile : row) {
@@ -80,7 +81,7 @@ public class Wall {
      * @return whether the row is full
      */
     public boolean isRowFull(Tile[] row) {
-        return countNonNullElementsInRow(row) == 5;
+        return countTilesInRow(row) == 5;
     }
 
     /**
@@ -149,7 +150,7 @@ public class Wall {
 
     /**
      * Calculates the score after each tile is added to the wall
-     *
+     * TODO: this function is more like: updateScoreAfterTileAdded.
      * @param row row on which tile was added
      * @param col column on which tile was added
      */
@@ -192,8 +193,8 @@ public class Wall {
      * Empties the wall, sets all arrays to nulls
      */
     public void emptyWall() {
-        for (int i = 0; i < wallSize; i++) {
-            for (int j = 0; j < wallSize; j++) {
+        for (int i = 0; i < WALLSIZE; i++) {
+            for (int j = 0; j < WALLSIZE; j++) {
                 wall[i][j] = null;
             }
         }
