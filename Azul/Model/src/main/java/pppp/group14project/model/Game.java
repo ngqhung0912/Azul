@@ -10,7 +10,7 @@ public class Game {
   private int currentRound;
 
   @Getter
-  private List<Board> boardlist = new ArrayList<Board>();
+  private List<Board> boardList = new ArrayList<Board>();
 
   private Game() {
     currentRound = 1;
@@ -25,8 +25,8 @@ public class Game {
   
   //TODO (REFACTOR): This method should be throwing an exception if you want to notify that no more board can be added since its full.
   public Boolean addBoard(Board board) {
-    if (boardlist.size() < 4) {
-      boardlist.add(board);
+    if (boardList.size() < 4) {
+      boardList.add(board);
       return true;
     }
     return false;
@@ -34,7 +34,7 @@ public class Game {
 
   public List<String> getPlayerNameList() {
     List<String> usernameList = new ArrayList<String>();
-    for (Board board : boardlist) {
+    for (Board board : boardList) {
       usernameList.add(board.getPlayer().getName());
     }
     return usernameList;
