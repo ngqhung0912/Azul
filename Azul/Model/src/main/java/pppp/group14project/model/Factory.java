@@ -92,4 +92,8 @@ public class Factory {
         return this.tiles.size();
     }
 
+    public List<Tile> getAllCurrentTiles(){
+        return this.tiles;
+    }
+
 }

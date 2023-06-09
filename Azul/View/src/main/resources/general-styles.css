@@ -1,0 +1,42 @@
+.background {
+    -fx-background-color: #71BFD1;
+}
+
+/* Colors or images for the different tiles */
+
+.is-colored {
+    -fx-border-width: 3;
+}
+
+.BLACK {
+    -fx-background-color: rgb(24, 32, 41);
+    -fx-border-color: rgb(6, 11, 15);
+}
+
+.BLUE {
+    -fx-background-color: rgb(66, 137, 172);
+    -fx-border-color: rgb(31, 98, 124);
+}
+
+.WHITE {
+    -fx-background-color: rgb(232, 247, 246);
+    -fx-border-color: rgb(163, 216, 209);
+}
+
+.ORANGE {
+    -fx-background-color: rgb(238, 187, 92);
+    -fx-border-color: rgb(209, 143, 36);
+}
+
+.RED {
+    -fx-background-color: rgb(221, 79, 80);
+    -fx-border-color: rgb(153, 46, 56);
+}
+
+ClickableTile {
+    -fx-border-width: 3;
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+    -fx-border-radius: 1;
+    -fx-background-insets: 1;
+}

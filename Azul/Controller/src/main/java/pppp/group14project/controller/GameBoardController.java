@@ -8,6 +8,7 @@ import javafx.util.Pair;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -15,7 +16,13 @@ import java.util.ResourceBundle;
 
 public class GameBoardController implements Initializable {
   @FXML
-  private GridPane gameBoardGrid;
+  private GridPane innerGridMid;
+
+  @FXML
+  private GridPane innerGridLeft;
+
+  @FXML
+  private GridPane innerGridRight;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,7 +43,14 @@ public class GameBoardController implements Initializable {
         GridPane playerBoardView = loader.load();
         PlayerBoardController playerBoardController = loader.getController();
         playerBoardController.setPlayerName(board.getPlayer().getName());
-        gameBoardGrid.add(playerBoardView, playerGridIndices[gridIndex].getValue(), playerGridIndices[gridIndex].getKey());
+
+        int row = playerGridIndices[gridIndex].getValue();
+        int column = playerGridIndices[gridIndex].getKey();
+        if(row == 0) {
+          innerGridLeft.add(playerBoardView, 0, column);
+        } else {
+          innerGridRight.add(playerBoardView, 0, column);
+        }
         gridIndex++;
 
         // attach player board model to player board controller
@@ -46,6 +60,19 @@ public class GameBoardController implements Initializable {
       } catch (IOException e) {
         e.printStackTrace();
       }
+    }
+
+
+    try {
+      FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factories-view.fxml")));
+      GridPane factories = factoryLoader.load();
+      FactoriesController factoryController = factoryLoader.getController();
+      factoryController.setNumberOfPlayers(playerList.size());
+      innerGridMid.add(factories, 0, 0);
+
+      // Also add the table at 0,1
+    } catch (IOException e) {
+      e.printStackTrace();
     }
 
 
