@@ -23,17 +23,20 @@ import java.util.ResourceBundle;
 public class PatternController implements Initializable {
 
     /**
+     * FXML for updating views
+     */
+    @FXML
+    private VBox rows;
+
+    /**
      * Pattern data model
      */
     @Setter
     @Getter
     Pattern pattern;
 
-    /**
-     * FXML for updating views
-     */
-    @FXML
-    private VBox rows;
+    @Setter
+    PlayerBoardController mediator;
 
     private void highlightPossibleSpaces(Tile tile) throws InvalidPositionException {
         for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
@@ -129,9 +132,6 @@ public class PatternController implements Initializable {
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        // Attach Pattern model
-        this.pattern = pattern;
 
         System.out.println("Created event listeners for patternlines");
         // Create event listeners on observable model attributes

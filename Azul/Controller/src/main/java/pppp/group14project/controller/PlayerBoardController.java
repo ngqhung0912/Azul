@@ -44,6 +44,10 @@ public class PlayerBoardController implements Initializable, Mediator {
     // attach models to respective controllers
     patternController.setPattern(board.getPattern());
     floorController.setFloor(board.getFloor());
+
+    // attach mediator
+    patternController.setMediator(this);
+    floorController.setMediator(this);
   }
 
   @Override
@@ -81,8 +85,7 @@ public class PlayerBoardController implements Initializable, Mediator {
 
   @Override
   public void moveTilesToPattern(List<Tile> tiles) {
-    // TODO: the PatternController needs some method to add tiles to the pattern line
-    // possible args: lineNumber, List<Tile>
+    // TODO: not implemented in the player board mediator
   }
 
   @Override

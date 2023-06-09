@@ -18,6 +18,9 @@ import java.io.IOException;
 
 public class FloorController {
 
+  @FXML
+  private GridPane floorGridPane;
+
   /**
    * Floor data model
    */
@@ -25,8 +28,8 @@ public class FloorController {
   @Setter
   Floor floor;
 
-  @FXML
-  private GridPane floorGridPane;
+  @Setter
+  PlayerBoardController mediator;
 
   private final javafx.scene.paint.Color emptyColor = javafx.scene.paint.Color.WHITE;
 
