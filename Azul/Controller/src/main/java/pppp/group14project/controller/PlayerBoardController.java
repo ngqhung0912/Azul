@@ -65,7 +65,28 @@ public class PlayerBoardController implements Initializable, Mediator {
     }
   }
 
+  /**
+   * Concrete Mediator implementation of moving tiles between different GameBoard components
+   */
 
+  @Override
+  public void moveTilesToWall(Tile tile) {
+    // TODO: implement
+  }
 
+  @Override
+  public void moveTilesToFloor(List<Tile> tiles) {
+    floorController.addTilesToFloor(tiles);
+  }
 
+  @Override
+  public void moveTilesToPattern(List<Tile> tiles) {
+    // TODO: the PatternController needs some method to add tiles to the pattern line
+    // possible args: lineNumber, List<Tile>
+  }
+
+  @Override
+  public void moveTilesToTable(List<Tile> tiles) {
+    // TODO: not implemented in the player board mediator
+  }
 }
