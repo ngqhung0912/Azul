@@ -6,12 +6,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import lombok.Getter;
+import lombok.Setter;
+import pppp.group14project.model.Board;
+import pppp.group14project.model.Tile;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class PlayerBoardController implements Initializable {
+public class PlayerBoardController implements Initializable, Mediator {
 
   /**
    * FXML for updating the View
@@ -20,12 +25,25 @@ public class PlayerBoardController implements Initializable {
   public Label playerName;
   @FXML
   private GridPane playerBoardGrid;
-  @FXML
-  public StackPane pattern;
 
+  /**
+   * Player board model
+   */
+  @Setter
+  @Getter
+  private Board board;
+
+  private PatternController patternController;
+  private FloorController floorController;
 
   public void setPlayerName(String playerName) {
     this.playerName.setText(playerName);
+  }
+
+  public void attachComponentModels() {
+    // attach models to respective controllers
+    patternController.setPattern(board.getPattern());
+    floorController.setFloor(board.getFloor());
   }
 
   @Override
@@ -36,16 +54,11 @@ public class PlayerBoardController implements Initializable {
       StackPane playerPattern = patternLoader.load();
       GridPane playerFloor = floorLoader.load();
 
-//      playerBoardGrid.getChildren().remove(pattern);
-//      int rowIndex = GridPane.getRowIndex(pattern);
-//      int columnIndex = GridPane.getColumnIndex(pattern);
       playerBoardGrid.add(playerPattern, 0, 1);
-
-      PatternController patternController = patternLoader.getController();
-
-//      FloorController floorController = loader.getController();
       playerBoardGrid.add(playerFloor, 0, 2);
 
+      patternController = patternLoader.getController();
+      floorController = floorLoader.getController();
     } catch (
         IOException e) {
       e.printStackTrace();

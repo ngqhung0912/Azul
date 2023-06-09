@@ -38,6 +38,11 @@ public class GameBoardController implements Initializable {
         playerBoardController.setPlayerName(board.getPlayer().getName());
         gameBoardGrid.add(playerBoardView, playerGridIndices[gridIndex].getValue(), playerGridIndices[gridIndex].getKey());
         gridIndex++;
+
+        // attach player board model to player board controller
+        playerBoardController.setBoard(board);
+        playerBoardController.attachComponentModels();
+
       } catch (IOException e) {
         e.printStackTrace();
       }

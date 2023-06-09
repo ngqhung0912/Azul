@@ -33,6 +33,9 @@ public class Pattern {
         PatternLine line = patternLines.get(patternLineNumber);
         List<Tile> returnedTiles = line.addTiles(tiles);
         return returnedTiles;
+
+        //TODO: shouldn't pattern be responsible for moving the tiles to the floor?
+        // mediator.moveTilesToFloor(returnedTiles);
     }
 
 }

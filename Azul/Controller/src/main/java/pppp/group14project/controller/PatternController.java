@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Pattern;
@@ -22,6 +24,8 @@ public class PatternController implements Initializable {
     /**
      * Pattern data model
      */
+    @Setter
+    @Getter
     Pattern pattern;
 
     /**
@@ -125,12 +129,8 @@ public class PatternController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        /**
-         * THIS WILL NEED TO BE REPLACED BY THE ACTUAL PATTERN MODEL, WHICH SHOULD BE OBTAINED FROM THE SINGLETON GAME,
-         * AND PLAYERBOARD MODEL
-         */
         // Attach Pattern model
-        this.pattern = new Pattern();
+        this.pattern = pattern;
 
         System.out.println("Created event listeners for patternlines");
         // Create event listeners on observable model attributes
