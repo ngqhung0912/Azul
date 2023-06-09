@@ -46,21 +46,21 @@ class PlayerPatternViewTest extends ApplicationTest {
 
     @Test
     void wallTileGridIsDisplayed() {
-        verifyThat("#pattern", isVisible());
+        verifyThat("#patternPane", isVisible());
     }
 
 
     @Test
     void correctNumberOfTilesIsDisplayed() {
 
-        StackPane pattern = lookup("#wallGridPane").query();
+        StackPane pattern = lookup("#patternPane").query();
 
         VBox vbox = ((VBox) pattern.getChildren().get(0));
         int numberOfRows = vbox.getChildren().size();
         assertEquals(numberOfRows, 5);
 
         for (int i = 0; i < numberOfRows; i++) {
-            HBox h = (HBox) pattern.getChildren().get(i);
+            HBox h = (HBox) vbox.getChildren().get(i);
             int numberOfSpaces = h.getChildren().size();
             assertEquals(numberOfSpaces, i + 1);
         }
@@ -70,7 +70,7 @@ class PlayerPatternViewTest extends ApplicationTest {
     @Test
     void noTilesColored() {
 
-        StackPane pattern = lookup("#wallGridPane").query();
+        StackPane pattern = lookup("#patternPane").query();
 
         VBox vbox = ((VBox) pattern.getChildren().get(0));
         int numberOfRows = vbox.getChildren().size();
@@ -83,6 +83,5 @@ class PlayerPatternViewTest extends ApplicationTest {
         }
 
     }
-
 
 }
