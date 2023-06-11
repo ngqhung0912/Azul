@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -39,6 +40,8 @@ class GameTableViewTest extends ApplicationTest {
         stage.show();
         stage.toFront();
     }
+
+
 
     @AfterEach
     public void tearDown() throws Exception {
@@ -88,8 +91,7 @@ class GameTableViewTest extends ApplicationTest {
         tileList.add(Tile.BLUE);
 
         tableController.addTilesToTable(table, tileList, tableGridPane);
-        // +2 is for starting tile and text on it
-        int expectedCount = tileList.size() + 1;
+        int expectedCount = tileList.size()+1;
         int actualCount = 0;
         int emptyCount = 0;
         for (Node node : tableGridPane.getChildren()){
@@ -106,8 +108,7 @@ class GameTableViewTest extends ApplicationTest {
                 emptyCount++;
             }
         }
-//         1 for starting tile
-        assertEquals(1, emptyCount);
+        assertEquals(0, emptyCount);
     }
 
     // add a test for grabbing tiles

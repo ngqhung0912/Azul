@@ -57,7 +57,10 @@ public class TableController {
     }
 
     public void grabTilesFromTable(Table table, Tile tile, GridPane tableGridPane) throws EmptyException {
-        List<Tile> grabbedTiles = table.grabTiles(tile);
+        if (table.isStartingTileOnTable()){
+            table.grabTiles(Tile.STARTING);
+        }
+        table.grabTiles(tile);
         zeroTableView(tableGridPane);
         displayTilesOnTheTable(table, tableGridPane);
     }
