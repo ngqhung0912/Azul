@@ -1,5 +1,6 @@
 package pppp.group14project.view;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -25,6 +26,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerWallViewTest extends ApplicationTest {
 
+    private WallController wallController;
+
+    private GridPane wallGridPane;
+
     @BeforeAll
     public static void headless() {
         if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
@@ -34,7 +39,10 @@ class PlayerWallViewTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/player-wall-view.fxml"));
+        FXMLLoader wallLoader  = new FXMLLoader(getClass().getResource("/player-wall-view.fxml"));
+        Parent root  = FXMLLoader.load((getClass().getResource("/player-wall-view.fxml")));
+        wallGridPane  = wallLoader.load();
+        wallController = wallLoader.getController();
         stage.setScene(new Scene(root, 180, 180));
         stage.show();
         stage.toFront();
@@ -55,8 +63,6 @@ class PlayerWallViewTest extends ApplicationTest {
         int expectedTiles = 25;
         int displayedTiles = 0;
 
-        GridPane wallGridPane = lookup("#wallGridPane").query();
-
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
                 displayedTiles++;
@@ -70,8 +76,6 @@ class PlayerWallViewTest extends ApplicationTest {
         int expectedTiles = 25;
         int displayedTiles = 0;
         double initialOpacity = 0.5;
-
-        GridPane wallGridPane = lookup("#wallGridPane").query();
 
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
@@ -88,11 +92,10 @@ class PlayerWallViewTest extends ApplicationTest {
         int expectedTiles = 1;
         int displayedTiles = 0;
         double finalOpacity = 1;
-        GridPane wallGridPane = lookup("#wallGridPane").query();
-        WallController wallController = new WallController();
+
         Wall wall = new Wall();
         int row = 2;
-        wallController.addTileToWall(wall, Tile.RED, row, wallGridPane);
+        wallController.addTileToWall(wall, Tile.RED, row);
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
                 if (node.getOpacity() == finalOpacity && ((Rectangle) node).getStrokeWidth() == 3) {
@@ -105,10 +108,9 @@ class PlayerWallViewTest extends ApplicationTest {
 
     @Test
     void tilesAddedInCorrectSpot() {
-        GridPane wallGridPane = lookup("#wallGridPane").query();
-        WallController wallController = new WallController();
+
         Wall wall = new Wall();
-        wallController.addTileToWall(wall, Tile.ORANGE, 2, wallGridPane);
+        wallController.addTileToWall(wall, Tile.ORANGE, 2);
         int row = 0;
         int col = 0;
         for (Node node : wallGridPane.getChildren()) {
@@ -134,12 +136,11 @@ class PlayerWallViewTest extends ApplicationTest {
         int displayedTilesAfterReset = 0;
         double initialOpacity = 0.5;
         double finalOpacity = 1;
-        GridPane wallGridPane = lookup("#wallGridPane").query();
-        WallController wallController = new WallController();
+
         Wall wall = new Wall();
-        wallController.addTileToWall(wall, Tile.RED, 2, wallGridPane);
-        wallController.addTileToWall(wall, Tile.ORANGE, 3, wallGridPane);
-        wallController.addTileToWall(wall, Tile.BLACK, 4, wallGridPane);
+        wallController.addTileToWall(wall, Tile.RED, 2);
+        wallController.addTileToWall(wall, Tile.ORANGE, 3);
+        wallController.addTileToWall(wall, Tile.BLACK, 4);
 
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
@@ -149,7 +150,7 @@ class PlayerWallViewTest extends ApplicationTest {
             }
         }
         assertEquals(expectedTiles, displayedTilesFirst);
-        wallController.resetWallView(wallGridPane);
+        wallController.resetWallView();
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
                 if (node.getOpacity() == initialOpacity && ((Rectangle) node).getStrokeWidth() == 1) {
