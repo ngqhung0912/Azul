@@ -5,16 +5,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.util.Pair;
+import lombok.Getter;
+import lombok.Setter;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class GameBoardController implements Initializable {
+
+  /**
+   * FXML for updating views
+   */
   @FXML
   private GridPane innerGridMid;
 
@@ -23,6 +30,13 @@ public class GameBoardController implements Initializable {
 
   @FXML
   private GridPane innerGridRight;
+
+  /**
+   * References to other controllers
+   */
+  @Setter
+  @Getter
+  private List<PlayerBoardController> playerBoardControllers = new ArrayList<>();
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,9 +67,8 @@ public class GameBoardController implements Initializable {
         }
         gridIndex++;
 
-        // attach player board model to player board controller
-        playerBoardController.setBoard(board);
-        playerBoardController.attachComponentModels();
+        // Adds the playerBoardControllers
+        this.playerBoardControllers.add(playerBoardController);
 
       } catch (IOException e) {
         e.printStackTrace();
@@ -75,6 +88,22 @@ public class GameBoardController implements Initializable {
       e.printStackTrace();
     }
 
-
+    // Initialize models at the end of Game initialization
+    postInitialize();
   }
+
+  /**
+   * Initializes the models, once all models of its parent models have loaded
+   */
+  private void postInitialize() {
+    List<Board> boards = Game.getInstance().getBoardList();
+    for (int i = 0; i < playerBoardControllers.size(); i++) {
+      PlayerBoardController p = playerBoardControllers.get(i);
+      p.setGameBoardController(this);
+      p.setBoard(boards.get(i));
+      // Delegates call to child
+      p.postInitialize();
+    }
+  }
+
 }

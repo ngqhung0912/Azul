@@ -34,21 +34,21 @@ public class PlayerBoardController implements Initializable, Mediator {
   @Getter
   private Board board;
 
+  /**
+   * References to other controllers
+   */
+  @Setter
+  @Getter
   private PatternController patternController;
+  @Setter
+  @Getter
   private FloorController floorController;
+  @Setter
+  @Getter
+  private GameBoardController gameBoardController;
 
   public void setPlayerName(String playerName) {
     this.playerName.setText(playerName);
-  }
-
-  public void attachComponentModels() {
-    // attach models to respective controllers
-    patternController.setPattern(board.getPattern());
-    floorController.setFloor(board.getFloor());
-
-    // attach mediator
-    patternController.setMediator(this);
-    floorController.setMediator(this);
   }
 
   @Override
@@ -67,10 +67,27 @@ public class PlayerBoardController implements Initializable, Mediator {
 
       patternController = patternLoader.getController();
       floorController = floorLoader.getController();
+      patternController.setPlayerBoardController(this);
+      floorController.setPlayerBoardController(this);
     } catch (
         IOException e) {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * Initializes the models, once all models of its parent models have loaded
+   */
+  public void postInitialize() {
+
+    floorController.setPlayerBoardController(this);
+    floorController.setFloor(board.getFloor());
+    floorController.postInitialize();
+
+    patternController.setPlayerBoardController(this);
+    patternController.setPattern(board.getPattern());
+    patternController.postInitialize();
+
   }
 
   /**
