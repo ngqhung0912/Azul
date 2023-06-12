@@ -87,4 +87,15 @@ public class FactoriesViewTest extends ApplicationTest {
         assertTrue(tiles.get(3).getStyleClass().contains("RED"));
     }
 
+    @Test
+    public void selectTile() {
+        GridPane tileGrid = lookup("#tileGrid").query();
+        ObservableList<Node> tiles = tileGrid.getChildren();
+        clickOn(tiles.get(0));
+        assertTrue(tiles.get(0).getStyleClass().contains("selected"));
+        assertFalse(tiles.get(1).getStyleClass().contains("selected"));
+        assertTrue(tiles.get(2).getStyleClass().contains("selected"));
+        assertFalse(tiles.get(3).getStyleClass().contains("selected"));
+    }
+
 }
