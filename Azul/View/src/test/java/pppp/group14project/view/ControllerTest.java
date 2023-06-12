@@ -38,6 +38,12 @@ class ControllerTest extends ApplicationTest {
     private static List<PlayerBoardController> playerBoardControllers;
 
 
+    @BeforeAll
+    public static void headless() {
+        if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
+            GitlabCISupport.headless();
+        }
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
