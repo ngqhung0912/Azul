@@ -1,5 +1,6 @@
 package pppp.group14project.controller;
 
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
@@ -12,14 +13,17 @@ import java.util.List;
 
 public class TableController {
 
-    public void addTilesToTable(Table table, List<Tile> tiles, GridPane tableGridPane) throws FullException {
+    @FXML
+    private GridPane tableGridPane;
+
+    public void addTilesToTable(Table table, List<Tile> tiles) throws FullException {
         table.addTiles(tiles);
-        displayTilesOnTheTable(table, tableGridPane);
+        displayTilesOnTheTable(table);
     }
 
-    private void displayTilesOnTheTable(Table table, GridPane tableGridPane) {
+    private void displayTilesOnTheTable(Table table) {
         List<Tile> tiles = table.getAllCurrentTiles();
-        zeroTableView(tableGridPane);
+        zeroTableView();
         if (tiles.isEmpty()) {
             return;
         }
@@ -50,19 +54,19 @@ public class TableController {
     }
 
 
-    private void zeroTableView(GridPane tableGridPane) {
+    private void zeroTableView() {
         for (Node node : tableGridPane.getChildren()) {
             node.setOpacity(0);
         }
     }
 
-    public void grabTilesFromTable(Table table, Tile tile, GridPane tableGridPane) throws EmptyException {
+    public void grabTilesFromTable(Table table, Tile tile) throws EmptyException {
         if (table.isStartingTileOnTable()){
             table.grabTiles(Tile.STARTING);
         }
         table.grabTiles(tile);
-        zeroTableView(tableGridPane);
-        displayTilesOnTheTable(table, tableGridPane);
+        zeroTableView();
+        displayTilesOnTheTable(table);
     }
 
 
