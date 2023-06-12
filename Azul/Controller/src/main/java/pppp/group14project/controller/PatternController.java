@@ -1,22 +1,42 @@
 package pppp.group14project.controller;
 
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
+import pppp.group14project.model.Pattern;
+import pppp.group14project.model.PatternLine;
 import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class PatternController implements Initializable {
 
+    /**
+     * FXML for updating views
+     */
     @FXML
     private VBox rows;
+
+    /**
+     * Pattern data model
+     */
+    @Setter
+    @Getter
+    Pattern pattern;
+
+    @Setter
+    PlayerBoardController mediator;
 
     private void highlightPossibleSpaces(Tile tile) throws InvalidPositionException {
         for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
@@ -58,8 +78,8 @@ public class PatternController implements Initializable {
         System.out.println("Added event listener to " + rowNumber + ", " + indexNumber);
         s.setOnAction(e -> {
             try {
-                setTiles(s.getRow(), 1, Tile.BLUE);
-            } catch (InvalidPositionException ex) {
+                this.pattern.addTiles(rowNumber, Arrays.asList(Tile.BLUE, Tile.BLUE));
+            } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
             unhighlightAllSpaces();
@@ -113,7 +133,51 @@ public class PatternController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        setTiles(4, 3, Tile.RED);
+        this.pattern = new Pattern(); // temporary!
+
+        System.out.println("Created event listeners for patternlines");
+        // Create event listeners on observable model attributes
+        for (PatternLine p : pattern.getPatternLines()) {
+            p.getSpaces().addListener((ListChangeListener<Tile>) change -> {
+                /**
+                 * HERE IS WHERE YOU SHOULD DEFINE EVENT LISTENERS TO RERENDER YOUR VIEW,
+                 * PROBABLY USING SOME METHOD LIKE SET_SPACES() WHICH UPDATES ALL OF THE TILE VIEWS
+                 */
+                for (int rowNumber = 0; rowNumber < pattern.getPatternLines().size(); rowNumber++) {
+                    int numberOfTiles = pattern.getPatternLines().get(rowNumber).numberOfFullSpaces();
+                    Tile tileColor = pattern.getPatternLines().get(rowNumber).getTileType();
+                    try {
+                        // Update views
+                        setTiles(rowNumber, numberOfTiles, tileColor);
+                    } catch (InvalidPositionException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                // Some other methods you can use:
+//                while (change.next()) {
+//                    if (change.wasAdded()) {
+//                        System.out.println(change.getAddedSubList().get(0)
+//                                + " was added to the list!");
+//                    } else if (change.wasRemoved()) {
+//                        System.out.println(change.getRemoved().get(0)
+//                                + " was removed from the list!");
+//                    }
+//                }
+            });
+        }
+
+        /**
+         * HERE WE UPDATE THE MODEL, WHICH UPDATES THE VIEW USING THE EVENTLISTENER ON THE MODEL ABOVE
+         */
+//        this.pattern.addTiles(0, Arrays.asList(Tile.BLUE));
+//        this.pattern.addTiles(1, Arrays.asList(Tile.RED));
+
+
+        /**
+         * DON'T UPDATE THE VIEW DIRECTLY LIKE THIS AS THAT WILL NOT UPDATE THE MODEL,
+         * THE MODEL TAKES CARE OF UPDATING THE VIEW
+         */
+//        setTiles(4, 3, Tile.RED);
 
         highlightPossibleSpaces(Tile.BLUE);
     }

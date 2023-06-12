@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.util.Pair;
+import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
 
 
@@ -23,7 +24,6 @@ public class GameBoardController implements Initializable {
   @FXML
   private GridPane innerGridRight;
 
-
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -35,22 +35,28 @@ public class GameBoardController implements Initializable {
     playerGridIndices[3] = (new Pair<>(1,2));
     int gridIndex = 0;
 
-    List<String> playerList = Game.getInstance().getPlayerNameList();
+    List<Board> boardList = Game.getInstance().getBoardList();
 
-    for (String playerName : playerList) {
+    for (Board board : boardList) {
       try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/player-board-view.fxml"));
-        GridPane playerBoard = loader.load();
+        GridPane playerBoardView = loader.load();
         PlayerBoardController playerBoardController = loader.getController();
-        playerBoardController.setPlayerName(playerName);
+        playerBoardController.setPlayerName(board.getPlayer().getName());
+
         int row = playerGridIndices[gridIndex].getValue();
         int column = playerGridIndices[gridIndex].getKey();
         if(row == 0) {
-          innerGridLeft.add(playerBoard, 0, column);
+          innerGridLeft.add(playerBoardView, 0, column);
         } else {
-          innerGridRight.add(playerBoard, 0, column);
+          innerGridRight.add(playerBoardView, 0, column);
         }
         gridIndex++;
+
+        // attach player board model to player board controller
+        playerBoardController.setBoard(board);
+        playerBoardController.attachComponentModels();
+
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -61,7 +67,7 @@ public class GameBoardController implements Initializable {
       FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factories-view.fxml")));
       GridPane factories = factoryLoader.load();
       FactoriesController factoryController = factoryLoader.getController();
-      factoryController.setNumberOfPlayers(playerList.size());
+      factoryController.setNumberOfPlayers(boardList.size());
       innerGridMid.add(factories, 0, 0);
 
       // Also add the table at 0,1
