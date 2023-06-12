@@ -29,14 +29,16 @@ public class FactoryTest {
 
         assertDoesNotThrow(() -> {
             List<Tile> t = Arrays.asList(Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE);
-            Factory f = new Factory(t);
+            Factory f = new Factory();
+            f.addTiles(t);
         });
 
         FullException thrown = assertThrows(
                 FullException.class,
                 () -> {
                     List<Tile> t2 = Arrays.asList(Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE);
-                    Factory f2 = new Factory(t2);
+                    Factory f2 = new Factory();
+                    f2.addTiles(t2);
                 }
         );
 

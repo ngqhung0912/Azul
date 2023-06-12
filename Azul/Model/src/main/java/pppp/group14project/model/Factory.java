@@ -28,15 +28,6 @@ public class Factory {
         this.tiles = FXCollections.observableArrayList();
     }
 
-    public Factory(List<Tile> tiles) throws FullException {
-
-        if (tiles.size() > getMaxNumberOfTiles())
-            throw new FullException("Can't add more than " + getMaxNumberOfTiles() + " tiles to a factory");
-
-        this.tiles.addAll(tiles);
-
-    }
-
     /**
      * Grabs the tiles from the factory of one color
      * @param tile the color of the tiles to grab
@@ -44,13 +35,12 @@ public class Factory {
      */
     public List<Tile> grabTiles(Tile tile) throws EmptyException {
         List<Tile> grabList = new ArrayList<>();
-        List<Tile> newTileList = new ArrayList<>(tiles);
         for (Tile t: this.tiles) {
             if (t == tile) {
                 grabList.add(t);
-                this.tiles.remove(t);
             }
         }
+        this.tiles.removeAll(grabList);
         return grabList;
     }
 

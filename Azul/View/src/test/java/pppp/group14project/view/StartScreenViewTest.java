@@ -21,6 +21,7 @@ import static org.testfx.api.FxAssert.*;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.model.Game;
+import pppp.group14project.model.TileContainer;
 
 public class StartScreenViewTest extends ApplicationTest {
     @BeforeAll
@@ -48,7 +49,9 @@ public class StartScreenViewTest extends ApplicationTest {
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         Game game = Game.getInstance();
-        game.removeAllBoards();
+        game.getBoardlist().clear();
+        game.getFactoryList().clear();
+        game.getTilecontainer().reset();
     }
 
     @Test

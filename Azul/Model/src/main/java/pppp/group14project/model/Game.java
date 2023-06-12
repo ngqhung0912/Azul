@@ -41,10 +41,6 @@ public class Game {
     return false;
   }
 
-  public void removeAllBoards() {
-    boardlist = new ArrayList<>();
-  }
-
   public List<String> getPlayerNameList() {
     List<String> usernameList = new ArrayList<String>();
     for (Board board : boardlist) {
@@ -52,17 +48,6 @@ public class Game {
     }
     return usernameList;
   }
-
-//  public Boolean addFactories(List<Factory> factories) {
-//    for (Factory factory:factories) {
-//      if (factoryList.size() <= boardlist.size()*2+1) {
-//        factoryList.add(factory);
-//      } else {
-//        return false;
-//      }
-//    }
-//    return true;
-//  }
 
   public void fillFactories(List<Tile> tiles) {
     Integer counter = 0;
