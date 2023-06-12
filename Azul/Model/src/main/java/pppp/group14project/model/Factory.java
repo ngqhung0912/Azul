@@ -1,10 +1,16 @@
 package pppp.group14project.model;
 
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import lombok.Getter;
 import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.collections.ObservableList;
+
+
+import java.util.*;
 
 public class Factory {
 
@@ -16,9 +22,10 @@ public class Factory {
         return 4;
     }
 
-    private List<Tile> tiles;
+    @Getter
+    private ObservableList<Tile> tiles;
     public Factory() {
-        this.tiles = new ArrayList<>();
+        this.tiles = FXCollections.observableArrayList();
     }
 
     public Factory(List<Tile> tiles) throws FullException {
@@ -26,7 +33,7 @@ public class Factory {
         if (tiles.size() > getMaxNumberOfTiles())
             throw new FullException("Can't add more than " + getMaxNumberOfTiles() + " tiles to a factory");
 
-        this.tiles = tiles;
+        this.tiles.addAll(tiles);
 
     }
 
@@ -41,10 +48,9 @@ public class Factory {
         for (Tile t: this.tiles) {
             if (t == tile) {
                 grabList.add(t);
-                newTileList.remove(t);
+                this.tiles.remove(t);
             }
         }
-        this.tiles = newTileList;
         return grabList;
     }
 

@@ -5,7 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.util.Pair;
+import pppp.group14project.model.Factory;
 import pppp.group14project.model.Game;
+import pppp.group14project.model.Tile;
 
 
 import java.io.IOException;
@@ -60,7 +62,8 @@ public class GameBoardController implements Initializable {
 
 
     try {
-      for(Integer factoryNr = 0; factoryNr <= playerList.size()*2; factoryNr++) {
+      Integer factoryAmount = Game.getInstance().getFactoryList().size();
+      for(Integer factoryNr = 0; factoryNr <= factoryAmount; factoryNr++) {
         FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factory-view.fxml")));
         GridPane factory = factoryLoader.load();
         factoriesGrid.add(factory, factoryNr%2, factoryNr/2);
