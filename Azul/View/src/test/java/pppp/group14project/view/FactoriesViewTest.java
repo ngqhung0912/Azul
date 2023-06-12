@@ -1,9 +1,11 @@
 package pppp.group14project.view;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Paint;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
@@ -16,6 +18,9 @@ import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 import pppp.group14project.controller.ClickableTile;
 import pppp.group14project.controller.FactoryController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -70,6 +75,16 @@ public class FactoriesViewTest extends ApplicationTest {
             assertEquals(bordercolour, backgroundcolor);
         }
 
+    }
+
+    @Test
+    public void tileColoursChangedByModel() {
+        GridPane tileGrid = lookup("#tileGrid").query();
+        ObservableList<Node> tiles = tileGrid.getChildren();
+        assertTrue(tiles.get(0).getStyleClass().contains("BLACK"));
+        assertTrue(tiles.get(1).getStyleClass().contains("ORANGE"));
+        assertTrue(tiles.get(2).getStyleClass().contains("BLACK"));
+        assertTrue(tiles.get(3).getStyleClass().contains("RED"));
     }
 
 }
