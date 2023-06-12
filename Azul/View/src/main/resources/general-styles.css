@@ -13,7 +13,7 @@
     -fx-border-color: rgb(6, 11, 15);
 }
 
-.BLACK:hover{
+.BLACK:hover, .BLACK.selected {
     -fx-background-color: rgb(6, 11, 15);
 }
 
@@ -22,7 +22,7 @@
     -fx-border-color: rgb(31, 98, 124);
 }
 
-.BLUE:hover {
+.BLUE:hover, .BLUE.selected {
     -fx-background-color: rgb(31, 98, 124);
 }
 
@@ -31,7 +31,7 @@
     -fx-border-color: rgb(163, 216, 209);
 }
 
-.WHITE:hover {
+.WHITE:hover, .WHITE.selected {
     -fx-background-color: rgb(163, 216, 209);
 }
 
@@ -40,7 +40,7 @@
     -fx-border-color: rgb(209, 143, 36);
 }
 
-.ORANGE:hover {
+.ORANGE:hover, .ORANGE.selected {
     -fx-background-color: rgb(209, 143, 36);
 }
 
@@ -49,7 +49,7 @@
     -fx-border-color: rgb(153, 46, 56);
 }
 
-.RED:hover {
+.RED:hover, .RED.selected{
     -fx-background-color: rgb(153, 46, 56);
 }
 
@@ -59,4 +59,5 @@ ClickableTile {
     -fx-pref-height: 33;
     -fx-border-radius: 1;
     -fx-background-insets: 1;
+    -fx-cursor: hand;
 }

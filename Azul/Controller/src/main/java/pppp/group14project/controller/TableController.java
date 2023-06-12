@@ -20,7 +20,7 @@ public class TableController {
     }
 
     private void displayTilesOnTheTable(Table table, GridPane tableGridPane) {
-        List<Tile> tiles = table.getAllCurrentTiles();
+        List<Tile> tiles = table.getTiles();
         if (tiles.isEmpty()){
             return;
         }

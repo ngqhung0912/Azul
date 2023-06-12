@@ -82,14 +82,14 @@ public class FactoryTest {
         List<Tile> expectedList = Arrays.asList(Tile.BLUE, Tile.BLUE);
 
         assertEquals(grabbedTiles, expectedList);
-        assertEquals(factory.size(), 2);
+        assertEquals(factory.size(), 4);
 
         // No tiles returned
         List<Tile> grabbedTiles2 = factory.grabTiles(Tile.BLUE);
         List<Tile> expectedList2 = Arrays.asList();
 
         assertEquals(grabbedTiles, expectedList);
-        assertEquals(factory.size(), 2);
+        assertEquals(factory.size(), 4);
 
     }
 

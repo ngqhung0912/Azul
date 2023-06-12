@@ -1,9 +1,11 @@
 package pppp.group14project.model;
 
 import javafx.beans.InvalidationListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import lombok.Getter;
+import lombok.Setter;
 import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
@@ -23,7 +25,9 @@ public class Factory {
     }
 
     @Getter
+    @Setter
     private ObservableList<Tile> tiles;
+
     public Factory() {
         this.tiles = FXCollections.observableArrayList();
     }
@@ -40,7 +44,6 @@ public class Factory {
                 grabList.add(t);
             }
         }
-        this.tiles.removeAll(grabList);
         return grabList;
     }
 
@@ -88,8 +91,5 @@ public class Factory {
         return this.tiles.size();
     }
 
-    public List<Tile> getAllCurrentTiles(){
-        return this.tiles;
-    }
 
 }
