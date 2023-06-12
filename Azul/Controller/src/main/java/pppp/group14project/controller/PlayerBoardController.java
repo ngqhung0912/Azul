@@ -34,7 +34,10 @@ public class PlayerBoardController implements Initializable, Mediator {
   @Getter
   private Board board;
 
+
+  @Getter
   private PatternController patternController;
+  @Getter
   private FloorController floorController;
 
   public void setPlayerName(String playerName) {

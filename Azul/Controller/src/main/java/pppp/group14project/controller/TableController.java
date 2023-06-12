@@ -1,27 +1,43 @@
 package pppp.group14project.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.SneakyThrows;
 
 import pppp.group14project.model.Table;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class TableController {
+public class TableController implements Initializable {
 
     @FXML
     private GridPane tableGridPane;
 
-    public void addTilesToTable(Table table, List<Tile> tiles) throws FullException {
-        table.addTiles(tiles);
-        displayTilesOnTheTable(table);
+    @Setter
+    @Getter
+    Table table;
+
+    @Setter
+    GameBoardController mediator;
+
+    public void addTilesToTable(List<Tile> tiles) throws FullException {
+        this.table.addTiles(tiles);
+//        displayTilesOnTheTable();
     }
 
-    private void displayTilesOnTheTable(Table table) {
+    private void displayTilesOnTheTable() {
         List<Tile> tiles = table.getAllCurrentTiles();
         zeroTableView();
         if (tiles.isEmpty()) {
@@ -60,15 +76,36 @@ public class TableController {
         }
     }
 
-    public void grabTilesFromTable(Table table, Tile tile) throws EmptyException {
+    public void grabTilesFromTable(Tile tile) throws EmptyException {
         if (table.isStartingTileOnTable()){
             table.grabTiles(Tile.STARTING);
+            mediator.moveTilesToFloor(Arrays.asList(Tile.STARTING));
         }
-        table.grabTiles(tile);
-        zeroTableView();
-        displayTilesOnTheTable(table);
+        List<Tile> tilesToMove = this.table.grabTiles(tile);
+        mediator.moveTilesToPattern(tilesToMove);
+//        zeroTableView();
+//        displayTilesOnTheTable();
     }
 
 
+    @SneakyThrows
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.table = new Table();
+
+        System.out.println("Created event listeners for table");
+
+        ClickableTile clickableTile = new ClickableTile();
+        clickableTile.setOnMouseClicked(event -> {
+            // Handle the tile click event here
+            try {
+                grabTilesFromTable(clickableTile.getColour());
+            } catch (EmptyException e) {
+                // Handle the EmptyException if necessary
+                e.printStackTrace();
+            }
+        });
+
+    }
 }
 

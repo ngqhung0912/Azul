@@ -7,6 +7,9 @@ import javafx.scene.layout.*;
 import javafx.util.Pair;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
+import pppp.group14project.model.Tile;
+
+import static org.mockito.Mockito.*;
 
 
 import java.io.IOException;
@@ -14,7 +17,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GameBoardController implements Initializable {
+public class GameBoardController implements Initializable, Mediator {
   @FXML
   private GridPane innerGridMid;
 
@@ -62,19 +65,48 @@ public class GameBoardController implements Initializable {
       }
     }
 
-
     try {
       FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factories-view.fxml")));
       GridPane factories = factoryLoader.load();
-      FactoriesController factoryController = factoryLoader.getController();
+      factoryController = factoryLoader.getController();
       factoryController.setNumberOfPlayers(boardList.size());
       innerGridMid.add(factories, 0, 0);
 
-      // Also add the table at 0,1
     } catch (IOException e) {
       e.printStackTrace();
     }
 
+    try{
+      FXMLLoader tableLoader = new FXMLLoader((getClass().getResource("/game-table-view.fxml")));
+      GridPane tableGrid = tableLoader.load();
+      tableController = tableLoader.getController();
+      tableController.setMediator(this);
+      innerGridMid.add(tableGrid, 0, 1);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+
+
+  }
+
+  @Override
+  public void moveTilesToWall(Tile tile) {
+
+  }
+
+  @Override
+  public void moveTilesToFloor(List<Tile> tiles) {
+
+  }
+
+  @Override
+  public void moveTilesToPattern(List<Tile> tiles) {
+
+  }
+
+  @Override
+  public void moveTilesToTable(List<Tile> tiles) {
 
   }
 }

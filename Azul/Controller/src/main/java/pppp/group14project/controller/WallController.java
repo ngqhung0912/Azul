@@ -1,6 +1,7 @@
 package pppp.group14project.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
@@ -8,7 +9,10 @@ import javafx.scene.shape.Rectangle;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.Wall;
 
-public class WallController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class WallController implements Initializable {
 
     @FXML
     private GridPane wallGridPane;
@@ -62,4 +66,8 @@ public class WallController {
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //TODO add method to pass tiles to the tile bag
+    }
 }

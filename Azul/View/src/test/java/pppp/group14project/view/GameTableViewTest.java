@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
+import pppp.group14project.controller.PlayerBoardController;
 import pppp.group14project.controller.TableController;
 import pppp.group14project.controller.WallController;
 import pppp.group14project.model.Table;
@@ -31,6 +32,12 @@ class GameTableViewTest extends ApplicationTest {
 
     private GridPane tableGridPane;
 
+    private Table table;
+
+    private PlayerBoardController playerBoardController;
+
+    private GridPane boardGridPane;
+
     @BeforeAll
     public static void headless() {
         if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
@@ -42,8 +49,12 @@ class GameTableViewTest extends ApplicationTest {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/game-table-view.fxml"));
         FXMLLoader tableLoader  = new FXMLLoader(getClass().getResource("/game-table-view.fxml"));
+        FXMLLoader playerBoardLoader = new FXMLLoader(getClass().getResource("/player-board-view.fxml"));
+        boardGridPane = playerBoardLoader.load();
+        playerBoardController = playerBoardLoader.getController();
         tableGridPane  = tableLoader.load();
         tableController = tableLoader.getController();
+        table = new Table();
         stage.setScene(new Scene(root, 120, 600));
         stage.show();
         stage.toFront();
@@ -63,7 +74,6 @@ class GameTableViewTest extends ApplicationTest {
 
     @Test
     void countAddedTiles() throws Exception {
-        Table table = new Table();
         tableGridPane.getStylesheets().add("game-table-view-styles.css");
         List<Tile> tileList = new ArrayList<>();
         tileList.add(Tile.BLUE);
@@ -73,7 +83,7 @@ class GameTableViewTest extends ApplicationTest {
         tileList.add(Tile.ORANGE);
         tileList.add(Tile.BLACK);
 
-        tableController.addTilesToTable(table, tileList);
+        tableController.addTilesToTable(tileList);
         int expectedCount = tileList.size() + 1;
         int actualCount = 0;
         for (Node node : tableGridPane.getChildren()){
@@ -86,7 +96,6 @@ class GameTableViewTest extends ApplicationTest {
 
     @Test
     void removeAllAddedTiles() throws Exception {
-        Table table = new Table();
         tableGridPane.getStylesheets().add("game-table-view-styles.css");
         List<Tile> tileList = new ArrayList<>();
         tileList.add(Tile.BLUE);
@@ -94,7 +103,7 @@ class GameTableViewTest extends ApplicationTest {
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
 
-        tableController.addTilesToTable(table, tileList);
+        tableController.addTilesToTable(tileList);
         int expectedCount = tileList.size()+1;
         int actualCount = 0;
         int emptyCount = 0;
@@ -105,7 +114,7 @@ class GameTableViewTest extends ApplicationTest {
         }
         assertEquals(expectedCount, actualCount);
 
-        tableController.grabTilesFromTable(table, Tile.BLUE);
+        tableController.grabTilesFromTable(Tile.BLUE);
 
         for (Node node : tableGridPane.getChildren()){
             if(node.getOpacity() == 1){
@@ -118,17 +127,16 @@ class GameTableViewTest extends ApplicationTest {
     // add a test for grabbing tiles
     @Test
     void firstGrabTilesFromTable() throws Exception {
-        Table table = new Table();
         tableGridPane.getStylesheets().add("game-table-view-styles.css");
         List<Tile> tileList = new ArrayList<>();
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
         tileList.add(Tile.RED);
         tileList.add(Tile.BLACK);
-        tableController.addTilesToTable(table, tileList);
-        assertEquals(5, table.size());
-        tableController.grabTilesFromTable(table, Tile.BLUE);
-        assertEquals(2, table.size());
+        tableController.addTilesToTable(tileList);
+        assertEquals(5, table.getAllCurrentTiles().size());
+        tableController.grabTilesFromTable(Tile.BLUE);
+        assertEquals(2, table.getAllCurrentTiles().size());
 
     }
 
