@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.util.Pair;
+import lombok.Getter;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
 import pppp.group14project.model.Tile;
@@ -14,6 +15,7 @@ import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -27,8 +29,19 @@ public class GameBoardController implements Initializable, Mediator {
   @FXML
   private GridPane innerGridRight;
 
+  @Getter
+  private FactoriesController factoryController;
+
+  @Getter
+  private TableController tableController;
+
+  @Getter
+  private List<PlayerBoardController> playerBoardControllers;
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    playerBoardControllers = new ArrayList<>();
 
     // hardcoded grid indices for player boards
     Pair<Integer, Integer>[] playerGridIndices = new Pair[4];
@@ -59,6 +72,7 @@ public class GameBoardController implements Initializable, Mediator {
         // attach player board model to player board controller
         playerBoardController.setBoard(board);
         playerBoardController.attachComponentModels();
+        playerBoardControllers.add(playerBoardController);
 
       } catch (IOException e) {
         e.printStackTrace();
