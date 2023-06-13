@@ -13,6 +13,7 @@ public class Wall {
     //TODO: Refactoring candidate: This variable does not change. It should be final.
     private final int WALLSIZE = 5;
 
+
     @Getter
     public int wallScore;
 
@@ -28,17 +29,17 @@ public class Wall {
      */
     public List<Tile> getTilesInWall() {
         List<Tile> tilesInWall = new ArrayList<>();
-
         for (Tile[] row : wall) {
             for (Tile tile : row) {
                 if (tile != null) {
                     tilesInWall.add(tile);
+
                 }
             }
         }
-
         return tilesInWall;
     }
+
 
     /**
      * Adds tile to the wall on a given row x column position

@@ -1,32 +1,57 @@
 package pppp.group14project.controller;
 
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
+import pppp.group14project.model.Pattern;
+import pppp.group14project.model.PatternLine;
 import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class PatternController implements Initializable {
+public class PatternController {
 
+    /**
+     * FXML for updating views
+     */
     @FXML
     private VBox rows;
 
-    private void highlightPossibleSpaces(Tile tile) throws InvalidPositionException {
+    /**
+     * Pattern data model
+     */
+    @Setter
+    @Getter
+    private Pattern pattern;
+
+    /**
+     * References to other controllers
+     */
+    @Setter
+    @Getter
+    private PlayerBoardController playerBoardController;
+
+    private void highlightPossibleSpaces(List<Tile> tiles) throws InvalidPositionException {
         for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
             // Go to next row if the row has a tile, but it is not equal to the tile color given
-            if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile))
+            if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tiles.get(0)))
                 continue;
 
             for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
                 if (!spaceHasTile(rowIndex, tileIndex)) {
-                    highlightSpace(rowIndex, tileIndex);
+                    highlightSpace(rowIndex, tileIndex, tiles);
                     break;
                 }
             }
@@ -52,14 +77,15 @@ public class PatternController implements Initializable {
         return space;
     }
 
-    private void highlightSpace(int rowNumber, int indexNumber) throws InvalidPositionException {
+    private void highlightSpace(int rowNumber, int indexNumber, List<Tile> tiles) throws InvalidPositionException {
         Space s = getSpace(rowNumber, indexNumber);
         s.getStyleClass().add("tile-option");
         System.out.println("Added event listener to " + rowNumber + ", " + indexNumber);
         s.setOnAction(e -> {
             try {
-                setTiles(s.getRow(), 1, Tile.BLUE);
-            } catch (InvalidPositionException ex) {
+                List<Tile> excessTiles = this.pattern.addTiles(rowNumber, tiles);
+                playerBoardController.moveTilesToFloor(excessTiles);
+            } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
             unhighlightAllSpaces();
@@ -95,7 +121,6 @@ public class PatternController implements Initializable {
         return getSpace(rowNumber, 0).getStyleClass().contains("is-colored");
     }
 
-
     private void setTiles(int rowNumber, int numberOfTiles, Tile tileColor) throws InvalidPositionException {
         System.out.println("Row: " + rowNumber);
         System.out.println("NumTiles: " + numberOfTiles);
@@ -109,13 +134,50 @@ public class PatternController implements Initializable {
         }
     }
 
-    @SneakyThrows
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    /**
+     * Initializes the models, once all models of its parent models have loaded
+     */
+    public void postInitialize() {
 
-        setTiles(4, 3, Tile.RED);
+        // Register event handlers here::
+        System.out.println("Created event listeners for patternlines");
+        // Create change listener that listens to changes in the model and updates the view
+        for (PatternLine p : pattern.getPatternLines()) {
+            p.getSpaces().addListener((ListChangeListener<Tile>) change -> {
+                /**
+                 * HERE IS WHERE YOU SHOULD DEFINE EVENT LISTENERS TO RERENDER YOUR VIEW,
+                 * PROBABLY USING SOME METHOD LIKE SET_SPACES() WHICH UPDATES ALL OF THE TILE VIEWS
+                 */
+                for (int rowNumber = 0; rowNumber < pattern.getPatternLines().size(); rowNumber++) {
+                    int numberOfTiles = pattern.getPatternLines().get(rowNumber).numberOfFullSpaces();
+                    Tile tileColor = pattern.getPatternLines().get(rowNumber).getTileType();
+                    try {
+                        // Update views
+                        setTiles(rowNumber, numberOfTiles, tileColor);
+                    } catch (InvalidPositionException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                // Some other methods you can use:
+//                while (change.next()) {
+//                    if (change.wasAdded()) {
+//                        System.out.println(change.getAddedSubList().get(0)
+//                                + " was added to the list!");
+//                    } else if (change.wasRemoved()) {
+//                        System.out.println(change.getRemoved().get(0)
+//                                + " was removed from the list!");
+//                    }
+//                }
+            });
+        }
 
-        highlightPossibleSpaces(Tile.BLUE);
+        try {
+            highlightPossibleSpaces(Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
+        } catch (InvalidPositionException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
 }
 

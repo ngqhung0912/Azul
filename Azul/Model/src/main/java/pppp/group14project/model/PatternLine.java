@@ -1,5 +1,8 @@
 package pppp.group14project.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import lombok.Getter;
 import pppp.group14project.model.exceptions.NotFullException;
 import pppp.group14project.model.exceptions.WrongTileException;
 
@@ -9,11 +12,18 @@ import java.util.List;
 
 public class PatternLine {
 
-    private List<Tile> spaces;
+
+    @Getter
+    private ObservableList<Tile> spaces;
 
     public PatternLine(int numberOfTiles) {
         // Constant number of elements
-        this.spaces = new ArrayList<>(Collections.nCopies(numberOfTiles, null));
+//        this.spaces = new ArrayList<>(Collections.nCopies(numberOfTiles, null));
+
+        // Constant number of elements, observable
+        this.spaces = FXCollections.observableArrayList();
+        spaces.addAll(Collections.nCopies(numberOfTiles, null));
+
     }
 
     /**
@@ -64,7 +74,7 @@ public class PatternLine {
      * Empties the PatternLine
      */
     public void empty() {
-        this.spaces = new ArrayList<>(Collections.nCopies(spaces.size(), null));
+        this.spaces.removeAll();
     }
 
     /**
@@ -74,6 +84,24 @@ public class PatternLine {
     public boolean isFull() {
         return Collections.frequency(spaces, getTileType()) == spaces.size() && getTileType() != null;
     }
+
+    /**
+     * Used to get the number of free spaces
+     * @return the number of free spaces
+     */
+    public int numberOfFreeSpaces() {
+        return Collections.frequency(spaces, null);
+    }
+
+    /**
+     * Used to get the number of filled spaces
+     * @return the number of filled spaces
+     */
+    public int numberOfFullSpaces() {
+        return this.spaces.size() - numberOfFreeSpaces();
+    }
+
+
 
     /**
      * Used to see if the PatternLine is empty

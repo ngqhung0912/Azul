@@ -19,9 +19,14 @@
 
 .pattern-view {
     -fx-background-color: rgb(254, 250, 244);
-    -fx-pref-width: 178;
-    -fx-pref-height: 178;
+    -fx-pref-width: 175;
+    -fx-pref-height: 175;
+    -fx-min-width: 175;
+    -fx-min-height: 175;
+    -fx-max-width: 175;
+    -fx-max-height: 175;
 }
+
 
 /* Colors or images for the different tiles */
 

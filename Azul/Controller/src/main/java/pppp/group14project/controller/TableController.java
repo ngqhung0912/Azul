@@ -1,65 +1,107 @@
 package pppp.group14project.controller;
 
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.SneakyThrows;
+
 import pppp.group14project.model.Table;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class TableController {
+public class TableController implements Initializable {
 
+    @FXML
+    private GridPane tableGridPane;
 
-    public void addTilesToTable(Table table, List<Tile> tiles, GridPane tableGridPane) throws FullException {
-        table.addTiles(tiles);
-        displayTilesOnTheTable(table, tableGridPane);
+    @Setter
+    @Getter
+    Table table;
+
+    @Setter
+    GameBoardController mediator;
+
+    public void addTilesToTable(List<Tile> tiles) throws FullException {
+        this.table.addTiles(tiles);
+        displayTilesOnTheTable();
     }
 
-    private void displayTilesOnTheTable(Table table, GridPane tableGridPane) {
+    private void displayTilesOnTheTable() {
         List<Tile> tiles = table.getAllCurrentTiles();
-        if (tiles.isEmpty()){
+        zeroTableView();
+        if (tiles.isEmpty()) {
             return;
         }
 
+        ClickableTile node = null; // Declare node variable outside the loop
+
         int currentRow = 0;
-        if (tiles.get(0) == Tile.STARTING) {
-            Rectangle start = (Rectangle) tableGridPane.getChildren().get(0);
-            start.getStyleClass().add("STARTING");
-            start.setOpacity(1);
-            Text text = (Text) tableGridPane.getChildren().get(tableGridPane.getChildren().size() - 1);
-            text.setOpacity(1);
-            tiles.remove(0);
-            currentRow = 1;
-        }
 
         for (Tile tile : tiles) {
-
-            Rectangle node = (Rectangle) tableGridPane.getChildren().get(currentRow);
-            if (node.getOpacity() == 0) {
-                node.getStyleClass().add(String.valueOf(tile));
+            if (tile == Tile.STARTING) {
+                node = (ClickableTile) tableGridPane.getChildren().get(0);
+                node.getStyleClass().add("STARTING");
                 node.setOpacity(1);
+            } else {
+                double opacity = 1;
+                while (opacity == 1 && currentRow < tableGridPane.getChildren().size()) {
+                    currentRow++;
+                    node = (ClickableTile) tableGridPane.getChildren().get(currentRow);
+                    opacity = node.getOpacity();
+                }
+
+                if (node != null) {
+                    node.getStyleClass().add(String.valueOf(tile));
+                    node.setOpacity(1);
+                }
             }
-            currentRow++;
         }
     }
 
-    private void zeroTableView(GridPane tableGridPane) {
+
+    private void zeroTableView() {
         for (Node node : tableGridPane.getChildren()) {
             node.setOpacity(0);
         }
     }
 
-    public void grabTilesFromTable(Table table, Tile tile, GridPane tableGridPane) throws EmptyException {
-        List<Tile> grabbedTiles = table.grabTiles(tile);
-        zeroTableView(tableGridPane);
-        displayTilesOnTheTable(table, tableGridPane);
+    public void grabTilesFromTable(Tile tile) throws EmptyException {
+        if (table.isStartingTileOnTable()){
+            table.grabTiles(Tile.STARTING);
+        }
+        this.table.grabTiles(tile);
+        zeroTableView();
+        displayTilesOnTheTable();
     }
 
 
+    @SneakyThrows
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.table = new Table();
 
+        System.out.println("Created event listeners for table");
+
+        ClickableTile clickableTile = new ClickableTile();
+        clickableTile.setOnMouseClicked(event -> {
+            // Handle the tile click event here
+            try {
+                grabTilesFromTable(clickableTile.getColour());
+            } catch (EmptyException e) {
+                // Handle the EmptyException if necessary
+                e.printStackTrace();
+            }
+        });
+
+    }
 }
 

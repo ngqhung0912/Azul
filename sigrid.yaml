@@ -1,0 +1,13 @@
+components:
+  - name: "Model"
+    include:
+      - ".*/Azul/Model/src/main/java/pppp/group14project/model/.*[.]java"
+  - name: "View"
+    include:
+      - ".*/Azul/View/src/main/java/pppp/group14project/view/.*[.]java"
+  - name: "Controller"
+    include:
+      - ".*/Azul/Controller/src/main/java/pppp/group14project/controller/.*[.]java"
+  
+languages:
+  - name: java
