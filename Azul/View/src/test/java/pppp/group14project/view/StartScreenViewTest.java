@@ -49,7 +49,7 @@ public class StartScreenViewTest extends ApplicationTest {
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         Game game = Game.getInstance();
-        game.getBoardlist().clear();
+        game.getBoardList().clear();
         game.getFactoryList().clear();
         game.getTilecontainer().reset();
     }
