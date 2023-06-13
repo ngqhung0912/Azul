@@ -2,6 +2,7 @@ package pppp.group14project.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
@@ -65,18 +66,31 @@ public class WallController {
     }
 
     /**
-     * resets all the tiles back to original look
+     * Resets all the tiles back to original look
      */
     public void resetWallView() {
         for (Node node : wallGridPane.getChildren()) {
-            if (node instanceof Rectangle) {
-                node.setOpacity(0.5);
-                ((Rectangle) node).setStrokeWidth(1);
+            if (node instanceof Button) {
+                node.getStyleClass().clear();
+                int rowID = GridPane.getRowIndex(node);
+                int columnID = GridPane.getColumnIndex(node);
+                Tile color = Wall.getTileColor(rowID, columnID);
+                node.getStyleClass().add(color.toString());
+                node.getStyleClass().add("is-not-colored");
+                System.out.println(node.getStyleClass());
             }
         }
     }
 
+    public void getRectangle(int row, int column) {
+
+    }
+
     public void postInitialize(){
-        ///
+
+        resetWallView();
+
+        for (wall)
+
     }
 }

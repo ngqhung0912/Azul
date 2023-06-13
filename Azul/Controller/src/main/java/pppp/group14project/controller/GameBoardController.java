@@ -121,6 +121,12 @@ public class GameBoardController implements Initializable {
       // Delegates call to child
       p.postInitialize();
     }
-    tableController.setMediator(this);
+
+
+    tableController.setSetGameBoardController(this);
+//    tableController.setTable(Game.getInstance)
+//    tableController.postInitialize();
+
+
   }
 }

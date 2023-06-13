@@ -28,7 +28,8 @@ public class TableController implements Initializable {
     Table table;
 
     @Setter
-    GameBoardController mediator;
+    @Getter
+    GameBoardController setGameBoardController;
 
     public void addTilesToTable(List<Tile> tiles) throws FullException {
         this.table.addTiles(tiles);
