@@ -68,6 +68,7 @@ public class WallController {
      * resets all the tiles back to original look
      */
     public void resetWallView() {
+        wall.emptyWall();
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
                 node.setOpacity(0.5);

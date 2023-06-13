@@ -13,10 +13,8 @@ import pppp.group14project.controller.GameBoardController;
 import pppp.group14project.controller.PlayerBoardController;
 import pppp.group14project.controller.TableController;
 import pppp.group14project.controller.WallController;
-import pppp.group14project.model.Table;
-import pppp.group14project.model.Tile;
+import pppp.group14project.model.*;
 import org.junit.jupiter.api.Test;
-import pppp.group14project.model.Wall;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,6 +37,15 @@ class ControllerTest extends ApplicationTest {
 
     private static List<PlayerBoardController> playerBoardControllers;
 
+    private static WallController wallController;
+
+    private static Wall wall;
+
+    private static Board board;
+
+    private static Player player;
+
+    private static PlayerBoardController playerBoardController;
 
 
     @BeforeAll
@@ -50,6 +57,12 @@ class ControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
+        player = new Player("test");
+
+        Game game = Game.getInstance();
+        board = new Board(player);
+
+        game.addBoard(board);
 
         Parent root = FXMLLoader.load(getClass().getResource("/game-board-view.fxml"));
         FXMLLoader gameBoard = new FXMLLoader(getClass().getResource("/game-board-view.fxml"));
@@ -60,8 +73,10 @@ class ControllerTest extends ApplicationTest {
         tableController = gameBoardController.getTableController();
         table = tableController.getTable();
 
-        playerBoardControllers = gameBoardController.getPlayerBoardControllers();
+        playerBoardController = gameBoardController.getPlayerBoardControllers().get(0);
 
+        wallController = playerBoardController.getWallController();
+        wall = wallController.getWall();
 
         stage.setScene(new Scene(root, 120, 600));
         stage.show();
@@ -74,7 +89,8 @@ class ControllerTest extends ApplicationTest {
         assertNotNull(gameBoardController);
         assertNotNull(tableController);
         assertNotNull(table);
-        assertNotNull(playerBoardControllers);
+        assertNotNull(wallController);
+        assertNotNull(wall);
     }
 
 
@@ -88,11 +104,8 @@ class ControllerTest extends ApplicationTest {
 
         tableController.addTilesToTable(tileList);
         int expectedCount = 5;
-
         assertEquals(expectedCount, table.size());
-
         tableController.grabTilesFromTable(Tile.BLUE);
-
         assertEquals(0, table.size());
     }
 
@@ -108,9 +121,40 @@ class ControllerTest extends ApplicationTest {
 
         tableController.addTilesToTable(tileList);
         int expectedCount = 7;
-
         assertEquals(expectedCount, table.size());
     }
+
+    @Test
+    void wallReset(){
+        wallController.addTileToWall(Tile.ORANGE, 0);
+        wallController.addTileToWall(Tile.ORANGE, 1);
+        wallController.addTileToWall(Tile.ORANGE, 2);
+        assertEquals(3, wall.getTilesInWall().size());
+        wallController.resetWallView();
+        assertEquals(0, wall.getTilesInWall().size());
+    }
+
+    @Test
+    void wallAddTiles(){
+        wallController.addTileToWall(Tile.RED, 2);
+        assertEquals(1, wall.getTilesInWall().size());
+        //No two tiles in the same row
+        wallController.addTileToWall(Tile.RED, 2);
+        assertEquals(1, wall.getTilesInWall().size());
+        wallController.addTileToWall(Tile.BLUE, 2);
+        assertEquals(2, wall.getTilesInWall().size());
+        assertEquals(0, wall.countNonNullElementsInRow(wall.getRow(0)));
+        assertEquals(2, wall.countNonNullElementsInRow(wall.getRow(2)));
+        wallController.resetWallView();
+    }
+
+    @Test
+    void wallAddTilesInCorrectSpot(){
+        wallController.addTileToWall(Tile.BLACK, 3);
+        assertEquals(Tile.BLACK, wall.getRow(3)[2]);
+        wallController.resetWallView();
+    }
+
 
 
 }
