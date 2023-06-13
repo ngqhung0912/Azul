@@ -23,4 +23,8 @@ public class Table extends Factory {
         this.addTile(Tile.STARTING);
     }
 
+    public boolean isStartingTileOnTable(){
+        return getAllCurrentTiles().contains(Tile.STARTING);
+    }
+
 }

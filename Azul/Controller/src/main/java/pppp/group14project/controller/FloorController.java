@@ -1,22 +1,18 @@
 package pppp.group14project.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.Floor;
-import pppp.group14project.model.Game;
-import pppp.group14project.model.Pattern;
+
 import pppp.group14project.model.Tile;
 
 import java.util.List;
-import java.io.IOException;
 
 public class FloorController {
 

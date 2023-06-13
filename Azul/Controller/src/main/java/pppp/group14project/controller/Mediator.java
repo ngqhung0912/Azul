@@ -11,4 +11,6 @@ public interface Mediator {
   void moveTilesToPattern(List<Tile> tiles);
 
   void moveTilesToTable(List<Tile> tiles);
+
+//  void moveTilesToBoxLid(List<Tile> tiles);
 }
