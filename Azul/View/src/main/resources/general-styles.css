@@ -6,7 +6,7 @@
 
 .is-not-colored {
     -fx-border-width: 1;
-    -fx-opacity: 0.5;
+    -fx-opacity: 0.3;
     -fx-border-color: rgb(101, 101, 101);
     -fx-background-color: rgb(101, 101, 101);
 }

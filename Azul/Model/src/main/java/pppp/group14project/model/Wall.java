@@ -31,6 +31,7 @@ public class Wall {
         return tileColors.get(row).get(column);
     }
 
+    @Getter
     private List<ObservableList<Tile>> wall;
     private int wallSize;
 
@@ -66,6 +67,19 @@ public class Wall {
             }
         }
         return tilesInWall;
+    }
+
+    /**
+     * Adds tile to the wall using a given row
+     *
+     * @param tile   tile to be added
+     * @param row    row on which the tile should be added
+     */
+    public void addTile(Tile tile, int row) throws FullException {
+
+        if (isTileInRow(tile, row)) throw new FullException();
+        addTile(tile, row, Wall.getTileColorColumn(tile, row));
+
     }
 
 
