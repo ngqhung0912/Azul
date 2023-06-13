@@ -6,11 +6,13 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.Floor;
 import pppp.group14project.model.Game;
+import pppp.group14project.model.Pattern;
 import pppp.group14project.model.Tile;
 
 import java.util.List;
@@ -18,6 +20,9 @@ import java.io.IOException;
 
 public class FloorController {
 
+  /**
+   * FXML for updating views
+   */
   @FXML
   private GridPane floorGridPane;
 
@@ -29,10 +34,13 @@ public class FloorController {
   Floor floor;
 
   @Setter
-  PlayerBoardController mediator;
+  @Getter
+  private PlayerBoardController playerBoardController;
 
-  private final javafx.scene.paint.Color emptyColor = javafx.scene.paint.Color.WHITE;
-
+  /**
+   * References to other controllers
+   */
+  private final Color emptyColor = Color.WHITE;
 
   public Rectangle findLeftmostEmptyTile(){
 
@@ -68,4 +76,14 @@ public class FloorController {
   public void onFloorButtonClick() {
     addTilesToFloor(List.of(Tile.RED, Tile.ORANGE));
   }
+
+  /**
+   * Initializes the models, once all models of its parent models have loaded
+   */
+  public void postInitialize() {
+
+    // Register event handlers here::
+
+  }
+
 }
