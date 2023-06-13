@@ -1,6 +1,5 @@
 package pppp.group14project.model;
 
-import javax.swing.plaf.PanelUI;
 import java.util.*;
 
 public class WallAdapter extends Wall {
@@ -69,8 +68,13 @@ public class WallAdapter extends Wall {
     @Override
     public int countTilesInRow(Tile[] row) {
         int count = 0;
+        return count;
+    }
 
 
+    @Override
+    public void emptyWall() {
+        team13Wall.clearTiles();
     }
 
 
