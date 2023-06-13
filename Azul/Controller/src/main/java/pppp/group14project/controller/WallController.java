@@ -1,39 +1,56 @@
 package pppp.group14project.controller;
 
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
+import lombok.Getter;
+import lombok.Setter;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.Wall;
 
+
 public class WallController {
+
+    @FXML
+    private GridPane wallGridPane;
+
+    @Getter
+    @Setter
+    private Wall wall;
+
+    /**
+     * References to other controllers
+     */
+    @Setter
+    @Getter
+    private PlayerBoardController playerBoardController;
+
 
     /**
      * Adds a tile to a wall
-     * @param wall the wall the tile should be added to
      * @param tile the tile that should be added
      * @param row on which row it should be added
-     * @param wallGridPane the GridPane used to show the wall
      */
-    public void addTileToWall(Wall wall, Tile tile, int row, GridPane wallGridPane) {
-        Rectangle tileToWall = findTileLocationInRow(row, tile, wallGridPane);
+    public void addTileToWall(Tile tile, int row) {
+        Rectangle tileToWall = findTileLocationInRow(row, tile);
         if (tileToWall != null) {
+            int column = GridPane.getColumnIndex(tileToWall);
             tileToWall.setOpacity(1.0);
             tileToWall.setStrokeWidth(3);
-            int column = GridPane.getColumnIndex(tileToWall);
             wall.addTile(tile, row, column);
         }
     }
+
 
     /**
      * Finds a Rectangle in GridPane for a given tile in a row
      * @param rowNumber the number of the row for finding the tile
      * @param tile the tile of which location is needed
-     * @param wallGridPane the GridPane associated with wall
      * @return the Rectangle associated with that tile
      */
-    public Rectangle findTileLocationInRow(int rowNumber, Tile tile, GridPane wallGridPane) {
+    public Rectangle findTileLocationInRow(int rowNumber, Tile tile) {
         String color = tile.toString();
         Rectangle tileToWall = null;
         for (Node node : wallGridPane.getChildren()) {
@@ -49,9 +66,8 @@ public class WallController {
 
     /**
      * resets all the tiles back to original look
-     * @param wallGridPane the GridPane on which the wall is shown
      */
-    public void resetWallView(GridPane wallGridPane) {
+    public void resetWallView() {
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
                 node.setOpacity(0.5);
@@ -60,4 +76,7 @@ public class WallController {
         }
     }
 
+    public void postInitialize(){
+        ///
+    }
 }

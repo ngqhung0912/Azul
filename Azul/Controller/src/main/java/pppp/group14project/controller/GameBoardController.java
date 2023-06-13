@@ -31,6 +31,12 @@ public class GameBoardController implements Initializable {
   @FXML
   private GridPane innerGridRight;
 
+  @Getter
+  private TableController tableController;
+
+  @Getter
+  private FloorController floorController;
+
   /**
    * References to other controllers
    */
@@ -88,6 +94,17 @@ public class GameBoardController implements Initializable {
       e.printStackTrace();
     }
 
+    try {
+      FXMLLoader tableLoader = new FXMLLoader((getClass().getResource("/game-table-view.fxml")));
+      GridPane table = tableLoader.load();
+      tableController = tableLoader.getController();
+      innerGridMid.add(table, 1, 0);
+
+      // Also add the table at 0,1
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     // Initialize models at the end of Game initialization
     postInitialize();
   }
@@ -104,6 +121,6 @@ public class GameBoardController implements Initializable {
       // Delegates call to child
       p.postInitialize();
     }
+    tableController.setMediator(this);
   }
-
 }

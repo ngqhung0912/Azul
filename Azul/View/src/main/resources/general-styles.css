@@ -33,6 +33,13 @@
     -fx-border-color: rgb(153, 46, 56);
 }
 
+.STARTING{
+    -fx-background-color: rgb(247, 247, 247);
+    -fx-border-color: rgb(31, 98, 124);
+
+}
+
+
 ClickableTile {
     -fx-border-width: 3;
     -fx-pref-width: 30;

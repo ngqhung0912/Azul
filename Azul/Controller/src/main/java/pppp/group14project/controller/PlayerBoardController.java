@@ -45,11 +45,15 @@ public class PlayerBoardController implements Initializable, Mediator {
   private FloorController floorController;
   @Setter
   @Getter
+  private WallController wallController;
+  @Setter
+  @Getter
   private GameBoardController gameBoardController;
 
   public void setPlayerName(String playerName) {
     this.playerName.setText(playerName);
   }
+
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,20 +61,25 @@ public class PlayerBoardController implements Initializable, Mediator {
       FXMLLoader floorLoader = new FXMLLoader(getClass().getResource("/player-floor-view.fxml"));
       FXMLLoader patternLoader = new FXMLLoader(getClass().getResource("/player-pattern-view.fxml"));
       FXMLLoader scoreLoader = new FXMLLoader(getClass().getResource("/board-score-view.fxml"));
+      FXMLLoader wallLoader = new FXMLLoader(getClass().getResource("/player-wall-view.fxml"));
       StackPane playerPattern = patternLoader.load();
       GridPane playerFloor = floorLoader.load();
       AnchorPane playerScore = scoreLoader.load();
+      GridPane playerWall = wallLoader.load();
 
       playerBoardGrid.add(playerPattern, 0, 1);
       playerBoardGrid.add(playerFloor, 0, 2);
       playerBoardGrid.add(playerScore, 1,3);
+      playerBoardGrid.add(playerWall, 1, 1);
 
       patternController = patternLoader.getController();
       floorController = floorLoader.getController();
       patternController.setPlayerBoardController(this);
       floorController.setPlayerBoardController(this);
+      wallController = wallLoader.getController();
+      wallController.setPlayerBoardController(this);
     } catch (
-        IOException e) {
+            IOException e) {
       e.printStackTrace();
     }
   }
@@ -87,6 +96,10 @@ public class PlayerBoardController implements Initializable, Mediator {
     patternController.setPlayerBoardController(this);
     patternController.setPattern(board.getPattern());
     patternController.postInitialize();
+
+    wallController.setPlayerBoardController(this);
+    wallController.setWall(board.getWall());
+    wallController.postInitialize();
 
   }
 
