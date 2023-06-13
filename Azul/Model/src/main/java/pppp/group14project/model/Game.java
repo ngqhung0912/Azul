@@ -1,6 +1,7 @@
 package pppp.group14project.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,17 @@ public class Game {
   private int currentRound;
 
   @Getter
+  @Setter
+  private Table table;
+
+  @Getter
+  @Setter
+  private Factory factory;
+
+  @Getter
   private List<Board> boardList = new ArrayList<Board>();
 
-  private Game() {
+  public Game() {
     currentRound = 1;
   }
 

@@ -9,10 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
-import pppp.group14project.controller.GameBoardController;
-import pppp.group14project.controller.PlayerBoardController;
-import pppp.group14project.controller.TableController;
-import pppp.group14project.controller.WallController;
+import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
 import org.junit.jupiter.api.Test;
 
@@ -35,11 +32,21 @@ class ControllerTest extends ApplicationTest {
 
     private static Table table;
 
-    private static List<PlayerBoardController> playerBoardControllers;
-
     private static WallController wallController;
 
     private static Wall wall;
+
+    private static FactoriesController factoriesController;
+
+    private static Factory factory;
+
+    private static FloorController floorController;
+
+    private static Floor floor;
+
+    private static PatternController patternController;
+
+    private static Pattern pattern;
 
     private static Board board;
 
@@ -73,10 +80,22 @@ class ControllerTest extends ApplicationTest {
         tableController = gameBoardController.getTableController();
         table = tableController.getTable();
 
+        factoriesController = gameBoardController.getFactoriesController();
+        factory = factoriesController.getFactory();
+
+
         playerBoardController = gameBoardController.getPlayerBoardControllers().get(0);
 
         wallController = playerBoardController.getWallController();
         wall = wallController.getWall();
+
+        patternController = playerBoardController.getPatternController();
+        pattern = patternController.getPattern();
+
+        floorController = playerBoardController.getFloorController();
+        floor = floorController.getFloor();
+
+
 
         stage.setScene(new Scene(root, 120, 600));
         stage.show();
@@ -89,8 +108,16 @@ class ControllerTest extends ApplicationTest {
         assertNotNull(gameBoardController);
         assertNotNull(tableController);
         assertNotNull(table);
+        assertNotNull(factoriesController);
+        //TODO fix the way factories are passed
+//        assertNotNull(factory);
         assertNotNull(wallController);
         assertNotNull(wall);
+        assertNotNull(patternController);
+        assertNotNull(pattern);
+        assertNotNull(floorController);
+        assertNotNull(floor);
+
     }
 
 

@@ -35,7 +35,11 @@ public class GameBoardController implements Initializable {
   private TableController tableController;
 
   @Getter
-  private FloorController floorController;
+  private FactoriesController factoriesController;
+
+  @Getter
+  @Setter
+  private Game game;
 
   /**
    * References to other controllers
@@ -85,8 +89,8 @@ public class GameBoardController implements Initializable {
     try {
       FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factories-view.fxml")));
       GridPane factories = factoryLoader.load();
-      FactoriesController factoryController = factoryLoader.getController();
-      factoryController.setNumberOfPlayers(boardList.size());
+      factoriesController = factoryLoader.getController();
+      factoriesController.setNumberOfPlayers(boardList.size());
       innerGridMid.add(factories, 0, 0);
 
       // Also add the table at 0,1
@@ -113,7 +117,8 @@ public class GameBoardController implements Initializable {
    * Initializes the models, once all models of its parent models have loaded
    */
   private void postInitialize() {
-    List<Board> boards = Game.getInstance().getBoardList();
+    game = Game.getInstance();
+    List<Board> boards = game.getBoardList();
     for (int i = 0; i < playerBoardControllers.size(); i++) {
       PlayerBoardController p = playerBoardControllers.get(i);
       p.setGameBoardController(this);
@@ -121,6 +126,11 @@ public class GameBoardController implements Initializable {
       // Delegates call to child
       p.postInitialize();
     }
-    tableController.setMediator(this);
+    tableController.setGameBoardController(this);
+    tableController.setTable(game.getTable());
+    tableController.postInitialize();
+    factoriesController.setGameBoardController(this);
+    factoriesController.setFactory(game.getFactory());
+    factoriesController.postInitialize();
   }
 }
