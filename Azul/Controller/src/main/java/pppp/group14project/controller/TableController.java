@@ -15,8 +15,6 @@ import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -34,7 +32,7 @@ public class TableController implements Initializable {
 
     public void addTilesToTable(List<Tile> tiles) throws FullException {
         this.table.addTiles(tiles);
-//        displayTilesOnTheTable();
+        displayTilesOnTheTable();
     }
 
     private void displayTilesOnTheTable() {
@@ -79,12 +77,10 @@ public class TableController implements Initializable {
     public void grabTilesFromTable(Tile tile) throws EmptyException {
         if (table.isStartingTileOnTable()){
             table.grabTiles(Tile.STARTING);
-            mediator.moveTilesToFloor(Arrays.asList(Tile.STARTING));
         }
-        List<Tile> tilesToMove = this.table.grabTiles(tile);
-        mediator.moveTilesToPattern(tilesToMove);
-//        zeroTableView();
-//        displayTilesOnTheTable();
+        this.table.grabTiles(tile);
+        zeroTableView();
+        displayTilesOnTheTable();
     }
 
 

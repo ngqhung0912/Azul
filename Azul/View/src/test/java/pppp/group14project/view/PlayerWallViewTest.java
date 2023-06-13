@@ -30,6 +30,8 @@ class PlayerWallViewTest extends ApplicationTest {
 
     private GridPane wallGridPane;
 
+    private Wall wall;
+
     @BeforeAll
     public static void headless() {
         if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
@@ -43,6 +45,7 @@ class PlayerWallViewTest extends ApplicationTest {
         Parent root  = FXMLLoader.load((getClass().getResource("/player-wall-view.fxml")));
         wallGridPane  = wallLoader.load();
         wallController = wallLoader.getController();
+        wall = new Wall();
         stage.setScene(new Scene(root, 180, 180));
         stage.show();
         stage.toFront();
@@ -95,7 +98,7 @@ class PlayerWallViewTest extends ApplicationTest {
 
         Wall wall = new Wall();
         int row = 2;
-        wallController.addTileToWall(wall, Tile.RED, row);
+        wallController.addTileToWall(Tile.RED, row);
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {
                 if (node.getOpacity() == finalOpacity && ((Rectangle) node).getStrokeWidth() == 3) {
@@ -110,7 +113,7 @@ class PlayerWallViewTest extends ApplicationTest {
     void tilesAddedInCorrectSpot() {
 
         Wall wall = new Wall();
-        wallController.addTileToWall(wall, Tile.ORANGE, 2);
+        wallController.addTileToWall(Tile.ORANGE, 2);
         int row = 0;
         int col = 0;
         for (Node node : wallGridPane.getChildren()) {
@@ -138,9 +141,9 @@ class PlayerWallViewTest extends ApplicationTest {
         double finalOpacity = 1;
 
         Wall wall = new Wall();
-        wallController.addTileToWall(wall, Tile.RED, 2);
-        wallController.addTileToWall(wall, Tile.ORANGE, 3);
-        wallController.addTileToWall(wall, Tile.BLACK, 4);
+        wallController.addTileToWall(Tile.RED, 2);
+        wallController.addTileToWall(Tile.ORANGE, 3);
+        wallController.addTileToWall(Tile.BLACK, 4);
 
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Rectangle) {

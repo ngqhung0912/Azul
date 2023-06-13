@@ -34,24 +34,24 @@ public class PlayerBoardController implements Initializable, Mediator {
   @Getter
   private Board board;
 
-
+  /**
+   * References to other controllers
+   */
+  @Setter
   @Getter
   private PatternController patternController;
+  @Setter
   @Getter
   private FloorController floorController;
+  @Setter
+  @Getter
+  private WallController wallController;
+  @Setter
+  @Getter
+  private GameBoardController gameBoardController;
 
   public void setPlayerName(String playerName) {
     this.playerName.setText(playerName);
-  }
-
-  public void attachComponentModels() {
-    // attach models to respective controllers
-    patternController.setPattern(board.getPattern());
-    floorController.setFloor(board.getFloor());
-
-    // attach mediator
-    patternController.setMediator(this);
-    floorController.setMediator(this);
   }
 
   @Override
@@ -60,7 +60,7 @@ public class PlayerBoardController implements Initializable, Mediator {
       FXMLLoader floorLoader = new FXMLLoader(getClass().getResource("/player-floor-view.fxml"));
       FXMLLoader patternLoader = new FXMLLoader(getClass().getResource("/player-pattern-view.fxml"));
       FXMLLoader scoreLoader = new FXMLLoader(getClass().getResource("/board-score-view.fxml"));
-      FXMLLoader wallLoader  = new FXMLLoader(getClass().getResource("/player-wall-view.fxml"));
+      FXMLLoader wallLoader = new FXMLLoader(getClass().getResource("/player-wall-view.fxml"));
       StackPane playerPattern = patternLoader.load();
       GridPane playerFloor = floorLoader.load();
       AnchorPane playerScore = scoreLoader.load();
@@ -69,14 +69,37 @@ public class PlayerBoardController implements Initializable, Mediator {
       playerBoardGrid.add(playerPattern, 0, 1);
       playerBoardGrid.add(playerFloor, 0, 2);
       playerBoardGrid.add(playerScore, 1,3);
-      playerBoardGrid.add(playerWall, 1, 1 );
+      playerBoardGrid.add(playerWall, 1, 1);
 
       patternController = patternLoader.getController();
       floorController = floorLoader.getController();
+      patternController.setPlayerBoardController(this);
+      floorController.setPlayerBoardController(this);
+      wallController = wallLoader.getController();
+      wallController.setPlayerBoardController(this);
     } catch (
-        IOException e) {
+            IOException e) {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * Initializes the models, once all models of its parent models have loaded
+   */
+  public void postInitialize() {
+
+    floorController.setPlayerBoardController(this);
+    floorController.setFloor(board.getFloor());
+    floorController.postInitialize();
+
+    patternController.setPlayerBoardController(this);
+    patternController.setPattern(board.getPattern());
+    patternController.postInitialize();
+
+    wallController.setPlayerBoardController(this);
+    wallController.setWall(board.getWall());
+    wallController.postInitialize();
+
   }
 
   /**

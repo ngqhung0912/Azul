@@ -11,6 +11,7 @@ public class Wall {
     private Tile[][] wall;
     private int wallSize;
 
+
     @Getter
     public int wallScore;
 
@@ -27,17 +28,17 @@ public class Wall {
      */
     public List<Tile> getTilesInWall() {
         List<Tile> tilesInWall = new ArrayList<>();
-
         for (Tile[] row : wall) {
             for (Tile tile : row) {
                 if (tile != null) {
                     tilesInWall.add(tile);
+
                 }
             }
         }
-
         return tilesInWall;
     }
+
 
     /**
      * Adds tile to the wall on a given row x column position

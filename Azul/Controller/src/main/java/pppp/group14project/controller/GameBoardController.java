@@ -5,19 +5,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.util.Pair;
+import lombok.Getter;
+import lombok.Setter;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
 import pppp.group14project.model.Tile;
-
-import static org.mockito.Mockito.*;
+import pppp.group14project.model.exceptions.FullException;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GameBoardController implements Initializable, Mediator {
+public class GameBoardController implements Initializable {
+
+  /**
+   * FXML for updating views
+   */
   @FXML
   private GridPane innerGridMid;
 
@@ -26,6 +32,13 @@ public class GameBoardController implements Initializable, Mediator {
 
   @FXML
   private GridPane innerGridRight;
+
+  /**
+   * References to other controllers
+   */
+  @Setter
+  @Getter
+  private List<PlayerBoardController> playerBoardControllers = new ArrayList<>();
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,57 +69,58 @@ public class GameBoardController implements Initializable, Mediator {
         }
         gridIndex++;
 
-        // attach player board model to player board controller
-        playerBoardController.setBoard(board);
-        playerBoardController.attachComponentModels();
+        // Adds the playerBoardControllers
+        this.playerBoardControllers.add(playerBoardController);
 
       } catch (IOException e) {
         e.printStackTrace();
       }
     }
 
+
     try {
       FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factories-view.fxml")));
       GridPane factories = factoryLoader.load();
-      factoryController = factoryLoader.getController();
+      FactoriesController factoryController = factoryLoader.getController();
       factoryController.setNumberOfPlayers(boardList.size());
       innerGridMid.add(factories, 0, 0);
 
+      // Also add the table at 0,1
     } catch (IOException e) {
       e.printStackTrace();
     }
 
-    try{
+    try {
       FXMLLoader tableLoader = new FXMLLoader((getClass().getResource("/game-table-view.fxml")));
-      GridPane tableGrid = tableLoader.load();
-      tableController = tableLoader.getController();
-      tableController.setMediator(this);
-      innerGridMid.add(tableGrid, 0, 1);
-    } catch (IOException e) {
+      GridPane table = tableLoader.load();
+      TableController tableController = tableLoader.getController();
+      //Just for testing the view
+      List<Tile> tileList = new ArrayList<>();
+      tileList.add(Tile.BLUE);
+      tableController.addTilesToTable(tileList);
+      innerGridMid.add(table, 1, 0);
+
+      // Also add the table at 0,1
+    } catch (IOException | FullException e) {
       e.printStackTrace();
     }
 
-
-
+    // Initialize models at the end of Game initialization
+    postInitialize();
   }
 
-  @Override
-  public void moveTilesToWall(Tile tile) {
-
+  /**
+   * Initializes the models, once all models of its parent models have loaded
+   */
+  private void postInitialize() {
+    List<Board> boards = Game.getInstance().getBoardList();
+    for (int i = 0; i < playerBoardControllers.size(); i++) {
+      PlayerBoardController p = playerBoardControllers.get(i);
+      p.setGameBoardController(this);
+      p.setBoard(boards.get(i));
+      // Delegates call to child
+      p.postInitialize();
+    }
   }
 
-  @Override
-  public void moveTilesToFloor(List<Tile> tiles) {
-
-  }
-
-  @Override
-  public void moveTilesToPattern(List<Tile> tiles) {
-
-  }
-
-  @Override
-  public void moveTilesToTable(List<Tile> tiles) {
-
-  }
 }

@@ -49,7 +49,7 @@ class ControllerTest extends ApplicationTest {
         ResourceBundle rb = null;
         gameBoardController.initialize(url, rb);   // Perhaps really dumb approach
 
-        tableController = gameBoardController.getTableController();
+//        tableController = gameBoardController.getTableController();
         table = tableController.getTable();
     }
 

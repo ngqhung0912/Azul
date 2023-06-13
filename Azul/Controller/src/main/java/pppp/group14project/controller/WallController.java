@@ -1,38 +1,48 @@
 package pppp.group14project.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
+import lombok.Getter;
+import lombok.Setter;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.Wall;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class WallController implements Initializable {
+public class WallController {
 
     @FXML
     private GridPane wallGridPane;
 
+    @Getter
+    @Setter
+    private Wall wall;
+
+    /**
+     * References to other controllers
+     */
+    @Setter
+    @Getter
+    private PlayerBoardController playerBoardController;
+
 
     /**
      * Adds a tile to a wall
-     * @param wall the wall the tile should be added to
      * @param tile the tile that should be added
      * @param row on which row it should be added
      */
-    public void addTileToWall(Wall wall, Tile tile, int row) {
+    public void addTileToWall(Tile tile, int row) {
         Rectangle tileToWall = findTileLocationInRow(row, tile);
         if (tileToWall != null) {
+            int column = GridPane.getColumnIndex(tileToWall);
             tileToWall.setOpacity(1.0);
             tileToWall.setStrokeWidth(3);
-            int column = GridPane.getColumnIndex(tileToWall);
             wall.addTile(tile, row, column);
         }
     }
+
 
     /**
      * Finds a Rectangle in GridPane for a given tile in a row
@@ -66,8 +76,7 @@ public class WallController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //TODO add method to pass tiles to the tile bag
+    public void postInitialize(){
+        ///
     }
 }
