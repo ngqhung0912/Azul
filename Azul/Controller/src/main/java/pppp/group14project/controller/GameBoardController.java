@@ -40,9 +40,6 @@ public class GameBoardController implements Initializable {
   private TableController tableController;
 
   @Getter
-  private ArrayList<FactoriesController> factoryControllers;
-
-  @Getter
   @Setter
   private Game game;
 
@@ -87,7 +84,7 @@ public class GameBoardController implements Initializable {
         gridIndex++;
 
         // Adds the playerBoardControllers
-        this.playerBoardControllers.add(playerBoardController);
+        playerBoardControllers.add(playerBoardController);
 
       } catch (IOException e) {
         e.printStackTrace();
@@ -97,7 +94,7 @@ public class GameBoardController implements Initializable {
 
     try {
       Integer factoryAmount = Game.getInstance().getFactoryList().size();
-      for(Integer factoryNr = 0; factoryNr <= factoryAmount; factoryNr++) {
+      for(Integer factoryNr = 0; factoryNr < factoryAmount; factoryNr++) {
         FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factory-view.fxml")));
         GridPane factory = factoryLoader.load();
         FactoryController controller = factoryLoader.getController();
@@ -144,7 +141,7 @@ public class GameBoardController implements Initializable {
     for (int i = 0; i < factoryControllers.size(); i++) {
       FactoryController controller = factoryControllers.get(i);
       controller.setGameBoardController(this);
-      controller.setFactory(game.getFactories.get(i));
+      controller.setFactory(game.getFactoryList().get(i));
       // Delegates call to child
       controller.postInitialize();
     }

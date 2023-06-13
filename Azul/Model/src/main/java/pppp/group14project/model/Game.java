@@ -16,10 +16,6 @@ public class Game {
   private Table table;
 
   @Getter
-  @Setter
-  private Factory factory;
-
-  @Getter
   private List<Board> boardList = new ArrayList<Board>();
 
   @Getter

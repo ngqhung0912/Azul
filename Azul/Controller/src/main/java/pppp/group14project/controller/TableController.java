@@ -32,7 +32,7 @@ public class TableController {
 
     public void addTilesToTable(List<Tile> tiles) throws FullException {
         this.table.addTiles(tiles);
-        displayTilesOnTheTable();
+//        displayTilesOnTheTable();
     }
 
     private void displayTilesOnTheTable(Table table, GridPane tableGridPane) {
@@ -80,7 +80,7 @@ public class TableController {
         }
         this.table.grabTiles(tile);
         zeroTableView();
-        displayTilesOnTheTable();
+//        displayTilesOnTheTable();
     }
 
 
