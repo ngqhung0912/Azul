@@ -1,7 +1,8 @@
 package pppp.group14project.controller;
 
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
@@ -14,9 +15,8 @@ import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
-import java.net.URL;
+
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class TableController {
 
@@ -51,12 +51,14 @@ public class TableController {
                 node = (ClickableTile) tableGridPane.getChildren().get(0);
                 node.getStyleClass().add("STARTING");
                 node.setOpacity(1);
+                node.setColour(tile);
             } else {
                 double opacity = 1;
                 while (opacity == 1 && currentRow < tableGridPane.getChildren().size()) {
                     currentRow++;
                     node = (ClickableTile) tableGridPane.getChildren().get(currentRow);
                     opacity = node.getOpacity();
+                    node.setColour(tile);
                 }
 
                 if (node != null) {
@@ -71,10 +73,26 @@ public class TableController {
     private void zeroTableView() {
         for (Node node : tableGridPane.getChildren()) {
             node.setOpacity(0);
+            ClickableTile clickableTile = (ClickableTile) node;
+            clickableTile.removeColour();
+        }
+    }
+
+
+    public void setSelectedTiles(Tile clickedTile){
+        String colour = clickedTile.toString();
+        for (Node node : tableGridPane.getChildren()){
+            ObservableList<String> style = node.getStyleClass();
+            if(style.contains(colour)) {
+                style.add("selected");
+            } else {
+                style.remove("selected");
+            }
         }
     }
 
     public void grabTilesFromTable(Tile tile) throws EmptyException {
+        setSelectedTiles(tile);
         if (table.isStartingTileOnTable()){
             table.grabTiles(Tile.STARTING);
         }
@@ -90,16 +108,25 @@ public class TableController {
 
         System.out.println("Created event listeners for table");
 
-        ClickableTile clickableTile = new ClickableTile();
-        clickableTile.setOnMouseClicked(event -> {
-            // Handle the tile click event here
-            try {
-                grabTilesFromTable(clickableTile.getColour());
-            } catch (EmptyException e) {
-                // Handle the EmptyException if necessary
-                e.printStackTrace();
-            }
+
+        this.table.getTiles().addListener((ListChangeListener<Tile>) change -> {
+            displayTilesOnTheTable();
         });
+
+        for (Node node : tableGridPane.getChildren()) {
+            ClickableTile clickableTile = (ClickableTile) node;
+            clickableTile.setOnMouseClicked(event -> {
+                // Handle the tile click event here
+                try {
+                    Tile clickedTile = clickableTile.getColour();
+                    System.out.println(clickedTile);
+                    grabTilesFromTable(clickedTile);
+                } catch (EmptyException e) {
+                    // Handle the EmptyException if necessary
+                    e.printStackTrace();
+                }
+            });
+        }
 
     }
 }

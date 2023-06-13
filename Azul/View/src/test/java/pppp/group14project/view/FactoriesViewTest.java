@@ -28,7 +28,7 @@ public class FactoriesViewTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/factories-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/factory-view.fxml"));
         stage.setScene(new Scene(root, 500, 500));
         stage.show();
         stage.toFront();

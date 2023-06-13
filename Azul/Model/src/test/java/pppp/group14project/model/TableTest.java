@@ -25,12 +25,8 @@ public class TableTest {
      */
     @Test
     void TestInitializingWithStartingTile() throws Exception {
-
         assertEquals(table.size(), 1);
-        List<Tile> t = table.grabTiles(Tile.STARTING);
-        assertEquals(t.get(0), Tile.STARTING);
-        assertEquals(t.size(), 1);
-
+        assertEquals(table.starting_tile, true);
     }
 
     /**

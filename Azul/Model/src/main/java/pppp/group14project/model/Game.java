@@ -1,7 +1,7 @@
 package pppp.group14project.model;
 
 import lombok.Getter;
-import lombok.Setter;
+import pppp.group14project.model.exceptions.FullException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,13 @@ public class Game {
   private int currentRound;
 
   @Getter
-  @Setter
   private Table table;
 
   @Getter
-  @Setter
-  private Factory factory;
+  private List<Factory> factoryList = new ArrayList<>();
+
+  @Getter
+  private TileContainer tilecontainer = new TileContainer();
 
   @Getter
   private List<Board> boardList = new ArrayList<Board>();
@@ -48,4 +49,17 @@ public class Game {
     }
     return usernameList;
   }
+
+  public void fillFactories(List<Tile> tiles) {
+    Integer counter = 0;
+    for (Factory factory: factoryList) {
+      try {
+        factory.addTiles(tiles.subList(counter, counter+4));
+      } catch (FullException e) {
+        e.printStackTrace();
+      }
+      counter = counter+4;
+    }
+  }
+
 }

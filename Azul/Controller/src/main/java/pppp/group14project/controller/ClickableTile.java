@@ -14,4 +14,6 @@ public class ClickableTile extends Button {
 
     public void setLocation(Factory location) {this.location = location;}
     public void setColour(Tile colour) {this.colour = colour;}
+
+    public void removeColour(){this.colour = null;}
 }

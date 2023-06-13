@@ -1,10 +1,15 @@
 package pppp.group14project.model;
 
-import pppp.group14project.model.exceptions.EmptyException;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import lombok.Getter;
+import lombok.Setter;
 import pppp.group14project.model.exceptions.FullException;
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.collections.ObservableList;
+
+
+import java.util.*;
 
 public class Factory {
 
@@ -16,36 +21,28 @@ public class Factory {
         return 4;
     }
 
-    private List<Tile> tiles;
+    @Getter
+    @Setter
+    private ObservableList<Tile> tiles;
+
+    @Getter
+    private SimpleStringProperty selected_colour;
+
     public Factory() {
-        this.tiles = new ArrayList<>();
-    }
-
-    public Factory(List<Tile> tiles) throws FullException {
-
-        if (tiles.size() > getMaxNumberOfTiles())
-            throw new FullException("Can't add more than " + getMaxNumberOfTiles() + " tiles to a factory");
-
-        this.tiles = tiles;
-
+        this.tiles = FXCollections.observableArrayList();
+        this.selected_colour = new SimpleStringProperty();
     }
 
     /**
-     * Grabs the tiles from the factory of one color
-     * @param tile the color of the tiles to grab
-     * @return a list of tiles
+     * Checks if the passed tile exist in the factory,
+     * and sets the selected_colour to this tile's colour
+     * if it is.
+     * @param tile the selected tile
      */
-    public List<Tile> grabTiles(Tile tile) throws EmptyException {
-        List<Tile> grabList = new ArrayList<>();
-        List<Tile> newTileList = new ArrayList<>(tiles);
-        for (Tile t: this.tiles) {
-            if (t == tile) {
-                grabList.add(t);
-                newTileList.remove(t);
-            }
+    public void grabTiles(Tile tile) {
+        if(this.tiles.contains(tile)) {
+            this.selected_colour.set(tile.toString());
         }
-        this.tiles = newTileList;
-        return grabList;
     }
 
     /**
@@ -92,8 +89,30 @@ public class Factory {
         return this.tiles.size();
     }
 
+    /**
+     * Counts how many tiles of a certain colour are on the factory
+     * @param tile the colour to count
+     * @return the number of tiles of the given colour
+     */
+    public int countColour(Tile tile) {
+        int counter = 0;
+        for(Tile t: this.tiles) {
+            if (t == tile) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public void empty() {
+        this.selected_colour = new SimpleStringProperty();
+        this.tiles.removeAll();
+    }
+
     public List<Tile> getAllCurrentTiles(){
         return this.tiles;
     }
+
+
 
 }

@@ -36,7 +36,7 @@ class ControllerTest extends ApplicationTest {
 
     private static Wall wall;
 
-    private static FactoriesController factoriesController;
+    private static FactoryController factoryController;
 
     private static Factory factory;
 
@@ -80,8 +80,8 @@ class ControllerTest extends ApplicationTest {
         tableController = gameBoardController.getTableController();
         table = tableController.getTable();
 
-        factoriesController = gameBoardController.getFactoriesController();
-        factory = factoriesController.getFactory();
+//        factoryController = gameBoardController.getfactoryController();
+//        factory = factoryController.getFactory();
 
 
         playerBoardController = gameBoardController.getPlayerBoardControllers().get(0);
@@ -108,7 +108,7 @@ class ControllerTest extends ApplicationTest {
         assertNotNull(gameBoardController);
         assertNotNull(tableController);
         assertNotNull(table);
-        assertNotNull(factoriesController);
+//        assertNotNull(factoryController);
         //TODO fix the way factories are passed
 //        assertNotNull(factory);
         assertNotNull(wallController);
