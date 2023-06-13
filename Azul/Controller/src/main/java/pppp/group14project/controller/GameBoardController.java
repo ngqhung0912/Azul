@@ -9,8 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
-import pppp.group14project.model.Tile;
-import pppp.group14project.model.exceptions.FullException;
+
 
 
 import java.io.IOException;
@@ -32,6 +31,12 @@ public class GameBoardController implements Initializable {
 
   @FXML
   private GridPane innerGridRight;
+
+  @Getter
+  private TableController tableController;
+
+  @Getter
+  private FloorController floorController;
 
   /**
    * References to other controllers
@@ -93,15 +98,11 @@ public class GameBoardController implements Initializable {
     try {
       FXMLLoader tableLoader = new FXMLLoader((getClass().getResource("/game-table-view.fxml")));
       GridPane table = tableLoader.load();
-      TableController tableController = tableLoader.getController();
-      //Just for testing the view
-      List<Tile> tileList = new ArrayList<>();
-      tileList.add(Tile.BLUE);
-      tableController.addTilesToTable(tileList);
+      tableController = tableLoader.getController();
       innerGridMid.add(table, 1, 0);
 
       // Also add the table at 0,1
-    } catch (IOException | FullException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
 
@@ -121,6 +122,7 @@ public class GameBoardController implements Initializable {
       // Delegates call to child
       p.postInitialize();
     }
+    tableController.setMediator(this);
   }
 
 }
