@@ -49,6 +49,10 @@ public class GameBoardController implements Initializable {
   @Getter
   private List<PlayerBoardController> playerBoardControllers = new ArrayList<>();
 
+  @Getter
+  @Setter
+  private List<FactoryController> factoryControllers = new ArrayList<>();
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -126,5 +130,14 @@ public class GameBoardController implements Initializable {
       p.postInitialize();
     }
     tableController.setMediator(this);
+
+    List<Factory> factories = Game.getInstance().getFactoryList();
+    for (int i = 0; i < factoryControllers.size(); i++) {
+      FactoryController controller = factoryControllers.get(i);
+      controller.setGameBoardController(this);
+      controller.setFactory(factories.get(i));
+      // Delegates call to child
+      controller.postInitialize();
+    }
   }
 }

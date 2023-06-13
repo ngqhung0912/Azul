@@ -13,7 +13,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import lombok.Getter;
+import lombok.Setter;
 import pppp.group14project.model.Factory;
+import pppp.group14project.model.Game;
 import pppp.group14project.model.Table;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.EmptyException;
@@ -25,14 +28,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class FactoryController implements Initializable {
+public class FactoryController {
 
     // model
+    @Setter
+    @Getter
     Factory factory;
 
     // view
     @FXML
     GridPane tileGrid;
+
+    @Getter
+    @Setter
+    private GameBoardController gameBoardController;
 
     public void setSelectedTiles(String colour) {
         for(Node tile : tileGrid.getChildren()) {
@@ -61,12 +70,9 @@ public class FactoryController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.factory = new Factory();
-
-        factory.getTiles().addListener((ListChangeListener<Tile>) change -> {
-            setTileColours(factory.getTiles());
+    public void postInitialize() {
+        this.factory.getTiles().addListener((ListChangeListener<Tile>) change -> {
+            setTileColours(this.factory.getTiles());
         });
 
         // Just to test changing the model (that this can be seen in the view)
@@ -76,16 +82,12 @@ public class FactoryController implements Initializable {
             e.printStackTrace();
         }
 
-        factory.getSelected_colour().addListener(new ChangeListener<String>() {
+        this.factory.getSelected_colour().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                FactoryController.this.setSelectedTiles(factory.getSelected_colour().toString());
+                FactoryController.this.setSelectedTiles(FactoryController.this.factory.getSelected_colour().toString());
             }
         });
 
     }
-
-
-
-
 }
