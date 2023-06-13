@@ -1,5 +1,9 @@
 package pppp.group14project.model;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import lombok.Getter;
 import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.util.ArrayList;
@@ -7,7 +11,10 @@ import java.util.List;
 
 public class Pattern {
 
-    List<PatternLine> patternLines = new ArrayList<>();
+    @Getter
+    ObservableList<PatternLine> patternLines = FXCollections.observableArrayList(
+            item -> new Observable[] { item.getSpaces() }
+    );
 
     public Pattern() {
         // Adds 5 PatternLines
@@ -26,6 +33,9 @@ public class Pattern {
         PatternLine line = patternLines.get(patternLineNumber);
         List<Tile> returnedTiles = line.addTiles(tiles);
         return returnedTiles;
+
+        //TODO: shouldn't pattern be responsible for moving the tiles to the floor?
+        // mediator.moveTilesToFloor(returnedTiles);
     }
 
 }

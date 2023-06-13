@@ -11,7 +11,6 @@ public class Board {
     @Getter
     @Setter
     private Wall wall;
-
     @Getter
     @Setter
     private Pattern pattern;
@@ -40,5 +39,7 @@ public class Board {
     this.player = player;
     this.score = 0;
     this.floor = new Floor();
+    this.pattern = new Pattern();
+    this.wall = new Wall();
   }
 }

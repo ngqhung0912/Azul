@@ -28,4 +28,8 @@ public class Table extends Factory {
         this.starting_tile = true;
     }
 
+    public boolean isStartingTileOnTable(){
+        return getAllCurrentTiles().contains(Tile.STARTING);
+    }
+
 }
