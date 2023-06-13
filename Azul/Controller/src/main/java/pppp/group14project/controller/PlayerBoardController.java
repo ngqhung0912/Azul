@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.FullException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -108,8 +109,12 @@ public class PlayerBoardController implements Initializable, Mediator {
    */
 
   @Override
-  public void moveTilesToWall(Tile tile) {
-    // TODO: implement
+  public void moveTilesToWall(Tile tile, int rowNumber) {
+    try {
+      wallController.addTileToWall(tile, rowNumber);
+    } catch (FullException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override

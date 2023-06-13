@@ -41,14 +41,15 @@ public class WallController {
      * @param tile the tile that should be added
      * @param row on which row it should be added
      */
-    public void addTileToWall(Tile tile, int row) {
-        Rectangle tileToWall = findTileLocationInRow(row, tile);
-        if (tileToWall != null) {
-            int column = GridPane.getColumnIndex(tileToWall);
-            tileToWall.setOpacity(1.0);
-            tileToWall.setStrokeWidth(3);
-            wall.addTile(tile, row, column);
-        }
+    public void addTileToWall(Tile tile, int row) throws FullException {
+//        Rectangle tileToWall = findTileLocationInRow(row, tile);
+//        if (tileToWall != null) {
+//            int column = GridPane.getColumnIndex(tileToWall);
+//            tileToWall.setOpacity(1.0);
+//            tileToWall.setStrokeWidth(3);
+//            wall.addTile(tile, row, column);
+//        }
+        wall.addTile(tile, row);
     }
 
 
