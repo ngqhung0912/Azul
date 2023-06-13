@@ -49,21 +49,10 @@ public class FactoriesViewTest extends ApplicationTest {
     }
 
     @Test
-    public void tilesAreClickable() {
-        GridPane tileGrid = lookup("#tileGrid").query();
-        int expected = 4;
-        int actual = 0;
-        for(Node n: tileGrid.getChildren()) {
-            if(n instanceof ClickableTile) {
-                actual++;
-            }
-        }
-        assertEquals(expected, actual);
-    }
-
-    @Test
     public void tilesLookClickable() {
+
         GridPane tileGrid = lookup("#tileGrid").query();
+        moveTo(tileGrid.getChildren().get(3));
         for(Node n : tileGrid.getChildren()) {
             ClickableTile tile = (ClickableTile) n;
             Paint bordercolour = tile.getBorder().getStrokes().get(0).getLeftStroke();
@@ -75,6 +64,19 @@ public class FactoriesViewTest extends ApplicationTest {
             assertEquals(bordercolour, backgroundcolor);
         }
 
+    }
+
+    @Test
+    public void tilesAreClickable() {
+        GridPane tileGrid = lookup("#tileGrid").query();
+        int expected = 4;
+        int actual = 0;
+        for(Node n: tileGrid.getChildren()) {
+            if(n instanceof ClickableTile) {
+                actual++;
+            }
+        }
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -96,6 +98,14 @@ public class FactoriesViewTest extends ApplicationTest {
         assertFalse(tiles.get(1).getStyleClass().contains("selected"));
         assertTrue(tiles.get(2).getStyleClass().contains("selected"));
         assertFalse(tiles.get(3).getStyleClass().contains("selected"));
+
+        clickOn(tiles.get(1));
+        assertFalse(tiles.get(0).getStyleClass().contains("selected"));
+        assertTrue(tiles.get(1).getStyleClass().contains("selected"));
+        assertFalse(tiles.get(2).getStyleClass().contains("selected"));
+        assertFalse(tiles.get(3).getStyleClass().contains("selected"));
+
+        tiles.get(1).getStyleClass().remove("selected");
     }
 
 }
