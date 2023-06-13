@@ -11,7 +11,6 @@ import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
 
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -124,5 +123,4 @@ public class GameBoardController implements Initializable {
     }
     tableController.setMediator(this);
   }
-
 }

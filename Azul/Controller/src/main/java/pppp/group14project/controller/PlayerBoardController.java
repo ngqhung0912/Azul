@@ -54,6 +54,7 @@ public class PlayerBoardController implements Initializable, Mediator {
     this.playerName.setText(playerName);
   }
 
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     try {
