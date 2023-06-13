@@ -4,13 +4,20 @@ import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.exceptions.FullException;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
   private static Game instance = null;
   private int currentRound;
+
+  @Getter
+  @Setter
+  private Table table;
+
+  @Getter
+  @Setter
+  private Factory factory;
 
   @Getter
   private List<Board> boardList = new ArrayList<Board>();
@@ -21,7 +28,7 @@ public class Game {
   @Getter
   private TileContainer tilecontainer = new TileContainer();
 
-  private Game() {
+  public Game() {
     currentRound = 1;
   }
 

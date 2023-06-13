@@ -40,7 +40,11 @@ public class GameBoardController implements Initializable {
   private TableController tableController;
 
   @Getter
-  private FloorController floorController;
+  private ArrayList<FactoriesController> factoryControllers;
+
+  @Getter
+  @Setter
+  private Game game;
 
   /**
    * References to other controllers
@@ -96,6 +100,8 @@ public class GameBoardController implements Initializable {
       for(Integer factoryNr = 0; factoryNr <= factoryAmount; factoryNr++) {
         FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factory-view.fxml")));
         GridPane factory = factoryLoader.load();
+        FactoryController controller = factoryLoader.getController();
+        factoryControllers.add(controller);
         factoriesGrid.add(factory, factoryNr%2, factoryNr/2);
       }
     } catch (IOException e) {
@@ -121,7 +127,8 @@ public class GameBoardController implements Initializable {
    * Initializes the models, once all models of its parent models have loaded
    */
   private void postInitialize() {
-    List<Board> boards = Game.getInstance().getBoardList();
+    game = Game.getInstance();
+    List<Board> boards = game.getBoardList();
     for (int i = 0; i < playerBoardControllers.size(); i++) {
       PlayerBoardController p = playerBoardControllers.get(i);
       p.setGameBoardController(this);
@@ -129,13 +136,15 @@ public class GameBoardController implements Initializable {
       // Delegates call to child
       p.postInitialize();
     }
-    tableController.setMediator(this);
+    tableController.setGameBoardController(this);
+    tableController.setTable(game.getTable());
+    tableController.postInitialize();
 
     List<Factory> factories = Game.getInstance().getFactoryList();
     for (int i = 0; i < factoryControllers.size(); i++) {
       FactoryController controller = factoryControllers.get(i);
       controller.setGameBoardController(this);
-      controller.setFactory(factories.get(i));
+      controller.setFactory(game.getFactories.get(i));
       // Delegates call to child
       controller.postInitialize();
     }
