@@ -78,18 +78,15 @@ public class FactoryTest {
         factory.addTiles(tilesToAdd);
 
         // Two BLUE tiles returned
-        List<Tile> grabbedTiles = factory.grabTiles(Tile.BLUE);
-        List<Tile> expectedList = Arrays.asList(Tile.BLUE, Tile.BLUE);
-
-        assertEquals(grabbedTiles, expectedList);
-        assertEquals(factory.size(), 4);
+        factory.grabTiles(Tile.BLUE);
+        assertEquals(Tile.BLUE.toString(), factory.getSelected_colour().getValue());
+        assertEquals(2, factory.countColour(Tile.BLUE));
 
         // No tiles returned
-        List<Tile> grabbedTiles2 = factory.grabTiles(Tile.BLUE);
-        List<Tile> expectedList2 = Arrays.asList();
+        factory.grabTiles(Tile.WHITE);
 
-        assertEquals(grabbedTiles, expectedList);
-        assertEquals(factory.size(), 4);
+        assertEquals(Tile.BLUE.toString(), factory.getSelected_colour().getValue());
+        assertEquals(2, factory.countColour(Tile.BLUE));
 
     }
 

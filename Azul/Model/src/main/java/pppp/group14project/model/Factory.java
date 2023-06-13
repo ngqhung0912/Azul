@@ -1,12 +1,10 @@
 package pppp.group14project.model;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringPropertyBase;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import lombok.Getter;
 import lombok.Setter;
-import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
 import javafx.collections.ObservableList;
@@ -28,23 +26,24 @@ public class Factory {
     @Setter
     private ObservableList<Tile> tiles;
 
+    @Getter
+    private SimpleStringProperty selected_colour;
+
     public Factory() {
         this.tiles = FXCollections.observableArrayList();
+        this.selected_colour = new SimpleStringProperty();
     }
 
     /**
-     * Grabs the tiles from the factory of one color
-     * @param tile the color of the tiles to grab
-     * @return a list of tiles
+     * Checks if the passed tile exist in the factory,
+     * and sets the selected_colour to this tile's colour
+     * if it is.
+     * @param tiles the selected tile
      */
-    public List<Tile> grabTiles(Tile tile) throws EmptyException {
-        List<Tile> grabList = new ArrayList<>();
-        for (Tile t: this.tiles) {
-            if (t == tile) {
-                grabList.add(t);
-            }
+    public void grabTiles(Tile tile) {
+        if(this.tiles.contains(tile)) {
+            this.selected_colour.set(tile.toString());
         }
-        return grabList;
     }
 
     /**
@@ -89,6 +88,26 @@ public class Factory {
      */
     public int size() {
         return this.tiles.size();
+    }
+
+    /**
+     * Counts how many tiles of a certain colour are on the factory
+     * @param tiles the colour to count
+     * @return the number of tiles of the given colour
+     */
+    public int countColour(Tile tile) {
+        int counter = 0;
+        for(Tile t: this.tiles) {
+            if (t == tile) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public void empty() {
+        this.selected_colour = new SimpleStringProperty();
+        this.tiles.removeAll();
     }
 
 

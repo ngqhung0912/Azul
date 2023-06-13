@@ -102,12 +102,8 @@ class GameTableViewTest extends ApplicationTest {
 
         tableController.grabTilesFromTable(table, Tile.BLUE, tableGridPane);
 
-        for (Node node : tableGridPane.getChildren()){
-            if(node.getOpacity() == 1){
-                emptyCount++;
-            }
-        }
-        assertEquals(0, emptyCount);
+        assertTrue(table.starting_tile);
+        assertEquals(4, table.countColour(Tile.valueOf(table.getSelected_colour().getValue())));
     }
 
 

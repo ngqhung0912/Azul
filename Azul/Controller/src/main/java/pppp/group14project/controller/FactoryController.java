@@ -1,5 +1,10 @@
 package pppp.group14project.controller;
 
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.StringPropertyBase;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableStringValue;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,21 +34,22 @@ public class FactoryController implements Initializable {
     @FXML
     GridPane tileGrid;
 
+    public void setSelectedTiles(String colour) {
+        for(Node tile : tileGrid.getChildren()) {
+            ObservableList<String> style = tile.getStyleClass();
+            if(style.contains(colour)) {
+                style.add("selected");
+            } else {
+                style.remove("selected");
+            }
+        }
+    }
+
     public void onTileClick(ActionEvent event) {
         String selected_colour = ((ClickableTile) event.getSource()).getStyleClass().get(0);
         Tile selected_tile = Tile.valueOf(selected_colour);
-        try {
-            factory.grabTiles(selected_tile);
-        } catch (EmptyException e) {
-            e.printStackTrace();
-        }
-
-        for(Node tile : tileGrid.getChildren()) {
-            if(tile.getStyleClass().contains(selected_colour)) {
-                tile.getStyleClass().add("selected");
-            }
-        }
-
+        factory.grabTiles(selected_tile);
+        setSelectedTiles(selected_colour);
     }
 
     public void setTileColours(ObservableList<Tile> colours) {
@@ -69,6 +75,13 @@ public class FactoryController implements Initializable {
         } catch (FullException e) {
             e.printStackTrace();
         }
+
+        factory.getSelected_colour().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                FactoryController.this.setSelectedTiles(factory.getSelected_colour().toString());
+            }
+        });
 
     }
 
