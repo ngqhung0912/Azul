@@ -28,7 +28,9 @@ public class TableController {
     Table table;
 
     @Setter
-    GameBoardController gameBoardController;
+    @Getter
+    private GameBoardController gameBoardController;
+
 
     public void addTilesToTable(List<Tile> tiles) throws FullException {
         this.table.addTiles(tiles);
@@ -52,6 +54,7 @@ public class TableController {
                 node.getStyleClass().add("STARTING");
                 node.setOpacity(1);
                 node.setColour(tile);
+                node.setText("1");
             } else {
                 double opacity = 1;
                 while (opacity == 1 && currentRow < tableGridPane.getChildren().size()) {
@@ -80,14 +83,27 @@ public class TableController {
 
 
     public void setSelectedTiles(Tile clickedTile){
+        if (clickedTile == null){
+            return;
+        }
         String colour = clickedTile.toString();
         for (Node node : tableGridPane.getChildren()){
             ObservableList<String> style = node.getStyleClass();
-            if(style.contains(colour)) {
+            if(style.contains(colour) || style.contains("STARTING")) {
                 style.add("selected");
             } else {
                 style.remove("selected");
             }
+        }
+    }
+
+    public void unSetSelectedTiles(Tile clickedTile){
+        if (clickedTile == null){
+            return;
+        }
+        for (Node node : tableGridPane.getChildren()){
+            ObservableList<String> style = node.getStyleClass();
+            style.remove("selected");
         }
     }
 
@@ -97,8 +113,10 @@ public class TableController {
             table.grabTiles(Tile.STARTING);
         }
         this.table.grabTiles(tile);
+//        playerBoardController.moveTilesToPattern();
         zeroTableView();
         displayTilesOnTheTable();
+
     }
 
 
@@ -115,6 +133,15 @@ public class TableController {
 
         for (Node node : tableGridPane.getChildren()) {
             ClickableTile clickableTile = (ClickableTile) node;
+
+            clickableTile.setOnMouseEntered(event-> {
+                setSelectedTiles(clickableTile.getColour());
+            });
+
+            clickableTile.setOnMouseExited(event-> {
+                unSetSelectedTiles(clickableTile.getColour());
+            });
+
             clickableTile.setOnMouseClicked(event -> {
                 // Handle the tile click event here
                 try {
