@@ -5,7 +5,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
 <GridPane fx:id="wallGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="180.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.WallController">
+    <stylesheets>
+        <URL value="@general-styles.css" />
+    </stylesheets>
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -21,30 +26,31 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Rectangle id="BLUE" arcHeight="1.0" arcWidth="1.0" fill="#4289ac" height="30.0" opacity="0.5" stroke="#1f627c" strokeType="INSIDE" width="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-        <Rectangle id="BLUE" arcHeight="1.0" arcWidth="1.0" fill="#4289ac" height="30.0" opacity="0.5" stroke="#1f627c" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Rectangle id="BLUE" arcHeight="1.0" arcWidth="1.0" fill="#4289ac" height="30.0" opacity="0.5" stroke="#1f627c" strokeType="INSIDE" width="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <Rectangle id="BLUE" arcHeight="1.0" arcWidth="1.0" fill="#4289ac" height="30.0" opacity="0.5" stroke="#1f627c" strokeType="INSIDE" width="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-        <Rectangle id="BLUE" arcHeight="1.0" arcWidth="1.0" fill="#4289ac" height="30.0" opacity="0.5" stroke="#1f627c" strokeType="INSIDE" width="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-        <Rectangle id="ORANGE" arcHeight="1.0" arcWidth="1.0" fill="#eebb5c" height="30.0" opacity="0.5" stroke="#d18f24" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-        <Rectangle id="ORANGE" arcHeight="1.0" arcWidth="1.0" fill="#eebb5c" height="30.0" opacity="0.5" stroke="#d18f24" strokeType="INSIDE" width="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Rectangle id="ORANGE" arcHeight="1.0" arcWidth="1.0" fill="#eebb5c" height="30.0" opacity="0.5" stroke="#d18f24" strokeType="INSIDE" width="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-        <Rectangle id="ORANGE" arcHeight="1.0" arcWidth="1.0" fill="#eebb5c" height="30.0" opacity="0.5" stroke="#d18f24" strokeType="INSIDE" width="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-        <Rectangle id="ORANGE" arcHeight="1.0" arcWidth="1.0" fill="#eebb5c" height="30.0" opacity="0.5" stroke="#d18f24" strokeType="INSIDE" width="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <Rectangle id="RED" arcHeight="1.0" arcWidth="1.0" fill="#dd4f50" height="30.0" opacity="0.5" stroke="#992e38" strokeType="INSIDE" width="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-        <Rectangle id="RED" arcHeight="1.0" arcWidth="1.0" fill="#dd4f50" height="30.0" opacity="0.5" stroke="#992e38" strokeType="INSIDE" width="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-        <Rectangle id="RED" arcHeight="1.0" arcWidth="1.0" fill="#dd4f50" height="30.0" opacity="0.5" stroke="#992e38" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-        <Rectangle id="RED" arcHeight="1.0" arcWidth="1.0" fill="#dd4f50" height="30.0" opacity="0.5" stroke="#992e38" strokeType="INSIDE" width="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <Rectangle id="RED" arcHeight="1.0" arcWidth="1.0" fill="#dd4f50" height="30.0" opacity="0.5" stroke="#992e38" strokeType="INSIDE" width="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Rectangle id="BLACK" arcHeight="1.0" arcWidth="1.0" fill="#182029" height="30.0" opacity="0.5" stroke="#060b0f" strokeType="INSIDE" width="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Rectangle id="BLACK" arcHeight="1.0" arcWidth="1.0" fill="#182029" height="30.0" opacity="0.5" stroke="#060b0f" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <Rectangle id="BLACK" arcHeight="1.0" arcWidth="1.0" fill="#182029" height="30.0" opacity="0.5" stroke="#060b0f" strokeType="INSIDE" width="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-        <Rectangle id="BLACK" arcHeight="1.0" arcWidth="1.0" fill="#182029" height="30.0" opacity="0.5" stroke="#060b0f" strokeType="INSIDE" width="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-        <Rectangle id="BLACK" arcHeight="1.0" arcWidth="1.0" fill="#182029" height="30.0" opacity="0.5" stroke="#060b0f" strokeType="INSIDE" width="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-        <Rectangle id="WHITE" arcHeight="1.0" arcWidth="1.0" fill="#e8f7f6" height="30.0" opacity="0.5" stroke="#a3d8d1" strokeType="INSIDE" width="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <Rectangle id="WHITE" arcHeight="1.0" arcWidth="1.0" fill="#e8f7f6" height="30.0" opacity="0.5" stroke="#a3d8d1" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-        <Rectangle id="WHITE" arcHeight="1.0" arcWidth="1.0" fill="#e8f7f6" height="30.0" opacity="0.5" stroke="#a3d8d1" strokeType="INSIDE" width="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-        <Rectangle id="WHITE" arcHeight="1.0" arcWidth="1.0" fill="#e8f7f6" height="30.0" opacity="0.5" stroke="#a3d8d1" strokeType="INSIDE" width="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-        <Rectangle id="WHITE" arcHeight="1.0" arcWidth="1.0" fill="#e8f7f6" height="30.0" opacity="0.5" stroke="#a3d8d1" strokeType="INSIDE" width="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" disable="true" />
+        <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" disable="true" />
+
     </children>
 </GridPane>

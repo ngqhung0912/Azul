@@ -12,6 +12,7 @@ import org.testfx.framework.junit5.Start;
 import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
 import org.junit.jupiter.api.Test;
+import pppp.group14project.model.Wall;
 
 import static org.junit.jupiter.api.Assertions.*;
 
