@@ -83,8 +83,14 @@ public class PatternController {
         System.out.println("Added event listener to " + rowNumber + ", " + indexNumber);
         s.setOnAction(e -> {
             try {
+                /**
+                 * Moving tiles after a Space has been clicked on the Pattern
+                 */
                 List<Tile> excessTiles = this.pattern.addTiles(rowNumber, tiles);
                 playerBoardController.moveTilesToFloor(excessTiles);
+                if (pattern.getPatternLines().get(rowNumber).isFull()) {
+                    playerBoardController.moveTilesToWall(tiles.get(0), rowNumber);
+                }
             } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
@@ -133,6 +139,7 @@ public class PatternController {
             s.getStyleClass().add("is-colored");
         }
     }
+
 
     /**
      * Initializes the models, once all models of its parent models have loaded

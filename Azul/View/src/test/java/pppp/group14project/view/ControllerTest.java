@@ -17,6 +17,7 @@ import pppp.group14project.model.Table;
 import pppp.group14project.model.Tile;
 import org.junit.jupiter.api.Test;
 import pppp.group14project.model.Wall;
+import pppp.group14project.model.exceptions.FullException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -111,6 +112,18 @@ class ControllerTest extends ApplicationTest {
 
         assertEquals(expectedCount, table.size());
     }
+
+
+//    @Test
+//    void testWallFullException() {
+//        try {
+//            wall.addTile(Tile.BLUE, 2);
+//            wall.addTile(Tile.ORANGE, 2);
+//            wall.addTile(Tile.BLACK, 3);
+//            fail();
+//        } catch (FullException ignored) {}
+//
+//    }
 
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface Mediator {
 
-  void moveTilesToWall(Tile tile);
+  void moveTilesToWall(Tile tile, int rowNumber);
   void moveTilesToFloor(List<Tile> tiles);
   void moveTilesToPattern(List<Tile> tiles);
 

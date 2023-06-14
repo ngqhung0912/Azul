@@ -1,16 +1,38 @@
 package pppp.group14project.model;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lombok.Getter;
+import pppp.group14project.model.exceptions.FullException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Wall {
 
+    private static List<List<Tile>> tileColors = Arrays.asList(
+            Arrays.asList(Tile.BLUE, Tile.ORANGE, Tile.RED, Tile.BLACK, Tile.WHITE),
+            Arrays.asList(Tile.WHITE, Tile.BLUE, Tile.ORANGE, Tile.RED, Tile.BLACK),
+            Arrays.asList(Tile.BLACK, Tile.WHITE, Tile.BLUE, Tile.ORANGE, Tile.RED),
+            Arrays.asList(Tile.RED, Tile.BLACK, Tile.WHITE, Tile.BLUE, Tile.ORANGE),
+            Arrays.asList(Tile.ORANGE, Tile.RED, Tile.BLACK, Tile.WHITE, Tile.BLUE)
+    );
 
-    private Tile[][] wall;
+    public static int getTileColorColumn(Tile t, int row) throws FullException {
+        for (int i = 0; i < tileColors.get(row).size(); i++) {
+            if (tileColors.get(row).get(i) == t) return i;
+        }
+        throw new FullException("Tile color not found in grid");
+    }
 
-    //TODO: Refactoring candidate: This variable does not change. It should be final.
+    public static Tile getTileColor(int row, int column) {
+        return tileColors.get(row).get(column);
+    }
+
+    @Getter
+    private List<ObservableList<Tile>> wall;
     private final int WALLSIZE = 5;
 
 
@@ -19,7 +41,14 @@ public class Wall {
 
     public Wall() {
         this.wallScore = 0;
-        this.wall = new Tile[WALLSIZE][WALLSIZE];
+        this.wall = new ArrayList<ObservableList<Tile>>();
+        for (int i = 0; i < WALLSIZE; i++) {
+            ObservableList<Tile> row = FXCollections.observableArrayList();
+            for (int j = 0; j < WALLSIZE; j++) {
+                row.add(null);
+            }
+            wall.add(row);
+        }
     }
 
     /**
@@ -29,15 +58,27 @@ public class Wall {
      */
     public List<Tile> getTilesInWall() {
         List<Tile> tilesInWall = new ArrayList<>();
-        for (Tile[] row : wall) {
+        for (ObservableList<Tile> row : wall) {
             for (Tile tile : row) {
                 if (tile != null) {
                     tilesInWall.add(tile);
-
                 }
             }
         }
         return tilesInWall;
+    }
+
+    /**
+     * Adds tile to the wall using a given row
+     *
+     * @param tile   tile to be added
+     * @param row    row on which the tile should be added
+     */
+    public void addTile(Tile tile, int row) throws FullException {
+
+        if (isTileInRow(tile, row)) throw new FullException();
+        addTile(tile, row, Wall.getTileColorColumn(tile, row));
+
     }
 
 
@@ -49,10 +90,10 @@ public class Wall {
      * @param column column in which the tile should be added
      */
     public void addTile(Tile tile, int row, int column) {
-        Tile[] targetRow = this.wall[row];
+        ObservableList<Tile> targetRow = this.wall.get(row);
 
         if (!isTileInRow(tile, row)) {
-            targetRow[column] = tile;
+            targetRow.set(column, tile);
             getScoreOfAddedTile(row, column);
         }
     }
@@ -63,7 +104,7 @@ public class Wall {
      * @param row row in which tiles should be counted
      * @return Number of tiles present in a row
      */
-    public int countTilesInRow(Tile[] row) {
+    public int countNonNullElementsInRow(List<Tile> row) {
         int count = 0;
 
         for (Tile tile : row) {
@@ -81,8 +122,8 @@ public class Wall {
      * @param row row to be checked
      * @return whether the row is full
      */
-    public boolean isRowFull(Tile[] row) {
-        return countTilesInRow(row) == 5;
+    public boolean isRowFull(List<Tile> row) {
+        return countNonNullElementsInRow(row) == 5;
     }
 
     /**
@@ -93,7 +134,7 @@ public class Wall {
      * @return whether the tile is in the row
      */
     public boolean isTileInRow(Tile tile, int row) {
-        Tile[] targetRow = this.wall[row];
+        ObservableList<Tile> targetRow = this.wall.get(row);
         for (Tile t : targetRow) {
             if (t == tile) {
                 return true;
@@ -110,7 +151,7 @@ public class Wall {
      */
     public int getFullRows() {
         int fullRows = 0;
-        for (Tile[] row : wall) {
+        for (ObservableList<Tile> row : wall) {
             boolean isRowFull = true;
             for (Tile tile : row) {
                 if (tile == null) {
@@ -133,10 +174,10 @@ public class Wall {
     public int getFullCols() {
         int fullCols = 0;
 
-        for (int col = 0; col < wall.length; col++) {
+        for (int col = 0; col < wall.size(); col++) {
             boolean isColumnFull = true;
-            for (Tile[] row : wall) {
-                Tile tile = row[col];
+            for (ObservableList<Tile> row : wall) {
+                Tile tile = row.get(col);
                 if (tile == null) {
                     isColumnFull = false;
                     break;
@@ -158,21 +199,21 @@ public class Wall {
     public void getScoreOfAddedTile(int row, int col) {
 
         // Check right side
-        if (col < wall[row].length - 1 && wall[row][col + 1] != null) {
+        if (col < wall.get(row).size() - 1 && wall.get(row).get(col + 1) != null) {
             this.wallScore++;
         }
         // Left side
-        if (col > 0 && wall[row][col - 1] != null) {
+        if (col > 0 && wall.get(row).get(col - 1) != null) {
             this.wallScore++;
         }
 
         // Bottom
-        if (row < wall.length - 1 && wall[row + 1][col] != null) {
+        if (row < wall.size() - 1 && wall.get(row + 1).get(col) != null) {
             this.wallScore++;
         }
 
         // Top
-        if (row > 0 && wall[row - 1][col] != null) {
+        if (row > 0 && wall.get(row - 1).get(col) != null) {
             this.wallScore++;
         }
         // +1 to the score for just placing the tile
@@ -186,8 +227,8 @@ public class Wall {
      * @param rowNumber the row to be returned
      * @return the array of tiles
      */
-    public Tile[] getRow(int rowNumber) {
-        return this.wall[rowNumber];
+    public List<Tile> getRow(int rowNumber) {
+        return this.wall.get(rowNumber);
     }
 
     /**
@@ -196,7 +237,7 @@ public class Wall {
     public void emptyWall() {
         for (int i = 0; i < WALLSIZE; i++) {
             for (int j = 0; j < WALLSIZE; j++) {
-                wall[i][j] = null;
+                wall.get(i).set(j, null);
             }
         }
         this.wallScore = 0;
