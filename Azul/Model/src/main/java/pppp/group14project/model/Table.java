@@ -1,5 +1,6 @@
 package pppp.group14project.model;
 
+import lombok.Getter;
 
 /**
  * Differences between Table and Factory:
@@ -28,7 +29,7 @@ public class Table extends Factory {
     }
 
     public boolean isStartingTileOnTable(){
-        return getAllCurrentTiles().contains(Tile.STARTING);
+        return getTiles().contains(Tile.STARTING);
     }
 
 }

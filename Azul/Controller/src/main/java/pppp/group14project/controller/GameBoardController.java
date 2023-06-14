@@ -7,12 +7,8 @@ import javafx.scene.layout.*;
 import javafx.util.Pair;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.SneakyThrows;
 import pppp.group14project.model.Board;
-import pppp.group14project.model.Factory;
 import pppp.group14project.model.Game;
-import pppp.group14project.model.Tile;
-import pppp.group14project.model.exceptions.FullException;
 
 
 import java.io.IOException;
@@ -58,7 +54,6 @@ public class GameBoardController implements Initializable, Mediator {
   @Setter
   private List<FactoryController> factoryControllers = new ArrayList<>();
 
-  @SneakyThrows
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -90,7 +85,7 @@ public class GameBoardController implements Initializable, Mediator {
         gridIndex++;
 
         // Adds the playerBoardControllers
-        this.playerBoardControllers.add(playerBoardController);
+        playerBoardControllers.add(playerBoardController);
 
       } catch (IOException e) {
         e.printStackTrace();
@@ -100,15 +95,16 @@ public class GameBoardController implements Initializable, Mediator {
 
     try {
       Integer factoryAmount = Game.getInstance().getFactoryList().size();
-      for(Integer factoryNr = 0; factoryNr <= factoryAmount; factoryNr++) {
+      for(Integer factoryNr = 0; factoryNr < factoryAmount; factoryNr++) {
         FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factory-view.fxml")));
         GridPane factory = factoryLoader.load();
+        FactoryController controller = factoryLoader.getController();
+        factoryControllers.add(controller);
         factoriesGrid.add(factory, factoryNr%2, factoryNr/2);
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
-
 
     try {
       FXMLLoader tableLoader = new FXMLLoader((getClass().getResource("/game-table-view.fxml")));
@@ -145,16 +141,16 @@ public class GameBoardController implements Initializable, Mediator {
     tileList.add(Tile.ORANGE);
     tileList.add(Tile.BLUE);
     tableController.addTilesToTable(tileList);
-    List<Factory> factories = Game.getInstance().getFactoryList();
+
     for (int i = 0; i < factoryControllers.size(); i++) {
       FactoryController controller = factoryControllers.get(i);
       controller.setGameBoardController(this);
-      controller.setFactory(factories.get(i));
+      controller.setFactory(game.getFactoryList().get(i));
       // Delegates call to child
       controller.postInitialize();
     }
-
   }
+
 
   @Override
   public void moveTilesToWall(Tile tile, int rowNumber) {

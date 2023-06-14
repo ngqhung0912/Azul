@@ -1,6 +1,7 @@
 package pppp.group14project.model;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringPropertyBase;
 import javafx.collections.FXCollections;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,7 +43,6 @@ public class Factory {
     public void grabTiles(Tile tile) {
         if(this.tiles.contains(tile)) {
             this.selected_colour.set(tile.toString());
-        }
     }
 
     public List<Tile> removeTiles(Tile tile){
@@ -54,8 +54,6 @@ public class Factory {
                 newTileList.remove(t);
             }
         }
-        this.tiles = newTileList;
-        return grabList;
     }
 
     /**
@@ -119,13 +117,11 @@ public class Factory {
 
     public void empty() {
         this.selected_colour = new SimpleStringProperty();
-        this.tiles.removeAll();
+        this.tiles.clear();
     }
 
-    public List<Tile> getAllCurrentTiles(){
-        return this.tiles;
-    }
-
-
+        public List<Tile> getAllCurrentTiles(){
+            return this.tiles;
+        }
 
 }

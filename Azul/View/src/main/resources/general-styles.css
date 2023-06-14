@@ -17,7 +17,7 @@
 }
 
 .BLACK {
-    -fx-background-color: rgb(24, 32, 41);
+    -fx-background-color: #293A49;
     -fx-border-color: rgb(6, 11, 15);
 }
 
@@ -54,8 +54,9 @@
 
 ClickableTile {
     -fx-border-width: 3;
-    -fx-pref-width: 30;
-    -fx-pref-height: 30;
+    -fx-pref-width: 33;
+    -fx-pref-height: 33;
     -fx-border-radius: 1;
     -fx-background-insets: 1;
+    -fx-cursor: hand;
 }
