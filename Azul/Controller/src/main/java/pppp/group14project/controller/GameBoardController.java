@@ -40,6 +40,9 @@ public class GameBoardController implements Initializable {
   private TableController tableController;
 
   @Getter
+  private FloorController floorController;
+
+  @Getter
   @Setter
   private Game game;
 

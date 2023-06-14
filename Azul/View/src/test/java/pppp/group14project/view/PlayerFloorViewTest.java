@@ -80,7 +80,7 @@ public class PlayerFloorViewTest extends ApplicationTest {
     GridPane floorGridPane = lookup("#floorGridPane").query();
 
     for (Node node : floorGridPane.getChildren()) {
-      if (node instanceof Rectangle) {
+      if (node instanceof Button) {
         displayedBoxes++;
       }
     }

@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.FullException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -69,7 +70,7 @@ public class PlayerBoardController implements Initializable, Mediator {
 
       playerBoardGrid.add(playerPattern, 0, 1);
       playerBoardGrid.add(playerFloor, 0, 2);
-      playerBoardGrid.add(playerScore, 1,3);
+      playerBoardGrid.add(playerScore, 2,3);
       playerBoardGrid.add(playerWall, 1, 1);
 
       patternController = patternLoader.getController();
@@ -108,8 +109,13 @@ public class PlayerBoardController implements Initializable, Mediator {
    */
 
   @Override
-  public void moveTilesToWall(Tile tile) {
-    // TODO: implement
+  public void moveTilesToWall(Tile tile, int rowNumber) {
+    try {
+      wallController.addTileToWall(tile, rowNumber);
+    } catch (FullException ignored) {
+//      throw new RuntimeException(e);
+      // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
+    }
   }
 
   @Override

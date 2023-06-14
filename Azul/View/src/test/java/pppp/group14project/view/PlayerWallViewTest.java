@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -67,7 +68,7 @@ class PlayerWallViewTest extends ApplicationTest {
         int displayedTiles = 0;
 
         for (Node node : wallGridPane.getChildren()) {
-            if (node instanceof Rectangle) {
+            if (node instanceof Button) {
                 displayedTiles++;
             }
         }
@@ -76,18 +77,16 @@ class PlayerWallViewTest extends ApplicationTest {
 
     @Test
     void correctInitialTileOpacity() {
-        int expectedTiles = 25;
+
+        int expectedRows = 25;
         int displayedTiles = 0;
-        double initialOpacity = 0.5;
 
         for (Node node : wallGridPane.getChildren()) {
-            if (node instanceof Rectangle) {
-                if (node.getOpacity() == initialOpacity) {
-                    displayedTiles++;
-                }
+            if (node instanceof Button) {
+                assertFalse(node.getStyleClass().contains("is-colored"));
             }
         }
-        assertEquals(displayedTiles, expectedTiles);
+
     }
 
 

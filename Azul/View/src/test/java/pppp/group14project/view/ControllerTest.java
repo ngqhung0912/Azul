@@ -12,6 +12,8 @@ import org.testfx.framework.junit5.Start;
 import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
 import org.junit.jupiter.api.Test;
+import pppp.group14project.model.Wall;
+import pppp.group14project.model.exceptions.FullException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -181,6 +183,17 @@ class ControllerTest extends ApplicationTest {
 //        wallController.resetWallView();
 //    }
 
+
+//    @Test
+//    void testWallFullException() {
+//        try {
+//            wall.addTile(Tile.BLUE, 2);
+//            wall.addTile(Tile.ORANGE, 2);
+//            wall.addTile(Tile.BLACK, 3);
+//            fail();
+//        } catch (FullException ignored) {}
+//
+//    }
 
 
 }

@@ -4,8 +4,16 @@
 
 /* Colors or images for the different tiles */
 
+.is-not-colored {
+    -fx-border-width: 1;
+    -fx-opacity: 0.3;
+    -fx-border-color: rgb(101, 101, 101);
+    -fx-background-color: rgb(101, 101, 101);
+}
+
 .is-colored {
     -fx-border-width: 3;
+    -fx-opacity: 1;
 }
 
 .BLACK {

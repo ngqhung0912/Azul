@@ -1,21 +1,19 @@
 package pppp.group14project.model;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lombok.Getter;
-import lombok.Setter;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Floor {
   @Getter
-  private List<Tile> tiles;
+  private ObservableList<Tile> tiles;
 
   private final int[] tilePoints = {-1, -1, -2,-2,-2, -3, -3};
 
   public Floor() {
-    this.tiles = new ArrayList<>();
+    this.tiles = FXCollections.observableArrayList();
   }
 
   public void addTile(Tile tile) {

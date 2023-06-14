@@ -95,9 +95,8 @@ public class TableController {
             // Handle the tile click event here
             try {
                 grabTilesFromTable(clickableTile.getColour());
-            } catch (EmptyException e) {
-                // Handle the EmptyException if necessary
-                e.printStackTrace();
+            } catch (EmptyException ignored) {
+                // TODO Handle the EmptyException if necessary
             }
         });
 
