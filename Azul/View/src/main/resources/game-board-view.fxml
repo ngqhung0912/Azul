@@ -31,6 +31,21 @@
          <rowConstraints>
             <RowConstraints percentHeight="100.0"/>
          </rowConstraints>
+         <children>
+            <GridPane fx:id="factoriesGrid">
+               <rowConstraints>
+                  <RowConstraints percentHeight="20.0" />
+                  <RowConstraints percentHeight="20.0" />
+                  <RowConstraints percentHeight="20.0" />
+                  <RowConstraints percentHeight="20.0" />
+                  <RowConstraints percentHeight="20.0" />
+               </rowConstraints>
+               <columnConstraints>
+                  <ColumnConstraints percentWidth="50.0" />
+                  <ColumnConstraints percentWidth="50.0" />
+               </columnConstraints>
+            </GridPane>
+         </children>
       </GridPane>
       <GridPane fx:id="innerGridRight" GridPane.columnIndex="2">
          <columnConstraints>

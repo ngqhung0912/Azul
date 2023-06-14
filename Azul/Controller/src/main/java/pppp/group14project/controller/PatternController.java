@@ -80,7 +80,6 @@ public class PatternController {
     private void highlightSpace(int rowNumber, int indexNumber, List<Tile> tiles) throws InvalidPositionException {
         Space s = getSpace(rowNumber, indexNumber);
         s.getStyleClass().add("tile-option");
-        System.out.println("Added event listener to " + rowNumber + ", " + indexNumber);
         s.setOnAction(e -> {
             try {
                 /**
@@ -147,7 +146,6 @@ public class PatternController {
     public void postInitialize() {
 
         // Register event handlers here::
-        System.out.println("Created event listeners for patternlines");
         // Create change listener that listens to changes in the model and updates the view
         for (PatternLine p : pattern.getPatternLines()) {
             p.getSpaces().addListener((ListChangeListener<Tile>) change -> {

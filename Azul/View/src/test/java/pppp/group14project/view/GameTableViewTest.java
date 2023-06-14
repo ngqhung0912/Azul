@@ -57,8 +57,6 @@ class GameTableViewTest extends ApplicationTest {
         stage.toFront();
     }
 
-
-
     @AfterEach
     public void tearDown() throws Exception {
         FxToolkit.hideStage();
@@ -69,9 +67,11 @@ class GameTableViewTest extends ApplicationTest {
         verifyThat("#tableGridPane", isVisible());
     }
 
-//
 //    @Test
 //    void countAddedTiles() throws Exception {
+//        Table table = new Table();
+//        TableController tableController = new TableController();
+//        GridPane tableGridPane = lookup("#tableGridPane").query();
 //        tableGridPane.getStylesheets().add("game-table-view-styles.css");
 //        List<Tile> tileList = new ArrayList<>();
 //        tileList.add(Tile.BLUE);
@@ -81,8 +81,9 @@ class GameTableViewTest extends ApplicationTest {
 //        tileList.add(Tile.ORANGE);
 //        tileList.add(Tile.BLACK);
 //
-//        tableController.addTilesToTable(tileList);
-//        int expectedCount = tileList.size() + 1;
+//        tableController.addTilesToTable(table, tileList, tableGridPane);
+//        // +2 is for starting tile and text on it
+//        int expectedCount = tileList.size() + 2;
 //        int actualCount = 0;
 //        for (Node node : tableGridPane.getChildren()){
 //            if(node.getOpacity() == 1){
@@ -94,6 +95,9 @@ class GameTableViewTest extends ApplicationTest {
 //
 //    @Test
 //    void removeAllAddedTiles() throws Exception {
+//        Table table = new Table();
+//        TableController tableController = new TableController();
+//        GridPane tableGridPane = lookup("#tableGridPane").query();
 //        tableGridPane.getStylesheets().add("game-table-view-styles.css");
 //        List<Tile> tileList = new ArrayList<>();
 //        tileList.add(Tile.BLUE);
@@ -101,8 +105,9 @@ class GameTableViewTest extends ApplicationTest {
 //        tileList.add(Tile.BLUE);
 //        tileList.add(Tile.BLUE);
 //
-//        tableController.addTilesToTable(tileList);
-//        int expectedCount = tileList.size()+1;
+//        tableController.addTilesToTable(table, tileList, tableGridPane);
+//        // +2 is for starting tile and text on it
+//        int expectedCount = tileList.size() + 2;
 //        int actualCount = 0;
 //        int emptyCount = 0;
 //        for (Node node : tableGridPane.getChildren()){
@@ -112,30 +117,11 @@ class GameTableViewTest extends ApplicationTest {
 //        }
 //        assertEquals(expectedCount, actualCount);
 //
-//        tableController.grabTilesFromTable(Tile.BLUE);
+//        tableController.grabTilesFromTable(table, Tile.BLUE, tableGridPane);
 //
-//        for (Node node : tableGridPane.getChildren()){
-//            if(node.getOpacity() == 1){
-//                emptyCount++;
-//            }
-//        }
-//        assertEquals(0, emptyCount);
+//        assertTrue(table.starting_tile);
+//        assertEquals(4, table.countColour(Tile.valueOf(table.getSelected_colour().getValue())));
 //    }
-//
-//    // add a test for grabbing tiles
-//    @Test
-//    void firstGrabTilesFromTable() throws Exception {
-//        tableGridPane.getStylesheets().add("game-table-view-styles.css");
-//        List<Tile> tileList = new ArrayList<>();
-//        tileList.add(Tile.BLUE);
-//        tileList.add(Tile.BLUE);
-//        tileList.add(Tile.RED);
-//        tileList.add(Tile.BLACK);
-//        tableController.addTilesToTable(tileList);
-//        assertEquals(5, table.getAllCurrentTiles().size());
-//        tableController.grabTilesFromTable(Tile.BLUE);
-//        assertEquals(2, table.getAllCurrentTiles().size());
-//
-//    }
+
 
 }

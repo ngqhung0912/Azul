@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TableController implements Initializable {
+public class TableController {
 
     @FXML
     private GridPane tableGridPane;
@@ -28,18 +28,17 @@ public class TableController implements Initializable {
     Table table;
 
     @Setter
-    @Getter
     GameBoardController gameBoardController;
 
     public void addTilesToTable(List<Tile> tiles) throws FullException {
         this.table.addTiles(tiles);
-        displayTilesOnTheTable();
+//        displayTilesOnTheTable();
     }
 
-    private void displayTilesOnTheTable() {
-        List<Tile> tiles = table.getAllCurrentTiles();
+    private void displayTilesOnTheTable(Table table, GridPane tableGridPane) {
+        List<Tile> tiles = table.getTiles();
         zeroTableView();
-        if (tiles.isEmpty()) {
+        if (tiles.isEmpty()){
             return;
         }
 
@@ -81,13 +80,12 @@ public class TableController implements Initializable {
         }
         this.table.grabTiles(tile);
         zeroTableView();
-        displayTilesOnTheTable();
+//        displayTilesOnTheTable();
     }
 
 
     @SneakyThrows
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void postInitialize() {
         this.table = new Table();
 
         System.out.println("Created event listeners for table");
