@@ -142,13 +142,6 @@ public class WallController {
 
         }
 
-        try {
-            wall.addTile(Tile.BLUE, 2);
-            wall.addTile(Tile.ORANGE, 2);
-            wall.addTile(Tile.BLACK, 3);
-        } catch (FullException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
