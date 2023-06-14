@@ -70,7 +70,7 @@ public class PlayerBoardController implements Initializable, Mediator {
 
       playerBoardGrid.add(playerPattern, 0, 1);
       playerBoardGrid.add(playerFloor, 0, 2);
-      playerBoardGrid.add(playerScore, 1,3);
+      playerBoardGrid.add(playerScore, 2,3);
       playerBoardGrid.add(playerWall, 1, 1);
 
       patternController = patternLoader.getController();
