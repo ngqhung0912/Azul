@@ -202,6 +202,12 @@ public class Wall {
         }
     }
 
+    private void increaseWallScoreIfNeighbouringTileExists(int row, int col) {
+        if (isValidCell(row, col) && cellContainsTile(row, col)) {
+            wallScore++;
+        }
+    }
+
     /**
      * Calculates the score after each tile is added to the wall
      *
@@ -212,26 +218,11 @@ public class Wall {
         assert (row >= 0 && row < wall.size());
         assert (col >= 0 && col < wall.get(row).size());
 
-        // Check right side
-        if (isValidCell(row, col + 1) && cellContainsTile(row, col + 1)) {
-            this.wallScore++;
-        }
-        // Left side
-        if (isValidCell(row, col - 1) && cellContainsTile(row, col - 1)) {
-            this.wallScore++;
-        }
-
-        // Bottom
-        if (isValidCell(row + 1, col) && cellContainsTile(row + 1, col)) {
-            this.wallScore++;
-        }
-
-        // Top
-        if (isValidCell(row - 1, col) && cellContainsTile(row - 1, col)) {
-            this.wallScore++;
-        }
-        // +1 to the score for just placing the tile
-        this.wallScore++;
+        increaseWallScoreIfNeighbouringTileExists(row, col + 1); // right
+        increaseWallScoreIfNeighbouringTileExists(row, col - 1); // left
+        increaseWallScoreIfNeighbouringTileExists(row + 1, col); // bottom
+        increaseWallScoreIfNeighbouringTileExists(row - 1, col); // top
+        wallScore++; // +1 to the score for just placing the tile
     }
 
 
