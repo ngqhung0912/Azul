@@ -37,7 +37,7 @@ public class Wall {
 
 
     @Getter
-    public int wallScore;
+    private int wallScore;
 
     public Wall() {
         this.wallSize = 5;

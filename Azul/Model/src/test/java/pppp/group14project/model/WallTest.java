@@ -79,21 +79,21 @@ class WallTest {
     @Test
     void scoreOfOneTile() {
         wall.addTile(Tile.RED, 3, 2);
-        assertEquals(1, wall.wallScore);
+        assertEquals(1, wall.getWallScore());
     }
 
     @Test
     void scoreTwoNotConnectedTiles() {
         wall.addTile(Tile.RED, 3, 2);
         wall.addTile(Tile.BLUE, 4, 3);
-        assertEquals(2, wall.wallScore);
+        assertEquals(2, wall.getWallScore());
     }
 
     @Test
     void scoreTwoConnectedTiles() {
         wall.addTile(Tile.RED, 3, 2);
         wall.addTile(Tile.BLUE, 4, 2);
-        assertEquals(3, wall.wallScore);
+        assertEquals(3, wall.getWallScore());
     }
 
     @Test
