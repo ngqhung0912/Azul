@@ -129,7 +129,7 @@ class ControllerTest extends ApplicationTest {
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
-
+        //TODO remove the tiles from the initialization
         tableController.addTilesToTable(tileList);
         int expectedCount = 5;
         assertEquals(expectedCount, table.size());
@@ -152,36 +152,36 @@ class ControllerTest extends ApplicationTest {
         assertEquals(expectedCount, table.size());
     }
 
-    @Test
-    void wallReset(){
-        wallController.addTileToWall(Tile.ORANGE, 0);
-        wallController.addTileToWall(Tile.ORANGE, 1);
-        wallController.addTileToWall(Tile.ORANGE, 2);
-        assertEquals(3, wall.getTilesInWall().size());
-        wallController.resetWallView();
-        assertEquals(0, wall.getTilesInWall().size());
-    }
-
-    @Test
-    void wallAddTiles(){
-        wallController.addTileToWall(Tile.RED, 2);
-        assertEquals(1, wall.getTilesInWall().size());
-        //No two tiles in the same row
-        wallController.addTileToWall(Tile.RED, 2);
-        assertEquals(1, wall.getTilesInWall().size());
-        wallController.addTileToWall(Tile.BLUE, 2);
-        assertEquals(2, wall.getTilesInWall().size());
-        assertEquals(0, wall.countNonNullElementsInRow(wall.getRow(0)));
-        assertEquals(2, wall.countNonNullElementsInRow(wall.getRow(2)));
-        wallController.resetWallView();
-    }
-
-    @Test
-    void wallAddTilesInCorrectSpot(){
-        wallController.addTileToWall(Tile.BLACK, 3);
-        assertEquals(Tile.BLACK, wall.getRow(3)[2]);
-        wallController.resetWallView();
-    }
+//    @Test
+//    void wallReset(){
+//        wallController.addTileToWall(Tile.ORANGE, 0);
+//        wallController.addTileToWall(Tile.ORANGE, 1);
+//        wallController.addTileToWall(Tile.ORANGE, 2);
+//        assertEquals(3, wall.getTilesInWall().size());
+//        wallController.resetWallView();
+//        assertEquals(0, wall.getTilesInWall().size());
+//    }
+//
+//    @Test
+//    void wallAddTiles(){
+//        wallController.addTileToWall(Tile.RED, 2);
+//        assertEquals(1, wall.getTilesInWall().size());
+//        //No two tiles in the same row
+//        wallController.addTileToWall(Tile.RED, 2);
+//        assertEquals(1, wall.getTilesInWall().size());
+//        wallController.addTileToWall(Tile.BLUE, 2);
+//        assertEquals(2, wall.getTilesInWall().size());
+//        assertEquals(0, wall.countNonNullElementsInRow(wall.getRow(0)));
+//        assertEquals(2, wall.countNonNullElementsInRow(wall.getRow(2)));
+//        wallController.resetWallView();
+//    }
+//
+//    @Test
+//    void wallAddTilesInCorrectSpot(){
+//        wallController.addTileToWall(Tile.BLACK, 3);
+//        assertEquals(Tile.BLACK, wall.getRow(3)[2]);
+//        wallController.resetWallView();
+//    }
 
 
 

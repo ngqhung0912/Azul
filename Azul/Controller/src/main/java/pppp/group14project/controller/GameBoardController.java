@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GameBoardController implements Initializable {
+public class GameBoardController implements Initializable, Mediator {
 
   /**
    * FXML for updating views
@@ -153,6 +153,26 @@ public class GameBoardController implements Initializable {
       // Delegates call to child
       controller.postInitialize();
     }
+
+  }
+
+  @Override
+  public void moveTilesToWall(Tile tile, int rowNumber) {
+
+  }
+
+  @Override
+  public void moveTilesToFloor(List<Tile> tiles) {
+
+  }
+
+  @Override
+  public void moveTilesToPattern(List<Tile> tiles) {
+
+  }
+
+  @Override
+  public void moveTilesToTable(List<Tile> tiles) {
 
   }
 }

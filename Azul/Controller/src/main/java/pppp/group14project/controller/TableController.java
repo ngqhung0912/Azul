@@ -3,6 +3,7 @@ package pppp.group14project.controller;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
@@ -54,14 +55,16 @@ public class TableController {
                 node.getStyleClass().add("STARTING");
                 node.setOpacity(1);
                 node.setColour(tile);
+                node.setAlignment(Pos.CENTER);
                 node.setText("1");
             } else {
                 double opacity = 1;
                 while (opacity == 1 && currentRow < tableGridPane.getChildren().size()) {
-                    currentRow++;
                     node = (ClickableTile) tableGridPane.getChildren().get(currentRow);
                     opacity = node.getOpacity();
                     node.setColour(tile);
+                    System.out.println(node);
+                    currentRow++;
                 }
 
                 if (node != null) {
@@ -77,6 +80,10 @@ public class TableController {
         for (Node node : tableGridPane.getChildren()) {
             node.setOpacity(0);
             ClickableTile clickableTile = (ClickableTile) node;
+            if (!clickableTile.getText().isEmpty()) {
+                clickableTile.setText("");
+            }
+            clickableTile.getStyleClass().clear();
             clickableTile.removeColour();
         }
     }
@@ -110,12 +117,15 @@ public class TableController {
     public void grabTilesFromTable(Tile tile) throws EmptyException {
         setSelectedTiles(tile);
         if (table.isStartingTileOnTable()){
-            table.grabTiles(Tile.STARTING);
+            this.table.removeTiles(Tile.STARTING);
         }
-        this.table.grabTiles(tile);
-//        playerBoardController.moveTilesToPattern();
+        this.table.removeTiles(tile);
+        //TODO move tiles to correct pattern
+        //gameBoardController.moveTilesToPattern(this.table.removeTiles(tile));
+
         zeroTableView();
         displayTilesOnTheTable();
+        System.out.println(this.table.getAllCurrentTiles());
 
     }
 

@@ -47,6 +47,7 @@
     -fx-text-fill: rgb(31, 98, 124);
     -fx-font-size: 14px;
     -fx-font-family: "Arial";
+    -fx-text-alignment: CENTER;
 }
 
 
