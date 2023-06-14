@@ -250,8 +250,7 @@ class ControllerTest extends ApplicationTest {
     void testAddCorrectTilesToPattern() {
         List<Tile> tileList = new ArrayList<>();
 
-        for (int i = 1; i < 5; i++) {
-            tileList.add(Tile.BLUE);
+        for (int i = 0; i < 5; i++) {
             tileList.add(Tile.BLUE);
 
             try {
