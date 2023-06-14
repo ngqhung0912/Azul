@@ -191,6 +191,10 @@ public class Wall {
         return fullCols;
     }
 
+    private boolean isValidCell(int row, int col) {
+        return row >= 0 && row < wall.size() && col >= 0 && col < wall.get(row).size();
+    }
+
     /**
      * Calculates the score after each tile is added to the wall
      *
@@ -202,21 +206,21 @@ public class Wall {
         assert (col >= 0 && col < wall.get(row).size());
 
         // Check right side
-        if (col < wall.get(row).size() - 1 && wall.get(row).get(col + 1) != null) {
+        if (isValidCell(row, col + 1) && wall.get(row).get(col + 1) != null) {
             this.wallScore++;
         }
         // Left side
-        if (col > 0 && wall.get(row).get(col - 1) != null) {
+        if (isValidCell(row, col - 1) && wall.get(row).get(col - 1) != null) {
             this.wallScore++;
         }
 
         // Bottom
-        if (row < wall.size() - 1 && wall.get(row + 1).get(col) != null) {
+        if (isValidCell(row + 1, col) && wall.get(row + 1).get(col) != null) {
             this.wallScore++;
         }
 
         // Top
-        if (row > 0 && wall.get(row - 1).get(col) != null) {
+        if (isValidCell(row - 1, col) && wall.get(row - 1).get(col) != null) {
             this.wallScore++;
         }
         // +1 to the score for just placing the tile
