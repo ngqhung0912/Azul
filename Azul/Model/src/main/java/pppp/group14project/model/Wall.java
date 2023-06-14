@@ -198,6 +198,8 @@ public class Wall {
      * @param col column on which tile was added
      */
     public void getScoreOfAddedTile(int row, int col) {
+        assert (row >= 0 && row < wall.size());
+        assert (col >= 0 && col < wall.get(row).size());
 
         // Check right side
         if (col < wall.get(row).size() - 1 && wall.get(row).get(col + 1) != null) {
