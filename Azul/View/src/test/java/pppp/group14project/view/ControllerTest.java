@@ -13,6 +13,8 @@ import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
 import org.junit.jupiter.api.Test;
 import pppp.group14project.model.Wall;
+import pppp.group14project.model.exceptions.FullException;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -105,7 +107,7 @@ class ControllerTest extends ApplicationTest {
 
 
     @Test
-    void testInitialization() throws Exception {
+    void testInitialization() {
         assertNotNull(gameBoardController);
         assertNotNull(tableController);
         assertNotNull(table);
@@ -123,22 +125,31 @@ class ControllerTest extends ApplicationTest {
 
 
     @Test
-    void tableRemoveAllAddedTiles() throws Exception {
+    void tableRemoveAllAddedTiles()  {
         List<Tile> tileList = new ArrayList<>();
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
         //TODO remove the tiles from the initialization
-        tableController.addTilesToTable(tileList);
-        int expectedCount = 5;
-        assertEquals(expectedCount, table.size());
-        tableController.grabTilesFromTable(Tile.BLUE);
+        try {
+            tableController.addTilesToTable(tileList);
+        } catch (Exception e) {
+            fail("Should not throw FullException");
+        }
+        assertEquals(tileList.size(), table.size());
+        try {
+            tableController.grabTilesFromTable(Tile.BLUE);
+        } catch (Exception e) {
+            fail("Should not throw FullException");
+        }
         assertEquals(0, table.size());
     }
 
+
+
     @Test
-    void tableCountAddedTiles() throws Exception {
+    void tableCountAddedTiles() {
         List<Tile> tileList = new ArrayList<>();
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
@@ -147,41 +158,152 @@ class ControllerTest extends ApplicationTest {
         tileList.add(Tile.ORANGE);
         tileList.add(Tile.BLACK);
 
-        tableController.addTilesToTable(tileList);
-        int expectedCount = 7;
-        assertEquals(expectedCount, table.size());
+        try {
+            tableController.addTilesToTable(tileList);
+        } catch (Exception e) {
+            fail("Should not throw FullException");
+        }
+        assertEquals(tileList.size(), table.size());
     }
 
-//    @Test
-//    void wallReset(){
-//        wallController.addTileToWall(Tile.ORANGE, 0);
-//        wallController.addTileToWall(Tile.ORANGE, 1);
-//        wallController.addTileToWall(Tile.ORANGE, 2);
-//        assertEquals(3, wall.getTilesInWall().size());
-//        wallController.resetWallView();
-//        assertEquals(0, wall.getTilesInWall().size());
-//    }
-//
-//    @Test
-//    void wallAddTiles(){
-//        wallController.addTileToWall(Tile.RED, 2);
-//        assertEquals(1, wall.getTilesInWall().size());
-//        //No two tiles in the same row
-//        wallController.addTileToWall(Tile.RED, 2);
-//        assertEquals(1, wall.getTilesInWall().size());
-//        wallController.addTileToWall(Tile.BLUE, 2);
-//        assertEquals(2, wall.getTilesInWall().size());
-//        assertEquals(0, wall.countNonNullElementsInRow(wall.getRow(0)));
-//        assertEquals(2, wall.countNonNullElementsInRow(wall.getRow(2)));
-//        wallController.resetWallView();
-//    }
-//
-//    @Test
-//    void wallAddTilesInCorrectSpot(){
-//        wallController.addTileToWall(Tile.BLACK, 3);
-//        assertEquals(Tile.BLACK, wall.getRow(3)[2]);
-//        wallController.resetWallView();
-//    }
+
+    @Test
+    void wallReset()  {
+        try {
+            wallController.addTileToWall(Tile.ORANGE, 0);
+            wallController.addTileToWall(Tile.ORANGE, 1);
+            wallController.addTileToWall(Tile.ORANGE, 2);
+            assertEquals(3, wall.getTilesInWall().size());
+            wallController.resetWallView();
+            assertEquals(0, wall.getTilesInWall().size());
+        } catch (FullException e) {
+            fail("Should not throw FullException");
+        }
+    }
+
+    @Test
+    void wallAddTiles() {
+        try {
+            wallController.addTileToWall(Tile.RED, 2);
+        } catch (FullException e) {
+            fail("Should not throw FullException");
+        }
+        assertEquals(1, wall.getTilesInWall().size());
+        //No two tiles in the same row
+        try {
+            wallController.addTileToWall(Tile.RED, 2);
+            fail("Expect FullException");
+        } catch (FullException ignored) {}
+
+        assertEquals(1, wall.getTilesInWall().size());
+
+        try {
+            wallController.addTileToWall(Tile.BLUE, 2);
+        } catch (FullException e) {
+            fail("Should not throw FullException");
+        }
+        assertEquals(2, wall.getTilesInWall().size());
+        assertEquals(0, wall.countNonNullElementsInRow(wall.getRow(0)));
+        assertEquals(2, wall.countNonNullElementsInRow(wall.getRow(2)));
+        wallController.resetWallView();
+    }
+
+    @Test
+    void wallAddTilesInCorrectSpot() {
+        try {
+            wallController.addTileToWall(Tile.BLACK, 3);
+        } catch (FullException e) {
+            fail("Should not throw FullException");
+        }
+        assertEquals(Tile.BLACK, wall.getRow(3).get(1));
+        wallController.resetWallView();
+    }
+
+
+    @Test
+    void testAddTilesToFloor() {
+        List<Tile> tileList = new ArrayList<>();
+        tileList.add(Tile.BLUE);
+        tileList.add(Tile.BLUE);
+        tileList.add(Tile.RED);
+        tileList.add(Tile.WHITE);
+        tileList.add(Tile.ORANGE);
+        tileList.add(Tile.BLACK);
+        floorController.addTilesToFloor(tileList);
+        assertEquals(tileList.size(), floor.getTiles().size());
+
+        List<Tile> additionalTileList = new ArrayList<>();
+        additionalTileList.add(Tile.ORANGE);
+        additionalTileList.add(Tile.BLACK);
+
+        floorController.addTilesToFloor(additionalTileList);
+        assertEquals(7, floor.getTiles().size());
+
+        assertEquals(-14, floor.getScore());
+        // TODO test whether the excess tile end up in the box lid.
+
+        floor.emptyFloor();
+        assertEquals(0, floor.getTiles().size());
+    }
+
+    @Test
+    void testAddCorrectTilesToPattern() {
+        List<Tile> tileList = new ArrayList<>();
+
+        for (int i = 1; i < 5; i++) {
+            tileList.add(Tile.BLUE);
+            tileList.add(Tile.BLUE);
+
+            try {
+                pattern.addTiles(i, tileList);
+            } catch (WrongTileException e) {
+                fail("Should not throw WrongTileException");
+            }
+            assertEquals(tileList.size(), pattern.getPatternLines().get(i).numberOfFullSpaces());
+            assertEquals(0, pattern.getPatternLines().get(i).numberOfFreeSpaces());
+            assertTrue(pattern.getPatternLines().get(i).isFull());
+            assertFalse(pattern.getPatternLines().get(i).isEmpty());
+
+            pattern.getPatternLines().get(i).empty();
+
+
+            assertFalse(pattern.getPatternLines().get(i).isFull());
+            assertTrue(pattern.getPatternLines().get(i).isEmpty());
+
+
+            assertEquals(tileList.size(), pattern.getPatternLines().get(i).numberOfFreeSpaces());
+            assertEquals(0, pattern.getPatternLines().get(i).numberOfFullSpaces());
+
+
+
+
+        }
+    }
+
+    @Test
+    void testAddWrongTilesToPattern() {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
