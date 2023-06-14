@@ -112,8 +112,9 @@ public class PlayerBoardController implements Initializable, Mediator {
   public void moveTilesToWall(Tile tile, int rowNumber) {
     try {
       wallController.addTileToWall(tile, rowNumber);
-    } catch (FullException e) {
-      throw new RuntimeException(e);
+    } catch (FullException ignored) {
+//      throw new RuntimeException(e);
+      // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
     }
   }
 

@@ -29,7 +29,7 @@ public class TableController implements Initializable {
 
     @Setter
     @Getter
-    GameBoardController setGameBoardController;
+    GameBoardController gameBoardController;
 
     public void addTilesToTable(List<Tile> tiles) throws FullException {
         this.table.addTiles(tiles);
@@ -97,9 +97,8 @@ public class TableController implements Initializable {
             // Handle the tile click event here
             try {
                 grabTilesFromTable(clickableTile.getColour());
-            } catch (EmptyException e) {
-                // Handle the EmptyException if necessary
-                e.printStackTrace();
+            } catch (EmptyException ignored) {
+                // TODO Handle the EmptyException if necessary
             }
         });
 

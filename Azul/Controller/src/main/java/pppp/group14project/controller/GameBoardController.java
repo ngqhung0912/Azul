@@ -123,10 +123,10 @@ public class GameBoardController implements Initializable {
     }
 
 
-    tableController.setSetGameBoardController(this);
+    tableController.setGameBoardController(this);
 //    tableController.setTable(Game.getInstance)
 //    tableController.postInitialize();
 
 
-  }
+    }
 }
