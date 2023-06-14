@@ -7,8 +7,11 @@ import javafx.scene.layout.*;
 import javafx.util.Pair;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
+import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.FullException;
 
 
 import java.io.IOException;
@@ -54,6 +57,7 @@ public class GameBoardController implements Initializable, Mediator {
   @Setter
   private List<FactoryController> factoryControllers = new ArrayList<>();
 
+  @SneakyThrows
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -136,11 +140,6 @@ public class GameBoardController implements Initializable, Mediator {
     tableController.setGameBoardController(this);
     tableController.setTable(game.getTable());
     tableController.postInitialize();
-    List<Tile> tileList = new ArrayList<>();
-    tileList.add(Tile.BLUE);
-    tileList.add(Tile.ORANGE);
-    tileList.add(Tile.BLUE);
-    tableController.addTilesToTable(tileList);
 
     for (int i = 0; i < factoryControllers.size(); i++) {
       FactoryController controller = factoryControllers.get(i);

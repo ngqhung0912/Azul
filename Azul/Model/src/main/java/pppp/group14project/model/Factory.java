@@ -43,6 +43,7 @@ public class Factory {
     public void grabTiles(Tile tile) {
         if(this.tiles.contains(tile)) {
             this.selected_colour.set(tile.toString());
+        }
     }
 
     public List<Tile> removeTiles(Tile tile){
@@ -54,6 +55,8 @@ public class Factory {
                 newTileList.remove(t);
             }
         }
+        this.tiles = newTileList;
+        return grabList;
     }
 
     /**
