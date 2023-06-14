@@ -46,6 +46,19 @@ public class Factory {
         }
     }
 
+    public List<Tile> removeTiles(Tile tile){
+        ObservableList<Tile> grabList = FXCollections.observableArrayList();
+        ObservableList<Tile> newTileList = FXCollections.observableArrayList(tiles);
+        for (Tile t: this.tiles) {
+            if (t == tile) {
+                grabList.add(t);
+                newTileList.remove(t);
+            }
+        }
+        this.tiles = newTileList;
+        return grabList;
+    }
+
     /**
      * Adds tiles from a list to the factory
      * @param tiles the tiles to add to the factory
@@ -110,5 +123,8 @@ public class Factory {
         this.tiles.clear();
     }
 
+        public List<Tile> getAllCurrentTiles(){
+            return this.tiles;
+        }
 
 }

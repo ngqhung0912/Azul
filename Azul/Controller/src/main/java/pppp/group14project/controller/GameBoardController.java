@@ -7,10 +7,11 @@ import javafx.scene.layout.*;
 import javafx.util.Pair;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import pppp.group14project.model.Board;
-import pppp.group14project.model.Factory;
 import pppp.group14project.model.Game;
 import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.FullException;
 
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GameBoardController implements Initializable {
+public class GameBoardController implements Initializable, Mediator {
 
   /**
    * FXML for updating views
@@ -36,11 +37,10 @@ public class GameBoardController implements Initializable {
   @FXML
   private GridPane factoriesGrid;
 
+
   @Getter
   private TableController tableController;
 
-  @Getter
-  private FloorController floorController;
 
   @Getter
   @Setter
@@ -57,6 +57,7 @@ public class GameBoardController implements Initializable {
   @Setter
   private List<FactoryController> factoryControllers = new ArrayList<>();
 
+  @SneakyThrows
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -68,7 +69,8 @@ public class GameBoardController implements Initializable {
     playerGridIndices[3] = (new Pair<>(1,2));
     int gridIndex = 0;
 
-    List<Board> boardList = Game.getInstance().getBoardList();
+    game = Game.getInstance();
+    List<Board> boardList = game.getBoardList();
 
     for (Board board : boardList) {
       try {
@@ -126,8 +128,7 @@ public class GameBoardController implements Initializable {
   /**
    * Initializes the models, once all models of its parent models have loaded
    */
-  private void postInitialize() {
-    game = Game.getInstance();
+  private void postInitialize() throws FullException {
     List<Board> boards = game.getBoardList();
     for (int i = 0; i < playerBoardControllers.size(); i++) {
       PlayerBoardController p = playerBoardControllers.get(i);
@@ -147,5 +148,26 @@ public class GameBoardController implements Initializable {
       // Delegates call to child
       controller.postInitialize();
     }
+  }
+
+
+  @Override
+  public void moveTilesToWall(Tile tile, int rowNumber) {
+
+  }
+
+  @Override
+  public void moveTilesToFloor(List<Tile> tiles) {
+
+  }
+
+  @Override
+  public void moveTilesToPattern(List<Tile> tiles) {
+
+  }
+
+  @Override
+  public void moveTilesToTable(List<Tile> tiles) {
+
   }
 }

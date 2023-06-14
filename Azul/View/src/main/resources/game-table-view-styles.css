@@ -1,2 +1,27 @@
-/*not needed right now*/
+
+.RED:hover, .RED.selected{
+    -fx-background-color: rgb(153, 46, 56);
+}
+
+.ORANGE:hover, .ORANGE.selected {
+    -fx-background-color: rgb(209, 143, 36);
+}
+
+.WHITE:hover, .WHITE.selected {
+    -fx-background-color: rgb(163, 216, 209);
+}
+
+.BLUE:hover, .BLUE.selected {
+    -fx-background-color: rgb(31, 98, 124);
+}
+
+.BLACK:hover, .BLACK.selected {
+    -fx-background-color: rgb(6, 11, 15);
+}
+
+.STARTING:hover, .STARTING.selected {
+    -fx-background-color: rgb(31, 98, 124);
+    -fx-text-fill: rgb(247, 247, 247);
+}
+
 

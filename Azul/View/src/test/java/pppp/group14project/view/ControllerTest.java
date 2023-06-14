@@ -13,7 +13,6 @@ import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
 import org.junit.jupiter.api.Test;
 import pppp.group14project.model.Wall;
-import pppp.group14project.model.exceptions.FullException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,8 +81,8 @@ class ControllerTest extends ApplicationTest {
         tableController = gameBoardController.getTableController();
         table = tableController.getTable();
 
-        factoryController = gameBoardController.getFactoryControllers().get(0);
-        factory = factoryController.getFactory();
+//        factoryController = gameBoardController.getfactoryController();
+//        factory = factoryController.getFactory();
 
 
         playerBoardController = gameBoardController.getPlayerBoardControllers().get(0);
@@ -105,53 +104,54 @@ class ControllerTest extends ApplicationTest {
     }
 
 
-//    @Test
-//    void testInitialization() throws Exception {
-//        assertNotNull(gameBoardController);
-//        assertNotNull(tableController);
-//        assertNotNull(table);
+    @Test
+    void testInitialization() throws Exception {
+        assertNotNull(gameBoardController);
+        assertNotNull(tableController);
+        assertNotNull(table);
 //        assertNotNull(factoryController);
+        //TODO fix the way factories are passed
 //        assertNotNull(factory);
-//        assertNotNull(wallController);
-//        assertNotNull(wall);
-//        assertNotNull(patternController);
-//        assertNotNull(pattern);
-//        assertNotNull(floorController);
-//        assertNotNull(floor);
-//
-//    }
-//
-//
-//    @Test
-//    void tableRemoveAllAddedTiles() throws Exception {
-//        List<Tile> tileList = new ArrayList<>();
-//        tileList.add(Tile.BLUE);
-//        tileList.add(Tile.BLUE);
-//        tileList.add(Tile.BLUE);
-//        tileList.add(Tile.BLUE);
-//
-//        tableController.addTilesToTable(tileList);
-//        int expectedCount = 5;
-//        assertEquals(expectedCount, table.size());
-//        tableController.grabTilesFromTable(Tile.BLUE);
-//        assertEquals(0, table.size());
-//    }
-//
-//    @Test
-//    void tableCountAddedTiles() throws Exception {
-//        List<Tile> tileList = new ArrayList<>();
-//        tileList.add(Tile.BLUE);
-//        tileList.add(Tile.BLUE);
-//        tileList.add(Tile.RED);
-//        tileList.add(Tile.WHITE);
-//        tileList.add(Tile.ORANGE);
-//        tileList.add(Tile.BLACK);
-//
-//        tableController.addTilesToTable(tileList);
-//        int expectedCount = 7;
-//        assertEquals(expectedCount, table.size());
-//    }
-//
+        assertNotNull(wallController);
+        assertNotNull(wall);
+        assertNotNull(patternController);
+        assertNotNull(pattern);
+        assertNotNull(floorController);
+        assertNotNull(floor);
+
+    }
+
+
+    @Test
+    void tableRemoveAllAddedTiles() throws Exception {
+        List<Tile> tileList = new ArrayList<>();
+        tileList.add(Tile.BLUE);
+        tileList.add(Tile.BLUE);
+        tileList.add(Tile.BLUE);
+        tileList.add(Tile.BLUE);
+        //TODO remove the tiles from the initialization
+        tableController.addTilesToTable(tileList);
+        int expectedCount = 5;
+        assertEquals(expectedCount, table.size());
+        tableController.grabTilesFromTable(Tile.BLUE);
+        assertEquals(0, table.size());
+    }
+
+    @Test
+    void tableCountAddedTiles() throws Exception {
+        List<Tile> tileList = new ArrayList<>();
+        tileList.add(Tile.BLUE);
+        tileList.add(Tile.BLUE);
+        tileList.add(Tile.RED);
+        tileList.add(Tile.WHITE);
+        tileList.add(Tile.ORANGE);
+        tileList.add(Tile.BLACK);
+
+        tableController.addTilesToTable(tileList);
+        int expectedCount = 7;
+        assertEquals(expectedCount, table.size());
+    }
+
 //    @Test
 //    void wallReset(){
 //        wallController.addTileToWall(Tile.ORANGE, 0);
@@ -183,17 +183,6 @@ class ControllerTest extends ApplicationTest {
 //        wallController.resetWallView();
 //    }
 
-
-//    @Test
-//    void testWallFullException() {
-//        try {
-//            wall.addTile(Tile.BLUE, 2);
-//            wall.addTile(Tile.ORANGE, 2);
-//            wall.addTile(Tile.BLACK, 3);
-//            fail();
-//        } catch (FullException ignored) {}
-//
-//    }
 
 
 }
