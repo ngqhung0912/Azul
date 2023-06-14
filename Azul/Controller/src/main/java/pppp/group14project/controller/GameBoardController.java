@@ -137,7 +137,6 @@ public class GameBoardController implements Initializable {
     tableController.setTable(game.getTable());
     tableController.postInitialize();
 
-    List<Factory> factories = Game.getInstance().getFactoryList();
     for (int i = 0; i < factoryControllers.size(); i++) {
       FactoryController controller = factoryControllers.get(i);
       controller.setGameBoardController(this);

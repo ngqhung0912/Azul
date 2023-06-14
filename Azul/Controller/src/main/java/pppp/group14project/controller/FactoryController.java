@@ -77,6 +77,7 @@ public class FactoryController {
 
         // Just to test changing the model (that this can be seen in the view)
         try {
+            this.factory.empty();
             this.factory.addTiles(Arrays.asList(new Tile[]{Tile.BLACK, Tile.ORANGE, Tile.BLACK, Tile.RED}));
         } catch (FullException e) {
             e.printStackTrace();

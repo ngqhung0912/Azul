@@ -38,7 +38,7 @@ public class Factory {
      * Checks if the passed tile exist in the factory,
      * and sets the selected_colour to this tile's colour
      * if it is.
-     * @param tiles the selected tile
+     * @param tile the selected tile
      */
     public void grabTiles(Tile tile) {
         if(this.tiles.contains(tile)) {
@@ -92,7 +92,7 @@ public class Factory {
 
     /**
      * Counts how many tiles of a certain colour are on the factory
-     * @param tiles the colour to count
+     * @param tile the colour to count
      * @return the number of tiles of the given colour
      */
     public int countColour(Tile tile) {
@@ -107,7 +107,7 @@ public class Factory {
 
     public void empty() {
         this.selected_colour = new SimpleStringProperty();
-        this.tiles.removeAll();
+        this.tiles.clear();
     }
 
 
