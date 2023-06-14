@@ -195,11 +195,7 @@ public class Wall {
     }
 
     private boolean cellContainsTile(int row, int col) {
-        if (wall.get(row).get(col) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return wall.get(row).get(col) != null;
     }
 
     private void increaseWallScoreIfNeighbouringTileExists(int row, int col) {
@@ -208,12 +204,6 @@ public class Wall {
         }
     }
 
-    /**
-     * Calculates the score after each tile is added to the wall
-     *
-     * @param row row on which tile was added
-     * @param col column on which tile was added
-     */
     public void updateWallScore(int row, int col) {
         assert (row >= 0 && row < wall.size());
         assert (col >= 0 && col < wall.get(row).size());
