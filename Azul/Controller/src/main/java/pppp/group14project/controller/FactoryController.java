@@ -43,7 +43,9 @@ public class FactoryController {
     @Setter
     private GameBoardController gameBoardController;
 
-    public void setSelectedTiles(String colour) {
+    public void setSelectedTiles(Tile selectedTile) {
+        System.out.println("selected: " + selectedTile);
+        String colour = selectedTile.toString();
         for(Node tile : tileGrid.getChildren()) {
             ObservableList<String> style = tile.getStyleClass();
             if(style.contains(colour)) {
@@ -54,39 +56,57 @@ public class FactoryController {
         }
     }
 
-    public void onTileClick(ActionEvent event) {
-        String selected_colour = ((ClickableTile) event.getSource()).getStyleClass().get(0);
-        Tile selected_tile = Tile.valueOf(selected_colour);
-        factory.grabTiles(selected_tile);
-        setSelectedTiles(selected_colour);
-    }
+//    public void onTileClick(ActionEvent event) {
+//        ClickableTile tile = (ClickableTile) event.getSource();
+//        Tile selected_tile = tile.getColour();
+//        String selected_colour = selected_tile.toString();
+//        factory.grabTiles(selected_tile);
+//        setSelectedTiles(selected_colour);
+//    }
 
     public void setTileColours(ObservableList<Tile> colours) {
         for(Integer i = 0; i < colours.size(); i++) {
             Tile colour = colours.get(i);
-            Node tile = tileGrid.getChildren().get(i);
+            ClickableTile tile = (ClickableTile) tileGrid.getChildren().get(i);
             tile.getStyleClass().clear();
             tile.getStyleClass().add(String.valueOf(colour));
+            tile.setColour(colour);
         }
     }
 
     public void postInitialize() {
+        // Listen for tiles added to the factory by the container
         this.factory.getTiles().addListener((ListChangeListener<Tile>) change -> {
             setTileColours(this.factory.getTiles());
         });
+
+        for (Node node : tileGrid.getChildren()) {
+            ClickableTile clickableTile = (ClickableTile) node;
+
+            clickableTile.setOnMouseClicked(event -> {
+                // Handle the tile click event here
+                Tile colour = clickableTile.getColour();
+                setSelectedTiles(colour);
+                factory.grabTiles(colour);
+            });
+        }
+
 
         // Just to test changing the model (that this can be seen in the view)
         try {
             this.factory.empty();
             this.factory.addTiles(Arrays.asList(new Tile[]{Tile.BLACK, Tile.ORANGE, Tile.BLACK, Tile.RED}));
+            System.out.println("reached");
         } catch (FullException e) {
             e.printStackTrace();
         }
 
+        // listen to which tile has been selected
         this.factory.getSelected_colour().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                FactoryController.this.setSelectedTiles(FactoryController.this.factory.getSelected_colour().toString());
+                String colour = FactoryController.this.factory.getSelected_colour().getValue();
+                FactoryController.this.setSelectedTiles(Tile.valueOf(colour));
             }
         });
 
