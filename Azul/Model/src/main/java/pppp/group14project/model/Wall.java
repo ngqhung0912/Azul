@@ -95,7 +95,7 @@ public class Wall {
 
         if (!isTileInRow(tile, row)) {
             targetRow.set(column, tile);
-            getScoreOfAddedTile(row, column);
+            updateWallScore(row, column);
         }
     }
 
@@ -197,7 +197,7 @@ public class Wall {
      * @param row row on which tile was added
      * @param col column on which tile was added
      */
-    public void getScoreOfAddedTile(int row, int col) {
+    public void updateWallScore(int row, int col) {
         assert (row >= 0 && row < wall.size());
         assert (col >= 0 && col < wall.get(row).size());
 
