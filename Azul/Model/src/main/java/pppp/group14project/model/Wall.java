@@ -1,6 +1,5 @@
 package pppp.group14project.model;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
@@ -195,6 +194,14 @@ public class Wall {
         return row >= 0 && row < wall.size() && col >= 0 && col < wall.get(row).size();
     }
 
+    private boolean cellContainsTile(int row, int col) {
+        if (wall.get(row).get(col) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Calculates the score after each tile is added to the wall
      *
@@ -206,21 +213,21 @@ public class Wall {
         assert (col >= 0 && col < wall.get(row).size());
 
         // Check right side
-        if (isValidCell(row, col + 1) && wall.get(row).get(col + 1) != null) {
+        if (isValidCell(row, col + 1) && cellContainsTile(row, col + 1)) {
             this.wallScore++;
         }
         // Left side
-        if (isValidCell(row, col - 1) && wall.get(row).get(col - 1) != null) {
+        if (isValidCell(row, col - 1) && cellContainsTile(row, col - 1)) {
             this.wallScore++;
         }
 
         // Bottom
-        if (isValidCell(row + 1, col) && wall.get(row + 1).get(col) != null) {
+        if (isValidCell(row + 1, col) && cellContainsTile(row + 1, col)) {
             this.wallScore++;
         }
 
         // Top
-        if (isValidCell(row - 1, col) && wall.get(row - 1).get(col) != null) {
+        if (isValidCell(row - 1, col) && cellContainsTile(row - 1, col)) {
             this.wallScore++;
         }
         // +1 to the score for just placing the tile
