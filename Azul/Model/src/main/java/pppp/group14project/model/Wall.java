@@ -1,6 +1,5 @@
 package pppp.group14project.model;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
@@ -37,7 +36,7 @@ public class Wall {
 
 
     @Getter
-    public int wallScore;
+    private int wallScore;
 
     public Wall() {
         this.wallSize = 5;
@@ -95,7 +94,7 @@ public class Wall {
 
         if (!isTileInRow(tile, row)) {
             targetRow.set(column, tile);
-            getScoreOfAddedTile(row, column);
+            updateWallScore(row, column);
         }
     }
 
@@ -191,34 +190,29 @@ public class Wall {
         return fullCols;
     }
 
-    /**
-     * Calculates the score after each tile is added to the wall
-     *
-     * @param row row on which tile was added
-     * @param col column on which tile was added
-     */
-    public void getScoreOfAddedTile(int row, int col) {
+    private boolean isValidCell(int row, int col) {
+        return row >= 0 && row < wall.size() && col >= 0 && col < wall.get(row).size();
+    }
 
-        // Check right side
-        if (col < wall.get(row).size() - 1 && wall.get(row).get(col + 1) != null) {
-            this.wallScore++;
-        }
-        // Left side
-        if (col > 0 && wall.get(row).get(col - 1) != null) {
-            this.wallScore++;
-        }
+    private boolean cellContainsTile(int row, int col) {
+        return wall.get(row).get(col) != null;
+    }
 
-        // Bottom
-        if (row < wall.size() - 1 && wall.get(row + 1).get(col) != null) {
-            this.wallScore++;
+    private void increaseWallScoreIfNeighbouringTileExists(int row, int col) {
+        if (isValidCell(row, col) && cellContainsTile(row, col)) {
+            wallScore++;
         }
+    }
 
-        // Top
-        if (row > 0 && wall.get(row - 1).get(col) != null) {
-            this.wallScore++;
-        }
-        // +1 to the score for just placing the tile
-        this.wallScore++;
+    public void updateWallScore(int row, int col) {
+        assert (row >= 0 && row < wall.size());
+        assert (col >= 0 && col < wall.get(row).size());
+
+        increaseWallScoreIfNeighbouringTileExists(row, col + 1); // right
+        increaseWallScoreIfNeighbouringTileExists(row, col - 1); // left
+        increaseWallScoreIfNeighbouringTileExists(row + 1, col); // bottom
+        increaseWallScoreIfNeighbouringTileExists(row - 1, col); // top
+        wallScore++; // +1 to the score for just placing the tile
     }
 
 
