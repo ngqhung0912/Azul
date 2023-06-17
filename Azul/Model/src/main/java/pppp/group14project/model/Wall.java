@@ -196,21 +196,45 @@ public class Wall {
         return wall.get(row).get(col) != null;
     }
 
-    private void increaseWallScoreIfNeighbouringTileExists(int row, int col) {
-        if (isValidCell(row, col) && cellContainsTile(row, col)) {
-            wallScore++;
+    /**
+     * Counts the number of tiles in a given direction from a given cell.
+     * @return number of neighboring tiles in the given direction
+     */
+    private int countNeighboringTiles(int row, int col, String direction) {
+        int count = 0;
+        while (isValidCell(row, col) && cellContainsTile(row, col)) {
+            count++;
+            switch (direction) {
+                case "right" -> col++;
+                case "left" -> col--;
+                case "top" -> row++;
+                case "bottom" -> row--;
+            }
         }
+        return count;
     }
+
+    /**
+     * Update wall score after every move
+     */
 
     public void updateWallScore(int row, int col) {
         assert (row >= 0 && row < wall.size());
         assert (col >= 0 && col < wall.get(row).size());
 
-        increaseWallScoreIfNeighbouringTileExists(row, col + 1); // right
-        increaseWallScoreIfNeighbouringTileExists(row, col - 1); // left
-        increaseWallScoreIfNeighbouringTileExists(row + 1, col); // bottom
-        increaseWallScoreIfNeighbouringTileExists(row - 1, col); // top
-        wallScore++; // +1 to the score for just placing the tile
+        int horizontalNeighboringTiles = countNeighboringTiles(row, col + 1, "right") +  // right
+                countNeighboringTiles(row, col - 1, "left");  // left
+        if (horizontalNeighboringTiles > 0) {
+            wallScore += horizontalNeighboringTiles + 1;
+        }
+        int verticalNeighboringTiles = countNeighboringTiles(row + 1, col, "top") +  // top
+                countNeighboringTiles(row - 1 , col, "bottom");  // bottom
+        if (verticalNeighboringTiles > 0) {
+            wallScore += verticalNeighboringTiles + 1;
+        }
+        if (horizontalNeighboringTiles == 0 && verticalNeighboringTiles == 0) {
+            wallScore += 1;
+        }
     }
 
 
