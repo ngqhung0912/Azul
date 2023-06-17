@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Wall {
 
-    private static List<List<Tile>> tileColors = Arrays.asList(
+    private static final List<List<Tile>> TILE_COLORS = Arrays.asList(
             Arrays.asList(Tile.BLUE, Tile.ORANGE, Tile.RED, Tile.BLACK, Tile.WHITE),
             Arrays.asList(Tile.WHITE, Tile.BLUE, Tile.ORANGE, Tile.RED, Tile.BLACK),
             Arrays.asList(Tile.BLACK, Tile.WHITE, Tile.BLUE, Tile.ORANGE, Tile.RED),
@@ -19,37 +19,38 @@ public class Wall {
             Arrays.asList(Tile.ORANGE, Tile.RED, Tile.BLACK, Tile.WHITE, Tile.BLUE)
     );
 
-    public static int getTileColorColumn(Tile t, int row) throws FullException {
-        for (int i = 0; i < tileColors.get(row).size(); i++) {
-            if (tileColors.get(row).get(i) == t) return i;
-        }
-        throw new FullException("Tile color not found in grid");
-    }
-
-    public static Tile getTileColor(int row, int column) {
-        return tileColors.get(row).get(column);
-    }
 
     @Getter
     private List<ObservableList<Tile>> wall;
-    private int wallSize;
+    private static final int WALL_SIZE = 5;
 
 
     @Getter
     private int wallScore;
 
     public Wall() {
-        this.wallSize = 5;
         this.wallScore = 0;
-        this.wall = new ArrayList<ObservableList<Tile>>();
-        for (int i = 0; i < wallSize; i++) {
+        this.wall = new ArrayList<>();
+        for (int i = 0; i < WALL_SIZE; i++) {
             ObservableList<Tile> row = FXCollections.observableArrayList();
-            for (int j = 0; j < wallSize; j++) {
+            for (int j = 0; j < WALL_SIZE; j++) {
                 row.add(null);
             }
             wall.add(row);
         }
     }
+
+    public static int getTileColorColumn(Tile t, int row) throws FullException {
+        for (int i = 0; i < TILE_COLORS.get(row).size(); i++) {
+            if (TILE_COLORS.get(row).get(i) == t) return i;
+        }
+        throw new FullException("Tile color not found in grid");
+    }
+
+    public static Tile getTileColor(int row, int column) {
+        return TILE_COLORS.get(row).get(column);
+    }
+
 
     /**
      * Functions loops through the whole wall and creates list of tiles present
@@ -230,8 +231,8 @@ public class Wall {
      * Empties the wall, sets all arrays to nulls
      */
     public void emptyWall() {
-        for (int i = 0; i < wallSize; i++) {
-            for (int j = 0; j < wallSize; j++) {
+        for (int i = 0; i < WALL_SIZE; i++) {
+            for (int j = 0; j < WALL_SIZE; j++) {
                 wall.get(i).set(j, null);
             }
         }
