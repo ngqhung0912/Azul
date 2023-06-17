@@ -22,7 +22,7 @@ class WallTest {
         } catch (FullException e) {
             fail();
         }
-        assertEquals(1, wall.countNonNullElementsInRow(wall.getRow(3)));
+        assertEquals(1, wall.countTilesInRow(wall.getRow(3)));
         assertTrue(wall.isTileInRow(Tile.RED, 3));
 
     }
@@ -77,7 +77,7 @@ class WallTest {
 
         } catch (FullException ignored) {}
 
-        assertNotEquals(5, wall.countNonNullElementsInRow(wall.getRow(0)));
+        assertNotEquals(5, wall.countTilesInRow(wall.getRow(0)));
     }
 
     @Test

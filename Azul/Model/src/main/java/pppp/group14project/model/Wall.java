@@ -105,7 +105,7 @@ public class Wall {
      * @param row row in which tiles should be counted
      * @return Number of tiles present in a row
      */
-    public int countNonNullElementsInRow(List<Tile> row) {
+    public int countTilesInRow(List<Tile> row) {
         int count = 0;
 
         for (Tile tile : row) {
@@ -124,7 +124,7 @@ public class Wall {
      * @return whether the row is full
      */
     public boolean isRowFull(List<Tile> row) {
-        return countNonNullElementsInRow(row) == 5;
+        return countTilesInRow(row) == 5;
     }
 
     /**
