@@ -132,18 +132,86 @@ class WallTest {
     }
 
     @Test
-    void scoreTwoConnectedTiles() {
+    void testScoringSameColumnAndRow() {
         try {
+            wall.addTile(Tile.ORANGE, 2);
+            assertEquals(1, wall.getWallScore());
+
+            wall.addTile(Tile.WHITE, 4);
+            assertEquals(2, wall.getWallScore());
+
+            wall.addTile(Tile.WHITE, 3);
+            assertEquals(3, wall.getWallScore());
+
             wall.addTile(Tile.ORANGE, 3);
-            wall.addTile(Tile.BLUE, 4);
+            assertEquals(4, wall.getWallScore());
+
+            wall.addTile(Tile.BLACK, 3);
+            assertEquals(6, wall.getWallScore());
+
+            wall.addTile(Tile.RED, 3);
+            assertEquals(9, wall.getWallScore());
+
+            wall.addTile(Tile.RED, 1);
+            assertEquals(11, wall.getWallScore());
+
+            wall.addTile(Tile.BLACK, 0);
+            assertEquals(14, wall.getWallScore());
+
+            wall.addTile(Tile.BLUE, 3);
+            assertEquals(24, wall.getWallScore());
         } catch (FullException e) {
             fail();
         }
-        assertEquals(3, wall.getWallScore());
+    }
+    @Test
+    void testScoringSameRow() {
+        try {
+            wall.addTile(Tile.BLUE, 2);
+            assertEquals(1, wall.getWallScore());
+
+            wall.addTile(Tile.WHITE, 2);
+            assertEquals(3, wall.getWallScore());
+
+            wall.addTile(Tile.BLACK, 2);
+            assertEquals(6, wall.getWallScore());
+
+            wall.addTile(Tile.ORANGE, 2);
+            assertEquals(10, wall.getWallScore());
+
+            wall.addTile(Tile.RED, 2);
+            assertEquals(15, wall.getWallScore());
+
+        } catch (FullException e) {
+            fail();
+        }
     }
 
     @Test
-    void getFullColumnsandRows() {
+    void testScoringSameColumn() {
+        try {
+            wall.addTile(Tile.BLUE, 2);
+            assertEquals(1, wall.getWallScore());
+
+            wall.addTile(Tile.ORANGE, 1);
+            assertEquals(3, wall.getWallScore());
+
+            wall.addTile(Tile.WHITE, 3);
+            assertEquals(6, wall.getWallScore());
+
+            wall.addTile(Tile.BLACK, 4);
+            assertEquals(10, wall.getWallScore());
+
+            wall.addTile(Tile.RED, 0);
+            assertEquals(15, wall.getWallScore());
+
+        } catch (FullException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void getFullColumnsAndRows() {
         try {
             wall.addTile(Tile.BLACK, 0);
             wall.addTile(Tile.BLUE, 0);
