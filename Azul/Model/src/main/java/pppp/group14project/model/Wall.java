@@ -92,11 +92,8 @@ public class Wall {
      */
     public void addTile(Tile tile, int row, int column) {
         ObservableList<Tile> targetRow = this.wall.get(row);
-
-        if (!isTileInRow(tile, row)) {
-            targetRow.set(column, tile);
-            updateWallScore(row, column);
-        }
+        targetRow.set(column, tile);
+        updateWallScore(row, column);
     }
 
     /**
