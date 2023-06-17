@@ -111,5 +111,30 @@ class WallTest {
         assertEquals(1, wall.getFullRows());
     }
 
+    @Test
+    void testScoringFullRows() {
+        // ADD 2 FULL ROWS:
+        wall.addTile(Tile.BLACK, 0, 1);
+        wall.addTile(Tile.BLUE, 1, 1);
+        wall.addTile(Tile.WHITE, 2, 1);
+        wall.addTile(Tile.RED, 3, 1);
+        wall.addTile(Tile.ORANGE, 4, 1);
+        wall.UpdateScoreAtEndGame();
+        assertEquals(2, wall.getWallScore());
+
+        wall.addTile(Tile.BLACK, 0, 2);
+        wall.addTile(Tile.BLUE, 1, 2);
+        wall.addTile(Tile.WHITE, 2, 2);
+        wall.addTile(Tile.RED, 3, 2);
+        wall.addTile(Tile.ORANGE, 4, 2);
+        wall.UpdateScoreAtEndGame();
+        assertEquals(2, wall.getWallScore());
+    }
+
+
+
+
+
+
 
 }
