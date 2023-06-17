@@ -2,6 +2,7 @@ package pppp.group14project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pppp.group14project.model.exceptions.FullException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -110,31 +111,30 @@ class WallTest {
         wall.addTile(Tile.ORANGE, 0, 4);
         assertEquals(1, wall.getFullRows());
     }
-
     @Test
-    void testScoringFullRows() {
-        // ADD 2 FULL ROWS:
-        wall.addTile(Tile.BLACK, 0, 1);
-        wall.addTile(Tile.BLUE, 1, 1);
-        wall.addTile(Tile.WHITE, 2, 1);
-        wall.addTile(Tile.RED, 3, 1);
-        wall.addTile(Tile.ORANGE, 4, 1);
-        wall.UpdateScoreAtEndGame();
-        assertEquals(2, wall.getWallScore());
+    void testScoringAtEndGame() {
+        try {
+            // ADDING A FULL ROW
+            wall.addTile(Tile.BLACK, 0);
+            wall.addTile(Tile.BLUE, 0);
+            wall.addTile(Tile.WHITE, 0);
+            wall.addTile(Tile.RED, 0);
+            wall.addTile(Tile.ORANGE, 0);
 
-        wall.addTile(Tile.BLACK, 0, 2);
-        wall.addTile(Tile.BLUE, 1, 2);
-        wall.addTile(Tile.WHITE, 2, 2);
-        wall.addTile(Tile.RED, 3, 2);
-        wall.addTile(Tile.ORANGE, 4, 2);
-        wall.UpdateScoreAtEndGame();
-        assertEquals(2, wall.getWallScore());
+            // ADDING A FULL COLUMN
+            wall.addTile(Tile.RED, 1);
+            wall.addTile(Tile.ORANGE, 2);
+            wall.addTile(Tile.BLUE, 3);
+            wall.addTile(Tile.WHITE, 4);
+
+            // ADDING A FULL COLOR
+            wall.addTile(Tile.BLUE, 0);
+            wall.addTile(Tile.BLUE, 2);
+            wall.addTile(Tile.BLUE, 4);
+
+        } catch (FullException e) {
+            fail();
+        }
+        assertEquals(15, wall.getWallScore());
     }
-
-
-
-
-
-
-
 }
