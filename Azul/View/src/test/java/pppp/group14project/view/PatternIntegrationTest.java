@@ -19,19 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PatternIntegrationTest extends ApplicationTest {
     private static GameBoardController gameBoardController;
 
-    private static TableController tableController;
-
-    private static Table table;
-
-    private static WallController wallController;
-
-    private static Wall wall;
-
-
-    private static FloorController floorController;
-
-    private static Floor floor;
-
     private static PatternController patternController;
 
     private static Pattern pattern;
@@ -65,19 +52,10 @@ public class PatternIntegrationTest extends ApplicationTest {
 
         gameBoardController = gameBoard.getController();
 
-        tableController = gameBoardController.getTableController();
-        table = tableController.getTable();
-
         playerBoardController = gameBoardController.getPlayerBoardControllers().get(0);
-
-        wallController = playerBoardController.getWallController();
-        wall = wallController.getWall();
 
         patternController = playerBoardController.getPatternController();
         pattern = patternController.getPattern();
-
-        floorController = playerBoardController.getFloorController();
-        floor = floorController.getFloor();
 
 
 
@@ -89,23 +67,17 @@ public class PatternIntegrationTest extends ApplicationTest {
     @Test
     void testInitialization() {
         assertNotNull(gameBoardController);
-        assertNotNull(tableController);
-        assertNotNull(table);
 //        assertNotNull(factoryController);
         //TODO fix the way factories are passed
 //        assertNotNull(factory);
-        assertNotNull(wallController);
-        assertNotNull(wall);
         assertNotNull(patternController);
         assertNotNull(pattern);
-        assertNotNull(floorController);
-        assertNotNull(floor);
 
     }
 
 
     @Test
-    void testAddCorrectTilesToPattern() {
+    void testAddAndRemoveCorrectTilesToPattern() {
         List<Tile> tileList = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
