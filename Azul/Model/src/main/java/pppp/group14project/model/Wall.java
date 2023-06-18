@@ -5,9 +5,7 @@ import javafx.collections.ObservableList;
 import lombok.Getter;
 import pppp.group14project.model.exceptions.FullException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Wall {
 
@@ -260,4 +258,57 @@ public class Wall {
         this.wallScore = 0;
     }
 
+    /**
+     * Note that the UpdateScoreAtEndGame function should only be called once,
+     * but tests call it multiple times for convenience.
+     */
+    public void updateScoreAtEndGame() {
+        this.wallScore += getAdditionalScoreOfCompleteRows()  +
+                getAdditionalScoreOfCompleteCols() +
+                getAdditionalScoreOfCompleteColors();
+    }
+
+    /**
+     * Calculates the additional score (2) for each complete row.
+     * @return additional score
+     */
+
+    private int getAdditionalScoreOfCompleteRows() {
+        return this.getFullRows() * 2;
+
+    }
+    /**
+     * Calculates the additional score (7) for each complete column.
+     * @return additional score
+     */
+
+    private int getAdditionalScoreOfCompleteCols() {
+        return this.getFullCols() * 7;
+
+    }
+    /**
+     * Calculates the additional score (10) for each complete colors.
+     * @return the additional score
+     */
+
+    private int getAdditionalScoreOfCompleteColors() {
+        return this.getFullColors() * 10;
+    }
+
+    private int getFullColors() {
+        int fullColorsCount = 0;
+        for (int i = 0; i < WALL_SIZE; i++) {
+                Tile tile = TILE_COLORS.get(0).get(i);
+                int counter = 0;
+                for (int j = 0; j < WALL_SIZE; j++) {
+                        if (isTileInRow(tile, j)) {
+                            counter++;
+                        }
+                    if (counter == 5) {
+                            fullColorsCount++;
+                        }
+                }
+        }
+        return fullColorsCount;
+    }
 }

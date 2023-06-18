@@ -233,6 +233,35 @@ class WallTest {
         }
         assertEquals(1, wall.getFullCols());
     }
+    @Test
+    void testScoringAtEndGame() {
+        try {
+            // ADDING A FULL ROW
+            wall.addTile(Tile.BLUE, 0);
+            wall.addTile(Tile.ORANGE, 0);
+            wall.addTile(Tile.RED, 0);
+            wall.addTile(Tile.BLACK, 0);
+            wall.addTile(Tile.WHITE, 0);
+            assertEquals(15, wall.getWallScore());
+            System.out.println(wall.getWall());
 
+            // ADDING A FULL COLUMN
+            wall.addTile(Tile.RED, 1);
+            wall.addTile(Tile.ORANGE, 2);
+            wall.addTile(Tile.BLUE, 3);
+            wall.addTile(Tile.WHITE, 4);
 
+            assertEquals(29, wall.getWallScore());
+
+            // ADDING A FULL COLOR
+            wall.addTile(Tile.BLUE, 1);
+            wall.addTile(Tile.BLUE, 2);
+            wall.addTile(Tile.BLUE, 4);
+
+        } catch (FullException e) {
+            fail();
+        }
+        wall.updateScoreAtEndGame();
+        assertEquals(54, wall.getWallScore());
+    }
 }
