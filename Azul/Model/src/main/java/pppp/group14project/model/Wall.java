@@ -1,18 +1,15 @@
 package pppp.group14project.model;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
 import pppp.group14project.model.exceptions.FullException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Wall {
 
-    private static List<List<Tile>> tileColors = Arrays.asList(
+    private static final List<List<Tile>> TILE_COLORS = Arrays.asList(
             Arrays.asList(Tile.BLUE, Tile.ORANGE, Tile.RED, Tile.BLACK, Tile.WHITE),
             Arrays.asList(Tile.WHITE, Tile.BLUE, Tile.ORANGE, Tile.RED, Tile.BLACK),
             Arrays.asList(Tile.BLACK, Tile.WHITE, Tile.BLUE, Tile.ORANGE, Tile.RED),
@@ -20,36 +17,38 @@ public class Wall {
             Arrays.asList(Tile.ORANGE, Tile.RED, Tile.BLACK, Tile.WHITE, Tile.BLUE)
     );
 
-    public static int getTileColorColumn(Tile t, int row) throws FullException {
-        for (int i = 0; i < tileColors.get(row).size(); i++) {
-            if (tileColors.get(row).get(i) == t) return i;
-        }
-        throw new FullException("Tile color not found in grid");
-    }
-
-    public static Tile getTileColor(int row, int column) {
-        return tileColors.get(row).get(column);
-    }
 
     @Getter
     private List<ObservableList<Tile>> wall;
-    private final int WALLSIZE = 5;
+    private static final int WALL_SIZE = 5;
 
 
     @Getter
-    public int wallScore;
+    protected int wallScore;
 
     public Wall() {
         this.wallScore = 0;
-        this.wall = new ArrayList<ObservableList<Tile>>();
-        for (int i = 0; i < WALLSIZE; i++) {
+        this.wall = new ArrayList<>();
+        for (int i = 0; i < WALL_SIZE; i++) {
             ObservableList<Tile> row = FXCollections.observableArrayList();
-            for (int j = 0; j < WALLSIZE; j++) {
+            for (int j = 0; j < WALL_SIZE; j++) {
                 row.add(null);
             }
             wall.add(row);
         }
     }
+
+    public static int getTileColorColumn(Tile t, int row) throws FullException {
+        for (int i = 0; i < TILE_COLORS.get(row).size(); i++) {
+            if (TILE_COLORS.get(row).get(i) == t) return i;
+        }
+        throw new FullException("Tile color not found in grid");
+    }
+
+    public static Tile getTileColor(int row, int column) {
+        return TILE_COLORS.get(row).get(column);
+    }
+
 
     /**
      * Functions loops through the whole wall and creates list of tiles present
@@ -91,20 +90,17 @@ public class Wall {
      */
     public void addTile(Tile tile, int row, int column) {
         ObservableList<Tile> targetRow = this.wall.get(row);
-
-        if (!isTileInRow(tile, row)) {
-            targetRow.set(column, tile);
-            getScoreOfAddedTile(row, column);
-        }
+        targetRow.set(column, tile);
+        updateWallScore(row, column);
     }
 
     /**
      * Counts the number of tiles in a given row
-     * TODO then while the method is not named accordingly, i.e.: CountTilesInRow?
+     *
      * @param row row in which tiles should be counted
      * @return Number of tiles present in a row
      */
-    public int countNonNullElementsInRow(List<Tile> row) {
+    public int countTilesInRow(List<Tile> row) {
         int count = 0;
 
         for (Tile tile : row) {
@@ -123,7 +119,7 @@ public class Wall {
      * @return whether the row is full
      */
     public boolean isRowFull(List<Tile> row) {
-        return countNonNullElementsInRow(row) == 5;
+        return countTilesInRow(row) == 5;
     }
 
     /**
@@ -190,34 +186,53 @@ public class Wall {
         return fullCols;
     }
 
+    private boolean isValidCell(int row, int col) {
+        return row >= 0 && row < wall.size() && col >= 0 && col < wall.get(row).size();
+    }
+
+    private boolean cellContainsTile(int row, int col) {
+        return wall.get(row).get(col) != null;
+    }
+
     /**
-     * Calculates the score after each tile is added to the wall
-     * TODO: this function is more like: updateScoreAfterTileAdded.
-     * @param row row on which tile was added
-     * @param col column on which tile was added
+     * Counts the number of tiles in a given direction from a given cell.
+     * @return number of neighboring tiles in the given direction
      */
-    public void getScoreOfAddedTile(int row, int col) {
+    private int countNeighboringTiles(int row, int col, String direction) {
+        int count = 0;
+        while (isValidCell(row, col) && cellContainsTile(row, col)) {
+            count++;
+            switch (direction) {
+                case "right" -> col++;
+                case "left" -> col--;
+                case "top" -> row++;
+                case "bottom" -> row--;
+            }
+        }
+        return count;
+    }
 
-        // Check right side
-        if (col < wall.get(row).size() - 1 && wall.get(row).get(col + 1) != null) {
-            this.wallScore++;
-        }
-        // Left side
-        if (col > 0 && wall.get(row).get(col - 1) != null) {
-            this.wallScore++;
-        }
+    /**
+     * Update wall score after every move
+     */
 
-        // Bottom
-        if (row < wall.size() - 1 && wall.get(row + 1).get(col) != null) {
-            this.wallScore++;
-        }
+    public void updateWallScore(int row, int col) {
+        assert (row >= 0 && row < wall.size());
+        assert (col >= 0 && col < wall.get(row).size());
 
-        // Top
-        if (row > 0 && wall.get(row - 1).get(col) != null) {
-            this.wallScore++;
+        int horizontalNeighboringTiles = countNeighboringTiles(row, col + 1, "right") +  // right
+                countNeighboringTiles(row, col - 1, "left");  // left
+        if (horizontalNeighboringTiles > 0) {
+            wallScore += horizontalNeighboringTiles + 1;
         }
-        // +1 to the score for just placing the tile
-        this.wallScore++;
+        int verticalNeighboringTiles = countNeighboringTiles(row + 1, col, "top") +  // top
+                countNeighboringTiles(row - 1 , col, "bottom");  // bottom
+        if (verticalNeighboringTiles > 0) {
+            wallScore += verticalNeighboringTiles + 1;
+        }
+        if (horizontalNeighboringTiles == 0 && verticalNeighboringTiles == 0) {
+            wallScore += 1;
+        }
     }
 
 
@@ -235,12 +250,65 @@ public class Wall {
      * Empties the wall, sets all arrays to nulls
      */
     public void emptyWall() {
-        for (int i = 0; i < WALLSIZE; i++) {
-            for (int j = 0; j < WALLSIZE; j++) {
+        for (int i = 0; i < WALL_SIZE; i++) {
+            for (int j = 0; j < WALL_SIZE; j++) {
                 wall.get(i).set(j, null);
             }
         }
         this.wallScore = 0;
     }
 
+    /**
+     * Note that the UpdateScoreAtEndGame function should only be called once,
+     * but tests call it multiple times for convenience.
+     */
+    public void updateScoreAtEndGame() {
+        this.wallScore += getAdditionalScoreOfCompleteRows()  +
+                getAdditionalScoreOfCompleteCols() +
+                getAdditionalScoreOfCompleteColors();
+    }
+
+    /**
+     * Calculates the additional score (2) for each complete row.
+     * @return additional score
+     */
+
+    private int getAdditionalScoreOfCompleteRows() {
+        return this.getFullRows() * 2;
+
+    }
+    /**
+     * Calculates the additional score (7) for each complete column.
+     * @return additional score
+     */
+
+    private int getAdditionalScoreOfCompleteCols() {
+        return this.getFullCols() * 7;
+
+    }
+    /**
+     * Calculates the additional score (10) for each complete colors.
+     * @return the additional score
+     */
+
+    private int getAdditionalScoreOfCompleteColors() {
+        return this.getFullColors() * 10;
+    }
+
+    private int getFullColors() {
+        int fullColorsCount = 0;
+        for (int i = 0; i < WALL_SIZE; i++) {
+                Tile tile = TILE_COLORS.get(0).get(i);
+                int counter = 0;
+                for (int j = 0; j < WALL_SIZE; j++) {
+                        if (isTileInRow(tile, j)) {
+                            counter++;
+                        }
+                    if (counter == 5) {
+                            fullColorsCount++;
+                        }
+                }
+        }
+        return fullColorsCount;
+    }
 }

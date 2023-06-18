@@ -93,6 +93,7 @@ public class WallController {
      * Resets all the tiles back to original look
      */
     public void resetWallView() {
+        wall.emptyWall();
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Button) {
                 node.getStyleClass().clear();

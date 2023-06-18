@@ -4,7 +4,7 @@ import java.util.*;
 
 public class WallAdapter extends Wall {
 
-    private Team13Wall team13Wall;
+    private final Team13Wall team13Wall;
 
     private final Map<Tile, TileType> tileTypeToTileMap;
 
@@ -42,8 +42,11 @@ public class WallAdapter extends Wall {
     public void addTile(Tile tile, int row, int column) {
         try {
             int score = team13Wall.addTile(tileTypeToTileMap.get(tile), row);
-            this.wallScore += score;
-        } catch (RuntimeException ignored) {}
+            super.wallScore += score;
+        } catch (RuntimeException e) {
+            System.out.println("Tile cannot be added to wall");
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -66,7 +69,7 @@ public class WallAdapter extends Wall {
     }
 
     @Override
-    public int countTilesInRow(Tile[] row) {
+    public int countTilesInRow(List<Tile> row) {
         int count = 0;
         return count;
     }

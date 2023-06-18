@@ -7,8 +7,11 @@ import javafx.scene.layout.*;
 import javafx.util.Pair;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
+import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.FullException;
 
 
 import java.io.IOException;
@@ -17,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GameBoardController implements Initializable {
+public class GameBoardController implements Initializable, Mediator {
 
   /**
    * FXML for updating views
@@ -31,11 +34,17 @@ public class GameBoardController implements Initializable {
   @FXML
   private GridPane innerGridRight;
 
+  @FXML
+  private GridPane factoriesGrid;
+
+
   @Getter
   private TableController tableController;
 
+
   @Getter
-  private FloorController floorController;
+  @Setter
+  private Game game;
 
   /**
    * References to other controllers
@@ -44,6 +53,11 @@ public class GameBoardController implements Initializable {
   @Getter
   private List<PlayerBoardController> playerBoardControllers = new ArrayList<>();
 
+  @Getter
+  @Setter
+  private List<FactoryController> factoryControllers = new ArrayList<>();
+
+  @SneakyThrows
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -55,7 +69,8 @@ public class GameBoardController implements Initializable {
     playerGridIndices[3] = (new Pair<>(1,2));
     int gridIndex = 0;
 
-    List<Board> boardList = Game.getInstance().getBoardList();
+    game = Game.getInstance();
+    List<Board> boardList = game.getBoardList();
 
     for (Board board : boardList) {
       try {
@@ -74,7 +89,7 @@ public class GameBoardController implements Initializable {
         gridIndex++;
 
         // Adds the playerBoardControllers
-        this.playerBoardControllers.add(playerBoardController);
+        playerBoardControllers.add(playerBoardController);
 
       } catch (IOException e) {
         e.printStackTrace();
@@ -83,13 +98,14 @@ public class GameBoardController implements Initializable {
 
 
     try {
-      FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factories-view.fxml")));
-      GridPane factories = factoryLoader.load();
-      FactoriesController factoryController = factoryLoader.getController();
-      factoryController.setNumberOfPlayers(boardList.size());
-      innerGridMid.add(factories, 0, 0);
-
-      // Also add the table at 0,1
+      Integer factoryAmount = Game.getInstance().getFactoryList().size();
+      for(Integer factoryNr = 0; factoryNr < factoryAmount; factoryNr++) {
+        FXMLLoader factoryLoader = new FXMLLoader((getClass().getResource("/factory-view.fxml")));
+        GridPane factory = factoryLoader.load();
+        FactoryController controller = factoryLoader.getController();
+        factoryControllers.add(controller);
+        factoriesGrid.add(factory, factoryNr%2, factoryNr/2);
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -112,8 +128,8 @@ public class GameBoardController implements Initializable {
   /**
    * Initializes the models, once all models of its parent models have loaded
    */
-  private void postInitialize() {
-    List<Board> boards = Game.getInstance().getBoardList();
+  private void postInitialize() throws FullException {
+    List<Board> boards = game.getBoardList();
     for (int i = 0; i < playerBoardControllers.size(); i++) {
       PlayerBoardController p = playerBoardControllers.get(i);
       p.setGameBoardController(this);
@@ -121,12 +137,37 @@ public class GameBoardController implements Initializable {
       // Delegates call to child
       p.postInitialize();
     }
-
-
     tableController.setGameBoardController(this);
-//    tableController.setTable(Game.getInstance)
-//    tableController.postInitialize();
+    tableController.setTable(game.getTable());
+    tableController.postInitialize();
 
-
+    for (int i = 0; i < factoryControllers.size(); i++) {
+      FactoryController controller = factoryControllers.get(i);
+      controller.setGameBoardController(this);
+      controller.setFactory(game.getFactoryList().get(i));
+      // Delegates call to child
+      controller.postInitialize();
     }
+  }
+
+
+  @Override
+  public void moveTilesToWall(Tile tile, int rowNumber) {
+
+  }
+
+  @Override
+  public void moveTilesToFloor(List<Tile> tiles) {
+
+  }
+
+  @Override
+  public void moveTilesToPattern(List<Tile> tiles) {
+
+  }
+
+  @Override
+  public void moveTilesToTable(List<Tile> tiles) {
+
+  }
 }
