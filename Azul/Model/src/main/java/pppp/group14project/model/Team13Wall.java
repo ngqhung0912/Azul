@@ -9,9 +9,11 @@ import java.util.Optional;
  * The Wall class represents the central game board in Azul where tiles are placed to score points.
  */
 public class Team13Wall {
-    private static final List<List<TileType>> backgroundTiles;
+    private List<List<Optional<TileType>>> placedTiles;
 
-    /**
+    protected static final List<List<TileType>> backgroundTiles;
+
+    /*
      * Initializes the background tiles of the wall.
      */
     static {
@@ -32,8 +34,6 @@ public class Team13Wall {
         }
     }
 
-    private List<List<Optional<TileType>>> placedTiles;
-
     /**
      * Constructs a new Wall instance with empty placed tiles.
      */
@@ -50,15 +50,10 @@ public class Team13Wall {
     /**
      * Adds a tile to the specified row of the wall and calculates the score.
      *
-     * @param tile
-     *            The type of tile to be added.
-     * @param row
-     *            The row number where the tile should be placed.
-     *
+     * @param tile The type of tile to be added.
+     * @param row The row number where the tile should be placed.
      * @return The score obtained by adding the tile to the wall.
-     *
-     * @throws RuntimeException
-     *             if the tile cannot be placed on the specified row.
+     * @throws RuntimeException if the tile cannot be placed on the specified row.
      */
     public int addTile(TileType tile, int row) {
         var backgroundRow = backgroundTiles.get(row);
@@ -94,18 +89,15 @@ public class Team13Wall {
 
             return score;
         }
-        throw new RuntimeException(
-                "The " + tile.toString() + " tile can't be placed on the row " + row + ", because it's already taken.");
+        throw new RuntimeException("The " + tile.toString() + " tile can't be placed on the row " + row
+                + ", because it's already taken.");
     }
 
     /**
      * Counts the number of horizontally linked tiles for a given position.
      *
-     * @param row
-     *            The row number of the tile.
-     * @param col
-     *            The column number of the tile.
-     *
+     * @param row The row number of the tile.
+     * @param col The column number of the tile.
      * @return The count of horizontally linked tiles.
      */
     private int countHorizontallyLinkedTiles(int row, int col) {
@@ -132,11 +124,8 @@ public class Team13Wall {
     /**
      * Counts the number of vertically linked tiles for a given position.
      *
-     * @param row
-     *            The row number of the tile.
-     * @param col
-     *            The column number of the tile.
-     *
+     * @param row The row number of the tile.
+     * @param col The column number of the tile.
      * @return The count of vertically linked tiles.
      */
     private int countVerticallyLinkedTiles(int row, int col) {
@@ -270,9 +259,7 @@ public class Team13Wall {
     /**
      * Checks if a specific tile type is present on the wall.
      *
-     * @param toSearch
-     *            The tile type to search for.
-     *
+     * @param toSearch The tile type to search for.
      * @return true if the tile type is present on the wall, false otherwise.
      */
     public boolean isPresent(TileType toSearch) {
@@ -290,5 +277,6 @@ public class Team13Wall {
     public Optional<TileType> getTile(int row, int col) {
         return placedTiles.get(row).get(col);
     }
+
 }
 

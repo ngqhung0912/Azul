@@ -1,5 +1,7 @@
 package pppp.group14project.model;
 
+import pppp.group14project.model.exceptions.FullException;
+
 import java.util.*;
 
 public class WallAdapter extends Wall {
@@ -11,8 +13,8 @@ public class WallAdapter extends Wall {
     private final Map<TileType, Tile> tileToTileTypeMap;
 
 
-    public WallAdapter(Team13Wall team13Wall) {
-        this.team13Wall = team13Wall;
+    public WallAdapter() {
+        this.team13Wall = new Team13Wall();
         tileTypeToTileMap = new HashMap<>(5);
         tileTypeToTileMap.put(Tile.BLACK, TileType.BLACK);
         tileTypeToTileMap.put(Tile.BLUE, TileType.BLUE);
@@ -36,16 +38,18 @@ public class WallAdapter extends Wall {
      *
      * @param tile   tile to be added
      * @param row    row on which the tile should be added
-     * @param column column in which the tile should be added
      */
     @Override
-    public void addTile(Tile tile, int row, int column) {
+    public void addTile(Tile tile, int row) throws FullException {
         try {
-            int score = team13Wall.addTile(tileTypeToTileMap.get(tile), row);
-            super.wallScore += score;
+            super.wallScore += team13Wall.addTile(tileTypeToTileMap.get(tile), row);
         } catch (RuntimeException e) {
-            System.out.println("Tile cannot be added to wall");
-            e.printStackTrace();
+            if (e.getMessage().contains("tile can't be placed on the row")){
+                throw new FullException("Tile cannot be added to wall");
+            } else {
+                System.out.println("not catched");
+                throw e;
+            }
         }
     }
 
@@ -57,7 +61,7 @@ public class WallAdapter extends Wall {
     public List<Tile> getTilesInWall() {
         List<Tile> tilesInWall = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            for (int j = 0; j <= i; j++) {
+            for (int j = 0; j < 5; j++) {
                 Optional<TileType> tileType = team13Wall.getTile(i, j);
                 if (tileType.isPresent()) {
                     Tile tile = tileToTileTypeMap.get(tileType.get());
@@ -69,9 +73,8 @@ public class WallAdapter extends Wall {
     }
 
     @Override
-    public int countTilesInRow(List<Tile> row) {
-        int count = 0;
-        return count;
+    public int countTilesInRow(int rowNumber) {
+        return this.getRow(rowNumber).stream().filter(Objects::nonNull).toArray().length;
     }
 
 
@@ -79,6 +82,30 @@ public class WallAdapter extends Wall {
     public void emptyWall() {
         team13Wall.clearTiles();
     }
+
+
+    @Override
+    public List<Tile> getRow(int rowNumber) {
+        List<Tile> tilesInRow = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            TileType tileType = team13Wall.getTile(rowNumber, i).orElse(null);
+            if (tileType == null) {
+                tilesInRow.add(null);
+            } else {
+                Tile tile = tileToTileTypeMap.get(tileType);
+                tilesInRow.add(tile);
+            }
+        }
+        return tilesInRow;
+    }
+
+    @Override
+    public void updateScoreAtEndGame() {
+        super.wallScore += team13Wall.calculateEndGameScore();
+    }
+
+
+
 
 
 
