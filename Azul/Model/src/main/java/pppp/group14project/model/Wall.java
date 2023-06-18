@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Wall {
 
-    private static List<List<Tile>> tileColors = Arrays.asList(
+    private static final List<List<Tile>> TILE_COLORS = Arrays.asList(
             Arrays.asList(Tile.BLUE, Tile.ORANGE, Tile.RED, Tile.BLACK, Tile.WHITE),
             Arrays.asList(Tile.WHITE, Tile.BLUE, Tile.ORANGE, Tile.RED, Tile.BLACK),
             Arrays.asList(Tile.BLACK, Tile.WHITE, Tile.BLUE, Tile.ORANGE, Tile.RED),
@@ -19,37 +19,38 @@ public class Wall {
             Arrays.asList(Tile.ORANGE, Tile.RED, Tile.BLACK, Tile.WHITE, Tile.BLUE)
     );
 
-    public static int getTileColorColumn(Tile t, int row) throws FullException {
-        for (int i = 0; i < tileColors.get(row).size(); i++) {
-            if (tileColors.get(row).get(i) == t) return i;
-        }
-        throw new FullException("Tile color not found in grid");
-    }
-
-    public static Tile getTileColor(int row, int column) {
-        return tileColors.get(row).get(column);
-    }
 
     @Getter
     private List<ObservableList<Tile>> wall;
-    private int wallSize;
+    private static final int WALL_SIZE = 5;
 
 
     @Getter
     private int wallScore;
 
     public Wall() {
-        this.wallSize = 5;
         this.wallScore = 0;
-        this.wall = new ArrayList<ObservableList<Tile>>();
-        for (int i = 0; i < wallSize; i++) {
+        this.wall = new ArrayList<>();
+        for (int i = 0; i < WALL_SIZE; i++) {
             ObservableList<Tile> row = FXCollections.observableArrayList();
-            for (int j = 0; j < wallSize; j++) {
+            for (int j = 0; j < WALL_SIZE; j++) {
                 row.add(null);
             }
             wall.add(row);
         }
     }
+
+    public static int getTileColorColumn(Tile t, int row) throws FullException {
+        for (int i = 0; i < TILE_COLORS.get(row).size(); i++) {
+            if (TILE_COLORS.get(row).get(i) == t) return i;
+        }
+        throw new FullException("Tile color not found in grid");
+    }
+
+    public static Tile getTileColor(int row, int column) {
+        return TILE_COLORS.get(row).get(column);
+    }
+
 
     /**
      * Functions loops through the whole wall and creates list of tiles present
@@ -91,11 +92,8 @@ public class Wall {
      */
     public void addTile(Tile tile, int row, int column) {
         ObservableList<Tile> targetRow = this.wall.get(row);
-
-        if (!isTileInRow(tile, row)) {
-            targetRow.set(column, tile);
-            updateWallScore(row, column);
-        }
+        targetRow.set(column, tile);
+        updateWallScore(row, column);
     }
 
     /**
@@ -104,7 +102,7 @@ public class Wall {
      * @param row row in which tiles should be counted
      * @return Number of tiles present in a row
      */
-    public int countNonNullElementsInRow(List<Tile> row) {
+    public int countTilesInRow(List<Tile> row) {
         int count = 0;
 
         for (Tile tile : row) {
@@ -123,7 +121,7 @@ public class Wall {
      * @return whether the row is full
      */
     public boolean isRowFull(List<Tile> row) {
-        return countNonNullElementsInRow(row) == 5;
+        return countTilesInRow(row) == 5;
     }
 
     /**
@@ -198,21 +196,45 @@ public class Wall {
         return wall.get(row).get(col) != null;
     }
 
-    private void increaseWallScoreIfNeighbouringTileExists(int row, int col) {
-        if (isValidCell(row, col) && cellContainsTile(row, col)) {
-            wallScore++;
+    /**
+     * Counts the number of tiles in a given direction from a given cell.
+     * @return number of neighboring tiles in the given direction
+     */
+    private int countNeighboringTiles(int row, int col, String direction) {
+        int count = 0;
+        while (isValidCell(row, col) && cellContainsTile(row, col)) {
+            count++;
+            switch (direction) {
+                case "right" -> col++;
+                case "left" -> col--;
+                case "top" -> row++;
+                case "bottom" -> row--;
+            }
         }
+        return count;
     }
+
+    /**
+     * Update wall score after every move
+     */
 
     public void updateWallScore(int row, int col) {
         assert (row >= 0 && row < wall.size());
         assert (col >= 0 && col < wall.get(row).size());
 
-        increaseWallScoreIfNeighbouringTileExists(row, col + 1); // right
-        increaseWallScoreIfNeighbouringTileExists(row, col - 1); // left
-        increaseWallScoreIfNeighbouringTileExists(row + 1, col); // bottom
-        increaseWallScoreIfNeighbouringTileExists(row - 1, col); // top
-        wallScore++; // +1 to the score for just placing the tile
+        int horizontalNeighboringTiles = countNeighboringTiles(row, col + 1, "right") +  // right
+                countNeighboringTiles(row, col - 1, "left");  // left
+        if (horizontalNeighboringTiles > 0) {
+            wallScore += horizontalNeighboringTiles + 1;
+        }
+        int verticalNeighboringTiles = countNeighboringTiles(row + 1, col, "top") +  // top
+                countNeighboringTiles(row - 1 , col, "bottom");  // bottom
+        if (verticalNeighboringTiles > 0) {
+            wallScore += verticalNeighboringTiles + 1;
+        }
+        if (horizontalNeighboringTiles == 0 && verticalNeighboringTiles == 0) {
+            wallScore += 1;
+        }
     }
 
 
@@ -230,8 +252,8 @@ public class Wall {
      * Empties the wall, sets all arrays to nulls
      */
     public void emptyWall() {
-        for (int i = 0; i < wallSize; i++) {
-            for (int j = 0; j < wallSize; j++) {
+        for (int i = 0; i < WALL_SIZE; i++) {
+            for (int j = 0; j < WALL_SIZE; j++) {
                 wall.get(i).set(j, null);
             }
         }
