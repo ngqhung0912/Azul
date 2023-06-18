@@ -12,6 +12,7 @@ import lombok.Setter;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -112,7 +113,7 @@ public class PlayerBoardController implements Initializable, Mediator {
   public void moveTilesToWall(Tile tile, int rowNumber) {
     try {
       wallController.addTileToWall(tile, rowNumber);
-    } catch (FullException ignored) {
+    } catch (FullException | WrongTileException ignored) {
 //      throw new RuntimeException(e);
       // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
     }
