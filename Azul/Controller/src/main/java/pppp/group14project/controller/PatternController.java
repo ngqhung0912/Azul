@@ -86,10 +86,9 @@ public class PatternController {
                  * Moving tiles after a Space has been clicked on the Pattern
                  */
                 List<Tile> excessTiles = this.pattern.addTiles(rowNumber, tiles);
+                // Moves tiles to floor immediately
                 playerBoardController.moveTilesToFloor(excessTiles);
-                if (pattern.getPatternLines().get(rowNumber).isFull()) {
-                    playerBoardController.moveTilesToWall(tiles.get(0), rowNumber);
-                }
+
             } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }

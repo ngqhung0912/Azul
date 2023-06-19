@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.Board;
+import pppp.group14project.model.PatternLine;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
 
@@ -108,16 +109,40 @@ public class PlayerBoardController implements Initializable, Mediator {
    * Concrete Mediator implementation of moving tiles between different GameBoard components
    */
 
+  /**
+   * Method which is called by the GameBoardController after every round to move tiles from Pattern to Wall
+   * @param tile
+   * @param rowNumber
+   */
   @Override
   public void moveTilesToWall(Tile tile, int rowNumber) {
+
+    List<PatternLine> patternLines = patternController.getPattern().getPatternLines();
+
     try {
-      wallController.addTileToWall(tile, rowNumber);
+      for (int i = 0; i < patternLines.size(); i++) {
+        PatternLine patternLine = patternLines.get(i);
+        if (patternLine.isFull()) {
+          List<Tile> tilesToMove = patternLine.getSpaces();
+          Tile wallTile = tilesToMove.remove(0);
+          wallController.addTileToWall(wallTile, i);
+
+          // TODO: Move remaining tiles to discardedTiles in TileContainer
+
+          patternLine.empty();
+        }
+      }
     } catch (FullException ignored) {
 //      throw new RuntimeException(e);
       // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
     }
+
   }
 
+  /**
+   * Method which is called by Pattern to move tiles to Floor immediately once tiles are placed
+   * @param tiles
+   */
   @Override
   public void moveTilesToFloor(List<Tile> tiles) {
     floorController.addTilesToFloor(tiles);
