@@ -140,7 +140,10 @@ public class TableController {
 
     @SneakyThrows
     public void postInitialize() {
+
         this.table = new Table();
+
+        this.displayTilesOnTheTable();
 
         System.out.println("Created event listeners for table");
 

@@ -24,8 +24,13 @@ public class Game {
   @Getter
   private TileContainer tilecontainer = new TileContainer();
 
+  @Getter
+  @Setter
+  private int currentPlayerID;
+
   public Game() {
     currentRound = 1;
+    currentPlayerID = 0;
   }
 
   public static Game getInstance() {

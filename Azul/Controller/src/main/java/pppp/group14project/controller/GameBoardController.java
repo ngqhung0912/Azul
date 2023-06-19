@@ -152,13 +152,27 @@ public class GameBoardController implements Initializable, Mediator {
     }
 
     // Highlights a specific player
-    activatePlayerBoard(0, Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
+    int currentPlayerID = game.getCurrentPlayerID();
+    activatePlayerBoard(currentPlayerID, Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
 
     // Fill the factories
     int numberOfTilesForFactories = game.getFactoryList().size() * 4;
     List<Tile> tilesForFactories = game.getTilecontainer().grabBagTiles(numberOfTilesForFactories);
     game.fillFactories(tilesForFactories);
 
+    List<Tile> tileList = new ArrayList<>();
+    tileList.add(Tile.WHITE);
+    tileList.add(Tile.RED);
+    tileList.add(Tile.BLUE);
+    tileList.add(Tile.RED);
+    tableController.addTilesToTable(tileList);
+
+  }
+
+  private void finishRound() {
+    // Move Tiles from Pattern to Wall for each player
+
+    // Update the currentPlayerID
   }
 
   public void activatePlayerBoard(int playerNumber, List<Tile> tiles) {
