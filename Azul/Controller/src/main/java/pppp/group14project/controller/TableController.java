@@ -96,7 +96,7 @@ public class TableController {
     }
 
 
-    private void setSelectedTiles(Tile clickedTile) {
+    public void setSelectedTiles(Tile clickedTile) {
         if (clickedTile == null) {
             return;
         }
