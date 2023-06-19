@@ -1,6 +1,9 @@
 package pppp.group14project.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import pppp.group14project.model.exceptions.FullException;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.util.*;
 
@@ -12,9 +15,23 @@ public class WallAdapter extends Wall {
 
     private final Map<TileType, Tile> tileToTileTypeMap;
 
+    private final List<ObservableList<Tile>> wallObserver;
+
+
+
 
     public WallAdapter() {
         this.team13Wall = new Team13Wall();
+
+        this.wallObserver = new ArrayList<>();
+        for (int i = 0; i < WALL_SIZE; i++) {
+            ObservableList<Tile> row = FXCollections.observableArrayList();
+            for (int j = 0; j < WALL_SIZE; j++) {
+                row.add(null);
+            }
+            wallObserver.add(row);
+        }
+
         tileTypeToTileMap = new HashMap<>(5);
         tileTypeToTileMap.put(Tile.BLACK, TileType.BLACK);
         tileTypeToTileMap.put(Tile.BLUE, TileType.BLUE);
@@ -43,14 +60,23 @@ public class WallAdapter extends Wall {
     public void addTile(Tile tile, int row) throws FullException {
         try {
             super.wallScore += team13Wall.addTile(tileTypeToTileMap.get(tile), row);
+            this.addTileToObservableList(tile, row);
         } catch (RuntimeException e) {
             if (e.getMessage().contains("tile can't be placed on the row")){
                 throw new FullException("Tile cannot be added to wall");
             } else {
-                System.out.println("not catched");
+                System.out.println("Something's wrong.");
                 throw e;
             }
         }
+    }
+
+    private void addTileToObservableList(Tile tile, int row) {
+        ObservableList<Tile> targetRow = this.wallObserver.get(row);
+        try {
+            int column = getTileColorColumn(tile, row);
+            targetRow.set(column, tile);
+        } catch (WrongTileException ignored) {}
     }
 
     /**
@@ -81,6 +107,17 @@ public class WallAdapter extends Wall {
     @Override
     public void emptyWall() {
         team13Wall.clearTiles();
+        this.emptyWallObserver();
+        super.wallScore = 0;
+    }
+
+    private void emptyWallObserver() {
+        for (int i = 0; i < WALL_SIZE; i++) {
+            for (int j = 0; j < WALL_SIZE; j++) {
+                wallObserver.get(i).set(j, null);
+            }
+        }
+
     }
 
 
@@ -102,6 +139,11 @@ public class WallAdapter extends Wall {
     @Override
     public void updateScoreAtEndGame() {
         super.wallScore += team13Wall.calculateEndGameScore();
+    }
+
+    @Override
+    public List<ObservableList<Tile>> getWall() {
+        return wallObserver;
     }
 
 

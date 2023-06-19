@@ -190,7 +190,6 @@ class WallTest {
             wall.addTile(Tile.BLACK, 0);
             wall.addTile(Tile.WHITE, 0);
             assertEquals(15, wall.getWallScore());
-            System.out.println(wall.getWall());
 
             // ADDING A FULL COLUMN
             wall.addTile(Tile.RED, 1);

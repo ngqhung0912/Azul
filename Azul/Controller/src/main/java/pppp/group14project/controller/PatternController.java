@@ -2,12 +2,14 @@ package pppp.group14project.controller;
 
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Factory;
 import pppp.group14project.model.Pattern;
@@ -98,6 +100,7 @@ public class PatternController {
                 }
                 List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
                 playerBoardController.moveTilesToFloor(excessTiles);
+
                 if (pattern.getPatternLines().get(rowNumber).isFull()) {
                     playerBoardController.moveTilesToWall(grabbedTiles.get(0), rowNumber);
                 }
