@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
+import pppp.group14project.model.exceptions.EmptyException;
+import pppp.group14project.model.exceptions.FullException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,15 +80,12 @@ public class TableIntegrationTest extends ApplicationTest {
         //TODO remove the tiles from the initialization
         try {
             tableController.addTilesToTable(tileList);
-        } catch (Exception e) {
+        } catch (FullException e) {
             fail("Should not throw FullException");
         }
         assertEquals(tileList.size() + 1, table.size());
-        try {
-            tableController.grabTilesFromTable(Tile.BLUE);
-        } catch (Exception e) {
-            fail("Should not throw FullException");
-        }
+        tableController.selectTilesToGrabFromTable(Tile.BLUE);
+        tableController.removeSelectedTilesFromTable();
         assertEquals(0, table.size());
     }
 
@@ -102,7 +101,7 @@ public class TableIntegrationTest extends ApplicationTest {
 
         try {
             tableController.addTilesToTable(tileList);
-        } catch (Exception e) {
+        } catch (FullException e) {
             fail("Should not throw FullException");
         }
         assertEquals(tileList.size() + 1, table.size());

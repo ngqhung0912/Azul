@@ -119,7 +119,7 @@ public class TableController {
         }
     }
 
-    public void selectTilesToGrabFromTable(Tile tile) throws EmptyException {
+    public void selectTilesToGrabFromTable(Tile tile)  {
         setSelectedTiles(tile);
         List<Tile> selectedTiles = new ArrayList<>();
         if (table.isStartingTileOnTable()) {
@@ -162,14 +162,10 @@ public class TableController {
 
             clickableTile.setOnMouseClicked(event -> {
                 // Handle the tile click event here
-                try {
-                    Tile clickedTile = clickableTile.getColour();
-                    System.out.println(clickedTile);
-                    selectTilesToGrabFromTable(clickedTile);
-                } catch (EmptyException e) {
+            Tile clickedTile = clickableTile.getColour();
+            System.out.println(clickedTile);
+            selectTilesToGrabFromTable(clickedTile);
                     // Handle the EmptyException if necessary
-                    e.printStackTrace();
-                }
             });
         }
 

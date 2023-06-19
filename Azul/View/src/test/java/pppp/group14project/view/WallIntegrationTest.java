@@ -84,8 +84,8 @@ class WallIntegrationTest extends ApplicationTest {
             assertEquals(3, wall.getTilesInWall().size());
             wallController.resetWallView();
             assertEquals(0, wall.getTilesInWall().size());
-        } catch (FullException e) {
-            fail("Should not throw FullException");
+        } catch (FullException | WrongTileException e) {
+            fail("Should not throw FullException or WrongTileException");
         }
     }
 
@@ -93,26 +93,26 @@ class WallIntegrationTest extends ApplicationTest {
     void wallAddTiles() {
         try {
             wallController.addTileToWall(Tile.RED, 2);
-        } catch (FullException e) {
-            fail("Should not throw FullException");
+        } catch (FullException | WrongTileException e) {
+            fail("Should not throw FullException or WrongTileException");
         }
         assertEquals(1, wall.getTilesInWall().size());
         //No two tiles in the same row
         try {
             wallController.addTileToWall(Tile.RED, 2);
-            fail("Expect FullException");
-        } catch (FullException ignored) {}
+            fail("Expect FullException and WrongTileException");
+        } catch (FullException | WrongTileException ignored) {}
 
         assertEquals(1, wall.getTilesInWall().size());
 
         try {
             wallController.addTileToWall(Tile.BLUE, 2);
-        } catch (FullException e) {
-            fail("Should not throw FullException");
+        } catch (FullException | WrongTileException e) {
+            fail("Should not throw FullException or WrongTileException");
         }
         assertEquals(2, wall.getTilesInWall().size());
-        assertEquals(0, wall.countTilesInRow(wall.getRow(0)));
-        assertEquals(2, wall.countTilesInRow(wall.getRow(2)));
+        assertEquals(0, wall.countTilesInRow(0));
+        assertEquals(2, wall.countTilesInRow(2));
         wallController.resetWallView();
     }
 
@@ -120,8 +120,8 @@ class WallIntegrationTest extends ApplicationTest {
     void wallAddTilesInCorrectSpot() {
         try {
             wallController.addTileToWall(Tile.BLACK, 3);
-        } catch (FullException e) {
-            fail("Should not throw FullException");
+        } catch (FullException | WrongTileException e) {
+            fail("Should not throw FullException or WrongTileException");
         }
         assertEquals(Tile.BLACK, wall.getRow(3).get(1));
         wallController.resetWallView();
