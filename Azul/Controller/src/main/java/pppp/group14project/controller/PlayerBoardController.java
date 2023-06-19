@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import lombok.Getter;
 import lombok.Setter;
+import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
@@ -125,12 +126,22 @@ public class PlayerBoardController implements Initializable, Mediator {
   }
 
   @Override
-  public void moveTilesToPattern(List<Tile> tiles) {
+  public void moveTilesToPattern(List<Tile> tiles){
     // TODO: not implemented in the player board mediator
+    try {
+      patternController.highlightPossibleSpaces(tiles);
+    } catch (InvalidPositionException ignored){
+
+    }
   }
 
   @Override
   public void moveTilesToTable(List<Tile> tiles) {
     // TODO: not implemented in the player board mediator
+  }
+
+  @Override
+  public void removeTilesFromTable() {
+
   }
 }

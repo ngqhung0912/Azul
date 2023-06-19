@@ -2,24 +2,21 @@ package pppp.group14project.controller;
 
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Pattern;
 import pppp.group14project.model.PatternLine;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.WrongTileException;
 
-import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class PatternController {
 
@@ -43,7 +40,7 @@ public class PatternController {
     @Getter
     private PlayerBoardController playerBoardController;
 
-    private void highlightPossibleSpaces(List<Tile> tiles) throws InvalidPositionException {
+    public void highlightPossibleSpaces(List<Tile> tiles) throws InvalidPositionException {
         for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
             // Go to next row if the row has a tile, but it is not equal to the tile color given
             if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tiles.get(0)))
@@ -85,11 +82,18 @@ public class PatternController {
                 /**
                  * Moving tiles after a Space has been clicked on the Pattern
                  */
+                if (tiles.contains(Tile.STARTING)){
+                    tiles.remove(Tile.STARTING);
+                    List<Tile> startingTile = new ArrayList<>();
+                    startingTile.add(Tile.STARTING);
+                    playerBoardController.moveTilesToFloor(startingTile);
+                }
                 List<Tile> excessTiles = this.pattern.addTiles(rowNumber, tiles);
                 playerBoardController.moveTilesToFloor(excessTiles);
                 if (pattern.getPatternLines().get(rowNumber).isFull()) {
                     playerBoardController.moveTilesToWall(tiles.get(0), rowNumber);
                 }
+                playerBoardController.getGameBoardController().removeTilesFromTable();
             } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }

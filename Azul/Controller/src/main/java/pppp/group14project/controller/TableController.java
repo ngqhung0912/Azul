@@ -11,12 +11,14 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 
+import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Table;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TableController {
@@ -31,6 +33,9 @@ public class TableController {
     @Setter
     @Getter
     private GameBoardController gameBoardController;
+
+    @Getter
+    private final Integer PlayerID = 1;
 
 
     public void addTilesToTable(List<Tile> tiles) throws FullException {
@@ -89,14 +94,14 @@ public class TableController {
     }
 
 
-    public void setSelectedTiles(Tile clickedTile){
-        if (clickedTile == null){
+    private void setSelectedTiles(Tile clickedTile) {
+        if (clickedTile == null) {
             return;
         }
         String colour = clickedTile.toString();
-        for (Node node : tableGridPane.getChildren()){
+        for (Node node : tableGridPane.getChildren()) {
             ObservableList<String> style = node.getStyleClass();
-            if(style.contains(colour) || style.contains("STARTING")) {
+            if (style.contains(colour) || style.contains("STARTING")) {
                 style.add("selected");
             } else {
                 style.remove("selected");
@@ -104,29 +109,32 @@ public class TableController {
         }
     }
 
-    public void unSetSelectedTiles(Tile clickedTile){
-        if (clickedTile == null){
+    private void unSetSelectedTiles(Tile clickedTile) {
+        if (clickedTile == null) {
             return;
         }
-        for (Node node : tableGridPane.getChildren()){
+        for (Node node : tableGridPane.getChildren()) {
             ObservableList<String> style = node.getStyleClass();
             style.remove("selected");
         }
     }
 
-    public void grabTilesFromTable(Tile tile) throws EmptyException {
+    public void selectTilesToGrabFromTable(Tile tile) throws EmptyException {
         setSelectedTiles(tile);
-        if (table.isStartingTileOnTable()){
-            this.table.removeTiles(Tile.STARTING);
+        List<Tile> selectedTiles = new ArrayList<>();
+        if (table.isStartingTileOnTable()) {
+            this.table.selectGrabbedTiles(Tile.STARTING);
         }
-        this.table.removeTiles(tile);
-        //TODO move tiles to correct pattern
-        //gameBoardController.moveTilesToPattern(this.table.removeTiles(tile));
+        //the 1 has to be changed based on the turn
+        selectedTiles.addAll(this.table.selectGrabbedTiles(tile));
+        gameBoardController.getPlayerBoardControllers().get(getPlayerID()).moveTilesToPattern(selectedTiles);
+    }
 
+    public void removeSelectedTilesFromTable() {
+        table.removeTiles();
         zeroTableView();
         displayTilesOnTheTable();
         System.out.println(this.table.getAllCurrentTiles());
-
     }
 
 
@@ -144,11 +152,11 @@ public class TableController {
         for (Node node : tableGridPane.getChildren()) {
             ClickableTile clickableTile = (ClickableTile) node;
 
-            clickableTile.setOnMouseEntered(event-> {
+            clickableTile.setOnMouseEntered(event -> {
                 setSelectedTiles(clickableTile.getColour());
             });
 
-            clickableTile.setOnMouseExited(event-> {
+            clickableTile.setOnMouseExited(event -> {
                 unSetSelectedTiles(clickableTile.getColour());
             });
 
@@ -157,7 +165,7 @@ public class TableController {
                 try {
                     Tile clickedTile = clickableTile.getColour();
                     System.out.println(clickedTile);
-                    grabTilesFromTable(clickedTile);
+                    selectTilesToGrabFromTable(clickedTile);
                 } catch (EmptyException e) {
                     // Handle the EmptyException if necessary
                     e.printStackTrace();
