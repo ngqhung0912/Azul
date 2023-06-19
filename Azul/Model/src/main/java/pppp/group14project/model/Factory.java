@@ -32,6 +32,7 @@ public class Factory {
     public ObservableList<Tile> grabList;
 
     public Factory() {
+        this.grabList = FXCollections.observableArrayList();
         this.tiles = FXCollections.observableArrayList();
         this.selected_colour = new SimpleStringProperty();
     }
@@ -62,8 +63,10 @@ public class Factory {
 
     public void removeTiles(){
         ObservableList<Tile> newTileList = FXCollections.observableArrayList(tiles);
-        newTileList.removeAll(grabList);
-        this.tiles = newTileList;
+        if(!newTileList.isEmpty() && !grabList.isEmpty()) {
+            newTileList.removeAll(grabList);
+            this.tiles = newTileList;
+        }
     }
 
     /**

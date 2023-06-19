@@ -186,13 +186,13 @@ public class GameBoardController implements Initializable, Mediator {
     tableController.removeSelectedTilesFromTable();
   }
 
-  @Override
-  public void removeTilesFromFactory(List<Tile> tiles, FactoryController factoryController) {
-    try {
-      tableController.addTilesToTable(tiles);
-    } catch (FullException ignore){
-
-    }
-    factoryController.emptyFactory();
-  }
+//  @Override
+//  public void removeTilesFromFactory(List<Tile> tiles, FactoryController factoryController) {
+//    try {
+//      tableController.addTilesToTable(tiles);
+//    } catch (FullException ignore){
+//
+//    }
+//    factoryController.emptyFactory();
+//  }
 }
