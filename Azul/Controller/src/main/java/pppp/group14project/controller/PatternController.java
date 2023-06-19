@@ -87,7 +87,7 @@ public class PatternController {
                 List<Tile> grabbedTiles = returnTiles.get(0);
                 List<Tile> tableTiles = returnTiles.get(1);
 
-                playerBoardController.moveTilesToTable(tableTiles);
+                playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
 
                 /**
                  * Moving tiles after a Space has been clicked on the Pattern
@@ -190,12 +190,6 @@ public class PatternController {
 //                }
             });
         }
-
-//        try {
-//            highlightPossibleSpaces(Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
-//        } catch (InvalidPositionException e) {
-//            throw new RuntimeException(e);
-//        }
 
     }
 

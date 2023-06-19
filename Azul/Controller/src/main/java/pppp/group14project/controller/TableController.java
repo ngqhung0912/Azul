@@ -128,25 +128,6 @@ public class TableController {
         clicked = false;
     }
 
-//    public void selectTilesToGrabFromTable(Tile tile) throws EmptyException {
-//        setSelectedTiles(tile);
-//        List<Tile> selectedTiles = new ArrayList<>();
-//        if (table.isStartingTileOnTable()) {
-//            this.table.selectGrabbedTiles(Tile.STARTING);
-//        }
-//        //the 1 has to be changed based on the turn
-//        selectedTiles.addAll(this.table.selectGrabbedTiles(tile));
-//        gameBoardController.getPlayerBoardControllers().get(getPlayerID()).moveTilesToPattern(selectedTiles);
-//    }
-
-//    public void removeSelectedTilesFromTable() {
-//        table.removeTiles();
-//        zeroTableView();
-//        displayTilesOnTheTable();
-//        System.out.println(this.table.getAllCurrentTiles());
-//    }
-
-
     @SneakyThrows
     public void postInitialize() {
 

@@ -164,17 +164,11 @@ public class PlayerBoardController implements Initializable, Mediator {
   @Override
   public void moveTilesToPattern(List<Tile> tiles){
     // TODO: not implemented in the player board mediator
-//    try {
-//      patternController.highlightPossibleSpaces(tiles);
-//    } catch (InvalidPositionException ignored){
-//
-//    }
   }
 
   @Override
   public void moveTilesToTable(List<Tile> tiles) {
     // TODO: not implemented in the player board mediator
-    gameBoardController.getTableController().getTable().getTiles().addAll(tiles);
   }
 
   @Override
