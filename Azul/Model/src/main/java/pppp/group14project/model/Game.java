@@ -24,7 +24,7 @@ public class Game {
   @Getter
   private TileContainer tilecontainer = new TileContainer();
 
-  private int roundTurnCounter = 0;
+  private int roundTurnCounter;
 
   @Getter
   @Setter

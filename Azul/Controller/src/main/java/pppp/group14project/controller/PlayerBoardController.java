@@ -19,6 +19,7 @@ import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -124,25 +125,27 @@ public class PlayerBoardController implements Initializable, Mediator {
 
   /**
    * Method which is called by the GameBoardController after every round to move tiles from Pattern to Wall
-   * @param tile
-   * @param rowNumber
+   *
    */
   @Override
-  public void moveTilesToWall(Tile tile, int rowNumber) {
+  public List<Tile> moveTilesToWall() {
 
     List<PatternLine> patternLines = patternController.getPattern().getPatternLines();
 
     try {
       for (int i = 0; i < patternLines.size(); i++) {
         PatternLine patternLine = patternLines.get(i);
+        System.out.println(i + " is full: " + patternLine.isFull());
         if (patternLine.isFull()) {
           List<Tile> tilesToMove = patternLine.getSpaces();
           Tile wallTile = tilesToMove.remove(0);
           wallController.addTileToWall(wallTile, i);
-
-          // TODO: Move remaining tiles to discardedTiles in TileContainer
+          System.out.println(wallTile);
+          System.out.println(tilesToMove);
+          // Move remaining tiles to discardedTiles in TileContainer
 
           patternLine.empty();
+          return tilesToMove;
         }
       }
     } catch (FullException | WrongTileException ignored) {
@@ -150,6 +153,7 @@ public class PlayerBoardController implements Initializable, Mediator {
       // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
     }
 
+    return null;
   }
 
   /**

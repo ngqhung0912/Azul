@@ -44,17 +44,37 @@ public class PatternController {
     private PlayerBoardController playerBoardController;
 
     public void highlightPossibleSpaces(Tile tile, Factory factory) throws InvalidPositionException {
-        for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
-            // Go to next row if the row has a tile, but it is not equal to the tile color given
-            if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile))
-                continue;
+        boolean patternHasPossibleSpaces = false;
+        for (PatternLine p: pattern.getPatternLines()) {
+            if (p.isEmpty() || (p.getTileType() == tile && !p.isFull()))
+                patternHasPossibleSpaces = true;
+        }
 
-            for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
-                if (!spaceHasTile(rowIndex, tileIndex)) {
-                    highlightSpace(rowIndex, tileIndex, tile, factory);
-                    break;
+
+        if (patternHasPossibleSpaces) {
+            for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
+                // Go to next row if the row has a tile, but it is not equal to the tile color given
+                if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile))
+                    continue;
+
+                for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
+                    if (!spaceHasTile(rowIndex, tileIndex)) {
+                        highlightSpace(rowIndex, tileIndex, tile, factory);
+                        break;
+                    }
                 }
             }
+        } else {
+
+            List<List<Tile>> returnTiles = factory.grabTiles(tile);
+            List<Tile> grabbedTiles = returnTiles.get(0);
+            List<Tile> tableTiles = returnTiles.get(1);
+
+            playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
+            playerBoardController.moveTilesToFloor(grabbedTiles);
+
+            playerBoardController.getGameBoardController().finishPlayerTurn();
+            unhighlightAllSpaces();
         }
     }
 
@@ -98,13 +118,10 @@ public class PatternController {
                     startingTile.add(Tile.STARTING);
                     playerBoardController.moveTilesToFloor(startingTile);
                 }
+
                 List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
                 playerBoardController.moveTilesToFloor(excessTiles);
 
-                if (pattern.getPatternLines().get(rowNumber).isFull()) {
-                    playerBoardController.moveTilesToWall(grabbedTiles.get(0), rowNumber);
-                }
-                playerBoardController.getGameBoardController().removeTilesFromTable();
             } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }

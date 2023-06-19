@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface Mediator {
 
-  void moveTilesToWall(Tile tile, int rowNumber);
+  List<Tile> moveTilesToWall();
   void moveTilesToFloor(List<Tile> tiles);
   void moveTilesToPattern(List<Tile> tiles) throws InvalidPositionException;
 

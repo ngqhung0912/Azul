@@ -9,10 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
-import pppp.group14project.model.Board;
-import pppp.group14project.model.Factory;
-import pppp.group14project.model.Game;
-import pppp.group14project.model.Tile;
+import pppp.group14project.model.*;
 import pppp.group14project.model.exceptions.FullException;
 
 
@@ -161,11 +158,28 @@ public class GameBoardController implements Initializable, Mediator {
   }
 
   private void finishRound() {
+
+    // Update starting player
+    int startingPlayerID = 0;
+    for (int i = 0; i < playerBoardControllers.size(); i++) {
+      if (playerBoardControllers.get(i).getFloorController().getFloor().getTiles().contains(Tile.STARTING)) {
+        startingPlayerID = i;
+        break;
+      }
+    }
+    game.generateTurns(startingPlayerID);
+
     // Move Tiles from Pattern to Wall for each player
 
-    // Update the currentPlayerID
-    int startingPlayerID = 2; // 2 starts
-    game.generateTurns(2);
+    for (PlayerBoardController p: playerBoardControllers) {
+
+      List<Tile> returnTiles = p.moveTilesToWall();
+      game.getTilecontainer().addDiscardedTiles(returnTiles);
+
+    }
+
+    // Empty Wall and Floor, move to
+
   }
 
   public void deselectAllFactories() {
@@ -173,6 +187,16 @@ public class GameBoardController implements Initializable, Mediator {
       f.deselectAllTiles();
     }
     tableController.unhighlightAllTiles();
+  }
+
+  public boolean factoriesAndTableEmpty() {
+    for (FactoryController f: factoryControllers) {
+      if (!f.getFactory().isEmpty())
+        return false;
+    }
+    if (!tableController.getTable().isEmpty())
+      return false;
+    return true;
   }
 
   // Pass
@@ -191,15 +215,23 @@ public class GameBoardController implements Initializable, Mediator {
   }
 
   public void finishPlayerTurn() {
-    game.nextPlayer();
+    // If Factories are empty start next round, otherwise go to next player
+    if (factoriesAndTableEmpty()) {
+
+      finishRound();
+
+    } else {
+      game.nextPlayer();
+    }
+
   }
 
 
 
 
   @Override
-  public void moveTilesToWall(Tile tile, int rowNumber) {
-
+  public List<Tile> moveTilesToWall() {
+    return null;
   }
 
   @Override
