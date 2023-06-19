@@ -2,8 +2,6 @@ package pppp.group14project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pppp.group14project.model.Factory;
-import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
 
 import java.util.ArrayList;
@@ -78,12 +76,12 @@ public class FactoryTest {
         factory.addTiles(tilesToAdd);
 
         // Two BLUE tiles returned
-        factory.grabTiles(Tile.BLUE);
+        factory.updateTile(Tile.BLUE);
         assertEquals(Tile.BLUE.toString(), factory.getSelected_colour().getValue());
         assertEquals(2, factory.countColour(Tile.BLUE));
 
         // No tiles returned
-        factory.grabTiles(Tile.WHITE);
+        factory.updateTile(Tile.WHITE);
 
         assertEquals(Tile.BLUE.toString(), factory.getSelected_colour().getValue());
         assertEquals(2, factory.countColour(Tile.BLUE));

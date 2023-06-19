@@ -8,6 +8,7 @@ import javafx.util.Pair;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
+import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Factory;
 import pppp.group14project.model.Game;
@@ -154,6 +155,13 @@ public class GameBoardController implements Initializable, Mediator {
     int numberOfTilesForFactories = game.getFactoryList().size() * 4;
     List<Tile> tilesForFactories = game.getTilecontainer().grabBagTiles(numberOfTilesForFactories);
     game.fillFactories(tilesForFactories);
+//
+//    List<Tile> tileList = new ArrayList<>();
+//    tileList.add(Tile.WHITE);
+//    tileList.add(Tile.RED);
+//    tileList.add(Tile.BLUE);
+//    tileList.add(Tile.RED);
+//    tableController.addTilesToTable(tileList);
 
   }
 
@@ -161,6 +169,21 @@ public class GameBoardController implements Initializable, Mediator {
     for (FactoryController f: factoryControllers) {
       f.deselectAllTiles();
     }
+  }
+
+  // Pass
+  public void highlightCurrentPlayerBoard(Tile tileColor, Factory f) {
+    int playerID = 0;
+
+    PlayerBoardController activePlayer = playerBoardControllers.get(0);
+
+    try {
+      activePlayer.activate(tileColor, f);
+    } catch (InvalidPositionException e) {
+      throw new RuntimeException(e);
+    }
+
+
   }
 
 
@@ -190,7 +213,7 @@ public class GameBoardController implements Initializable, Mediator {
 
   @Override
   public void removeTilesFromTable() {
-    tableController.removeSelectedTilesFromTable();
+//    tableController.removeSelectedTilesFromTable();
   }
 
 //  @Override

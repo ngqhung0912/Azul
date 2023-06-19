@@ -1,8 +1,6 @@
 package pppp.group14project.controller;
 
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,6 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.Factory;
 import pppp.group14project.model.Tile;
+
+import java.util.List;
 
 
 public class FactoryController {
@@ -40,7 +40,7 @@ public class FactoryController {
     /**
      * Used to update the view if the model changes
      */
-    public void setTileColours(ObservableList<Tile> colours) {
+    public void setTileColours(List<Tile> colours) {
         for(Integer i = 0; i < colours.size(); i++) {
             Tile colour = colours.get(i);
             ClickableTile tile = (ClickableTile) tileGrid.getChildren().get(i);
@@ -50,7 +50,7 @@ public class FactoryController {
         }
     }
 
-    public void selectTiles(Tile selectedTile) {
+    public void highlightTiles(Tile selectedTile) {
         String colour = selectedTile.toString();
         for(Node tile : tileGrid.getChildren()) {
             ObservableList<String> style = tile.getStyleClass();
@@ -83,17 +83,16 @@ public class FactoryController {
 
             clickableTile.setOnMouseClicked(event -> {
                 System.out.println("----------------");
-                System.out.println("Selected Tile: " + clickableTile.getColour());
+                Tile clickedColor = clickableTile.getColour();
+                System.out.println("Selected Tile: " + clickedColor);
 
                 // First deselect all Factories
                 System.out.println("Deselecting all factories!");
                 gameBoardController.deselectAllFactories();
 
-                // Make the other Tiles selected
-                Tile colour = clickableTile.getColour();
-                selectTiles(colour);
-                factory.grabTiles(colour);
-
+                // Notify the active PlayerBoard that a Tile has been selected
+                highlightTiles(clickedColor);
+                gameBoardController.highlightCurrentPlayerBoard(clickedColor, factory);
 
             });
         }

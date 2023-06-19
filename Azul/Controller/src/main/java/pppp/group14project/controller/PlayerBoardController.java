@@ -11,12 +11,14 @@ import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Board;
+import pppp.group14project.model.Factory;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
 import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -110,6 +112,10 @@ public class PlayerBoardController implements Initializable, Mediator {
    * Concrete Mediator implementation of moving tiles between different GameBoard components
    */
 
+  public void activate(Tile tile, Factory factory) throws InvalidPositionException {
+    patternController.highlightPossibleSpaces(tile, factory);
+  }
+
   @Override
   public void moveTilesToWall(Tile tile, int rowNumber) {
     try {
@@ -128,16 +134,17 @@ public class PlayerBoardController implements Initializable, Mediator {
   @Override
   public void moveTilesToPattern(List<Tile> tiles){
     // TODO: not implemented in the player board mediator
-    try {
-      patternController.highlightPossibleSpaces(tiles);
-    } catch (InvalidPositionException ignored){
-
-    }
+//    try {
+//      patternController.highlightPossibleSpaces(tiles);
+//    } catch (InvalidPositionException ignored){
+//
+//    }
   }
 
   @Override
   public void moveTilesToTable(List<Tile> tiles) {
     // TODO: not implemented in the player board mediator
+    gameBoardController.getTableController().getTable().getTiles().addAll(tiles);
   }
 
   @Override

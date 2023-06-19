@@ -10,9 +10,6 @@ public class Table extends Factory {
 
     public boolean starting_tile;
 
-
-
-
     /**
      * Used to update the default maximum number of tiles
      * @return the maximum number of tiles
@@ -34,5 +31,7 @@ public class Table extends Factory {
     public boolean isStartingTileOnTable(){
         return getTiles().contains(Tile.STARTING);
     }
+
+
 
 }

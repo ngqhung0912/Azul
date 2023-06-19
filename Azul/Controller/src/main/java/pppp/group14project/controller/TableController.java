@@ -119,31 +119,33 @@ public class TableController {
         }
     }
 
-    public void selectTilesToGrabFromTable(Tile tile) throws EmptyException {
-        setSelectedTiles(tile);
-        List<Tile> selectedTiles = new ArrayList<>();
-        if (table.isStartingTileOnTable()) {
-            this.table.selectGrabbedTiles(Tile.STARTING);
-        }
-        //the 1 has to be changed based on the turn
-        selectedTiles.addAll(this.table.selectGrabbedTiles(tile));
-        gameBoardController.getPlayerBoardControllers().get(getPlayerID()).moveTilesToPattern(selectedTiles);
-    }
+//    public void selectTilesToGrabFromTable(Tile tile) throws EmptyException {
+//        setSelectedTiles(tile);
+//        List<Tile> selectedTiles = new ArrayList<>();
+//        if (table.isStartingTileOnTable()) {
+//            this.table.selectGrabbedTiles(Tile.STARTING);
+//        }
+//        //the 1 has to be changed based on the turn
+//        selectedTiles.addAll(this.table.selectGrabbedTiles(tile));
+//        gameBoardController.getPlayerBoardControllers().get(getPlayerID()).moveTilesToPattern(selectedTiles);
+//    }
 
-    public void removeSelectedTilesFromTable() {
-        table.removeTiles();
-        zeroTableView();
-        displayTilesOnTheTable();
-        System.out.println(this.table.getAllCurrentTiles());
-    }
+//    public void removeSelectedTilesFromTable() {
+//        table.removeTiles();
+//        zeroTableView();
+//        displayTilesOnTheTable();
+//        System.out.println(this.table.getAllCurrentTiles());
+//    }
 
 
     @SneakyThrows
     public void postInitialize() {
+
         this.table = new Table();
 
-        System.out.println("Created event listeners for table");
+        displayTilesOnTheTable(); // To display the STARTING Tile
 
+        System.out.println("Created event listeners for Table");
 
         this.table.getTiles().addListener((ListChangeListener<Tile>) change -> {
             displayTilesOnTheTable();
@@ -160,17 +162,17 @@ public class TableController {
                 unSetSelectedTiles(clickableTile.getColour());
             });
 
-            clickableTile.setOnMouseClicked(event -> {
-                // Handle the tile click event here
-                try {
-                    Tile clickedTile = clickableTile.getColour();
-                    System.out.println(clickedTile);
-                    selectTilesToGrabFromTable(clickedTile);
-                } catch (EmptyException e) {
-                    // Handle the EmptyException if necessary
-                    e.printStackTrace();
-                }
-            });
+//            clickableTile.setOnMouseClicked(event -> {
+//                // Handle the tile click event here
+//                try {
+//                    Tile clickedTile = clickableTile.getColour();
+//                    System.out.println(clickedTile);
+//                    selectTilesToGrabFromTable(clickedTile);
+//                } catch (EmptyException e) {
+//                    // Handle the EmptyException if necessary
+//                    e.printStackTrace();
+//                }
+//            });
         }
 
     }

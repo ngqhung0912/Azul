@@ -1,12 +1,10 @@
 package pppp.group14project.model;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.exceptions.FullException;
-
-import javafx.collections.ObservableList;
 
 
 import java.util.*;
@@ -25,49 +23,32 @@ public class Factory {
     @Setter
     private ObservableList<Tile> tiles;
 
-    @Getter
-    private SimpleStringProperty selected_colour;
-
-    @Getter
-    public ObservableList<Tile> grabList;
 
     public Factory() {
-        this.grabList = FXCollections.observableArrayList();
         this.tiles = FXCollections.observableArrayList();
-        this.selected_colour = new SimpleStringProperty();
     }
 
-    /**
-     * Checks if the passed tile exist in the factory,
-     * and sets the selected_colour to this tile's colour
-     * if it is.
-     * @param tile the selected tile
-     */
-    public void grabTiles(Tile tile) {
-        if(this.tiles.contains(tile)) {
-            this.selected_colour.set(tile.toString());
-        }
-    }
+//    public List<Tile> selectGrabbedTiles(Tile tile){
+//        this.grabList = FXCollections.observableArrayList();
+//        if (this.tiles.contains(Tile.STARTING)){
+//            this.grabList.add(Tile.STARTING);
+//        }
+//        for (Tile t: this.tiles) {
+//            if (t == tile) {
+//                grabList.add(t);
+//            }
+//        }
+//
+//        return grabList;
+//    }
 
-    public List<Tile> selectGrabbedTiles(Tile tile){
-        this.grabList = FXCollections.observableArrayList();
-        if (this.tiles.contains(Tile.STARTING)){this.grabList.add(Tile.STARTING);}
-        for (Tile t: this.tiles) {
-            if (t == tile) {
-                grabList.add(t);
-            }
-        }
-
-        return grabList;
-    }
-
-    public void removeTiles(){
-        ObservableList<Tile> newTileList = FXCollections.observableArrayList(tiles);
-        if(!newTileList.isEmpty() && !grabList.isEmpty()) {
-            newTileList.removeAll(grabList);
-            this.tiles = newTileList;
-        }
-    }
+//    public void removeTiles(){
+//        ObservableList<Tile> newTileList = FXCollections.observableArrayList(tiles);
+//        if(!newTileList.isEmpty() && !grabList.isEmpty()) {
+//            newTileList.removeAll(grabList);
+//            this.tiles = newTileList;
+//        }
+//    }
 
     /**
      * Adds tiles from a list to the factory
@@ -129,7 +110,7 @@ public class Factory {
     }
 
     public void empty() {
-        this.selected_colour = new SimpleStringProperty();
+//        this.selected_colour = new SimpleStringProperty();
         this.tiles.clear();
     }
 
@@ -137,4 +118,40 @@ public class Factory {
             return this.tiles;
         }
 
+//    /**
+//     * Checks if the passed tile exist in the factory,
+//     * and sets the selected_colour to this tile's colour
+//     * if it is.
+//     * @param tile the selected tile
+//     */
+//    public void updateTile(Tile tile) {
+//        if(this.tiles.contains(tile)) {
+//            this.selected_colour.set(tile.toString());
+//        }
+//    }
+
+    public List<List<Tile>> grabTiles(Tile tile) {
+        List<Tile> grabTiles = new ArrayList<>();
+        List<Tile> tableTiles = new ArrayList<>();
+
+        // Add the starting Tile if it contains it
+        if (tiles.contains(Tile.STARTING)){
+            grabTiles.add(Tile.STARTING);
+        }
+
+        Iterator<Tile> iterator = tiles.iterator();
+        while(iterator.hasNext()){
+            Tile t = iterator.next();
+            if (t == tile) {
+                grabTiles.add(t);
+            } else {
+                tableTiles.add(t);
+            }
+            iterator.remove();
+        }
+
+        List<List<Tile>> returnTiles = Arrays.asList(grabTiles, tableTiles);
+
+        return returnTiles;
+    }
 }
