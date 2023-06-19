@@ -14,6 +14,7 @@ import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.Wall;
 import pppp.group14project.model.exceptions.FullException;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class WallController {
      * @param tile the tile that should be added
      * @param row on which row it should be added
      */
-    public void addTileToWall(Tile tile, int row) throws FullException {
+    public void addTileToWall(Tile tile, int row) throws FullException, WrongTileException {
 //        Rectangle tileToWall = findTileLocationInRow(row, tile);
 //        if (tileToWall != null) {
 //            int column = GridPane.getColumnIndex(tileToWall);
