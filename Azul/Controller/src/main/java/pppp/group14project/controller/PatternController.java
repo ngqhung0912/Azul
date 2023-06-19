@@ -2,12 +2,14 @@ package pppp.group14project.controller;
 
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Pattern;
 import pppp.group14project.model.PatternLine;
@@ -15,7 +17,6 @@ import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PatternController {
@@ -89,7 +90,9 @@ public class PatternController {
                     playerBoardController.moveTilesToFloor(startingTile);
                 }
                 List<Tile> excessTiles = this.pattern.addTiles(rowNumber, tiles);
+                // Moves tiles to floor immediately
                 playerBoardController.moveTilesToFloor(excessTiles);
+
                 if (pattern.getPatternLines().get(rowNumber).isFull()) {
                     playerBoardController.moveTilesToWall(tiles.get(0), rowNumber);
                 }
@@ -180,11 +183,11 @@ public class PatternController {
             });
         }
 
-        try {
-            highlightPossibleSpaces(Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
-        } catch (InvalidPositionException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            highlightPossibleSpaces(Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
+//        } catch (InvalidPositionException e) {
+//            throw new RuntimeException(e);
+//        }
 
     }
 

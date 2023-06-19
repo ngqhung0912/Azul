@@ -46,7 +46,7 @@ public class TileContainer {
      * @param numberOfTiles the number of tiles to get from the bag
      * @return a list of the tiles
      */
-    public List<Tile> grabBagTiles(int numberOfTiles) throws EmptyException {
+    public List<Tile> grabBagTiles(int numberOfTiles) {
         List<Tile> returnedTiles = new ArrayList<>();
         Random rand = new Random();
         for (int i = 0; i < numberOfTiles; i++) {
@@ -54,8 +54,12 @@ public class TileContainer {
                 Tile t = this.bagTiles.remove(rand.nextInt(this.bagTiles.size()));
                 returnedTiles.add(t);
             } catch(IndexOutOfBoundsException | IllegalArgumentException e) {
-                this.bagTiles = returnedTiles;
-                throw new EmptyException("No more tiles left in the tile bag");
+
+                // If BagTiles is empty, move the DiscardedTiles back to the Bag
+                moveDiscardedTiles();
+                Tile t = this.bagTiles.remove(rand.nextInt(this.bagTiles.size()));
+                returnedTiles.add(t);
+
             }
         }
         return returnedTiles;
@@ -65,7 +69,7 @@ public class TileContainer {
         discardedTiles.addAll(discardedTilesToAdd);
     }
 
-    public void moveDiscardedTiles() {
+    private void moveDiscardedTiles() {
         bagTiles.addAll(discardedTiles);
         discardedTiles = new ArrayList<>();
     }
