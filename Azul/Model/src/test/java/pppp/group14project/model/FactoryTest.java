@@ -62,30 +62,4 @@ public class FactoryTest {
 
     }
 
-    /**
-     * Test initializing and adding a list of tiles to the Factory
-     */
-    @Test
-    void TestTileGrabbingFromFactory() throws Exception {
-
-        List<Tile> tilesToAdd = new ArrayList<>();
-        tilesToAdd.add(Tile.BLUE);
-        tilesToAdd.add(Tile.BLUE);
-        tilesToAdd.add(Tile.RED);
-        tilesToAdd.add(Tile.ORANGE);
-        factory.addTiles(tilesToAdd);
-
-//        // Two BLUE tiles returned
-//        factory.updateTile(Tile.BLUE);
-//        assertEquals(Tile.BLUE.toString(), factory.getSelected_colour().getValue());
-//        assertEquals(2, factory.countColour(Tile.BLUE));
-//
-//        // No tiles returned
-//        factory.updateTile(Tile.WHITE);
-//
-//        assertEquals(Tile.BLUE.toString(), factory.getSelected_colour().getValue());
-//        assertEquals(2, factory.countColour(Tile.BLUE));
-
-    }
-
 }
