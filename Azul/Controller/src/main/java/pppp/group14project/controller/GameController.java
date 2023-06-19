@@ -37,11 +37,6 @@ public class GameController {
     List<Factory> factories = game.getFactoryList();
     factories.add(new Factory());
     TileContainer container = game.getTilecontainer();
-    try {
-      game.fillFactories(container.grabBagTiles(game.getFactoryList().size()*4));
-    } catch (EmptyException e) {
-      e.printStackTrace();
-    }
 
     try {
       Parent root = FXMLLoader.load(getClass().getResource("/game-board-view.fxml"));
