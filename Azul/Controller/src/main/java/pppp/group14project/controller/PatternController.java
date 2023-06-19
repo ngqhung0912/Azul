@@ -159,6 +159,20 @@ public class PatternController {
         return getSpace(rowNumber, 0).getStyleClass().contains("is-colored");
     }
 
+    private void resetTiles(int rowNumber) throws InvalidPositionException {
+        int numberOfTiles = rowNumber + 1;
+
+        for (int i = 0; i < numberOfTiles; i++) {
+
+            Space s = getSpace(rowNumber, i);
+            System.out.println("Styles: " + s.getStyleClass());
+            s.getStyleClass().clear();
+            s.getStyleClass().add("button");
+            s.getStyleClass().add("pattern-tile-box");
+        }
+
+    }
+
     private void setTiles(int rowNumber, int numberOfTiles, Tile tileColor) throws InvalidPositionException {
         System.out.println("Row: " + rowNumber);
         System.out.println("NumTiles: " + numberOfTiles);
@@ -191,6 +205,8 @@ public class PatternController {
                     Tile tileColor = pattern.getPatternLines().get(rowNumber).getTileType();
                     try {
                         // Update views
+                        System.out.println("Number of full spaces " + tileColor + numberOfTiles);
+                        resetTiles(rowNumber);
                         setTiles(rowNumber, numberOfTiles, tileColor);
                     } catch (InvalidPositionException e) {
                         throw new RuntimeException(e);

@@ -130,6 +130,7 @@ public class PlayerBoardController implements Initializable, Mediator {
   @Override
   public List<Tile> moveTilesToWall() {
 
+    List<Tile> returnTiles = new ArrayList<>();
     List<PatternLine> patternLines = patternController.getPattern().getPatternLines();
 
     try {
@@ -140,20 +141,20 @@ public class PlayerBoardController implements Initializable, Mediator {
           List<Tile> tilesToMove = patternLine.getSpaces();
           Tile wallTile = tilesToMove.remove(0);
           wallController.addTileToWall(wallTile, i);
+          returnTiles.addAll(tilesToMove);
           System.out.println(wallTile);
           System.out.println(tilesToMove);
           // Move remaining tiles to discardedTiles in TileContainer
 
           patternLine.empty();
-          return tilesToMove;
         }
       }
     } catch (FullException | WrongTileException ignored) {
-//      throw new RuntimeException(e);
+      throw new RuntimeException(ignored);
       // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
     }
 
-    return null;
+    return returnTiles;
   }
 
   /**

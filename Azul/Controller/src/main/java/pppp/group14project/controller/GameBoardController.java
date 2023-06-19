@@ -159,6 +159,8 @@ public class GameBoardController implements Initializable, Mediator {
 
   private void finishRound() {
 
+    System.out.println("All Factories and Table are empty");
+
     // Update starting player
     int startingPlayerID = 0;
     for (int i = 0; i < playerBoardControllers.size(); i++) {
