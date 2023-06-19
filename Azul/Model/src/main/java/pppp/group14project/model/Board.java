@@ -1,6 +1,8 @@
 package pppp.group14project.model;
 
-import javafx.collections.ObservableList;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableIntegerValue;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,8 +25,7 @@ public class Board {
     private Player player;
 
     @Getter
-    @Setter
-    private int score;
+    private IntegerProperty score;
 
     @Getter
     @Setter
@@ -37,9 +38,13 @@ public class Board {
 
   public Board(Player player) {
     this.player = player;
-    this.score = 0;
+    this.score = new SimpleIntegerProperty(0);
     this.floor = new Floor();
     this.pattern = new Pattern();
     this.wall = new Wall();
+  }
+
+  public void updateScore(int score) {
+    this.score.set(this.score.get() + score);
   }
 }
