@@ -47,4 +47,8 @@ public class Board {
   public void updateScore(int score) {
     this.score.set(this.score.get() + score);
   }
+
+  public void useTeam13Wall() {
+    this.wall = new WallAdapter();
+  }
 }

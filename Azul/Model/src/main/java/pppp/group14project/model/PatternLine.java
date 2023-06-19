@@ -68,6 +68,7 @@ public class PatternLine {
      * @return
      */
     public Tile getTileType() {
+        if (spaces.size() == 0) return null;
         return spaces.get(0);
     }
 

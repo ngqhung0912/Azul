@@ -84,8 +84,8 @@ public class TableIntegrationTest extends ApplicationTest {
             fail("Should not throw FullException");
         }
         assertEquals(tileList.size() + 1, table.size());
-        tableController.selectTilesToGrabFromTable(Tile.BLUE);
-        tableController.removeSelectedTilesFromTable();
+        tableController.setSelectedTiles(Tile.BLUE);
+        tableController.getTable().grabTiles(Tile.BLUE);
         assertEquals(0, table.size());
     }
 
