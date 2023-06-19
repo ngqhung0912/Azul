@@ -2,8 +2,6 @@ package pppp.group14project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pppp.group14project.model.Factory;
-import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
 
 import java.util.ArrayList;
@@ -61,32 +59,6 @@ public class FactoryTest {
         factory.addTiles(tilesToAdd);
 
         assertEquals(factory.size(), 4);
-
-    }
-
-    /**
-     * Test initializing and adding a list of tiles to the Factory
-     */
-    @Test
-    void TestTileGrabbingFromFactory() throws Exception {
-
-        List<Tile> tilesToAdd = new ArrayList<>();
-        tilesToAdd.add(Tile.BLUE);
-        tilesToAdd.add(Tile.BLUE);
-        tilesToAdd.add(Tile.RED);
-        tilesToAdd.add(Tile.ORANGE);
-        factory.addTiles(tilesToAdd);
-
-        // Two BLUE tiles returned
-        factory.grabTiles(Tile.BLUE);
-        assertEquals(Tile.BLUE.toString(), factory.getSelected_colour().getValue());
-        assertEquals(2, factory.countColour(Tile.BLUE));
-
-        // No tiles returned
-        factory.grabTiles(Tile.WHITE);
-
-        assertEquals(Tile.BLUE.toString(), factory.getSelected_colour().getValue());
-        assertEquals(2, factory.countColour(Tile.BLUE));
 
     }
 

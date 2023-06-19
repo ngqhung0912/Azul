@@ -24,6 +24,7 @@ public class PatternLine {
         this.spaces = FXCollections.observableArrayList();
         spaces.addAll(Collections.nCopies(numberOfTiles, null));
 
+
     }
 
     /**
@@ -67,6 +68,7 @@ public class PatternLine {
      * @return
      */
     public Tile getTileType() {
+        if (spaces.size() == 0) return null;
         return spaces.get(0);
     }
 
@@ -74,7 +76,8 @@ public class PatternLine {
      * Empties the PatternLine
      */
     public void empty() {
-        this.spaces.removeAll();
+//        this.spaces.removeAll();
+        Collections.fill(this.spaces, null);
     }
 
     /**

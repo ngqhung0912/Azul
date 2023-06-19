@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Board;
+import pppp.group14project.model.Factory;
 import pppp.group14project.model.PatternLine;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
@@ -112,13 +113,13 @@ public class PlayerBoardController implements Initializable, Mediator {
    * Concrete Mediator implementation of moving tiles between different GameBoard components
    */
 
-
   /**
-   * Activates this PlayerBoard for interactivity, and highlights possible spaces for some passed tiles
-   * @param tiles
+   * Activates this PlayerBoard for interactivity, and highlights possible spaces for some passed tile
+   * @param tile
+   * @param factory
    */
-  public void activate(List<Tile> tiles) throws InvalidPositionException {
-    patternController.highlightPossibleSpaces(tiles);
+  public void activate(Tile tile, Factory factory) throws InvalidPositionException {
+    patternController.highlightPossibleSpaces(tile, factory);
   }
 
   /**
@@ -163,11 +164,6 @@ public class PlayerBoardController implements Initializable, Mediator {
   @Override
   public void moveTilesToPattern(List<Tile> tiles){
     // TODO: not implemented in the player board mediator
-    try {
-      patternController.highlightPossibleSpaces(tiles);
-    } catch (InvalidPositionException ignored){
-
-    }
   }
 
   @Override
