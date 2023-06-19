@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import lombok.Getter;
 import lombok.Setter;
+import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.PatternLine;
 import pppp.group14project.model.Tile;
@@ -16,6 +17,7 @@ import pppp.group14project.model.exceptions.FullException;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -108,6 +110,15 @@ public class PlayerBoardController implements Initializable, Mediator {
   /**
    * Concrete Mediator implementation of moving tiles between different GameBoard components
    */
+
+
+  /**
+   * Activates this PlayerBoard for interactivity, and highlights possible spaces for some passed tiles
+   * @param tiles
+   */
+  public void activate(List<Tile> tiles) throws InvalidPositionException {
+    patternController.highlightPossibleSpaces(tiles);
+  }
 
   /**
    * Method which is called by the GameBoardController after every round to move tiles from Pattern to Wall

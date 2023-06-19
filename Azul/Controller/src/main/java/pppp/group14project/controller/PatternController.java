@@ -43,7 +43,7 @@ public class PatternController {
     @Getter
     private PlayerBoardController playerBoardController;
 
-    private void highlightPossibleSpaces(List<Tile> tiles) throws InvalidPositionException {
+    void highlightPossibleSpaces(List<Tile> tiles) throws InvalidPositionException {
         for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
             // Go to next row if the row has a tile, but it is not equal to the tile color given
             if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tiles.get(0)))
@@ -175,11 +175,11 @@ public class PatternController {
             });
         }
 
-        try {
-            highlightPossibleSpaces(Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
-        } catch (InvalidPositionException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            highlightPossibleSpaces(Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
+//        } catch (InvalidPositionException e) {
+//            throw new RuntimeException(e);
+//        }
 
     }
 
