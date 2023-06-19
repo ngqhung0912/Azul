@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import pppp.group14project.model.Board;
+import pppp.group14project.model.Factory;
 import pppp.group14project.model.Game;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
@@ -154,6 +155,12 @@ public class GameBoardController implements Initializable, Mediator {
     List<Tile> tilesForFactories = game.getTilecontainer().grabBagTiles(numberOfTilesForFactories);
     game.fillFactories(tilesForFactories);
 
+  }
+
+  public void deselectAllFactories() {
+    for (FactoryController f: factoryControllers) {
+      f.deselectAllTiles();
+    }
   }
 
 

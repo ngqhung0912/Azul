@@ -29,19 +29,6 @@ public class FactoryController {
     @Setter
     private GameBoardController gameBoardController;
 
-    public void setSelectedTiles(Tile selectedTile) {
-        System.out.println("selected: " + selectedTile);
-        String colour = selectedTile.toString();
-        for(Node tile : tileGrid.getChildren()) {
-            ObservableList<String> style = tile.getStyleClass();
-            if(style.contains(colour)) {
-                style.add("selected");
-            } else {
-                style.remove("selected");
-            }
-        }
-    }
-
 //    public void onTileClick(ActionEvent event) {
 //        ClickableTile tile = (ClickableTile) event.getSource();
 //        Tile selected_tile = tile.getColour();
@@ -50,6 +37,9 @@ public class FactoryController {
 //        setSelectedTiles(selected_colour);
 //    }
 
+    /**
+     * Used to update the view if the model changes
+     */
     public void setTileColours(ObservableList<Tile> colours) {
         for(Integer i = 0; i < colours.size(); i++) {
             Tile colour = colours.get(i);
@@ -57,6 +47,28 @@ public class FactoryController {
             tile.getStyleClass().clear();
             tile.getStyleClass().add(String.valueOf(colour));
             tile.setColour(colour);
+        }
+    }
+
+    public void selectTiles(Tile selectedTile) {
+        String colour = selectedTile.toString();
+        for(Node tile : tileGrid.getChildren()) {
+            ObservableList<String> style = tile.getStyleClass();
+            if(style.contains(colour)) {
+                style.add("selected");
+            }
+        }
+    }
+
+    public void deselectAllTiles() {
+        for (Node node : tileGrid.getChildren()) {
+            ObservableList<String> styleClass = node.getStyleClass();
+            if (styleClass.contains("selected")) {
+                System.out.println(node.getStyleClass());
+                styleClass.remove("selected");
+                System.out.println("Removed style from Tile");
+                System.out.println(node.getStyleClass());
+            }
         }
     }
 
@@ -70,10 +82,19 @@ public class FactoryController {
             ClickableTile clickableTile = (ClickableTile) node;
 
             clickableTile.setOnMouseClicked(event -> {
-                // Handle the tile click event here
+                System.out.println("----------------");
+                System.out.println("Selected Tile: " + clickableTile.getColour());
+
+                // First deselect all Factories
+                System.out.println("Deselecting all factories!");
+                gameBoardController.deselectAllFactories();
+
+                // Make the other Tiles selected
                 Tile colour = clickableTile.getColour();
-                setSelectedTiles(colour);
+                selectTiles(colour);
                 factory.grabTiles(colour);
+
+
             });
         }
 
@@ -91,13 +112,13 @@ public class FactoryController {
 //        }
 
         // listen to which tile has been selected
-        this.factory.getSelected_colour().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                String colour = FactoryController.this.factory.getSelected_colour().getValue();
-                FactoryController.this.setSelectedTiles(Tile.valueOf(colour));
-            }
-        });
+//        this.factory.getSelected_colour().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+//                String colour = FactoryController.this.factory.getSelected_colour().getValue();
+//                FactoryController.this.selectTiles(Tile.valueOf(colour));
+//            }
+//        });
 
     }
 }
