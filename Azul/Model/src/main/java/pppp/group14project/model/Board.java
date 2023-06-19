@@ -42,4 +42,8 @@ public class Board {
     this.pattern = new Pattern();
     this.wall = new Wall();
   }
+
+  public void useTeam13Wall() {
+    this.wall = new WallAdapter();
+  }
 }
