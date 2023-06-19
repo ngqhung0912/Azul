@@ -21,7 +21,8 @@ public class Wall {
 
     @Getter
     private List<ObservableList<Tile>> wall;
-    private static final int WALL_SIZE = 5;
+
+    protected static final int WALL_SIZE = 5;
 
 
     @Getter
@@ -39,7 +40,7 @@ public class Wall {
         }
     }
 
-    private static int getTileColorColumn(Tile t, int row) throws WrongTileException {
+    protected static int getTileColorColumn(Tile t, int row) throws WrongTileException {
         for (int i = 0; i < TILE_COLORS.get(row).size(); i++) {
             if (TILE_COLORS.get(row).get(i) == t) return i;
         }
