@@ -11,12 +11,14 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
+import pppp.group14project.model.Factory;
 import pppp.group14project.model.Pattern;
 import pppp.group14project.model.PatternLine;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PatternController {
@@ -41,15 +43,15 @@ public class PatternController {
     @Getter
     private PlayerBoardController playerBoardController;
 
-    public void highlightPossibleSpaces(List<Tile> tiles) throws InvalidPositionException {
+    public void highlightPossibleSpaces(Tile tile, Factory factory) throws InvalidPositionException {
         for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
             // Go to next row if the row has a tile, but it is not equal to the tile color given
-            if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tiles.get(0)))
+            if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile))
                 continue;
 
             for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
                 if (!spaceHasTile(rowIndex, tileIndex)) {
-                    highlightSpace(rowIndex, tileIndex, tiles);
+                    highlightSpace(rowIndex, tileIndex, tile, factory);
                     break;
                 }
             }
@@ -75,26 +77,32 @@ public class PatternController {
         return space;
     }
 
-    private void highlightSpace(int rowNumber, int indexNumber, List<Tile> tiles) throws InvalidPositionException {
+    private void highlightSpace(int rowNumber, int indexNumber, Tile tile, Factory factory) throws InvalidPositionException {
         Space s = getSpace(rowNumber, indexNumber);
         s.getStyleClass().add("tile-option");
         s.setOnAction(e -> {
             try {
+                // Grab from Factory model or Table
+                List<List<Tile>> returnTiles = factory.grabTiles(tile);
+                List<Tile> grabbedTiles = returnTiles.get(0);
+                List<Tile> tableTiles = returnTiles.get(1);
+
+                playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
+
                 /**
                  * Moving tiles after a Space has been clicked on the Pattern
                  */
-                if (tiles.contains(Tile.STARTING)){
-                    tiles.remove(Tile.STARTING);
+                if (grabbedTiles.contains(Tile.STARTING)){
+                    grabbedTiles.remove(Tile.STARTING);
                     List<Tile> startingTile = new ArrayList<>();
                     startingTile.add(Tile.STARTING);
                     playerBoardController.moveTilesToFloor(startingTile);
                 }
-                List<Tile> excessTiles = this.pattern.addTiles(rowNumber, tiles);
-                // Moves tiles to floor immediately
+                List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
                 playerBoardController.moveTilesToFloor(excessTiles);
 
                 if (pattern.getPatternLines().get(rowNumber).isFull()) {
-                    playerBoardController.moveTilesToWall(tiles.get(0), rowNumber);
+                    playerBoardController.moveTilesToWall(grabbedTiles.get(0), rowNumber);
                 }
                 playerBoardController.getGameBoardController().removeTilesFromTable();
             } catch (WrongTileException ex) {
@@ -182,12 +190,6 @@ public class PatternController {
 //                }
             });
         }
-
-//        try {
-//            highlightPossibleSpaces(Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
-//        } catch (InvalidPositionException e) {
-//            throw new RuntimeException(e);
-//        }
 
     }
 

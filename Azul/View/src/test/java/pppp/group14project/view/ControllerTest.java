@@ -133,8 +133,8 @@ class ControllerTest extends ApplicationTest {
         tableController.addTilesToTable(tileList);
         int expectedCount = 5;
         assertEquals(expectedCount, table.size());
-        tableController.selectTilesToGrabFromTable(Tile.BLUE);
-        tableController.removeSelectedTilesFromTable();
+        tableController.setSelectedTiles(Tile.BLUE);
+        tableController.getTable().grabTiles(Tile.BLUE);
         assertEquals(0, table.size());
     }
 

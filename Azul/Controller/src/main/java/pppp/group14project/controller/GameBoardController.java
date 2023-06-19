@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Board;
+import pppp.group14project.model.Factory;
 import pppp.group14project.model.Game;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
@@ -151,9 +152,6 @@ public class GameBoardController implements Initializable, Mediator {
       controller.postInitialize();
     }
 
-    // Highlights a specific player
-    activatePlayerBoard(0, Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
-
     // Fill the factories
     int numberOfTilesForFactories = game.getFactoryList().size() * 4;
     List<Tile> tilesForFactories = game.getTilecontainer().grabBagTiles(numberOfTilesForFactories);
@@ -161,12 +159,25 @@ public class GameBoardController implements Initializable, Mediator {
 
   }
 
-  public void activatePlayerBoard(int playerNumber, List<Tile> tiles) {
+  public void deselectAllFactories() {
+    for (FactoryController f: factoryControllers) {
+      f.deselectAllTiles();
+    }
+    tableController.unhighlightAllTiles();
+  }
+
+  // Pass
+  public void highlightCurrentPlayerBoard(Tile tileColor, Factory f) {
+    int playerID = 0;
+
+    PlayerBoardController activePlayer = playerBoardControllers.get(0);
+
     try {
-      playerBoardControllers.get(playerNumber).activate(tiles);
+      activePlayer.activate(tileColor, f);
     } catch (InvalidPositionException e) {
       throw new RuntimeException(e);
     }
+
 
   }
 
@@ -197,7 +208,7 @@ public class GameBoardController implements Initializable, Mediator {
 
   @Override
   public void removeTilesFromTable() {
-    tableController.removeSelectedTilesFromTable();
+//    tableController.removeSelectedTilesFromTable();
   }
 
 //  @Override
