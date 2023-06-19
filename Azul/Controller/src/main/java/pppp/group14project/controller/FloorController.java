@@ -3,6 +3,7 @@ package pppp.group14project.controller;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -56,6 +57,13 @@ public class FloorController {
 
       tileNode.getStyleClass().clear();
       tileNode.getStyleClass().add(String.valueOf(tile));
+      if (tile == Tile.STARTING){
+        Button starting = (Button) tileNode;
+        starting.setText("1");
+        starting.setAlignment(Pos.CENTER);
+      }
+
+
     }
   }
 

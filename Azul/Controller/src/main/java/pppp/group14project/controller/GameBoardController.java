@@ -8,6 +8,7 @@ import javafx.util.Pair;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
+import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Game;
 import pppp.group14project.model.Tile;
@@ -17,6 +18,7 @@ import pppp.group14project.model.exceptions.FullException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -148,6 +150,24 @@ public class GameBoardController implements Initializable, Mediator {
       // Delegates call to child
       controller.postInitialize();
     }
+
+    // Highlights a specific player
+    activatePlayerBoard(0, Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
+
+    // Fill the factories
+    int numberOfTilesForFactories = game.getFactoryList().size() * 4;
+    List<Tile> tilesForFactories = game.getTilecontainer().grabBagTiles(numberOfTilesForFactories);
+    game.fillFactories(tilesForFactories);
+
+  }
+
+  public void activatePlayerBoard(int playerNumber, List<Tile> tiles) {
+    try {
+      playerBoardControllers.get(playerNumber).activate(tiles);
+    } catch (InvalidPositionException e) {
+      throw new RuntimeException(e);
+    }
+
   }
 
 
@@ -167,7 +187,26 @@ public class GameBoardController implements Initializable, Mediator {
   }
 
   @Override
-  public void moveTilesToTable(List<Tile> tiles) {
+  public void moveTilesToTable(List<Tile> tiles){
+    try {
+      tableController.addTilesToTable(tiles);
+    } catch (FullException ignore){
 
+    }
   }
+
+  @Override
+  public void removeTilesFromTable() {
+    tableController.removeSelectedTilesFromTable();
+  }
+
+//  @Override
+//  public void removeTilesFromFactory(List<Tile> tiles, FactoryController factoryController) {
+//    try {
+//      tableController.addTilesToTable(tiles);
+//    } catch (FullException ignore){
+//
+//    }
+//    factoryController.emptyFactory();
+//  }
 }

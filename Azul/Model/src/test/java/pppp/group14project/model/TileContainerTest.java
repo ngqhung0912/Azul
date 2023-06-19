@@ -45,12 +45,15 @@ class TileContainerTest {
      * Test grabbing too many tiles from the bag in the TileContainer
      */
     @Test
-    void TestTileGrabbingError() {
+    void TestTileGrabbingTooMany() {
 
-        EmptyException thrown = assertThrows(
-                EmptyException.class,
-                () -> tileContainer.grabBagTiles(110)
-        );
+        assertDoesNotThrow(() -> {
+            List<Tile> t = tileContainer.grabBagTiles(90);
+            // Add tiles to discarded Tiles
+            tileContainer.addDiscardedTiles(t);
+            // Test if it automatically moves discarded Tiles back
+            tileContainer.grabBagTiles(90);
+        });
 
     }
 
