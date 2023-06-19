@@ -108,6 +108,7 @@ public class PatternController {
             } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
+            playerBoardController.getGameBoardController().finishPlayerTurn();
             unhighlightAllSpaces();
         });
     }

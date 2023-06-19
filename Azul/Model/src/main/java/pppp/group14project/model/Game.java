@@ -24,13 +24,40 @@ public class Game {
   @Getter
   private TileContainer tilecontainer = new TileContainer();
 
+  private int roundTurnCounter = 0;
+
   @Getter
   @Setter
-  private int currentPlayerID;
+  private List<Integer> playerOrder;
+
+  public int getNextPlayerID() {
+    int numberOfPlayers = boardList.size();
+    int playerIndex = roundTurnCounter % numberOfPlayers;
+    int playerID = playerOrder.get(playerIndex);
+    return playerID;
+  }
+
+  public void nextPlayer() {
+    roundTurnCounter++;
+  }
+
+  public void generateTurns(int startPlayerID) {
+    int numberOfPlayers = boardList.size();
+    List<Integer> result = new ArrayList<>();
+
+    int currentNumber = startPlayerID;
+    for (int i = 0; i < numberOfPlayers; i++) {
+      result.add(currentNumber);
+      currentNumber = (currentNumber + 1) % numberOfPlayers;
+    }
+
+    this.roundTurnCounter = 0;
+    this.playerOrder = result;
+  }
 
   public Game() {
     currentRound = 1;
-    currentPlayerID = 0;
+    roundTurnCounter = 0;
   }
 
   public static Game getInstance() {

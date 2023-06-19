@@ -19,7 +19,6 @@ import pppp.group14project.model.exceptions.FullException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -157,12 +156,16 @@ public class GameBoardController implements Initializable, Mediator {
     List<Tile> tilesForFactories = game.getTilecontainer().grabBagTiles(numberOfTilesForFactories);
     game.fillFactories(tilesForFactories);
 
+    game.generateTurns(0); // Start from Player 0
+
   }
 
   private void finishRound() {
     // Move Tiles from Pattern to Wall for each player
 
     // Update the currentPlayerID
+    int startingPlayerID = 2; // 2 starts
+    game.generateTurns(2);
   }
 
   public void deselectAllFactories() {
@@ -174,9 +177,10 @@ public class GameBoardController implements Initializable, Mediator {
 
   // Pass
   public void highlightCurrentPlayerBoard(Tile tileColor, Factory f) {
-    int playerID = 0;
 
-    PlayerBoardController activePlayer = playerBoardControllers.get(0);
+    int playerID = game.getNextPlayerID();
+
+    PlayerBoardController activePlayer = playerBoardControllers.get(playerID);
 
     try {
       activePlayer.activate(tileColor, f);
@@ -184,7 +188,10 @@ public class GameBoardController implements Initializable, Mediator {
       throw new RuntimeException(e);
     }
 
+  }
 
+  public void finishPlayerTurn() {
+    game.nextPlayer();
   }
 
 
