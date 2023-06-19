@@ -67,9 +67,6 @@ public class PatternIntegrationTest extends ApplicationTest {
     @Test
     void testInitialization() {
         assertNotNull(gameBoardController);
-//        assertNotNull(factoryController);
-        //TODO fix the way factories are passed
-//        assertNotNull(factory);
         assertNotNull(patternController);
         assertNotNull(pattern);
 

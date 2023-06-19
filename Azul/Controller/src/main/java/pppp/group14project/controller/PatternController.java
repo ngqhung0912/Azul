@@ -90,9 +90,7 @@ public class PatternController {
                 if (pattern.getPatternLines().get(rowNumber).isFull()) {
                     playerBoardController.moveTilesToWall(tiles.get(0), rowNumber);
                 }
-            } catch (WrongTileException ignore) {
-                // TODO please, again, never throw a runtimeException.
-            }
+            } catch (WrongTileException ignore) {}
             unhighlightAllSpaces();
         });
     }

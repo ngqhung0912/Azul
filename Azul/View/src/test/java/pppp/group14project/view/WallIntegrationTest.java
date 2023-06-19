@@ -111,8 +111,8 @@ class WallIntegrationTest extends ApplicationTest {
             fail("Should not throw FullException");
         }
         assertEquals(2, wall.getTilesInWall().size());
-        assertEquals(0, wall.countNonNullElementsInRow(wall.getRow(0)));
-        assertEquals(2, wall.countNonNullElementsInRow(wall.getRow(2)));
+        assertEquals(0, wall.countTilesInRow(wall.getRow(0)));
+        assertEquals(2, wall.countTilesInRow(wall.getRow(2)));
         wallController.resetWallView();
     }
 
