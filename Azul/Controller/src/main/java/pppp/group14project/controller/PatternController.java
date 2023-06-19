@@ -1,6 +1,8 @@
 package pppp.group14project.controller;
 
 import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -134,9 +136,10 @@ public class PatternController {
         for (Node row : rows.getChildren()) {
             HBox r = (HBox) row;
             for (Node space : r.getChildren()) {
+                Button b = (Button) space;
+                b.setOnAction(null);
+
                 if (space.getStyleClass().contains("tile-option")) {
-                    Button b = (Button) space;
-                    b.setOnAction(null);
                     b.getStyleClass().remove("tile-option");
                 }
             }
