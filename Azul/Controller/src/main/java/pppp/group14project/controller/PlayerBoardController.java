@@ -144,7 +144,7 @@ public class PlayerBoardController implements Initializable, Mediator {
           patternLine.empty();
         }
       }
-    } catch (FullException ignored) {
+    } catch (FullException | WrongTileException ignored) {
 //      throw new RuntimeException(e);
       // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
     }
