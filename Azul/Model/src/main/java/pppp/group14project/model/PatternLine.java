@@ -24,6 +24,7 @@ public class PatternLine {
         this.spaces = FXCollections.observableArrayList();
         spaces.addAll(Collections.nCopies(numberOfTiles, null));
 
+
     }
 
     /**
@@ -74,7 +75,8 @@ public class PatternLine {
      * Empties the PatternLine
      */
     public void empty() {
-        this.spaces.removeAll();
+//        this.spaces.removeAll();
+        Collections.fill(this.spaces, null);
     }
 
     /**
