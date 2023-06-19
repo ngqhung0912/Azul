@@ -48,6 +48,13 @@ public class FactoryController {
             tile.getStyleClass().add(String.valueOf(colour));
             tile.setColour(colour);
         }
+        // Hide the other ClickableTiles that are not colored
+        int i = colours.size();
+        while (i < 4) {
+            ClickableTile tile = (ClickableTile) tileGrid.getChildren().get(i);
+            tile.setVisible(false);
+            i++;
+        }
     }
 
     public void highlightTiles(Tile selectedTile) {

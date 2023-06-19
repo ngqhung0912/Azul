@@ -137,6 +137,7 @@ public class Factory {
         // Add the starting Tile if it contains it
         if (tiles.contains(Tile.STARTING)){
             grabTiles.add(Tile.STARTING);
+            tiles.remove(Tile.STARTING);
         }
 
         Iterator<Tile> iterator = tiles.iterator();
@@ -151,6 +152,8 @@ public class Factory {
         }
 
         List<List<Tile>> returnTiles = Arrays.asList(grabTiles, tableTiles);
+        System.out.println(grabTiles);
+        System.out.println(tiles);
 
         return returnTiles;
     }

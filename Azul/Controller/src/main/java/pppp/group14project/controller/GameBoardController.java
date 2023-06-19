@@ -169,6 +169,7 @@ public class GameBoardController implements Initializable, Mediator {
     for (FactoryController f: factoryControllers) {
       f.deselectAllTiles();
     }
+    tableController.unhighlightAllTiles();
   }
 
   // Pass

@@ -37,6 +37,8 @@ public class TableController {
     @Getter
     private final Integer PlayerID = 1;
 
+    private boolean clicked = false;
+
 
     public void addTilesToTable(List<Tile> tiles) throws FullException {
         this.table.addTiles(tiles);
@@ -102,6 +104,7 @@ public class TableController {
         for (Node node : tableGridPane.getChildren()) {
             ObservableList<String> style = node.getStyleClass();
             if (style.contains(colour) || style.contains("STARTING")) {
+                System.out.println("SELECTED");
                 style.add("selected");
             } else {
                 style.remove("selected");
@@ -110,13 +113,19 @@ public class TableController {
     }
 
     private void unSetSelectedTiles(Tile clickedTile) {
-        if (clickedTile == null) {
-            return;
-        }
+        if (clickedTile == null) return;
         for (Node node : tableGridPane.getChildren()) {
             ObservableList<String> style = node.getStyleClass();
             style.remove("selected");
         }
+    }
+
+    public void unhighlightAllTiles() {
+        for (Node node : tableGridPane.getChildren()) {
+            ObservableList<String> style = node.getStyleClass();
+            style.remove("selected");
+        }
+        clicked = false;
     }
 
 //    public void selectTilesToGrabFromTable(Tile tile) throws EmptyException {
@@ -152,27 +161,47 @@ public class TableController {
         });
 
         for (Node node : tableGridPane.getChildren()) {
+
             ClickableTile clickableTile = (ClickableTile) node;
 
+
+
             clickableTile.setOnMouseEntered(event -> {
-                setSelectedTiles(clickableTile.getColour());
+
+                Tile tileColor = clickableTile.getColour();
+                // You can't click the STARTING Tile
+                if (tileColor == Tile.STARTING) return;
+
+                setSelectedTiles(tileColor);
             });
 
             clickableTile.setOnMouseExited(event -> {
-                unSetSelectedTiles(clickableTile.getColour());
+
+                Tile tileColor = clickableTile.getColour();
+                // You can't click the STARTING Tile
+                if (tileColor == Tile.STARTING) return;
+
+                // Do not unhighlight if Table has been clicked
+                if (clicked) return;
+                unSetSelectedTiles(tileColor);
             });
 
-//            clickableTile.setOnMouseClicked(event -> {
-//                // Handle the tile click event here
-//                try {
-//                    Tile clickedTile = clickableTile.getColour();
-//                    System.out.println(clickedTile);
-//                    selectTilesToGrabFromTable(clickedTile);
-//                } catch (EmptyException e) {
-//                    // Handle the EmptyException if necessary
-//                    e.printStackTrace();
-//                }
-//            });
+            clickableTile.setOnMouseClicked(event -> {
+
+                Tile tileColor = clickableTile.getColour();
+                // You can't click the STARTING Tile
+                if (tileColor == Tile.STARTING) return;
+
+                gameBoardController.deselectAllFactories();
+                clicked = true;
+
+                // Handle the tile click event here
+                Tile clickedTile = clickableTile.getColour();
+                setSelectedTiles(clickedTile);
+                System.out.println("Clicked in Table: " + clickedTile);
+
+                gameBoardController.highlightCurrentPlayerBoard(clickedTile, table);
+            });
         }
 
     }
