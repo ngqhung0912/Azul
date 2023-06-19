@@ -148,6 +148,12 @@ public class GameBoardController implements Initializable, Mediator {
       // Delegates call to child
       controller.postInitialize();
     }
+
+    // Fill the factories
+    int numberOfTilesForFactories = game.getFactoryList().size() * 4;
+    List<Tile> tilesForFactories = game.getTilecontainer().grabBagTiles(numberOfTilesForFactories);
+    game.fillFactories(tilesForFactories);
+
   }
 
 

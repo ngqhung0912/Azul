@@ -15,10 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import lombok.Getter;
 import lombok.Setter;
-import pppp.group14project.model.Factory;
-import pppp.group14project.model.Game;
-import pppp.group14project.model.Table;
-import pppp.group14project.model.Tile;
+import pppp.group14project.model.*;
 import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
@@ -93,13 +90,16 @@ public class FactoryController {
 
 
         // Just to test changing the model (that this can be seen in the view)
-        try {
-            this.factory.empty();
-            this.factory.addTiles(Arrays.asList(new Tile[]{Tile.BLACK, Tile.ORANGE, Tile.BLACK, Tile.RED}));
-            System.out.println("reached");
-        } catch (FullException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            this.factory.empty();
+//
+//            TileContainer t = this.gameBoardController.getGame().getTilecontainer();
+//            List<Tile> tilesForFactory = t.grabBagTiles(4);
+//            this.factory.addTiles(tilesForFactory);
+//            System.out.println("reached");
+//        } catch (FullException e) {
+//            e.printStackTrace();
+//        }
 
         // listen to which tile has been selected
         this.factory.getSelected_colour().addListener(new ChangeListener<String>() {
