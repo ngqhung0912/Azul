@@ -1,37 +1,42 @@
 package pppp.group14project.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
+import lombok.Setter;
 import pppp.group14project.model.Board;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-
-public class ScoreController implements Initializable {
+public class ScoreController {
 
   @FXML
   private Text scoreText;
 
-  public void setScoreText(String score) {
+  @Setter
+  private Board board;
+
+  private void setScoreText(String score) {
     scoreText.setText(score);
   }
 
-  @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
-    setScoreText("0");
+  /**
+   * Initializes the models, once all models of its parent models have loaded
+   */
+  public void postInitialize() {
+    // first initialization
+    setScoreText(Integer.toString(board.getScore().intValue()));
+
+    board.getScore().addListener((observableValue, oldValue, newValue) -> {
+      setScoreText(Integer.toString(newValue.intValue()));
+    });
   }
 
-  public void updateScore(Board board) {
+  public void updateScore() {
     // additional check if currently displayed score is the same as the score in the model
     int displayedScore = Integer.parseInt(scoreText.getText());
-    int modelScore = board.getScore();
+    int modelScore = board.getScore().intValue();
     assert displayedScore == modelScore;
 
     int floorScore = board.getFloor().getScore();
     int wallScore = board.getWall().getWallScore();
-    board.setScore(modelScore + floorScore + wallScore);
-    setScoreText(Integer.toString(board.getScore()));
+    board.updateScore(floorScore + wallScore);
   }
 }
