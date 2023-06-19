@@ -152,20 +152,10 @@ public class GameBoardController implements Initializable, Mediator {
       controller.postInitialize();
     }
 
-    // Highlights a specific player
-    activatePlayerBoard(0, Arrays.asList(Tile.ORANGE, Tile.ORANGE, Tile.ORANGE));
-
     // Fill the factories
     int numberOfTilesForFactories = game.getFactoryList().size() * 4;
     List<Tile> tilesForFactories = game.getTilecontainer().grabBagTiles(numberOfTilesForFactories);
     game.fillFactories(tilesForFactories);
-//
-//    List<Tile> tileList = new ArrayList<>();
-//    tileList.add(Tile.WHITE);
-//    tileList.add(Tile.RED);
-//    tileList.add(Tile.BLUE);
-//    tileList.add(Tile.RED);
-//    tableController.addTilesToTable(tileList);
 
   }
 
@@ -188,15 +178,6 @@ public class GameBoardController implements Initializable, Mediator {
       throw new RuntimeException(e);
     }
 
-
-  }
-
-  public void activatePlayerBoard(int playerNumber, List<Tile> tiles) {
-    try {
-      playerBoardControllers.get(playerNumber).activate(tiles);
-    } catch (InvalidPositionException e) {
-      throw new RuntimeException(e);
-    }
 
   }
 
