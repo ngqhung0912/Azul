@@ -1,6 +1,5 @@
 package pppp.group14project.model;
 
-import lombok.Getter;
 
 /**
  * Differences between Table and Factory:
@@ -11,6 +10,9 @@ public class Table extends Factory {
 
     public boolean starting_tile;
 
+
+
+
     /**
      * Used to update the default maximum number of tiles
      * @return the maximum number of tiles
@@ -19,6 +21,7 @@ public class Table extends Factory {
     public int getMaxNumberOfTiles() {
         return Integer.MAX_VALUE;
     }
+
 
     /**
      * Adds a starting tile to the Table

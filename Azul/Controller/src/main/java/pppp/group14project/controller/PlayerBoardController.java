@@ -14,6 +14,7 @@ import pppp.group14project.model.Board;
 import pppp.group14project.model.PatternLine;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -160,12 +161,22 @@ public class PlayerBoardController implements Initializable, Mediator {
   }
 
   @Override
-  public void moveTilesToPattern(List<Tile> tiles) {
+  public void moveTilesToPattern(List<Tile> tiles){
     // TODO: not implemented in the player board mediator
+    try {
+      patternController.highlightPossibleSpaces(tiles);
+    } catch (InvalidPositionException ignored){
+
+    }
   }
 
   @Override
   public void moveTilesToTable(List<Tile> tiles) {
     // TODO: not implemented in the player board mediator
+  }
+
+  @Override
+  public void removeTilesFromTable() {
+
   }
 }
