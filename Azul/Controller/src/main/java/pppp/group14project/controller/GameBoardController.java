@@ -140,12 +140,6 @@ public class GameBoardController implements Initializable, Mediator {
     tableController.setGameBoardController(this);
     tableController.setTable(game.getTable());
     tableController.postInitialize();
-//    List<Tile> tileList = new ArrayList<>();
-//    tileList.add(Tile.WHITE);
-//    tileList.add(Tile.RED);
-//    tileList.add(Tile.BLUE);
-//    tileList.add(Tile.RED);
-//    tableController.addTilesToTable(tileList);
 
     for (int i = 0; i < factoryControllers.size(); i++) {
       FactoryController controller = factoryControllers.get(i);
