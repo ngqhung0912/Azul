@@ -134,6 +134,7 @@ class ControllerTest extends ApplicationTest {
         int expectedCount = 5;
         assertEquals(expectedCount, table.size());
         tableController.selectTilesToGrabFromTable(Tile.BLUE);
+        tableController.removeSelectedTilesFromTable();
         assertEquals(0, table.size());
     }
 
