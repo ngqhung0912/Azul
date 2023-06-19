@@ -9,9 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import lombok.Getter;
 import lombok.Setter;
+import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Board;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -112,7 +114,7 @@ public class PlayerBoardController implements Initializable, Mediator {
   public void moveTilesToWall(Tile tile, int rowNumber) {
     try {
       wallController.addTileToWall(tile, rowNumber);
-    } catch (FullException ignored) {
+    } catch (FullException | WrongTileException ignored) {
 //      throw new RuntimeException(e);
       // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
     }
@@ -124,12 +126,22 @@ public class PlayerBoardController implements Initializable, Mediator {
   }
 
   @Override
-  public void moveTilesToPattern(List<Tile> tiles) {
+  public void moveTilesToPattern(List<Tile> tiles){
     // TODO: not implemented in the player board mediator
+    try {
+      patternController.highlightPossibleSpaces(tiles);
+    } catch (InvalidPositionException ignored){
+
+    }
   }
 
   @Override
   public void moveTilesToTable(List<Tile> tiles) {
     // TODO: not implemented in the player board mediator
+  }
+
+  @Override
+  public void removeTilesFromTable() {
+
   }
 }

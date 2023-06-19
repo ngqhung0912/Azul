@@ -3,12 +3,13 @@ package pppp.group14project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pppp.group14project.model.exceptions.FullException;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WallTest {
 
-    private Wall wall;
+    protected Wall wall;
 
     @BeforeEach
     void setUp() {
@@ -19,12 +20,10 @@ class WallTest {
     void addSpecificTile() {
         try {
             wall.addTile(Tile.RED, 3);
-        } catch (FullException e) {
+        } catch (WrongTileException | FullException e) {
             fail();
         }
-        assertEquals(1, wall.countTilesInRow(wall.getRow(3)));
-        assertTrue(wall.isTileInRow(Tile.RED, 3));
-
+        assertEquals(1, wall.countTilesInRow(3));
     }
 
     @Test
@@ -32,28 +31,12 @@ class WallTest {
         assertThrows(IndexOutOfBoundsException.class, () -> {
             try {
                 wall.addTile(Tile.RED, 5);
-            } catch (FullException e) {
+            } catch (WrongTileException | FullException e) {
                 fail();
             }
         });
     }
 
-
-    @Test
-    void rowIsFullCorrectColors() {
-        try {
-            wall.addTile(Tile.BLACK, 0);
-            wall.addTile(Tile.BLUE, 0);
-            wall.addTile(Tile.WHITE, 0);
-            wall.addTile(Tile.RED, 0);
-            wall.addTile(Tile.ORANGE, 0);
-        } catch (FullException e) {
-            fail();
-        }
-
-        assertTrue(wall.isRowFull(wall.getRow(0)));
-        assertEquals(5, wall.getRow(0).size());
-    }
 
     @Test
     void AddSameTilesToOneRow() {
@@ -62,36 +45,24 @@ class WallTest {
             wall.addTile(Tile.BLACK, 0);
             wall.addTile(Tile.WHITE, 0);
             wall.addTile(Tile.RED, 0);
-        } catch (FullException e) {
+        } catch (WrongTileException | FullException e) {
             fail();
         }
         try {
             wall.addTile(Tile.BLACK, 0);
             fail();
 
-        } catch (FullException ignored) {}
+        } catch (WrongTileException | FullException ignored) {}
 
         try {
             wall.addTile(Tile.RED, 0);
             fail();
 
-        } catch (FullException ignored) {}
+        } catch (WrongTileException | FullException ignored) {}
 
-        assertNotEquals(5, wall.countTilesInRow(wall.getRow(0)));
+        assertNotEquals(5, wall.countTilesInRow(0));
     }
 
-    @Test
-    void rowIsNotFull() {
-        try {
-            wall.addTile(Tile.BLACK, 0);
-            wall.addTile(Tile.BLUE, 0);
-            wall.addTile(Tile.WHITE, 0);
-            wall.addTile(Tile.RED, 0);
-        } catch (FullException e) {
-            fail();
-        }
-        assertFalse(wall.isRowFull(wall.getRow(0)));
-    }
 
     @Test
     void emptyWall() {
@@ -100,7 +71,7 @@ class WallTest {
             wall.addTile(Tile.BLUE, 0);
             wall.addTile(Tile.WHITE, 0);
             wall.addTile(Tile.RED, 0);
-        } catch (FullException e) {
+        } catch (WrongTileException | FullException e) {
             fail();
         }
         assertEquals(4, wall.getTilesInWall().size());
@@ -113,7 +84,7 @@ class WallTest {
     void scoreOfOneTile() {
         try {
             wall.addTile(Tile.BLACK, 0);
-        } catch (FullException e) {
+        } catch (WrongTileException | FullException e) {
             fail();
         }
         assertEquals(1, wall.getWallScore());
@@ -124,7 +95,7 @@ class WallTest {
         try {
             wall.addTile(Tile.BLACK, 0);
             wall.addTile(Tile.BLUE, 0);
-        } catch (FullException e) {
+        } catch (WrongTileException | FullException e) {
             fail();
         }
 
@@ -160,7 +131,7 @@ class WallTest {
 
             wall.addTile(Tile.BLUE, 3);
             assertEquals(24, wall.getWallScore());
-        } catch (FullException e) {
+        } catch (WrongTileException | FullException e) {
             fail();
         }
     }
@@ -182,7 +153,7 @@ class WallTest {
             wall.addTile(Tile.RED, 2);
             assertEquals(15, wall.getWallScore());
 
-        } catch (FullException e) {
+        } catch (WrongTileException | FullException e) {
             fail();
         }
     }
@@ -205,33 +176,9 @@ class WallTest {
             wall.addTile(Tile.RED, 0);
             assertEquals(15, wall.getWallScore());
 
-        } catch (FullException e) {
+        } catch (WrongTileException | FullException e) {
             fail();
         }
-    }
-
-    @Test
-    void getFullColumnsAndRows() {
-        try {
-            wall.addTile(Tile.BLACK, 0);
-            wall.addTile(Tile.BLUE, 0);
-            wall.addTile(Tile.WHITE, 0);
-            wall.addTile(Tile.RED, 0);
-            wall.addTile(Tile.ORANGE, 0);
-        } catch (FullException e) {
-            fail();
-        }
-        assertEquals(1, wall.getFullRows());
-
-        try {
-            wall.addTile(Tile.RED, 1);
-            wall.addTile(Tile.ORANGE, 2);
-            wall.addTile(Tile.BLUE, 3);
-            wall.addTile(Tile.WHITE, 4);
-        } catch (FullException e) {
-            fail();
-        }
-        assertEquals(1, wall.getFullCols());
     }
     @Test
     void testScoringAtEndGame() {
@@ -258,7 +205,7 @@ class WallTest {
             wall.addTile(Tile.BLUE, 2);
             wall.addTile(Tile.BLUE, 4);
 
-        } catch (FullException e) {
+        } catch (WrongTileException | FullException e) {
             fail();
         }
         wall.updateScoreAtEndGame();

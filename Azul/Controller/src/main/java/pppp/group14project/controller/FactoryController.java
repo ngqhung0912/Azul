@@ -1,29 +1,18 @@
 package pppp.group14project.controller;
 
-import javafx.beans.property.StringProperty;
-import javafx.beans.property.StringPropertyBase;
+
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableStringValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import lombok.Getter;
 import lombok.Setter;
-import pppp.group14project.model.*;
-import pppp.group14project.model.exceptions.EmptyException;
-import pppp.group14project.model.exceptions.FullException;
+import pppp.group14project.model.Factory;
+import pppp.group14project.model.Tile;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class FactoryController {
 
