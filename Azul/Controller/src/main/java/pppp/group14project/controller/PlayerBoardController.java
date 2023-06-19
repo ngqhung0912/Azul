@@ -185,4 +185,9 @@ public class PlayerBoardController implements Initializable, Mediator {
   public void removeTilesFromTable() {
 
   }
+
+  @Override
+  public void updateScore() {
+    scoreController.updateScore();
+  }
 }
