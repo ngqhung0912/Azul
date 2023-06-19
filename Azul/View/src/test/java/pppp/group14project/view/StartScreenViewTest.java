@@ -41,6 +41,11 @@ public class StartScreenViewTest extends ApplicationTest {
 
     @BeforeEach
     public void setUp () throws Exception {
+        Game game = Game.getInstance();
+        game.getBoardList().clear();
+        game.getFactoryList().clear();
+        game.getTilecontainer().reset();
+        game.getPlayerNameList().clear();
     }
 
     @AfterEach
@@ -52,6 +57,7 @@ public class StartScreenViewTest extends ApplicationTest {
         game.getBoardList().clear();
         game.getFactoryList().clear();
         game.getTilecontainer().reset();
+        game.getPlayerNameList().clear();
     }
 
     @Test
@@ -61,9 +67,26 @@ public class StartScreenViewTest extends ApplicationTest {
         clickOn("#addPlayerButton");
         WaitForAsyncUtils.waitForFxEvents();
         verifyThat("#welcomeText", hasText("Welcome [Bob]!"));
+    }
+
+    @Test
+    public void testPlayerName() {
+        clickOn("#usernameTextField");
+        write("Bob");
+        clickOn("#addPlayerButton");
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("#startButton");
         WaitForAsyncUtils.waitForFxEvents();
         verifyThat("#playerName", NodeQueryUtils.hasText("Bob"));
+    }
+
+    @Test
+    public void testNoName() {
+        clickOn("#addPlayerButton");
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn("#startButton");
+        WaitForAsyncUtils.waitForFxEvents();
+        verifyThat("#playerName", NodeQueryUtils.hasText(""));
     }
 
     @Test
