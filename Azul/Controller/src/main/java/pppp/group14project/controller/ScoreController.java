@@ -21,9 +21,6 @@ public class ScoreController {
    * Initializes the models, once all models of its parent models have loaded
    */
   public void postInitialize() {
-    // first initialization
-    setScoreText(Integer.toString(board.getScore().intValue()));
-
     board.getScore().addListener((observableValue, oldValue, newValue) -> {
       setScoreText(Integer.toString(newValue.intValue()));
     });
