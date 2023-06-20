@@ -194,6 +194,6 @@ public class PlayerBoardController implements Initializable, Mediator {
 
   @Override
   public List<Tile> removeTilesFromFloor() {
-    return null;
+    return floorController.getFloor().emptyFloor();
   }
 }

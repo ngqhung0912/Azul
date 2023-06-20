@@ -180,11 +180,29 @@ public class GameBoardController implements Initializable, Mediator {
       game.getTilecontainer().addDiscardedTiles(returnTilesWall);
 
       System.out.println("Wall score: " + p.getFloorController().getFloor().getScore());
+      p.updateScore();
       List<Tile> returnTilesFloor = p.removeTilesFromFloor();
+      if (returnTilesFloor.contains(Tile.STARTING)) {
+        returnTilesFloor.remove(Tile.STARTING);
+      }
       game.getTilecontainer().addDiscardedTiles(returnTilesFloor);
 
     }
 
+    // Re-fill Factories
+
+    for (FactoryController f: factoryControllers) {
+      try {
+        f.getFactory().addTiles(game.getTilecontainer().grabBagTiles(4));
+      } catch (FullException e) {
+        throw new RuntimeException(e);
+      }
+    }
+    try {
+      tableController.getTable().addTile(Tile.STARTING);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
 
   }
 
