@@ -180,8 +180,8 @@ public class GameBoardController implements Initializable, Mediator {
       game.getTilecontainer().addDiscardedTiles(returnTilesWall);
 
       System.out.println("Wall score: " + p.getFloorController().getFloor().getScore());
-//      List<Tile> returnTilesFloor = p.moveTilesToFloor();
-//      game.getTilecontainer().addDiscardedTiles(returnTilesFloor);
+      List<Tile> returnTilesFloor = p.removeTilesFromFloor();
+      game.getTilecontainer().addDiscardedTiles(returnTilesFloor);
 
     }
 
@@ -227,7 +227,9 @@ public class GameBoardController implements Initializable, Mediator {
       finishRound();
 
     } else {
+
       game.nextPlayer();
+
     }
 
   }
@@ -237,6 +239,11 @@ public class GameBoardController implements Initializable, Mediator {
 
   @Override
   public List<Tile> moveTilesToWall() {
+    return null;
+  }
+
+  @Override
+  public List<Tile> removeTilesFromFloor() {
     return null;
   }
 

@@ -15,4 +15,6 @@ public interface Mediator {
 
   void removeTilesFromTable();
 
+  List<Tile> removeTilesFromFloor();
+
 }

@@ -180,4 +180,9 @@ public class PlayerBoardController implements Initializable, Mediator {
   public void removeTilesFromTable() {
 
   }
+
+  @Override
+  public List<Tile> removeTilesFromFloor() {
+    return null;
+  }
 }
