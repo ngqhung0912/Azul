@@ -46,9 +46,14 @@ public class PatternController {
     private PlayerBoardController playerBoardController;
 
     public void highlightPossibleSpaces(Tile tile, Factory factory) throws InvalidPositionException {
+        unhighlightAllSpaces();
+
         boolean patternHasPossibleSpaces = false;
-        for (PatternLine p: pattern.getPatternLines()) {
-            if (p.isEmpty() || (p.getTileType() == tile && !p.isFull()))
+
+        for (int i = 0; i < 5; i++) {
+            PatternLine p = pattern.getPatternLines().get(i);
+            boolean wallContainsTile = playerBoardController.getWallController().getWall().isTileInRow(tile, i);
+            if ((p.isEmpty() || (p.getTileType() == tile && !p.isFull())) && !wallContainsTile)
                 patternHasPossibleSpaces = true;
         }
 
@@ -56,11 +61,14 @@ public class PatternController {
         if (patternHasPossibleSpaces) {
             for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
                 // Go to next row if the row has a tile, but it is not equal to the tile color given
-                if (rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile))
+                boolean wallContainsTile = playerBoardController.getWallController().getWall().isTileInRow(tile, rowIndex);
+                System.out.println("Tile " + tile + " is in row " + rowIndex + wallContainsTile);
+                if ((rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile)) || wallContainsTile)
                     continue;
 
                 for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
                     if (!spaceHasTile(rowIndex, tileIndex)) {
+                        System.out.println("Highlighted Tile " + tile);
                         highlightSpace(rowIndex, tileIndex, tile, factory);
                         break;
                     }
