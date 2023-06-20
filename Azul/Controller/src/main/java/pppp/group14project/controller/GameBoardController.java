@@ -170,17 +170,21 @@ public class GameBoardController implements Initializable, Mediator {
       }
     }
     game.generateTurns(startingPlayerID);
+    System.out.println("Player " + startingPlayerID + " starts the next round!");
 
-    // Move Tiles from Pattern to Wall for each player
+    // Move Tiles from Pattern to Wall, and empty Floor for each player
 
     for (PlayerBoardController p: playerBoardControllers) {
 
-      List<Tile> returnTiles = p.moveTilesToWall();
-      game.getTilecontainer().addDiscardedTiles(returnTiles);
+      List<Tile> returnTilesWall = p.moveTilesToWall();
+      game.getTilecontainer().addDiscardedTiles(returnTilesWall);
+
+      System.out.println("Wall score: " + p.getFloorController().getFloor().getScore());
+//      List<Tile> returnTilesFloor = p.moveTilesToFloor();
+//      game.getTilecontainer().addDiscardedTiles(returnTilesFloor);
 
     }
 
-    // Empty Wall and Floor, move to
 
   }
 
