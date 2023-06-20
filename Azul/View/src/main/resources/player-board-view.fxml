@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -7,16 +8,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import java.net.URL?>
 
-<GridPane xmlns="http://javafx.com/javafx/19"
-          xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="pppp.group14project.controller.PlayerBoardController">
+<GridPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PlayerBoardController">
     <stylesheets>
         <URL value="@general-styles.css" />
     </stylesheets>
-    <Rectangle styleClass="playerBoard" width="420.0" height="300.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-    <GridPane fx:id="playerBoardGrid" maxWidth="420.0">
+    <Rectangle height="300.0" styleClass="playerBoard" width="420.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <GridPane fx:id="playerBoardGrid" maxWidth="420.0" >
         <Label fx:id="playerName" GridPane.columnIndex="3">
             <font>
                 <Font name="System Bold" size="24.0" />
@@ -26,16 +24,19 @@
             </GridPane.margin>
         </Label>
         <rowConstraints>
-            <RowConstraints percentHeight="15.0" minHeight="0"/>
-            <RowConstraints percentHeight="60.0" minHeight="0"/>
-            <RowConstraints percentHeight="25.0" minHeight="0"/>
+            <RowConstraints minHeight="0" percentHeight="15.0" />
+            <RowConstraints minHeight="0" percentHeight="65.0" />
+            <RowConstraints minHeight="0" percentHeight="20.0" />
         </rowConstraints>
         <columnConstraints>
-            <ColumnConstraints percentWidth="4.0" minWidth="0"/>
-            <ColumnConstraints percentWidth="42.0" minWidth="0"/>
-            <ColumnConstraints percentWidth="8.0" minWidth="0"/>
-            <ColumnConstraints percentWidth="42.0" minWidth="0"/>
-            <ColumnConstraints percentWidth="4.0" minWidth="0"/>
+            <ColumnConstraints minWidth="0" percentWidth="4.0" />
+            <ColumnConstraints minWidth="0" percentWidth="42.0" />
+            <ColumnConstraints minWidth="0" percentWidth="8.0" />
+            <ColumnConstraints minWidth="0" percentWidth="42.0" />
+            <ColumnConstraints minWidth="0" percentWidth="4.0" />
         </columnConstraints>
     </GridPane>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
 </GridPane>
