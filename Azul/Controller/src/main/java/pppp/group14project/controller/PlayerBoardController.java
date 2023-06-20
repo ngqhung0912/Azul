@@ -54,6 +54,9 @@ public class PlayerBoardController implements Initializable, Mediator {
   private WallController wallController;
   @Setter
   @Getter
+  private ScoreController scoreController;
+  @Setter
+  @Getter
   private GameBoardController gameBoardController;
 
   public void setPlayerName(String playerName) {
@@ -84,6 +87,7 @@ public class PlayerBoardController implements Initializable, Mediator {
       floorController.setPlayerBoardController(this);
       wallController = wallLoader.getController();
       wallController.setPlayerBoardController(this);
+      scoreController = scoreLoader.getController();
     } catch (
             IOException e) {
       e.printStackTrace();
@@ -107,6 +111,8 @@ public class PlayerBoardController implements Initializable, Mediator {
     wallController.setWall(board.getWall());
     wallController.postInitialize();
 
+    scoreController.setBoard(board);
+    scoreController.postInitialize();
   }
 
   /**
@@ -174,5 +180,10 @@ public class PlayerBoardController implements Initializable, Mediator {
   @Override
   public void removeTilesFromTable() {
 
+  }
+
+  @Override
+  public void updateScore() {
+    scoreController.updateScore();
   }
 }

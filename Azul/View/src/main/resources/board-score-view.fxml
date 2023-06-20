@@ -6,7 +6,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.ScoreController">
 
-    <Text fx:id="scoreText" textAlignment="RIGHT">
+    <Text fx:id="scoreText" textAlignment="RIGHT" text="0">
       <font>
          <Font name="System Bold" size="36.0" />
       </font></Text>
