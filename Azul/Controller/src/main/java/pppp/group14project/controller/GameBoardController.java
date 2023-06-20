@@ -193,7 +193,8 @@ public class GameBoardController implements Initializable, Mediator {
 
     for (FactoryController f: factoryControllers) {
       try {
-        f.getFactory().addTiles(game.getTilecontainer().grabBagTiles(4));
+        List<Tile> tilesToAdd = game.getTilecontainer().grabBagTiles(4);
+        f.getFactory().addTiles(tilesToAdd);
       } catch (FullException e) {
         throw new RuntimeException(e);
       }
