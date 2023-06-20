@@ -50,8 +50,6 @@
     -fx-text-alignment: CENTER;
 }
 
-
-
 ClickableTile {
     -fx-border-width: 3;
     -fx-pref-width: 33;
@@ -59,4 +57,12 @@ ClickableTile {
     -fx-border-radius: 1;
     -fx-background-insets: 1;
     -fx-cursor: hand;
+}
+
+.playerBoard {
+    -fx-arc-height: 16;
+    -fx-arc-width: 16;
+    -fx-fill: #fefaf4;
+    -fx-stroke: #c7b299;
+    -fx-stroke-width: 3;
 }

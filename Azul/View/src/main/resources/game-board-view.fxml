@@ -3,7 +3,6 @@
 <!--<?import javafx.scene.layout.ColumnConstraints?>-->
 <!--<?import javafx.scene.layout.GridPane?>-->
 <!--<?import javafx.scene.layout.RowConstraints?>-->
-
 <!--<GridPane fx:id="outerGrid" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(113, 191, 209);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.GameBoardController">-->
 <!--   <rowConstraints>-->
 <!--      <RowConstraints minHeight="10.0" percentHeight="100.0" prefHeight="30.0" />-->
@@ -45,61 +44,75 @@
 <!--</GridPane>-->
 <!--<?xml version="1.0" encoding="UTF-8"?>-->
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="outerGrid" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(113, 191, 209);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.GameBoardController">
+<?import java.net.URL?>
+<GridPane fx:id="outerGrid"
+          styleClass="background"
+          xmlns="http://javafx.com/javafx/19"
+          xmlns:fx="http://javafx.com/fxml/1"
+          prefHeight="700"
+          prefWidth="1250"
+          fx:controller="pppp.group14project.controller.GameBoardController">
+   <stylesheets>
+      <URL value="@general-styles.css" />
+   </stylesheets>
    <rowConstraints>
-      <RowConstraints minHeight="10.0" percentHeight="100.0" prefHeight="30.0" />
+      <RowConstraints percentHeight="100.0" minHeight="0"/>
    </rowConstraints>
    <columnConstraints>
-      <ColumnConstraints minWidth="10.0" percentWidth="38.0" prefWidth="100.0" />
-      <ColumnConstraints minWidth="10.0" percentWidth="24.0" prefWidth="100.0" />
-      <ColumnConstraints minWidth="10.0" percentWidth="38.0" prefWidth="100.0" />
+      <ColumnConstraints percentWidth="36.0" minWidth="0"/>
+      <ColumnConstraints percentWidth="28.0" minWidth="0"/>
+      <ColumnConstraints percentWidth="36.0" minWidth="0"/>
    </columnConstraints>
    <children>
       <GridPane fx:id="innerGridLeft">
          <columnConstraints>
-            <ColumnConstraints minWidth="10.0" percentWidth="100.0" prefWidth="200"/>
+            <ColumnConstraints  percentWidth="100.0" minWidth="0"/>
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="100.0"/>
-            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="100.0"/>
+            <RowConstraints percentHeight="50.0" minHeight="0"/>
+            <RowConstraints percentHeight="50.0" minHeight="0"/>
          </rowConstraints>
       </GridPane>
       <GridPane fx:id="innerGridMid" GridPane.columnIndex="1">
          <columnConstraints>
-            <ColumnConstraints percentWidth="66"/>
-            <ColumnConstraints percentWidth="34"/>
+            <ColumnConstraints percentWidth="66" minWidth="0"/>
+            <ColumnConstraints percentWidth="34" minWidth="0"/>
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints percentHeight="100.0"/>
+            <RowConstraints percentHeight="100.0" minHeight="0"/>
          </rowConstraints>
          <children>
             <GridPane fx:id="factoriesGrid">
                <rowConstraints>
-                  <RowConstraints percentHeight="20.0" />
-                  <RowConstraints percentHeight="20.0" />
-                  <RowConstraints percentHeight="20.0" />
-                  <RowConstraints percentHeight="20.0" />
-                  <RowConstraints percentHeight="20.0" />
+                  <RowConstraints percentHeight="20.0" minHeight="0"/>
+                  <RowConstraints percentHeight="20.0" minHeight="0"/>
+                  <RowConstraints percentHeight="20.0" minHeight="0"/>
+                  <RowConstraints percentHeight="20.0" minHeight="0"/>
+                  <RowConstraints percentHeight="20.0" minHeight="0"/>
                </rowConstraints>
                <columnConstraints>
-                  <ColumnConstraints percentWidth="50.0" />
-                  <ColumnConstraints percentWidth="50.0" />
+                  <ColumnConstraints percentWidth="50.0" minWidth="0"/>
+                  <ColumnConstraints percentWidth="50.0" minWidth="0"/>
                </columnConstraints>
             </GridPane>
          </children>
       </GridPane>
       <GridPane fx:id="innerGridRight" GridPane.columnIndex="2">
          <columnConstraints>
-            <ColumnConstraints minWidth="10.0" percentWidth="100.0" prefWidth="200"/>
+            <ColumnConstraints percentWidth="100.0" minWidth="0"/>
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="100.0"/>
-            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="100.0"/>
+            <RowConstraints percentHeight="50.0" minHeight="0"/>
+            <RowConstraints percentHeight="50.0" minHeight="0"/>
          </rowConstraints>
       </GridPane>
    </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
 </GridPane>

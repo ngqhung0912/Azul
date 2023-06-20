@@ -13,17 +13,17 @@
         <URL value="@general-styles.css" />
     </stylesheets>
     <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
+      <ColumnConstraints percentWidth="14.3" minWidth="0"/>
+      <ColumnConstraints percentWidth="14.3" minWidth="0"/>
+      <ColumnConstraints percentWidth="14.3" minWidth="0"/>
+      <ColumnConstraints percentWidth="14.3" minWidth="0"/>
+      <ColumnConstraints percentWidth="14.3" minWidth="0"/>
+      <ColumnConstraints percentWidth="14.3" minWidth="0"/>
+      <ColumnConstraints percentWidth="14.2" minWidth="0"/>
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints percentHeight="50.0" />
-      <RowConstraints percentHeight="50.0" />
+      <RowConstraints percentHeight="50.0" minHeight="0"/>
+      <RowConstraints percentHeight="50.0" minHeight="0"/>
    </rowConstraints>
    <children>
       <Label alignment="CENTER" text="-1" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER"></Label>
