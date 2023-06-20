@@ -24,9 +24,9 @@
             </GridPane.margin>
         </Label>
         <rowConstraints>
-            <RowConstraints minHeight="0" percentHeight="15.0" />
+            <RowConstraints minHeight="0" percentHeight="12.0" />
             <RowConstraints minHeight="0" percentHeight="65.0" />
-            <RowConstraints minHeight="0" percentHeight="20.0" />
+            <RowConstraints minHeight="0" percentHeight="23.0" />
         </rowConstraints>
         <columnConstraints>
             <ColumnConstraints minWidth="0" percentWidth="4.0" />

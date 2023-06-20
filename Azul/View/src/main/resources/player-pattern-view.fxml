@@ -11,21 +11,21 @@
 <?import javafx.geometry.Insets?>
 <StackPane fx:id="patternPane"  xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PatternController">
     <stylesheets>
-        <URL value="@player-pattern-view-styles.css" />
         <URL value="@general-styles.css" />
+        <URL value="@player-pattern-view-styles.css" />
     </stylesheets>
     <children>
         <VBox fx:id="rows" alignment="TOP_LEFT" >
             <children>
                 <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="10.0" >
                     <children>
-                        <Space mnemonicParsing="false"  row="0" index="0"/>
+                        <Space mnemonicParsing="false" row="0" index="0"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" spacing="10.0" >
                     <children>
-                        <Space mnemonicParsing="false"  row="1" index="1"/>
-                        <Space mnemonicParsing="false"  row="1" index="0"/>
+                        <Space mnemonicParsing="false" row="1" index="1"/>
+                        <Space mnemonicParsing="false" row="1" index="0"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" spacing="10.0" >

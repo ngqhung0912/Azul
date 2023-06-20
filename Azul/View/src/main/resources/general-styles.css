@@ -9,10 +9,18 @@
     -fx-opacity: 0.3;
     -fx-border-color: rgb(101, 101, 101);
     -fx-background-color: rgb(101, 101, 101);
+    -fx-min-width: 33;
+    -fx-min-height: 33;
+    -fx-background-insets: 1;
+    -fx-background-radius: 0;
 }
 
 .is-colored {
     -fx-border-width: 3;
+    -fx-pref-width: 33;
+    -fx-pref-height: 33;
+    -fx-border-radius: 1;
+    -fx-background-insets: 1;
     -fx-opacity: 1;
 }
 
@@ -68,8 +76,8 @@ ClickableTile {
 }
 
 .floorTile {
-    -fx-min-width: 31;
-    -fx-min-height: 31;
+    -fx-min-width: 33;
+    -fx-min-height: 33;
     -fx-background-color: rgb(249, 240, 229);
     -fx-border-color: rgb(199, 178, 153);
     -fx-border-width: 1;

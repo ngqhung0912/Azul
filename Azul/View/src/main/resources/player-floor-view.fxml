@@ -16,13 +16,13 @@
         <URL value="@general-styles.css" />
     </stylesheets>
     <columnConstraints>
-      <ColumnConstraints minWidth="35" percentWidth="14.3" />
-      <ColumnConstraints minWidth="35" percentWidth="14.3" />
-      <ColumnConstraints minWidth="35" percentWidth="14.3" />
-      <ColumnConstraints minWidth="35" percentWidth="14.3" />
-      <ColumnConstraints minWidth="35" percentWidth="14.3" />
-      <ColumnConstraints minWidth="35" percentWidth="14.3" />
-      <ColumnConstraints minWidth="35" percentWidth="14.2" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.2" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints minHeight="0" percentHeight="40.0" />
@@ -46,6 +46,6 @@
         <Button styleClass="floorTile" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
     </children>
     <padding>
-        <Insets left="2" bottom="10"/>
+        <Insets left="-4.5" bottom="10"/>
     </padding>
 </GridPane>
