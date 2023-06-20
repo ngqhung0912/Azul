@@ -56,7 +56,9 @@ public class FloorController {
       Tile tile = tileIterator.next();
 
       tileNode.getStyleClass().clear();
+      tileNode.getStyleClass().add("is-colored");
       tileNode.getStyleClass().add(String.valueOf(tile));
+      System.out.println(tileNode.getStyleClass());
       if (tile == Tile.STARTING){
         Button starting = (Button) tileNode;
         starting.setText("1");
