@@ -3,6 +3,7 @@ package pppp.group14project.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import pppp.group14project.model.*;
@@ -20,8 +21,10 @@ public class GameController {
   @FXML
   private Label welcomeText;
 
-  public void onAddPlayerButtonClick() {
+  @FXML
+  private Button addPlayerButton;
 
+  public void onAddPlayerButtonClick() {
     Game game = Game.getInstance();
     Player player = new Player(usernameTextField.getText());
     Board board = new Board(player);
@@ -30,6 +33,10 @@ public class GameController {
     factories.add(new Factory());
     factories.add(new Factory());
     welcomeText.setText("Welcome " + game.getPlayerNameList() + "!");
+
+    if(game.getPlayerNameList().size() == 4) {
+      addPlayerButton.setDisable(true);
+    }
   }
 
   public void onStartGameButtonClick() {
