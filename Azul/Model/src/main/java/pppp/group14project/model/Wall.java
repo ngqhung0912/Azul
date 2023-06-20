@@ -77,7 +77,10 @@ public class Wall {
      */
     public void addTile(Tile tile, int row) throws FullException, WrongTileException {
         if (isTileInRow(tile, row)) throw new FullException();
-        addTile(tile, row, Wall.getTileColorColumn(tile, row));
+        int col = getTileColorColumn(tile, row);
+        addTile(tile, row, col);
+        updateWallScore(row, col);
+
     }
 
 
@@ -91,7 +94,6 @@ public class Wall {
     private void addTile(Tile tile, int row, int column) {
         ObservableList<Tile> targetRow = this.wall.get(row);
         targetRow.set(column, tile);
-        updateWallScore(row, column);
     }
 
     /**

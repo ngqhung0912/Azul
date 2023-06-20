@@ -31,11 +31,6 @@ public class Board {
     @Setter
     private ArrayList<Tile> selected_tiles;
 
-    public void placeOnWall() {}
-
-    public void destroyAll() {}
-
-
   public Board(Player player) {
     this.player = player;
     this.score = new SimpleIntegerProperty(0);
@@ -44,8 +39,10 @@ public class Board {
     this.wall = new Wall();
   }
 
-  public void updateScore(int score) {
-    this.score.set(score);
+  public void updateScore() {
+      int floorScore = this.getFloor().getFloorScore();
+      int wallScore = this.getWall().getWallScore();
+      this.score.set(floorScore + wallScore);
   }
 
   public void useTeam13Wall() {

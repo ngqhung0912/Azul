@@ -31,9 +31,5 @@ public class ScoreController {
     int displayedScore = Integer.parseInt(scoreText.getText());
     int modelScore = board.getScore().intValue();
     assert displayedScore == modelScore;
-
-    int floorScore = board.getFloor().getScore();
-    int wallScore = board.getWall().getWallScore();
-    board.updateScore(floorScore + wallScore);
   }
 }

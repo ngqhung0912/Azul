@@ -182,8 +182,13 @@ public class PlayerBoardController implements Initializable, Mediator {
 
   }
 
+  /**
+   * Get score AT THE END OF EVERY TURN!
+   */
   @Override
   public void updateScore() {
+
+    board.updateScore();
     scoreController.updateScore();
   }
 }

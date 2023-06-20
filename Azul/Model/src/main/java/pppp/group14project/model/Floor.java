@@ -10,9 +10,14 @@ public class Floor {
   @Getter
   private ObservableList<Tile> tiles;
 
+
+  @Getter
+  private int floorScore;
+
   private final int[] tilePoints = {-1, -1, -2,-2,-2, -3, -3};
 
   public Floor() {
+    this.floorScore = 0;
     this.tiles = FXCollections.observableArrayList();
   }
 
@@ -23,12 +28,12 @@ public class Floor {
     } else {
       // TODO: call box lid method to add tiles
     }
+    updateFloorScore();
   }
 
-  public int getScore() {
+  public void updateFloorScore() {
     int numberOfTiles = tiles.size();
-    int score = Arrays.stream(tilePoints).limit(numberOfTiles).sum();
-    return score;
+    floorScore += Arrays.stream(tilePoints).limit(numberOfTiles).sum();
   }
 
   public void emptyFloor() { this.tiles.clear(); }
