@@ -8,22 +8,25 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="floorGridPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.FloorController">
+<GridPane fx:id="floorGridPane"
+          xmlns="http://javafx.com/javafx/19"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="pppp.group14project.controller.FloorController" >
     <stylesheets>
         <URL value="@general-styles.css" />
     </stylesheets>
     <columnConstraints>
-      <ColumnConstraints minWidth="0" percentWidth="14.3" />
-      <ColumnConstraints minWidth="0" percentWidth="14.3" />
-      <ColumnConstraints minWidth="0" percentWidth="14.3" />
-      <ColumnConstraints minWidth="0" percentWidth="14.3" />
-      <ColumnConstraints minWidth="0" percentWidth="14.3" />
-      <ColumnConstraints minWidth="0" percentWidth="14.3" />
-      <ColumnConstraints minWidth="0" percentWidth="14.2" />
+      <ColumnConstraints minWidth="35" percentWidth="14.3" />
+      <ColumnConstraints minWidth="35" percentWidth="14.3" />
+      <ColumnConstraints minWidth="35" percentWidth="14.3" />
+      <ColumnConstraints minWidth="35" percentWidth="14.3" />
+      <ColumnConstraints minWidth="35" percentWidth="14.3" />
+      <ColumnConstraints minWidth="35" percentWidth="14.3" />
+      <ColumnConstraints minWidth="35" percentWidth="14.2" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints minHeight="0" percentHeight="50.0" />
-      <RowConstraints minHeight="0" percentHeight="50.0" />
+      <RowConstraints minHeight="0" percentHeight="40.0" />
+      <RowConstraints minHeight="0" percentHeight="60.0" />
    </rowConstraints>
     <children>
         <Label alignment="CENTER" text="-1" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
@@ -34,12 +37,15 @@
         <Label alignment="CENTER" text="-3" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
         <Label alignment="CENTER" text="-3" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
 
-        <Button disable="true" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Button disable="true" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
-        <Button disable="true" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Button disable="true" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Button disable="true" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Button disable="true" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Button disable="true" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTile" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTile" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
+        <Button styleClass="floorTile" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTile" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTile" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTile" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTile" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
     </children>
+    <padding>
+        <Insets left="2" bottom="10"/>
+    </padding>
 </GridPane>

@@ -14,13 +14,13 @@
         <URL value="@general-styles.css" />
     </stylesheets>
     <Rectangle height="300.0" styleClass="playerBoard" width="420.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-    <GridPane fx:id="playerBoardGrid" maxWidth="420.0" >
+    <GridPane fx:id="playerBoardGrid" maxWidth="420.0">
         <Label fx:id="playerName" GridPane.columnIndex="3">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
             <GridPane.margin>
-                <Insets />
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </GridPane.margin>
         </Label>
         <rowConstraints>
@@ -35,6 +35,9 @@
             <ColumnConstraints minWidth="0" percentWidth="42.0" />
             <ColumnConstraints minWidth="0" percentWidth="4.0" />
         </columnConstraints>
+      <GridPane.margin>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </GridPane.margin>
     </GridPane>
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

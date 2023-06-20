@@ -9,46 +9,47 @@
 
 <?import pppp.group14project.controller.Space?>
 <?import javafx.geometry.Insets?>
-<StackPane fx:id="patternPane" styleClass="pattern-view" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PatternController">
+<StackPane fx:id="patternPane"  xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PatternController">
     <stylesheets>
         <URL value="@player-pattern-view-styles.css" />
+        <URL value="@general-styles.css" />
     </stylesheets>
     <children>
-        <VBox fx:id="rows" alignment="TOP_CENTER" styleClass="pattern-rows">
+        <VBox fx:id="rows" alignment="TOP_LEFT" >
             <children>
-                <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="10.0" styleClass="pattern-row">
+                <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="10.0" >
                     <children>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="0" index="0"/>
+                        <Space mnemonicParsing="false"  row="0" index="0"/>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_RIGHT" spacing="10.0" styleClass="pattern-row">
+                <HBox alignment="CENTER_RIGHT" spacing="10.0" >
                     <children>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="1" index="1"/>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="1" index="0"/>
+                        <Space mnemonicParsing="false"  row="1" index="1"/>
+                        <Space mnemonicParsing="false"  row="1" index="0"/>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_RIGHT" spacing="10.0" styleClass="pattern-row">
+                <HBox alignment="CENTER_RIGHT" spacing="10.0" >
                     <children>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="2" index="2"/>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="2" index="1"/>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="2" index="0"/>
+                        <Space mnemonicParsing="false" row="2" index="2"/>
+                        <Space mnemonicParsing="false" row="2" index="1"/>
+                        <Space mnemonicParsing="false" row="2" index="0"/>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_RIGHT" spacing="10.0" styleClass="pattern-row">
+                <HBox alignment="CENTER_RIGHT" spacing="10.0" >
                     <children>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="3" index="3"/>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="3" index="2"/>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="3" index="1"/>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="3" index="0"/>
+                        <Space mnemonicParsing="false" row="3" index="3"/>
+                        <Space mnemonicParsing="false" row="3" index="2"/>
+                        <Space mnemonicParsing="false" row="3" index="1"/>
+                        <Space mnemonicParsing="false" row="3" index="0"/>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_RIGHT" spacing="10.0" styleClass="pattern-row">
+                <HBox alignment="CENTER_RIGHT" spacing="10.0" >
                     <children>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="4" index="4"/>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="4" index="3"/>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="4" index="2"/>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="4" index="1"/>
-                        <Space mnemonicParsing="false" styleClass="pattern-tile-box" row="4" index="0"/>
+                        <Space mnemonicParsing="false" row="4" index="4"/>
+                        <Space mnemonicParsing="false" row="4" index="3"/>
+                        <Space mnemonicParsing="false" row="4" index="2"/>
+                        <Space mnemonicParsing="false" row="4" index="1"/>
+                        <Space mnemonicParsing="false" row="4" index="0"/>
                     </children>
                 </HBox>
             </children>
