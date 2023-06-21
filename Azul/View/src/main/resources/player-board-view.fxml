@@ -9,7 +9,10 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 
-<GridPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PlayerBoardController">
+<GridPane xmlns="http://javafx.com/javafx/19"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="pppp.group14project.controller.PlayerBoardController"
+          fx:id="boardview">
     <stylesheets>
         <URL value="@general-styles.css" />
     </stylesheets>
