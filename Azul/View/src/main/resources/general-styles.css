@@ -96,3 +96,20 @@ ClickableTile {
 #playerName {
     -fx-font-size: 20;
 }
+
+#addPlayerButton, #startButton {
+    -fx-pref-width: 110;
+    -fx-background-color: FloralWhite;
+}
+
+#addPlayerButton:hover, #startButton:hover {
+    -fx-background-color: #DFDAD0;
+}
+
+#usernameTextField {
+    -fx-max-width: 200;
+}
+
+#welcomeText {
+    -fx-font-size: 30;
+}

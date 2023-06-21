@@ -1,5 +1,6 @@
 package pppp.group14project.controller;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,7 +37,21 @@ public class GameController implements Initializable {
     List<Factory> factories = game.getFactoryList();
     factories.add(new Factory());
     factories.add(new Factory());
-    welcomeText.setText("Welcome " + game.getPlayerNameList() + "!");
+    String welcome_text = "Welcome ";
+    List<String> players = game.getPlayerNameList();
+    for(int i = 0; i < players.size(); i++) {
+      if(i > 0) {
+        welcome_text += ", ";
+      }
+      if (players.get(i) != null && !players.get(i).equals("")) {
+        welcome_text += players.get(i);
+      } else {
+        welcome_text += "anonymous";
+      }
+    }
+    welcomeText.setText(welcome_text + "!");
+
+    usernameTextField.setText(null);
 
     if(game.getPlayerNameList().size() == 4) {
       addPlayerButton.setDisable(true);
