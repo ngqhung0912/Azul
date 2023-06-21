@@ -94,7 +94,7 @@ ClickableTile {
 }
 
 #playerName {
-    -fx-font-size: 20;
+    -fx-font-size: 25;
 }
 
 #addPlayerButton, #startButton {

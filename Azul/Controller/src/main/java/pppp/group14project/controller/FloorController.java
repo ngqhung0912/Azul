@@ -77,7 +77,7 @@ public class FloorController {
         Button b = (Button) tileNode;
         b.setText("");
         tileNode.getStyleClass().add("button");
-
+        tileNode.getStyleClass().add("floorTileEmpty");
       }
 
     }
