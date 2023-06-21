@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.Floor;
 import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.FullException;
 
 import java.util.Iterator;
 import java.util.List;
@@ -36,7 +37,11 @@ public class FloorController {
 
   public void addTilesToFloor(List<Tile> tiles) {
     for (Tile tile : tiles) {
-      floor.addTile(tile);
+      try {
+        floor.addTile(tile);
+      } catch (FullException e) {
+        playerBoardController.moveTilesToTileContainer(tile);
+      }
     }
   }
 
@@ -51,20 +56,29 @@ public class FloorController {
     Iterator<Node> tileNodeIterator = tileNodes.iterator();
     Iterator<Tile> tileIterator = tiles.iterator();
 
-    while (tileNodeIterator.hasNext() && tileIterator.hasNext()) {
+    while (tileNodeIterator.hasNext()) {
       Node tileNode = tileNodeIterator.next();
-      Tile tile = tileIterator.next();
 
-      tileNode.getStyleClass().clear();
-      tileNode.getStyleClass().add("is-colored");
-      tileNode.getStyleClass().add(String.valueOf(tile));
-      System.out.println(tileNode.getStyleClass());
-      if (tile == Tile.STARTING){
-        Button starting = (Button) tileNode;
-        starting.setText("1");
-        starting.setAlignment(Pos.CENTER);
+      if (tileIterator.hasNext()) {
+        Tile tile = tileIterator.next();
+
+        tileNode.getStyleClass().clear();
+        tileNode.getStyleClass().add("is-colored");
+        tileNode.getStyleClass().add(String.valueOf(tile));
+        if (tile == Tile.STARTING) {
+          Button starting = (Button) tileNode;
+          starting.setText("1");
+          starting.setAlignment(Pos.CENTER);
+        }
+      } else {
+
+        // Resets the Tile
+        tileNode.getStyleClass().clear();
+        Button b = (Button) tileNode;
+        b.setText("");
+        tileNode.getStyleClass().add("button");
+
       }
-
 
     }
   }

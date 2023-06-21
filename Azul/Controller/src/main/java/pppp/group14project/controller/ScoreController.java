@@ -26,14 +26,4 @@ public class ScoreController {
     });
   }
 
-  public void updateScore() {
-    // additional check if currently displayed score is the same as the score in the model
-    int displayedScore = Integer.parseInt(scoreText.getText());
-    int modelScore = board.getScore().intValue();
-    assert displayedScore == modelScore;
-
-    int floorScore = board.getFloor().getScore();
-    int wallScore = board.getWall().getWallScore();
-    board.updateScore(floorScore + wallScore);
-  }
 }

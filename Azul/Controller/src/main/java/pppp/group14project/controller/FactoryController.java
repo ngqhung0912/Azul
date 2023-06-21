@@ -47,6 +47,7 @@ public class FactoryController {
             tile.getStyleClass().clear();
             tile.getStyleClass().add(String.valueOf(colour));
             tile.setColour(colour);
+            tile.setVisible(true);
         }
         // Hide the other ClickableTiles that are not colored
         int i = colours.size();

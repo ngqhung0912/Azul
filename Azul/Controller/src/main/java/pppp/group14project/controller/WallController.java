@@ -10,13 +10,11 @@ import javafx.scene.shape.Rectangle;
 
 import lombok.Getter;
 import lombok.Setter;
-import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.Wall;
 import pppp.group14project.model.exceptions.FullException;
 import pppp.group14project.model.exceptions.WrongTileException;
 
-import java.util.List;
 
 
 public class WallController {
@@ -43,13 +41,6 @@ public class WallController {
      * @param row on which row it should be added
      */
     public void addTileToWall(Tile tile, int row) throws FullException, WrongTileException {
-//        Rectangle tileToWall = findTileLocationInRow(row, tile);
-//        if (tileToWall != null) {
-//            int column = GridPane.getColumnIndex(tileToWall);
-//            tileToWall.setOpacity(1.0);
-//            tileToWall.setStrokeWidth(3);
-//            wall.addTile(tile, row, column);
-//        }
         wall.addTile(tile, row);
     }
 

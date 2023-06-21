@@ -12,9 +12,4 @@ public class Player {
     public Player(String name) {
         this.name = name;
     }
-
-    public static void main(String[] args) {
-        Player player = new Player("Hung");
-        System.out.println(player.getName());
-    }
 }

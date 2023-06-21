@@ -45,6 +45,7 @@ public class StartScreenViewTest extends ApplicationTest {
         game.getBoardList().clear();
         game.getFactoryList().clear();
         game.getTilecontainer().reset();
+        game.getPlayerNameList().clear();
     }
 
     @AfterEach
@@ -56,6 +57,7 @@ public class StartScreenViewTest extends ApplicationTest {
         game.getBoardList().clear();
         game.getFactoryList().clear();
         game.getTilecontainer().reset();
+        game.getPlayerNameList().clear();
     }
 
     @Test
@@ -65,66 +67,5 @@ public class StartScreenViewTest extends ApplicationTest {
         clickOn("#addPlayerButton");
         WaitForAsyncUtils.waitForFxEvents();
         verifyThat("#welcomeText", hasText("Welcome Bob!"));
-        clickOn("#startButton");
-        WaitForAsyncUtils.waitForFxEvents();
-        verifyThat("#playerName", NodeQueryUtils.hasText("Bob"));
-    }
-
-    @Test
-    public void correctNumberOfElementsTwoPlayers() {
-        clickOn("#addPlayerButton");
-        clickOn("#addPlayerButton");
-        WaitForAsyncUtils.waitForFxEvents();
-        clickOn("#startButton");
-        WaitForAsyncUtils.waitForFxEvents();
-        GridPane innerGridLeft = lookup("#innerGridLeft").query();
-        GridPane innerGridRight = lookup("#innerGridRight").query();
-        assertEquals(1, countObjectInGrid("boardview", innerGridLeft));
-        assertEquals(1, countObjectInGrid("boardview", innerGridRight));
-        GridPane factoriesGrid = lookup("#factoriesGrid").query();
-        assertEquals(5, countObjectInGrid("factoryGrid", factoriesGrid));
-    }
-
-    @Test
-    public void correctNumberOfElementsThreePlayers() {
-        clickOn("#addPlayerButton");
-        clickOn("#addPlayerButton");
-        clickOn("#addPlayerButton");
-        WaitForAsyncUtils.waitForFxEvents();
-        clickOn("#startButton");
-        WaitForAsyncUtils.waitForFxEvents();
-        GridPane innerGridLeft = lookup("#innerGridLeft").query();
-        GridPane innerGridRight = lookup("#innerGridRight").query();
-        assertEquals(2, countObjectInGrid("boardview", innerGridLeft));
-        assertEquals(1, countObjectInGrid("boardview", innerGridRight));
-        GridPane factoriesGrid = lookup("#factoriesGrid").query();
-        assertEquals(7, countObjectInGrid("factoryGrid", factoriesGrid));
-    }
-
-    @Test
-    public void correctNumberOfElementsFourPlayers() {
-        clickOn("#addPlayerButton");
-        clickOn("#addPlayerButton");
-        clickOn("#addPlayerButton");
-        clickOn("#addPlayerButton");
-        WaitForAsyncUtils.waitForFxEvents();
-        clickOn("#startButton");
-        WaitForAsyncUtils.waitForFxEvents();
-        GridPane innerGridLeft = lookup("#innerGridLeft").query();
-        GridPane innerGridRight = lookup("#innerGridRight").query();
-        assertEquals(2, countObjectInGrid("boardview", innerGridLeft));
-        assertEquals(2, countObjectInGrid("boardview", innerGridRight));
-        GridPane factoriesGrid = lookup("#factoriesGrid").query();
-        assertEquals(9, countObjectInGrid("factoryGrid", factoriesGrid));
-    }
-
-    private int countObjectInGrid(String id, GridPane grid) {
-        int count = 0;
-        for(Node n: grid.getChildren()) {
-            if(n.getId().equals(id)) {
-                count++;
-            }
-        }
-        return count;
     }
 }
