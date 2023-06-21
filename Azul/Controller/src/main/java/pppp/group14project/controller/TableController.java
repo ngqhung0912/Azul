@@ -70,7 +70,6 @@ public class TableController {
                     node = (ClickableTile) tableGridPane.getChildren().get(currentRow);
                     opacity = node.getOpacity();
                     node.setColour(tile);
-                    System.out.println(node);
                     currentRow++;
                 }
 
@@ -104,7 +103,6 @@ public class TableController {
         for (Node node : tableGridPane.getChildren()) {
             ObservableList<String> style = node.getStyleClass();
             if (style.contains(colour) || style.contains("STARTING")) {
-                System.out.println("SELECTED");
                 style.add("selected");
             } else {
                 style.remove("selected");

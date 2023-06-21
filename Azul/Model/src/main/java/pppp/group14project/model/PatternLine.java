@@ -42,12 +42,14 @@ public class PatternLine {
 
         List<Tile> returnedTiles = new ArrayList(t);
         // Moves Tiles from t to tiles
+        System.out.println("Tiles on PatternLine before adding: " + this.spaces);
         for (int i = 0; i < spaces.size(); i++) {
             if (returnedTiles.size() == 0)
                 return returnedTiles;
             if (spaces.get(i) == null)
                 spaces.set(i, returnedTiles.remove(0));
         }
+        System.out.println("Tiles on PatternLine after adding: " + this.spaces);
         return returnedTiles;
     }
 

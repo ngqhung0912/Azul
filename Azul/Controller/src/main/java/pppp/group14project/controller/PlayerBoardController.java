@@ -144,15 +144,15 @@ public class PlayerBoardController implements Initializable, Mediator {
         PatternLine patternLine = patternLines.get(i);
         System.out.println(i + " is full: " + patternLine.isFull());
         if (patternLine.isFull()) {
-          List<Tile> tilesToMove = patternLine.getSpaces();
+          List<Tile> tilesToMove = new ArrayList<>(patternLine.getSpaces());
+          System.out.println("PatternLine size before: " + patternLine.getSpaces().size());
           Tile wallTile = tilesToMove.remove(0);
           wallController.addTileToWall(wallTile, i);
           returnTiles.addAll(tilesToMove);
-          System.out.println(wallTile);
-          System.out.println(tilesToMove);
           // Move remaining tiles to discardedTiles in TileContainer
-
+          System.out.println("PatternLine size mid: " + patternLine.getSpaces().size());
           patternLine.empty();
+          System.out.println("PatternLine size after: " + patternLine.getSpaces().size());
         }
       }
     } catch (FullException | WrongTileException ignored) {

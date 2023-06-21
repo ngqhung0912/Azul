@@ -72,10 +72,7 @@ public class FactoryController {
         for (Node node : tileGrid.getChildren()) {
             ObservableList<String> styleClass = node.getStyleClass();
             if (styleClass.contains("selected")) {
-                System.out.println(node.getStyleClass());
                 styleClass.remove("selected");
-                System.out.println("Removed style from Tile");
-                System.out.println(node.getStyleClass());
             }
         }
     }

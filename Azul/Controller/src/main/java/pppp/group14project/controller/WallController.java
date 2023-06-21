@@ -94,7 +94,6 @@ public class WallController {
                 Tile color = Wall.getTileColor(rowID, columnID);
                 node.getStyleClass().add(color.toString());
                 node.getStyleClass().add("is-not-colored");
-                System.out.println(node.getStyleClass());
             }
         }
     }

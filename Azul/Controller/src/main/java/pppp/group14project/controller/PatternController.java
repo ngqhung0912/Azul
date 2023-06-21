@@ -127,9 +127,12 @@ public class PatternController {
                     List<Tile> startingTile = new ArrayList<>();
                     startingTile.add(Tile.STARTING);
                     playerBoardController.moveTilesToFloor(startingTile);
+                    System.out.println("Moving Starting Tile to Floor!");
                 }
 
+                System.out.println("Processing the following grabbed Tiles: " + grabbedTiles);
                 List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
+                System.out.println("Excess tiles: " + excessTiles);
                 playerBoardController.moveTilesToFloor(excessTiles);
 
             } catch (WrongTileException ex) {
@@ -176,10 +179,10 @@ public class PatternController {
         for (int i = 0; i < numberOfTiles; i++) {
 
             Space s = getSpace(rowNumber, i);
-            System.out.println("Styles: " + s.getStyleClass());
             s.getStyleClass().clear();
             s.getStyleClass().add("button");
             s.getStyleClass().add("pattern-tile-box");
+
         }
 
     }
@@ -213,7 +216,6 @@ public class PatternController {
                     Tile tileColor = pattern.getPatternLines().get(rowNumber).getTileType();
                     try {
                         // Update views
-                        System.out.println("Number of full spaces " + tileColor + numberOfTiles);
                         resetTiles(rowNumber);
                         setTiles(rowNumber, numberOfTiles, tileColor);
                     } catch (InvalidPositionException e) {
