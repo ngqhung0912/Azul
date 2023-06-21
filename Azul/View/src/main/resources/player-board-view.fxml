@@ -15,13 +15,10 @@
     </stylesheets>
     <Rectangle height="300.0" styleClass="playerBoard" width="420.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <GridPane fx:id="playerBoardGrid" maxWidth="420.0">
-        <Label fx:id="playerName" GridPane.columnIndex="3">
+        <Label fx:id="playerName" text="Test" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
-            <GridPane.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </GridPane.margin>
         </Label>
         <rowConstraints>
             <RowConstraints minHeight="0" percentHeight="12.0" />
@@ -29,7 +26,7 @@
             <RowConstraints minHeight="0" percentHeight="23.0" />
         </rowConstraints>
         <columnConstraints>
-            <ColumnConstraints minWidth="0" percentWidth="4.0" />
+            <ColumnConstraints minWidth="0" percentWidth="3.0" />
             <ColumnConstraints minWidth="0" percentWidth="42.0" />
             <ColumnConstraints minWidth="0" percentWidth="8.0" />
             <ColumnConstraints minWidth="0" percentWidth="42.0" />
@@ -42,4 +39,10 @@
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
