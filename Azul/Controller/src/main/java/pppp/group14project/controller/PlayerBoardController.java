@@ -73,7 +73,7 @@ public class PlayerBoardController implements Initializable, Mediator {
       FXMLLoader wallLoader = new FXMLLoader(getClass().getResource("/player-wall-view.fxml"));
       StackPane playerPattern = patternLoader.load();
       GridPane playerFloor = floorLoader.load();
-      AnchorPane playerScore = scoreLoader.load();
+      GridPane playerScore = scoreLoader.load();
       GridPane playerWall = wallLoader.load();
 
       playerBoardGrid.add(playerPattern, 1, 1);
