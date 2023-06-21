@@ -288,8 +288,7 @@ public class GameBoardController implements Initializable, Mediator {
 
   @Override
   public void moveTilesToTileContainer(Tile tile) {
-    this.getGame().getTilecontainer().addDiscardedTiles(Collections.singletonList(tile));
-
+    game.getTilecontainer().addDiscardedTiles(Collections.singletonList(tile));
   }
 
   @Override

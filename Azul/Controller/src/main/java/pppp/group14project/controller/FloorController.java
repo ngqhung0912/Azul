@@ -40,7 +40,7 @@ public class FloorController {
       try {
         floor.addTile(tile);
       } catch (FullException e) {
-        playerBoardController.getGameBoardController().moveTilesToTileContainer(tile);
+        playerBoardController.moveTilesToTileContainer(tile);
       }
     }
   }

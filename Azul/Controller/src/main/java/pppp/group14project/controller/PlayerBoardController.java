@@ -184,7 +184,7 @@ public class PlayerBoardController implements Initializable, Mediator {
 
   @Override
   public void moveTilesToTileContainer(Tile tile) {
-    // TODO: not implemented in the player board mediator
+    gameBoardController.moveTilesToTileContainer(tile);
   }
 
   @Override
@@ -197,9 +197,7 @@ public class PlayerBoardController implements Initializable, Mediator {
    */
   @Override
   public void updateScore() {
-
     board.updateScore();
-    scoreController.updateScore();
   }
 
   @Override
