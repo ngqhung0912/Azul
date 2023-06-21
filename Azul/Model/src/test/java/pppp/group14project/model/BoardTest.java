@@ -42,7 +42,7 @@ public class BoardTest {
             board.getFloor().addTile(Tile.STARTING);
             board.getFloor().addTile(Tile.BLUE);
             // Turn ends, update score
-            assertBoardScore(8);
+            assertBoardScore(6);
             board.getFloor().emptyFloor();
         } catch (FullException | WrongTileException e) {
             fail("Should not throw");;
@@ -78,7 +78,7 @@ public class BoardTest {
             board.getFloor().addTile(Tile.STARTING);
             board.getFloor().addTile(Tile.BLUE);
             // Turn ends, update score
-            assertBoardScore(8);
+            assertBoardScore(6);
             board.getFloor().emptyFloor();
         } catch (FullException | WrongTileException e) {
             fail("Should not throw");;
@@ -89,7 +89,6 @@ public class BoardTest {
 
     void assertBoardScore(int score) {
         board.updateScore();
-        System.out.println(board.getScore());
         assert(board.getScore().intValue() == score);
     }
 

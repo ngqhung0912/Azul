@@ -210,21 +210,18 @@ public class Wall {
         assert (row >= 0 && row < wall.size());
         assert (col >= 0 && col < wall.get(row).size());
 
-        System.out.println("1:" + wallScore);
 
         int horizontalNeighboringTiles = countNeighboringTiles(row, col + 1, "right") +  // right
                 countNeighboringTiles(row, col - 1, "left");  // left
         if (horizontalNeighboringTiles > 0) {
             wallScore += horizontalNeighboringTiles + 1;
         }
-        System.out.println("2:" + wallScore);
 
         int verticalNeighboringTiles = countNeighboringTiles(row + 1, col, "top") +  // top
                 countNeighboringTiles(row - 1 , col, "bottom");  // bottom
         if (verticalNeighboringTiles > 0) {
             wallScore += verticalNeighboringTiles + 1;
         }
-        System.out.println("3:" + wallScore);
 
         if (horizontalNeighboringTiles == 0 && verticalNeighboringTiles == 0) {
             wallScore += 1;
