@@ -17,10 +17,6 @@
         <ColumnConstraints percentWidth="100.0" minWidth="0"/>
     </columnConstraints>
     <children>
-        <Text fx:id="scoreText" text="0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" >
-            <font>
-                <Font name="System Bold" size="36.0" />
-            </font>
-        </Text>
+        <Text fx:id="scoreText" text="0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
     </children>
 </GridPane>

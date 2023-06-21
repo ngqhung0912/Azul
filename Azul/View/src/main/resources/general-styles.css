@@ -2,6 +2,10 @@
     -fx-background-color: #71BFD1;
 }
 
+Label, Text, Button {
+    -fx-font-family: Binner;
+}
+
 /* Colors or images for the different tiles */
 
 .is-not-colored {
@@ -53,8 +57,8 @@
     -fx-background-color: rgb(247, 247, 247);
     -fx-border-color: rgb(31, 98, 124);
     -fx-text-fill: rgb(31, 98, 124);
-    -fx-font-size: 14px;
-    -fx-font-family: "Arial";
+    -fx-font-size: 21px;
+    -fx-font-family: Binner;
     -fx-text-alignment: CENTER;
 }
 
@@ -83,4 +87,12 @@ ClickableTile {
     -fx-min-height: 33;
     -fx-background-insets: 1;
     -fx-background-radius: 0;
+}
+
+#scoreText {
+    -fx-font-size: 50;
+}
+
+#playerName {
+    -fx-font-size: 20;
 }
