@@ -81,8 +81,6 @@ public class StartScreenIntegrationTest extends ApplicationTest {
 
     @Test
     public void correctNumberOfElementsTwoPlayers() {
-        clickOn("#usernameTextField");
-        write("Bob");
         clickOn("#addPlayerButton");
         clickOn("#addPlayerButton");
         WaitForAsyncUtils.waitForFxEvents();
@@ -90,16 +88,14 @@ public class StartScreenIntegrationTest extends ApplicationTest {
         WaitForAsyncUtils.waitForFxEvents();
         GridPane innerGridLeft = lookup("#innerGridLeft").query();
         GridPane innerGridRight = lookup("#innerGridRight").query();
-        assertEquals(1, countObjectInGrid("playerBoardGrid", innerGridLeft));
-        assertEquals(1, countObjectInGrid("playerBoardGrid", innerGridRight));
+        assertEquals(1, countObjectInGrid("boardview", innerGridLeft));
+        assertEquals(1, countObjectInGrid("boardview", innerGridRight));
         GridPane factoriesGrid = lookup("#factoriesGrid").query();
         assertEquals(5, countObjectInGrid("factoryGrid", factoriesGrid));
     }
 
     @Test
     public void correctNumberOfElementsThreePlayers() {
-        clickOn("#usernameTextField");
-        write("Bob");
         clickOn("#addPlayerButton");
         clickOn("#addPlayerButton");
         clickOn("#addPlayerButton");
@@ -108,16 +104,14 @@ public class StartScreenIntegrationTest extends ApplicationTest {
         WaitForAsyncUtils.waitForFxEvents();
         GridPane innerGridLeft = lookup("#innerGridLeft").query();
         GridPane innerGridRight = lookup("#innerGridRight").query();
-        assertEquals(2, countObjectInGrid("playerBoardGrid", innerGridLeft));
-        assertEquals(1, countObjectInGrid("playerBoardGrid", innerGridRight));
+        assertEquals(2, countObjectInGrid("boardview", innerGridLeft));
+        assertEquals(1, countObjectInGrid("boardview", innerGridRight));
         GridPane factoriesGrid = lookup("#factoriesGrid").query();
         assertEquals(7, countObjectInGrid("factoryGrid", factoriesGrid));
     }
 
     @Test
     public void correctNumberOfElementsFourPlayers() {
-        clickOn("#usernameTextField");
-        write("Bob");
         clickOn("#addPlayerButton");
         clickOn("#addPlayerButton");
         clickOn("#addPlayerButton");
@@ -127,8 +121,8 @@ public class StartScreenIntegrationTest extends ApplicationTest {
         WaitForAsyncUtils.waitForFxEvents();
         GridPane innerGridLeft = lookup("#innerGridLeft").query();
         GridPane innerGridRight = lookup("#innerGridRight").query();
-        assertEquals(2, countObjectInGrid("playerBoardGrid", innerGridLeft));
-        assertEquals(2, countObjectInGrid("playerBoardGrid", innerGridRight));
+        assertEquals(2, countObjectInGrid("boardview", innerGridLeft));
+        assertEquals(2, countObjectInGrid("boardview", innerGridRight));
         GridPane factoriesGrid = lookup("#factoriesGrid").query();
         assertEquals(9, countObjectInGrid("factoryGrid", factoriesGrid));
     }
