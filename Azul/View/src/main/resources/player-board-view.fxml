@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
 
 <GridPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.PlayerBoardController">
     <stylesheets>
@@ -15,7 +15,29 @@
     </stylesheets>
     <Rectangle height="300.0" styleClass="playerBoard" width="420.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <GridPane fx:id="playerBoardGrid" maxWidth="420.0">
-        <Label fx:id="playerName" text="Test" GridPane.columnIndex="1" GridPane.valignment="BOTTOM"/>
+        <Label fx:id="playerName" text="Test" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
+        <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints minWidth="17.0" percentWidth="100" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="30.0" percentHeight="20.0" />
+                <RowConstraints minHeight="30.0" percentHeight="20.0" />
+                <RowConstraints minHeight="30.0" percentHeight="20.0" />
+                <RowConstraints minHeight="30.0" percentHeight="20.0" />
+                <RowConstraints minHeight="30.0" percentHeight="20.0" />
+            </rowConstraints>
+            <children>
+                <Polygon points="-50.0, 40.0, -33.0, 55.0, -50.0, 70.0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                <Polygon points="-50.0, 40.0, -33.0, 55.0, -50.0, 70.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                <Polygon points="-50.0, 40.0, -33.0, 55.0, -50.0, 70.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                <Polygon points="-50.0, 40.0, -33.0, 55.0, -50.0, 70.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                <Polygon points="-50.0, 40.0, -33.0, 55.0, -50.0, 70.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            </children>
+            <GridPane.margin>
+                <Insets bottom="5.0" top="5.0" />
+            </GridPane.margin>
+        </GridPane>
         <rowConstraints>
             <RowConstraints minHeight="0" percentHeight="12.0" />
             <RowConstraints minHeight="0" percentHeight="65.0" />
@@ -28,9 +50,9 @@
             <ColumnConstraints minWidth="0" percentWidth="42.0" />
             <ColumnConstraints minWidth="0" percentWidth="4.0" />
         </columnConstraints>
-      <GridPane.margin>
-         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-      </GridPane.margin>
+        <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </GridPane.margin>
     </GridPane>
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
