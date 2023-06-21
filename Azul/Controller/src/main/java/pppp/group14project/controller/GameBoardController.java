@@ -9,17 +9,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
-import pppp.group14project.model.Board;
-import pppp.group14project.model.Factory;
-import pppp.group14project.model.Game;
-import pppp.group14project.model.Tile;
+import pppp.group14project.model.*;
 import pppp.group14project.model.exceptions.FullException;
 
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -157,6 +153,58 @@ public class GameBoardController implements Initializable, Mediator {
     List<Tile> tilesForFactories = game.getTilecontainer().grabBagTiles(numberOfTilesForFactories);
     game.fillFactories(tilesForFactories);
 
+    game.generateTurns(0); // Start from Player 0
+
+  }
+
+  private void finishRound() {
+
+    System.out.println("All Factories and Table are empty");
+
+    // Update starting player
+    int startingPlayerID = 0;
+    for (int i = 0; i < playerBoardControllers.size(); i++) {
+      if (playerBoardControllers.get(i).getFloorController().getFloor().getTiles().contains(Tile.STARTING)) {
+        startingPlayerID = i;
+        break;
+      }
+    }
+    game.generateTurns(startingPlayerID);
+    System.out.println("Player " + startingPlayerID + " starts the next round!");
+
+    // Move Tiles from Pattern to Wall, and empty Floor for each player
+
+    for (PlayerBoardController p: playerBoardControllers) {
+
+      List<Tile> returnTilesWall = p.moveTilesToWall();
+      game.getTilecontainer().addDiscardedTiles(returnTilesWall);
+
+      System.out.println("Wall score: " + p.getFloorController().getFloor().getScore());
+      p.updateScore();
+      List<Tile> returnTilesFloor = p.removeTilesFromFloor();
+      if (returnTilesFloor.contains(Tile.STARTING)) {
+        returnTilesFloor.remove(Tile.STARTING);
+      }
+      game.getTilecontainer().addDiscardedTiles(returnTilesFloor);
+
+    }
+
+    // Re-fill Factories
+
+    for (FactoryController f: factoryControllers) {
+      try {
+        List<Tile> tilesToAdd = game.getTilecontainer().grabBagTiles(4);
+        f.getFactory().addTiles(tilesToAdd);
+      } catch (FullException e) {
+        throw new RuntimeException(e);
+      }
+    }
+    try {
+      tableController.getTable().addTile(Tile.STARTING);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+
   }
 
   public void deselectAllFactories() {
@@ -166,11 +214,22 @@ public class GameBoardController implements Initializable, Mediator {
     tableController.unhighlightAllTiles();
   }
 
+  public boolean factoriesAndTableEmpty() {
+    for (FactoryController f: factoryControllers) {
+      if (!f.getFactory().isEmpty())
+        return false;
+    }
+    if (!tableController.getTable().isEmpty())
+      return false;
+    return true;
+  }
+
   // Pass
   public void highlightCurrentPlayerBoard(Tile tileColor, Factory f) {
-    int playerID = 0;
 
-    PlayerBoardController activePlayer = playerBoardControllers.get(0);
+    int playerID = game.getNextPlayerID();
+
+    PlayerBoardController activePlayer = playerBoardControllers.get(playerID);
 
     try {
       activePlayer.activate(tileColor, f);
@@ -178,13 +237,33 @@ public class GameBoardController implements Initializable, Mediator {
       throw new RuntimeException(e);
     }
 
+  }
+
+  public void finishPlayerTurn() {
+    // If Factories are empty start next round, otherwise go to next player
+    if (factoriesAndTableEmpty()) {
+
+      finishRound();
+
+    } else {
+
+      game.nextPlayer();
+
+    }
 
   }
 
 
-  @Override
-  public void moveTilesToWall(Tile tile, int rowNumber) {
 
+
+  @Override
+  public List<Tile> moveTilesToWall() {
+    return null;
+  }
+
+  @Override
+  public List<Tile> removeTilesFromFloor() {
+    return null;
   }
 
   @Override

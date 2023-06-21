@@ -125,7 +125,7 @@ public class Wall {
      * @param row  row to be checked
      * @return whether the tile is in the row
      */
-    private boolean isTileInRow(Tile tile, int row) {
+    public boolean isTileInRow(Tile tile, int row) {
         ObservableList<Tile> targetRow = this.wall.get(row);
         for (Tile t : targetRow) {
             if (t == tile) {
@@ -300,4 +300,5 @@ public class Wall {
         }
         return fullColorsCount;
     }
+
 }

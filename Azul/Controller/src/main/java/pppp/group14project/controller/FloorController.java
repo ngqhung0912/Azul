@@ -51,18 +51,32 @@ public class FloorController {
     Iterator<Node> tileNodeIterator = tileNodes.iterator();
     Iterator<Tile> tileIterator = tiles.iterator();
 
-    while (tileNodeIterator.hasNext() && tileIterator.hasNext()) {
+    while (tileNodeIterator.hasNext()) {
       Node tileNode = tileNodeIterator.next();
-      Tile tile = tileIterator.next();
 
-      tileNode.getStyleClass().clear();
-      tileNode.getStyleClass().add(String.valueOf(tile));
-      if (tile == Tile.STARTING){
-        Button starting = (Button) tileNode;
-        starting.setText("1");
-        starting.setAlignment(Pos.CENTER);
+      if (tileIterator.hasNext()) {
+        Tile tile = tileIterator.next();
+
+        System.out.println("Cleared Button");
+        System.out.println(tiles);
+        System.out.println(tileNode.getStyleClass());
+        tileNode.getStyleClass().clear();
+        tileNode.getStyleClass().add(String.valueOf(tile));
+        System.out.println(tileNode.getStyleClass());
+        if (tile == Tile.STARTING) {
+          Button starting = (Button) tileNode;
+          starting.setText("1");
+          starting.setAlignment(Pos.CENTER);
+        }
+      } else {
+
+        // Resets the Tile
+        tileNode.getStyleClass().clear();
+        Button b = (Button) tileNode;
+        b.setText("");
+        tileNode.getStyleClass().add("button");
+
       }
-
 
     }
   }
