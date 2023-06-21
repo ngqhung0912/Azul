@@ -13,18 +13,18 @@
         <URL value="@general-styles.css" />
     </stylesheets>
     <columnConstraints>
-        <ColumnConstraints percentWidth="20.0" minWidth="0"/>
-        <ColumnConstraints percentWidth="20.0" minWidth="0"/>
-        <ColumnConstraints percentWidth="20.0" minWidth="0"/>
-        <ColumnConstraints percentWidth="20.0" minWidth="0"/>
-        <ColumnConstraints percentWidth="20.0" minWidth="0"/>
+        <ColumnConstraints percentWidth="20.0" minWidth="37"/>
+        <ColumnConstraints percentWidth="20.0" minWidth="37"/>
+        <ColumnConstraints percentWidth="20.0" minWidth="37"/>
+        <ColumnConstraints percentWidth="20.0" minWidth="37"/>
+        <ColumnConstraints percentWidth="20.0" minWidth="37"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints percentHeight="20.0" minHeight="0"/>
-        <RowConstraints percentHeight="20.0" minHeight="0"/>
-        <RowConstraints percentHeight="20.0" minHeight="0"/>
-        <RowConstraints percentHeight="20.0" minHeight="0"/>
-        <RowConstraints percentHeight="20.0" minHeight="0"/>
+        <RowConstraints percentHeight="20.0" minHeight="37"/>
+        <RowConstraints percentHeight="20.0" minHeight="37"/>
+        <RowConstraints percentHeight="20.0" minHeight="37"/>
+        <RowConstraints percentHeight="20.0" minHeight="37"/>
+        <RowConstraints percentHeight="20.0" minHeight="37"/>
     </rowConstraints>
     <children>
         <Button GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" disable="true" />
