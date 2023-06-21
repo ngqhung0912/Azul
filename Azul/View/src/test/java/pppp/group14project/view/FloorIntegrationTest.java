@@ -92,8 +92,7 @@ public class FloorIntegrationTest extends ApplicationTest {
 
         floorController.addTilesToFloor(additionalTileList);
         assertEquals(7, floor.getTiles().size());
-
-        assertEquals(-14, floor.getScore());
+        assertEquals(-14, floor.getFloorScore());
         // TODO test whether the excess tile end up in the box lid.
 
         floor.emptyFloor();

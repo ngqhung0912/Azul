@@ -42,7 +42,7 @@ public class Board {
   public void updateScore() {
       int floorScore = this.getFloor().getFloorScore();
       int wallScore = this.getWall().getWallScore();
-      this.score.set(floorScore + wallScore);
+      this.score.set(Math.max(floorScore + wallScore, 0));
   }
 
   public void useTeam13Wall() {

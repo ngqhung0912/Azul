@@ -16,6 +16,7 @@ import pppp.group14project.model.exceptions.FullException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -179,7 +180,7 @@ public class GameBoardController implements Initializable, Mediator {
       List<Tile> returnTilesWall = p.moveTilesToWall();
       game.getTilecontainer().addDiscardedTiles(returnTilesWall);
 
-      System.out.println("Wall score: " + p.getFloorController().getFloor().getScore());
+//      System.out.println("Wall score: " + p.getFloorController().getFloor().getScore());
       p.updateScore();
       List<Tile> returnTilesFloor = p.removeTilesFromFloor();
       if (returnTilesFloor.contains(Tile.STARTING)) {
@@ -283,6 +284,12 @@ public class GameBoardController implements Initializable, Mediator {
     } catch (FullException ignore){
 
     }
+  }
+
+  @Override
+  public void moveTilesToTileContainer(Tile tile) {
+    this.getGame().getTilecontainer().addDiscardedTiles(Collections.singletonList(tile));
+
   }
 
   @Override
