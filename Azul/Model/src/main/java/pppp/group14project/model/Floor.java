@@ -48,9 +48,6 @@ public class Floor {
     this.floorScore += tilePoints.get(IndexOfTilesAdded);
   }
 
-  private void resetScore() {
-    this.floorScore = 0;
-  }
 
 
   public List<Tile> emptyFloor() {
@@ -61,7 +58,6 @@ public class Floor {
       iterator.next();
       iterator.remove();
     }
-    this.resetScore();
     return returnTiles;
   }
 
