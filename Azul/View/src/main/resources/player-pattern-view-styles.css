@@ -1,23 +1,19 @@
-.pattern-tile-box {
-    -fx-min-width: 32;
-    -fx-min-height: 32;
+Space {
+    -fx-min-width: 33;
+    -fx-min-height: 33;
     -fx-background-color: rgb(249, 240, 229);
     -fx-border-color: rgb(199, 178, 153);
-    -fx-border-width: 2;
-    -fx-border-radius: 1;
+    -fx-border-width: 1;
+    /*-fx-border-radius: 1;*/
     -fx-background-insets: 1;
     -fx-background-radius: 0;
 }
 
-.pattern-row {
+HBox, VBox {
     -fx-spacing: 4;
 }
 
-.pattern-rows {
-    -fx-spacing: 4;
-}
-
-.pattern-view {
+StackPane {
     -fx-background-color: rgb(254, 250, 244);
     -fx-pref-width: 175;
     -fx-pref-height: 175;
@@ -26,42 +22,6 @@
     -fx-max-width: 175;
     -fx-max-height: 175;
 }
-
-
-/* Colors or images for the different tiles */
-
-.is-colored {
-    -fx-border-width: 2;
-}
-
-.BLACK {
-    -fx-background-color: rgb(24, 32, 41);
-    -fx-border-color: rgb(6, 11, 15);
-}
-
-.BLUE {
-    -fx-background-color: rgb(66, 137, 172);
-    -fx-border-color: rgb(31, 98, 124);
-}
-
-.WHITE {
-    -fx-background-color: rgb(232, 247, 246);
-    -fx-border-color: rgb(163, 216, 209);
-}
-
-.ORANGE {
-    -fx-background-color: rgb(238, 187, 92);
-    -fx-border-color: rgb(209, 143, 36);
-}
-
-.RED {
-    -fx-background-color: rgb(221, 79, 80);
-    -fx-border-color: rgb(153, 46, 56);
-}
-
-
-
-
 
 /* Effects for tiles that the player can choose to place a tile on */
 .tile-option:hover {

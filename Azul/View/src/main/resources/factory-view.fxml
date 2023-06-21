@@ -25,12 +25,12 @@
     <Circle fx:id="factoryCircle" radius="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
     <GridPane fx:id="tileGrid">
         <columnConstraints>
-            <ColumnConstraints percentWidth="50.0" />
-            <ColumnConstraints percentWidth="50.0" />
+            <ColumnConstraints percentWidth="50.0" minWidth="0"/>
+            <ColumnConstraints percentWidth="50.0" minWidth="0"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints percentHeight="50.0" />
-            <RowConstraints percentHeight="50.0" />
+            <RowConstraints percentHeight="50.0" minHeight="0"/>
+            <RowConstraints percentHeight="50.0" minHeight="0"/>
         </rowConstraints>
         <children>
             <ClickableTile fx:id="tile1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM" styleClass="BLACK">

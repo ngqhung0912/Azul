@@ -185,9 +185,6 @@ public class PatternController {
     }
 
     private void setTiles(int rowNumber, int numberOfTiles, Tile tileColor) throws InvalidPositionException {
-        System.out.println("Row: " + rowNumber);
-        System.out.println("NumTiles: " + numberOfTiles);
-
         for (int i = 0; i < numberOfTiles; i++) {
             HBox r = (HBox) rows.getChildren().get(rowNumber);
             final int maxNumberOfTiles = r.getChildren().size();

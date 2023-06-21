@@ -66,6 +66,6 @@ public class StartScreenViewTest extends ApplicationTest {
         write("Bob");
         clickOn("#addPlayerButton");
         WaitForAsyncUtils.waitForFxEvents();
-        verifyThat("#welcomeText", hasText("Welcome [Bob]!"));
+        verifyThat("#welcomeText", hasText("Welcome Bob!"));
     }
 }

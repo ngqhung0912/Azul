@@ -62,12 +62,9 @@ public class FloorController {
       if (tileIterator.hasNext()) {
         Tile tile = tileIterator.next();
 
-        System.out.println("Cleared Button");
-        System.out.println(tiles);
-        System.out.println(tileNode.getStyleClass());
         tileNode.getStyleClass().clear();
+        tileNode.getStyleClass().add("is-colored");
         tileNode.getStyleClass().add(String.valueOf(tile));
-        System.out.println(tileNode.getStyleClass());
         if (tile == Tile.STARTING) {
           Button starting = (Button) tileNode;
           starting.setText("1");

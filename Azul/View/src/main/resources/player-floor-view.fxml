@@ -1,46 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
 
-<?import java.net.URL?>
-<GridPane fx:id="floorGridPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.FloorController">
+<GridPane fx:id="floorGridPane"
+          xmlns="http://javafx.com/javafx/19"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="pppp.group14project.controller.FloorController" >
     <stylesheets>
         <URL value="@general-styles.css" />
     </stylesheets>
     <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.3" />
+      <ColumnConstraints minWidth="36.5" percentWidth="14.2" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints percentHeight="50.0" />
-      <RowConstraints percentHeight="50.0" />
+      <RowConstraints minHeight="0" percentHeight="40.0" />
+      <RowConstraints minHeight="0" percentHeight="60.0" />
    </rowConstraints>
-   <children>
-      <Label alignment="CENTER" text="-1" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER"></Label>
-      <Label alignment="CENTER" text="-1" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER"></Label>
-      <Label alignment="CENTER" text="-2" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER"></Label>
-      <Label alignment="CENTER" text="-2" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER"></Label>
-      <Label alignment="CENTER" text="-2" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER"></Label>
-      <Label alignment="CENTER" text="-3" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER"></Label>
-      <Label alignment="CENTER" text="-3" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER"></Label>
+    <children>
+        <Label alignment="CENTER" text="-1" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+        <Label alignment="CENTER" text="-1" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+        <Label alignment="CENTER" text="-2" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+        <Label alignment="CENTER" text="-2" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+        <Label alignment="CENTER" text="-2" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+        <Label alignment="CENTER" text="-3" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+        <Label alignment="CENTER" text="-3" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
 
-       <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
-       <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
-       <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
-       <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
-       <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
-       <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
-       <Button prefHeight="30.0" prefWidth="30.0" minHeight="30.0" minWidth="30.0" maxHeight="30.0" maxWidth="30.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" disable="true" />
-
-   </children>
+        <Button styleClass="floorTileEmpty" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTileEmpty" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
+        <Button styleClass="floorTileEmpty" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTileEmpty" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTileEmpty" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTileEmpty" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button styleClass="floorTileEmpty" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+    </children>
+    <padding>
+        <Insets left="-4.5" bottom="10"/>
+    </padding>
 </GridPane>

@@ -2,6 +2,10 @@
     -fx-background-color: #71BFD1;
 }
 
+Label, Text, Button {
+    -fx-font-family: Binner;
+}
+
 /* Colors or images for the different tiles */
 
 .is-not-colored {
@@ -9,10 +13,18 @@
     -fx-opacity: 0.3;
     -fx-border-color: rgb(101, 101, 101);
     -fx-background-color: rgb(101, 101, 101);
+    -fx-min-width: 33;
+    -fx-min-height: 33;
+    -fx-background-insets: 1;
+    -fx-background-radius: 0;
 }
 
 .is-colored {
     -fx-border-width: 3;
+    -fx-pref-width: 33;
+    -fx-pref-height: 33;
+    -fx-border-radius: 1;
+    -fx-background-insets: 1;
     -fx-opacity: 1;
 }
 
@@ -45,12 +57,10 @@
     -fx-background-color: rgb(247, 247, 247);
     -fx-border-color: rgb(31, 98, 124);
     -fx-text-fill: rgb(31, 98, 124);
-    -fx-font-size: 14px;
-    -fx-font-family: "Arial";
+    -fx-font-size: 21px;
+    -fx-font-family: Binner;
     -fx-text-alignment: CENTER;
 }
-
-
 
 ClickableTile {
     -fx-border-width: 3;
@@ -59,4 +69,47 @@ ClickableTile {
     -fx-border-radius: 1;
     -fx-background-insets: 1;
     -fx-cursor: hand;
+}
+
+.playerBoard {
+    -fx-arc-height: 16;
+    -fx-arc-width: 16;
+    -fx-fill: #fefaf4;
+    -fx-stroke: #c7b299;
+    -fx-stroke-width: 3;
+}
+
+.floorTileEmpty {
+    -fx-background-color: rgb(249, 240, 229);
+    -fx-border-color: rgb(199, 178, 153);
+    -fx-border-width: 1;
+    -fx-min-width: 33;
+    -fx-min-height: 33;
+    -fx-background-insets: 1;
+    -fx-background-radius: 0;
+}
+
+#scoreText {
+    -fx-font-size: 50;
+}
+
+#playerName {
+    -fx-font-size: 20;
+}
+
+#addPlayerButton, #startButton {
+    -fx-pref-width: 110;
+    -fx-background-color: FloralWhite;
+}
+
+#addPlayerButton:hover, #startButton:hover {
+    -fx-background-color: #DFDAD0;
+}
+
+#usernameTextField {
+    -fx-max-width: 200;
+}
+
+#welcomeText {
+    -fx-font-size: 30;
 }
