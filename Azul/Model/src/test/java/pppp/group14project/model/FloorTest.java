@@ -2,6 +2,7 @@ package pppp.group14project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pppp.group14project.model.exceptions.FullException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,16 +17,23 @@ class FloorTest {
 
   @Test
   void addSpecificTile(){
-    floor.addTile(Tile.STARTING);
+    try {
+      floor.addTile(Tile.STARTING);
+    } catch (FullException e) {
+      fail();
+    }
     assertEquals(1, floor.getTiles().size());
     assertEquals(Tile.STARTING, floor.getTiles().get(0));
   }
 
   @Test
   void emptyFloorLine(){
-    floor.addTile(Tile.RED);
-    floor.addTile(Tile.RED);
-    floor.addTile(Tile.ORANGE);
+    try {
+      floor.addTile(Tile.RED);
+      floor.addTile(Tile.RED);
+      floor.addTile(Tile.ORANGE);
+
+    } catch (FullException e) {fail();}
     assertEquals(3, floor.getTiles().size());
     floor.emptyFloor();
     assertEquals(0, floor.getTiles().size());
@@ -33,38 +41,51 @@ class FloorTest {
 
   @Test
   void addMoreTileThanMaximumFloorSize() {
-    floor.addTile(Tile.RED);
-    floor.addTile(Tile.RED);
-    floor.addTile(Tile.ORANGE);
-    floor.addTile(Tile.BLACK);
-    floor.addTile(Tile.WHITE);
-    floor.addTile(Tile.BLUE);
-    floor.addTile(Tile.WHITE);
+    try {
+      floor.addTile(Tile.RED);
+      floor.addTile(Tile.RED);
+      floor.addTile(Tile.ORANGE);
+      floor.addTile(Tile.BLACK);
+      floor.addTile(Tile.WHITE);
+      floor.addTile(Tile.BLUE);
+      floor.addTile(Tile.WHITE);
+    } catch (FullException e) {
+      fail();
+    }
     assertEquals(7, floor.getTiles().size());
-    floor.addTile(Tile.RED);
+    try {
+      floor.addTile(Tile.RED);
+      fail();
+    } catch (FullException ignored) {
+    }
     assertEquals(7, floor.getTiles().size());
   }
 
   @Test
   void whenFloorIsEmptyScoreIsZero() {
-    assertEquals(0, floor.getScore());
+    assertEquals(0, floor.getFloorScore());
   }
 
   @Test
   void whenFloorHasOneTileScoreIsMinusOne() {
-    floor.addTile(Tile.RED);
-    assertEquals(-1, floor.getScore());
+    try {
+      floor.addTile(Tile.RED);
+    } catch (FullException e) {fail();    }
+    assertEquals(-1, floor.getFloorScore());
   }
 
   @Test
   void whenFloorIsFullScoreIsMinusFourteen() {
-    floor.addTile(Tile.RED);
-    floor.addTile(Tile.RED);
-    floor.addTile(Tile.ORANGE);
-    floor.addTile(Tile.BLACK);
-    floor.addTile(Tile.WHITE);
-    floor.addTile(Tile.STARTING);
-    floor.addTile(Tile.BLUE);
-    assertEquals(-14, floor.getScore());
+    try {
+      floor.addTile(Tile.STARTING);
+      floor.addTile(Tile.RED);
+      floor.addTile(Tile.RED);
+      floor.addTile(Tile.ORANGE);
+      floor.addTile(Tile.BLACK);
+      floor.addTile(Tile.WHITE);
+      floor.addTile(Tile.BLUE);
+      System.out.println(floor.getTiles().size());
+    } catch (FullException e) {fail();}
+    assertEquals(-14, floor.getFloorScore());
   }
 }

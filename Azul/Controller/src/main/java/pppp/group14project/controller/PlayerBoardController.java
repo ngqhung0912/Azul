@@ -183,13 +183,21 @@ public class PlayerBoardController implements Initializable, Mediator {
   }
 
   @Override
+  public void moveTilesToTileContainer(Tile tile) {
+    gameBoardController.moveTilesToTileContainer(tile);
+  }
+
+  @Override
   public void removeTilesFromTable() {
 
   }
 
+  /**
+   * Get score AT THE END OF EVERY TURN!
+   */
   @Override
   public void updateScore() {
-    scoreController.updateScore();
+    board.updateScore();
   }
 
   @Override

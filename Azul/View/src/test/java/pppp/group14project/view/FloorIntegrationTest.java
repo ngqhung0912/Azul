@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.controller.*;
@@ -36,7 +37,6 @@ public class FloorIntegrationTest extends ApplicationTest {
             GitlabCISupport.headless();
         }
     }
-
     @Override
     public void start(Stage stage) throws Exception {
         player = new Player("test");
@@ -83,6 +83,7 @@ public class FloorIntegrationTest extends ApplicationTest {
         tileList.add(Tile.WHITE);
         tileList.add(Tile.ORANGE);
         tileList.add(Tile.BLACK);
+        tileList.add(Tile.BLACK);
         floorController.addTilesToFloor(tileList);
         assertEquals(tileList.size(), floor.getTiles().size());
 
@@ -92,9 +93,7 @@ public class FloorIntegrationTest extends ApplicationTest {
 
         floorController.addTilesToFloor(additionalTileList);
         assertEquals(7, floor.getTiles().size());
-
-        assertEquals(-14, floor.getScore());
-        // TODO test whether the excess tile end up in the box lid.
+        assertEquals(-14, floor.getFloorScore());
 
         floor.emptyFloor();
         assertEquals(0, floor.getTiles().size());

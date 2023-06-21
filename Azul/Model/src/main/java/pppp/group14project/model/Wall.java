@@ -77,7 +77,11 @@ public class Wall {
      */
     public void addTile(Tile tile, int row) throws FullException, WrongTileException {
         if (isTileInRow(tile, row)) throw new FullException();
-        addTile(tile, row, Wall.getTileColorColumn(tile, row));
+        int col = getTileColorColumn(tile, row);
+        addTile(tile, row, col);
+        updateWallScore(row, col);
+        System.out.println(tile + " " + wallScore);
+
     }
 
 
@@ -91,7 +95,6 @@ public class Wall {
     private void addTile(Tile tile, int row, int column) {
         ObservableList<Tile> targetRow = this.wall.get(row);
         targetRow.set(column, tile);
-        updateWallScore(row, column);
     }
 
     /**
@@ -207,19 +210,24 @@ public class Wall {
         assert (row >= 0 && row < wall.size());
         assert (col >= 0 && col < wall.get(row).size());
 
+
         int horizontalNeighboringTiles = countNeighboringTiles(row, col + 1, "right") +  // right
                 countNeighboringTiles(row, col - 1, "left");  // left
         if (horizontalNeighboringTiles > 0) {
             wallScore += horizontalNeighboringTiles + 1;
         }
+
         int verticalNeighboringTiles = countNeighboringTiles(row + 1, col, "top") +  // top
                 countNeighboringTiles(row - 1 , col, "bottom");  // bottom
         if (verticalNeighboringTiles > 0) {
             wallScore += verticalNeighboringTiles + 1;
         }
+
         if (horizontalNeighboringTiles == 0 && verticalNeighboringTiles == 0) {
             wallScore += 1;
         }
+        System.out.println(wallScore);
+
     }
 
 

@@ -13,10 +13,13 @@ public interface Mediator {
 
   void moveTilesToTable(List<Tile> tiles);
 
+  void moveTilesToTileContainer(Tile tile);
+
   void updateScore();
 
   void removeTilesFromTable();
 
   List<Tile> removeTilesFromFloor();
+
 
 }

@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.model.Floor;
 import pppp.group14project.model.Tile;
+import pppp.group14project.model.exceptions.FullException;
 
 import java.util.Iterator;
 import java.util.List;
@@ -36,7 +37,11 @@ public class FloorController {
 
   public void addTilesToFloor(List<Tile> tiles) {
     for (Tile tile : tiles) {
-      floor.addTile(tile);
+      try {
+        floor.addTile(tile);
+      } catch (FullException e) {
+        playerBoardController.moveTilesToTileContainer(tile);
+      }
     }
   }
 
