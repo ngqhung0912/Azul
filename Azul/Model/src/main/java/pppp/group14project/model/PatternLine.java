@@ -77,7 +77,9 @@ public class PatternLine {
      */
     public void empty() {
 //        this.spaces.removeAll();
+        System.out.println("Before: " + spaces);
         Collections.fill(this.spaces, null);
+        System.out.println("After: " + spaces);
     }
 
     /**

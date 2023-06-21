@@ -4,7 +4,11 @@ package pppp.group14project.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public class Floor {
   @Getter
@@ -31,5 +35,19 @@ public class Floor {
     return score;
   }
 
-  public void emptyFloor() { this.tiles.clear(); }
+  public List<Tile> emptyFloor() {
+    System.out.println("Before: " + tiles);
+    List<Tile> returnTiles = new ArrayList<>(tiles);
+
+    // Remove everything from tiles using an iterator
+    Iterator<Tile> iterator = tiles.iterator();
+    while (iterator.hasNext()) {
+      iterator.next();
+      iterator.remove();
+    }
+
+    System.out.println("After: " + tiles);
+    return returnTiles;
+  }
+
 }
