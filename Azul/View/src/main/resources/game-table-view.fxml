@@ -11,8 +11,8 @@
 <?import pppp.group14project.controller.ClickableTile?>
 
 <?import java.net.URL?>
-<GridPane fx:id="tableGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-          minWidth="-Infinity" prefHeight="600.0" prefWidth="110.0" xmlns="http://javafx.com/javafx/19"
+<?import javafx.geometry.Insets?>
+<GridPane fx:id="tableGridPane" alignment="CENTER" xmlns="http://javafx.com/javafx/19"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="pppp.group14project.controller.TableController">
     <stylesheets>
         <URL value="@game-table-view-styles.css"/>
@@ -72,4 +72,7 @@
         <ClickableTile opacity="0.0"  GridPane.columnIndex="1" GridPane.rowIndex="13"/>
         <ClickableTile opacity="0.0"  GridPane.columnIndex="1" GridPane.rowIndex="14"/>
     </children>
+    <GridPane.margin>
+        <Insets top="4"/>
+    </GridPane.margin>
 </GridPane>
