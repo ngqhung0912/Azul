@@ -11,6 +11,7 @@ import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.*;
 import pppp.group14project.model.exceptions.FullException;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 
 import java.io.IOException;
@@ -174,8 +175,8 @@ public class GameBoardController implements Initializable, Mediator {
 
     for (PlayerBoardController p: playerBoardControllers) {
 
-      List<Tile> returnTilesWall = p.moveTilesToWall();
-      game.getTilecontainer().addDiscardedTiles(returnTilesWall);
+      List<Tile> returnTilesWall = p.moveTileFromPatternToWall();
+      game.getTilecontainer().addDiscardedTiles(returnTilesWall); // TODO: call existing function
 
       p.updateScore();
       List<Tile> returnTilesFloor = p.removeTilesFromFloor();
@@ -250,15 +251,13 @@ public class GameBoardController implements Initializable, Mediator {
 
   }
 
-
   @Override
-  public List<Tile> moveTilesToWall() {
+  public List<Tile> removeTilesFromFloor() {
     return null;
   }
 
   @Override
-  public List<Tile> removeTilesFromFloor() {
-    return null;
+  public void moveTileToWall(Tile tile, int rowIndex) {
   }
 
   @Override
@@ -294,14 +293,4 @@ public class GameBoardController implements Initializable, Mediator {
   public void removeTilesFromTable() {
 //    tableController.removeSelectedTilesFromTable();
   }
-
-//  @Override
-//  public void removeTilesFromFactory(List<Tile> tiles, FactoryController factoryController) {
-//    try {
-//      tableController.addTilesToTable(tiles);
-//    } catch (FullException ignore){
-//
-//    }
-//    factoryController.emptyFactory();
-//  }
 }

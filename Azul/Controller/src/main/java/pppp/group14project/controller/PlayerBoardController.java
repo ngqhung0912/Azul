@@ -131,12 +131,7 @@ public class PlayerBoardController implements Initializable, Mediator {
         floorController.highlightFloor(tile, factory);
     }
 
-    /**
-     * Method which is called by the GameBoardController after every round to move tiles from Pattern to Wall
-     */
-    @Override
-    public List<Tile> moveTilesToWall() {
-
+    public List<Tile> moveTileFromPatternToWall() {
         List<Tile> returnTiles = new ArrayList<>();
         List<PatternLine> patternLines = patternController.getPattern().getPatternLines();
 
@@ -146,7 +141,7 @@ public class PlayerBoardController implements Initializable, Mediator {
                 if (patternLine.isFull()) {
                     List<Tile> tilesToMove = new ArrayList<>(patternLine.getSpaces());
                     Tile wallTile = tilesToMove.remove(0);
-                    wallController.addTileToWall(wallTile, i);
+                    moveTileToWall(wallTile, i);
                     returnTiles.addAll(tilesToMove);
                     // Move remaining tiles to discardedTiles in TileContainer
                     patternLine.empty();
@@ -158,6 +153,14 @@ public class PlayerBoardController implements Initializable, Mediator {
         }
 
         return returnTiles;
+    }
+
+    /**
+     * Method which is called by the GameBoardController after every round to move tiles from Pattern to Wall
+     */
+    @Override
+    public void moveTileToWall(Tile tile, int rowIndex) throws WrongTileException, FullException {
+        wallController.addTileToWall(tile, rowIndex);
     }
 
 
@@ -173,12 +176,10 @@ public class PlayerBoardController implements Initializable, Mediator {
 
     @Override
     public void moveTilesToPattern(List<Tile> tiles) {
-        // TODO: not implemented in the player board mediator
     }
 
     @Override
     public void moveTilesToTable(List<Tile> tiles) {
-        // TODO: not implemented in the player board mediator
     }
 
     @Override
