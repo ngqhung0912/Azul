@@ -181,7 +181,6 @@ class GameIntegrationTest extends ApplicationTest {
         table.empty();
         assertEquals(0, table.size());
         tableController.addTilesToTable(tileList);
-
         playerBoardController.activate(Tile.BLUE, table);
 
         patternController.patternMoveTiles(table, Tile.BLUE, 1);
