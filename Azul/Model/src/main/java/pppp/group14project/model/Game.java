@@ -93,10 +93,8 @@ public class Game {
     }
   }
 
-  public void resetGame(){
-//    boardList.clear();
-    instance = null;
-    getInstance();
+  public void resetGame() {
+    instance = new Game();
 
 //    factoryList.clear();
 //    tilecontainer.reset();
