@@ -17,28 +17,21 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.util.WaitForAsyncUtils;
 import pppp.group14project.controller.*;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.*;
 import org.junit.jupiter.api.Test;
 import pppp.group14project.model.Wall;
 import pppp.group14project.model.exceptions.FullException;
-import static org.testfx.api.FxAssert.verifyThat;
 
-import javafx.event.Event;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import pppp.group14project.model.exceptions.WrongTileException;
 
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.testfx.util.NodeQueryUtils.isVisible;
 
 class GameIntegrationTest extends ApplicationTest {
 
@@ -73,7 +66,6 @@ class GameIntegrationTest extends ApplicationTest {
     private static Game game;
 
     private GridPane gameBoardPane;
-
 
 
     @BeforeAll
@@ -123,20 +115,20 @@ class GameIntegrationTest extends ApplicationTest {
         pattern = patternController.getPattern();
 
 
-        stage.setScene(new Scene(root,1250, 700));
+        stage.setScene(new Scene(root, 1250, 700));
         stage.show();
         stage.toFront();
     }
 
 
     @AfterEach
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
         FxToolkit.hideStage();
         release(new KeyCode[]{});
         release(new MouseButton[]{});
-//        game.resetGame();
-        factory.empty();
-
+        game.getFactoryList().clear();
+        game.getBoardList().clear();
+        game.getTilecontainer().reset();
     }
 
 
@@ -158,12 +150,12 @@ class GameIntegrationTest extends ApplicationTest {
             playerBoardController.moveTilesToFloor(Collections.singletonList(Tile.BLUE));
         }
         assertEquals(7, playerBoardController.getFloorController().getFloor().getTiles().size());
-        assertEquals(0, gameBoardController.getGame().getTilecontainer().getDiscardedTiles().size() );
+        assertEquals(0, gameBoardController.getGame().getTilecontainer().getDiscardedTiles().size());
 
         for (int i = 0; i < 7; i++) {
             playerBoardController.moveTilesToFloor(Collections.singletonList(Tile.BLUE));
         }
-        assertEquals(7, gameBoardController.getGame().getTilecontainer().getDiscardedTiles().size() );
+        assertEquals(7, gameBoardController.getGame().getTilecontainer().getDiscardedTiles().size());
     }
 
     @Test
@@ -174,7 +166,7 @@ class GameIntegrationTest extends ApplicationTest {
         tileList.add(Tile.BLUE);
         tileList.add(Tile.RED);
         tableController.addTilesToTable(tileList);
-        assertEquals(tileList.size()+1, table.size());
+        assertEquals(tileList.size() + 1, table.size());
 
         List<Tile> expectedList = new ArrayList<>();
         expectedList.add(Tile.STARTING);

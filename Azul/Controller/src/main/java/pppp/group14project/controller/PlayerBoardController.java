@@ -26,182 +26,180 @@ import java.util.ResourceBundle;
 
 public class PlayerBoardController implements Initializable, Mediator {
 
-  /**
-   * FXML for updating the View
-   */
-  @FXML
-  public Label playerName;
-  @FXML
-  private GridPane playerBoardGrid;
+    /**
+     * FXML for updating the View
+     */
+    @FXML
+    public Label playerName;
+    @FXML
+    private GridPane playerBoardGrid;
 
-  /**
-   * Player board model
-   */
-  @Setter
-  @Getter
-  private Board board;
+    /**
+     * Player board model
+     */
+    @Setter
+    @Getter
+    private Board board;
 
-  /**
-   * References to other controllers
-   */
-  @Setter
-  @Getter
-  private PatternController patternController;
-  @Setter
-  @Getter
-  private FloorController floorController;
-  @Setter
-  @Getter
-  private WallController wallController;
-  @Setter
-  @Getter
-  private ScoreController scoreController;
-  @Setter
-  @Getter
-  private GameBoardController gameBoardController;
+    /**
+     * References to other controllers
+     */
+    @Setter
+    @Getter
+    private PatternController patternController;
+    @Setter
+    @Getter
+    private FloorController floorController;
+    @Setter
+    @Getter
+    private WallController wallController;
+    @Setter
+    @Getter
+    private ScoreController scoreController;
+    @Setter
+    @Getter
+    private GameBoardController gameBoardController;
 
-  public void setPlayerName(String playerName) {
-    this.playerName.setText(playerName);
-  }
-
-
-  @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
-    try {
-      FXMLLoader floorLoader = new FXMLLoader(getClass().getResource("/player-floor-view.fxml"));
-      FXMLLoader patternLoader = new FXMLLoader(getClass().getResource("/player-pattern-view.fxml"));
-      FXMLLoader scoreLoader = new FXMLLoader(getClass().getResource("/board-score-view.fxml"));
-      FXMLLoader wallLoader = new FXMLLoader(getClass().getResource("/player-wall-view.fxml"));
-      StackPane playerPattern = patternLoader.load();
-      GridPane playerFloor = floorLoader.load();
-      GridPane playerScore = scoreLoader.load();
-      GridPane playerWall = wallLoader.load();
-
-      playerBoardGrid.add(playerPattern, 1, 1);
-      playerBoardGrid.add(playerFloor, 1, 2);
-      playerBoardGrid.add(playerScore, 3,2);
-      playerBoardGrid.add(playerWall, 3, 1);
-
-      patternController = patternLoader.getController();
-      floorController = floorLoader.getController();
-      patternController.setPlayerBoardController(this);
-      floorController.setPlayerBoardController(this);
-      wallController = wallLoader.getController();
-      wallController.setPlayerBoardController(this);
-      scoreController = scoreLoader.getController();
-    } catch (
-            IOException e) {
-      e.printStackTrace();
+    public void setPlayerName(String playerName) {
+        this.playerName.setText(playerName);
     }
-  }
 
-  /**
-   * Initializes the models, once all models of its parent models have loaded
-   */
-  public void postInitialize() {
 
-    floorController.setPlayerBoardController(this);
-    floorController.setFloor(board.getFloor());
-    floorController.postInitialize();
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            FXMLLoader floorLoader = new FXMLLoader(getClass().getResource("/player-floor-view.fxml"));
+            FXMLLoader patternLoader = new FXMLLoader(getClass().getResource("/player-pattern-view.fxml"));
+            FXMLLoader scoreLoader = new FXMLLoader(getClass().getResource("/board-score-view.fxml"));
+            FXMLLoader wallLoader = new FXMLLoader(getClass().getResource("/player-wall-view.fxml"));
+            StackPane playerPattern = patternLoader.load();
+            GridPane playerFloor = floorLoader.load();
+            GridPane playerScore = scoreLoader.load();
+            GridPane playerWall = wallLoader.load();
 
-    patternController.setPlayerBoardController(this);
-    patternController.setPattern(board.getPattern());
-    patternController.postInitialize();
+            playerBoardGrid.add(playerPattern, 1, 1);
+            playerBoardGrid.add(playerFloor, 1, 2);
+            playerBoardGrid.add(playerScore, 3, 2);
+            playerBoardGrid.add(playerWall, 3, 1);
 
-    wallController.setPlayerBoardController(this);
-    wallController.setWall(board.getWall());
-    wallController.postInitialize();
-
-    scoreController.setBoard(board);
-    scoreController.postInitialize();
-  }
-
-  /**
-   * Concrete Mediator implementation of moving tiles between different GameBoard components
-   */
-
-  /**
-   * Activates this PlayerBoard for interactivity, and highlights possible spaces for some passed tile
-   * @param tile
-   * @param factory
-   */
-  public void activate(Tile tile, Factory factory) throws InvalidPositionException {
-    patternController.highlightPossibleSpaces(tile, factory);
-  }
-
-  /**
-   * Method which is called by the GameBoardController after every round to move tiles from Pattern to Wall
-   *
-   */
-  @Override
-  public List<Tile> moveTilesToWall() {
-
-    List<Tile> returnTiles = new ArrayList<>();
-    List<PatternLine> patternLines = patternController.getPattern().getPatternLines();
-
-    try {
-      for (int i = 0; i < patternLines.size(); i++) {
-        PatternLine patternLine = patternLines.get(i);
-        if (patternLine.isFull()) {
-          List<Tile> tilesToMove = new ArrayList<>(patternLine.getSpaces());
-          Tile wallTile = tilesToMove.remove(0);
-          wallController.addTileToWall(wallTile, i);
-          returnTiles.addAll(tilesToMove);
-          // Move remaining tiles to discardedTiles in TileContainer
-          patternLine.empty();
+            patternController = patternLoader.getController();
+            floorController = floorLoader.getController();
+            patternController.setPlayerBoardController(this);
+            floorController.setPlayerBoardController(this);
+            wallController = wallLoader.getController();
+            wallController.setPlayerBoardController(this);
+            scoreController = scoreLoader.getController();
+        } catch (
+                IOException e) {
+            e.printStackTrace();
         }
-      }
-    } catch (FullException | WrongTileException ignored) {
-      throw new RuntimeException(ignored);
-      // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
     }
 
-    return returnTiles;
-  }
+    /**
+     * Initializes the models, once all models of its parent models have loaded
+     */
+    public void postInitialize() {
 
-//  public void emptyAllControllers(){
-//      board.resetBoard();
-//  }
+        floorController.setPlayerBoardController(this);
+        floorController.setFloor(board.getFloor());
+        floorController.postInitialize();
 
-  /**
-   * Method which is called by Pattern to move tiles to Floor immediately once tiles are placed
-   * @param tiles
-   */
-  @Override
-  public void moveTilesToFloor(List<Tile> tiles) {
-    floorController.addTilesToFloor(tiles);
-  }
+        patternController.setPlayerBoardController(this);
+        patternController.setPattern(board.getPattern());
+        patternController.postInitialize();
 
-  @Override
-  public void moveTilesToPattern(List<Tile> tiles){
-    // TODO: not implemented in the player board mediator
-  }
+        wallController.setPlayerBoardController(this);
+        wallController.setWall(board.getWall());
+        wallController.postInitialize();
 
-  @Override
-  public void moveTilesToTable(List<Tile> tiles) {
-    // TODO: not implemented in the player board mediator
-  }
+        scoreController.setBoard(board);
+        scoreController.postInitialize();
+    }
 
-  @Override
-  public void moveTilesToTileContainer(Tile tile) {
-    gameBoardController.moveTilesToTileContainer(tile);
-  }
+    /**
+     * Concrete Mediator implementation of moving tiles between different GameBoard components
+     */
 
-  @Override
-  public void removeTilesFromTable() {
+    /**
+     * Activates this PlayerBoard for interactivity, and highlights possible spaces for some passed tile
+     *
+     * @param tile
+     * @param factory
+     */
+    public void activate(Tile tile, Factory factory) throws InvalidPositionException {
+        patternController.highlightPossibleSpaces(tile, factory);
+    }
 
-  }
+    /**
+     * Method which is called by the GameBoardController after every round to move tiles from Pattern to Wall
+     */
+    @Override
+    public List<Tile> moveTilesToWall() {
 
-  /**
-   * Get score AT THE END OF EVERY TURN!
-   */
-  @Override
-  public void updateScore() {
-    board.updateScore();
-  }
+        List<Tile> returnTiles = new ArrayList<>();
+        List<PatternLine> patternLines = patternController.getPattern().getPatternLines();
 
-  @Override
-  public List<Tile> removeTilesFromFloor() {
-    return floorController.getFloor().emptyFloor();
-  }
+        try {
+            for (int i = 0; i < patternLines.size(); i++) {
+                PatternLine patternLine = patternLines.get(i);
+                if (patternLine.isFull()) {
+                    List<Tile> tilesToMove = new ArrayList<>(patternLine.getSpaces());
+                    Tile wallTile = tilesToMove.remove(0);
+                    wallController.addTileToWall(wallTile, i);
+                    returnTiles.addAll(tilesToMove);
+                    // Move remaining tiles to discardedTiles in TileContainer
+                    patternLine.empty();
+                }
+            }
+        } catch (FullException | WrongTileException ignored) {
+            throw new RuntimeException(ignored);
+            // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
+        }
+
+        return returnTiles;
+    }
+
+
+    /**
+     * Method which is called by Pattern to move tiles to Floor immediately once tiles are placed
+     *
+     * @param tiles
+     */
+    @Override
+    public void moveTilesToFloor(List<Tile> tiles) {
+        floorController.addTilesToFloor(tiles);
+    }
+
+    @Override
+    public void moveTilesToPattern(List<Tile> tiles) {
+        // TODO: not implemented in the player board mediator
+    }
+
+    @Override
+    public void moveTilesToTable(List<Tile> tiles) {
+        // TODO: not implemented in the player board mediator
+    }
+
+    @Override
+    public void moveTilesToTileContainer(Tile tile) {
+        gameBoardController.moveTilesToTileContainer(tile);
+    }
+
+    @Override
+    public void removeTilesFromTable() {
+
+    }
+
+    /**
+     * Get score AT THE END OF EVERY TURN!
+     */
+    @Override
+    public void updateScore() {
+        board.updateScore();
+    }
+
+    @Override
+    public List<Tile> removeTilesFromFloor() {
+        return floorController.getFloor().emptyFloor();
+    }
 }

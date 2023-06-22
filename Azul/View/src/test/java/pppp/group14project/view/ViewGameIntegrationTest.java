@@ -23,6 +23,7 @@ import pppp.group14project.model.*;
 import org.junit.jupiter.api.Test;
 import pppp.group14project.model.Wall;
 import pppp.group14project.model.exceptions.FullException;
+
 import static org.testfx.api.FxAssert.verifyThat;
 
 import javafx.event.Event;
@@ -74,7 +75,6 @@ class ViewGameIntegrationTest extends ApplicationTest {
     private GridPane gameBoardPane;
 
 
-
     @BeforeAll
     public static void headless() {
         if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
@@ -94,7 +94,6 @@ class ViewGameIntegrationTest extends ApplicationTest {
 
         Parent root = FXMLLoader.load(getClass().getResource("/game-board-view.fxml"));
         FXMLLoader gameBoard = new FXMLLoader(getClass().getResource("/game-board-view.fxml"));
-
 
 
         //get game instances more factories
@@ -125,21 +124,22 @@ class ViewGameIntegrationTest extends ApplicationTest {
         pattern = patternController.getPattern();
 
 
-        stage.setScene(new Scene(root,1250, 700));
+        stage.setScene(new Scene(root, 1250, 700));
         stage.show();
         stage.toFront();
     }
 
 
     @AfterEach
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
         FxToolkit.hideStage();
         release(new KeyCode[]{});
         release(new MouseButton[]{});
+        game.getFactoryList().clear();
+        game.getBoardList().clear();
+        game.getTilecontainer().reset();
 
-//        game.resetGame();
     }
-
 
 
     @Test
@@ -162,13 +162,13 @@ class ViewGameIntegrationTest extends ApplicationTest {
         tileList.add(Tile.BLACK);
         tileList.add(Tile.BLUE);
         tableController.addTilesToTable(tileList);
-        assertEquals(tileList.size()+1, table.size());
+        assertEquals(tileList.size() + 1, table.size());
         List<Tile> tableTile = new ArrayList<>();
         GridPane tableGrid = (GridPane) gameBoardPane.lookup("#tableGridPane");
-        for(Node node : tableGrid.getChildren()){
-            if(node instanceof ClickableTile){
+        for (Node node : tableGrid.getChildren()) {
+            if (node instanceof ClickableTile) {
                 Tile color = ((ClickableTile) node).getColour();
-                if (color != null){
+                if (color != null) {
                     tableTile.add(color);
                 }
             }
@@ -185,7 +185,7 @@ class ViewGameIntegrationTest extends ApplicationTest {
         tileList.add(Tile.BLACK);
         tileList.add(Tile.BLUE);
         tableController.addTilesToTable(tileList);
-        assertEquals(tileList.size()+1, table.size());
+        assertEquals(tileList.size() + 1, table.size());
         List<Tile> tableTile = new ArrayList<>();
         GridPane tableGrid = (GridPane) gameBoardPane.lookup("#tableGridPane");
         assertTrue(tableGrid.isVisible());
@@ -193,10 +193,10 @@ class ViewGameIntegrationTest extends ApplicationTest {
 
         mouseClickHandling(tableGrid.getChildren().get(1));
 
-        for(Node node : tableGrid.getChildren()){
-            if(node instanceof ClickableTile){
+        for (Node node : tableGrid.getChildren()) {
+            if (node instanceof ClickableTile) {
                 Tile color = ((ClickableTile) node).getColour();
-                if (color != null && node.getStyleClass().contains("selected") && node.getOpacity() == 1){
+                if (color != null && node.getStyleClass().contains("selected") && node.getOpacity() == 1) {
                     tableTile.add(color);
                 }
             }
@@ -210,7 +210,7 @@ class ViewGameIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    void moveTilesFromFactory(){
+    void moveTilesFromFactory() {
         factory.empty();
         List<Tile> tileList = new ArrayList<>();
         tileList.add(Tile.RED);
@@ -229,8 +229,8 @@ class ViewGameIntegrationTest extends ApplicationTest {
         expected.add(Tile.RED);
         expected.add(Tile.RED);
 
-        for (Node node: tileGrid.getChildren()){
-            if (node instanceof ClickableTile && node.getStyleClass().contains("selected")){
+        for (Node node : tileGrid.getChildren()) {
+            if (node instanceof ClickableTile && node.getStyleClass().contains("selected")) {
                 actual.add(((ClickableTile) node).getColour());
             }
         }
@@ -247,7 +247,7 @@ class ViewGameIntegrationTest extends ApplicationTest {
         tileList.add(Tile.RED);
         tableController.addTilesToTable(tileList);
         floor.emptyFloor();
-        assertEquals(tileList.size()+1, table.size());
+        assertEquals(tileList.size() + 1, table.size());
         List<Tile> tableTile = new ArrayList<>();
         GridPane tableGrid = (GridPane) gameBoardPane.lookup("#tableGridPane");
         StackPane patternPane = (StackPane) gameBoardPane.lookup("#patternPane");
@@ -257,9 +257,8 @@ class ViewGameIntegrationTest extends ApplicationTest {
         assertTrue(tableGrid.isVisible());
         assertNotEquals(null, tableGrid);
 
-        ClickableTile clickedTile= (ClickableTile) tableGrid.getChildren().get(1);
+        ClickableTile clickedTile = (ClickableTile) tableGrid.getChildren().get(1);
         mouseClickHandling(clickedTile);
-
 
 
         VBox row = (VBox) patternPane.lookup("#rows");
@@ -276,14 +275,14 @@ class ViewGameIntegrationTest extends ApplicationTest {
 
     }
 
-    void mouseClickHandling(Node node){
+    void mouseClickHandling(Node node) {
         Event.fireEvent(node, new MouseEvent(MouseEvent.MOUSE_CLICKED, 0,
                 0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true,
                 true, true, true, true, true, true, null));
 
     }
 
-    void mouseClickSpaceHandling(Space space){
+    void mouseClickSpaceHandling(Space space) {
         Event.fireEvent(space, new MouseEvent(MouseEvent.MOUSE_CLICKED, 0,
                 0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true,
                 true, true, true, true, true, true, null));
