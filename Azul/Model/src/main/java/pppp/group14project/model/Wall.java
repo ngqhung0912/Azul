@@ -76,11 +76,11 @@ public class Wall {
      * @param row    row on which the tile should be added
      */
     public void addTile(Tile tile, int row) throws FullException, WrongTileException {
+
         if (isTileInRow(tile, row)) throw new FullException();
         int col = getTileColorColumn(tile, row);
         addTile(tile, row, col);
         updateWallScore(row, col);
-        System.out.println(tile + " " + wallScore);
 
     }
 
@@ -226,7 +226,6 @@ public class Wall {
         if (horizontalNeighboringTiles == 0 && verticalNeighboringTiles == 0) {
             wallScore += 1;
         }
-        System.out.println(wallScore);
 
     }
 

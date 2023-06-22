@@ -65,7 +65,6 @@ public class WallAdapter extends Wall {
             if (e.getMessage().contains("tile can't be placed on the row")){
                 throw new FullException("Tile cannot be added to wall");
             } else {
-                System.out.println("Something's wrong.");
                 throw e;
             }
         }

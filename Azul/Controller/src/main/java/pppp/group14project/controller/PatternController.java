@@ -62,13 +62,11 @@ public class PatternController {
             for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
                 // Go to next row if the row has a tile, but it is not equal to the tile color given
                 boolean wallContainsTile = playerBoardController.getWallController().getWall().isTileInRow(tile, rowIndex);
-                System.out.println("Tile " + tile + " is in row " + rowIndex + wallContainsTile);
                 if ((rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile)) || wallContainsTile)
                     continue;
 
                 for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
                     if (!spaceHasTile(rowIndex, tileIndex)) {
-                        System.out.println("Highlighted Tile " + tile);
                         highlightSpace(rowIndex, tileIndex, tile, factory);
                         break;
                     }
@@ -127,12 +125,9 @@ public class PatternController {
                     List<Tile> startingTile = new ArrayList<>();
                     startingTile.add(Tile.STARTING);
                     playerBoardController.moveTilesToFloor(startingTile);
-                    System.out.println("Moving Starting Tile to Floor!");
                 }
 
-                System.out.println("Processing the following grabbed Tiles: " + grabbedTiles);
                 List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
-                System.out.println("Excess tiles: " + excessTiles);
                 playerBoardController.moveTilesToFloor(excessTiles);
 
             } catch (WrongTileException ex) {
@@ -222,16 +217,6 @@ public class PatternController {
                         throw new RuntimeException(e);
                     }
                 }
-                // Some other methods you can use:
-//                while (change.next()) {
-//                    if (change.wasAdded()) {
-//                        System.out.println(change.getAddedSubList().get(0)
-//                                + " was added to the list!");
-//                    } else if (change.wasRemoved()) {
-//                        System.out.println(change.getRemoved().get(0)
-//                                + " was removed from the list!");
-//                    }
-//                }
             });
         }
 

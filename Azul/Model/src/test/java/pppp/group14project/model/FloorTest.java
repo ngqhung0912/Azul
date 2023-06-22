@@ -84,7 +84,6 @@ class FloorTest {
       floor.addTile(Tile.BLACK);
       floor.addTile(Tile.WHITE);
       floor.addTile(Tile.BLUE);
-      System.out.println(floor.getTiles().size());
     } catch (FullException e) {fail();}
     assertEquals(-14, floor.getFloorScore());
   }

@@ -133,8 +133,6 @@ public class TableController {
 
         displayTilesOnTheTable(); // To display the STARTING Tile
 
-        System.out.println("Created event listeners for Table");
-
         this.table.getTiles().addListener((ListChangeListener<Tile>) change -> {
             displayTilesOnTheTable();
         });
@@ -177,7 +175,6 @@ public class TableController {
                 // Handle the tile click event here
                 Tile clickedTile = clickableTile.getColour();
                 setSelectedTiles(clickedTile);
-                System.out.println("Clicked in Table: " + clickedTile);
 
                 gameBoardController.highlightCurrentPlayerBoard(clickedTile, table);
             });
