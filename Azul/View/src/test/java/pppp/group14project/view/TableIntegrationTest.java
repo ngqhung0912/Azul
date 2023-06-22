@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -55,12 +56,11 @@ public class TableIntegrationTest extends ApplicationTest {
         tableController = gameBoardController.getTableController();
         table = tableController.getTable();
 
-
-
         stage.setScene(new Scene(root, 120, 600));
         stage.show();
         stage.toFront();
     }
+
 
     @Test
     void testInitialization() {

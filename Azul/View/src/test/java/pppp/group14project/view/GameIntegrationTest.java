@@ -128,11 +128,6 @@ class GameIntegrationTest extends ApplicationTest {
         stage.toFront();
     }
 
-    @BeforeEach
-    public void beforeEach(){
-        //if not cleared more tiles are added
-        factory.empty();
-    }
 
     @AfterEach
     public void tearDown() throws Exception{
