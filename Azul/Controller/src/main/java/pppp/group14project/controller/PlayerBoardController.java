@@ -117,10 +117,6 @@ public class PlayerBoardController implements Initializable, Mediator {
     }
 
     /**
-     * Concrete Mediator implementation of moving tiles between different GameBoard components
-     */
-
-    /**
      * Activates this PlayerBoard for interactivity, and highlights possible spaces for some passed tile
      *
      * @param tile
@@ -131,12 +127,7 @@ public class PlayerBoardController implements Initializable, Mediator {
         floorController.highlightFloor(tile, factory);
     }
 
-    /**
-     * Method which is called by the GameBoardController after every round to move tiles from Pattern to Wall
-     */
-    @Override
-    public List<Tile> moveTilesToWall() {
-
+    public List<Tile> moveTileFromPatternToWall() {
         List<Tile> returnTiles = new ArrayList<>();
         List<PatternLine> patternLines = patternController.getPattern().getPatternLines();
 
@@ -146,7 +137,7 @@ public class PlayerBoardController implements Initializable, Mediator {
                 if (patternLine.isFull()) {
                     List<Tile> tilesToMove = new ArrayList<>(patternLine.getSpaces());
                     Tile wallTile = tilesToMove.remove(0);
-                    wallController.addTileToWall(wallTile, i);
+                    moveTileToWall(wallTile, i);
                     returnTiles.addAll(tilesToMove);
                     // Move remaining tiles to discardedTiles in TileContainer
                     patternLine.empty();
@@ -154,46 +145,38 @@ public class PlayerBoardController implements Initializable, Mediator {
             }
         } catch (FullException | WrongTileException ignored) {
             throw new RuntimeException(ignored);
-            // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
         }
 
         return returnTiles;
     }
 
-
     /**
-     * Method which is called by Pattern to move tiles to Floor immediately once tiles are placed
-     *
-     * @param tiles
+     * Concrete Mediator implementation of moving tiles between different GameBoard components
      */
+
+    @Override
+    public void moveTileToWall(Tile tile, int rowIndex) throws WrongTileException, FullException {
+        wallController.addTileToWall(tile, rowIndex);
+    }
+
     @Override
     public void moveTilesToFloor(List<Tile> tiles) {
         floorController.addTilesToFloor(tiles);
     }
 
     @Override
-    public void moveTilesToPattern(List<Tile> tiles) {
-        // TODO: not implemented in the player board mediator
-    }
-
-    @Override
     public void moveTilesToTable(List<Tile> tiles) {
-        // TODO: not implemented in the player board mediator
     }
 
     @Override
-    public void moveTilesToTileContainer(Tile tile) {
-        gameBoardController.moveTilesToTileContainer(tile);
+    public void moveTilesToTileContainer(List<Tile> tile) {
     }
 
     @Override
-    public void removeTilesFromTable() {
-
+    public void moveTileToTileContainer(Tile tile) {
+        gameBoardController.moveTileToTileContainer(tile);
     }
 
-    /**
-     * Get score AT THE END OF EVERY TURN!
-     */
     @Override
     public void updateScore() {
         board.updateScore();

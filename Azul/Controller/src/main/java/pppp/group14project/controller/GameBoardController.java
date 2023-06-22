@@ -11,6 +11,7 @@ import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.*;
 import pppp.group14project.model.exceptions.FullException;
+import pppp.group14project.model.exceptions.WrongTileException;
 
 
 import java.io.IOException;
@@ -161,6 +162,28 @@ public class GameBoardController implements Initializable, Mediator {
   private void finishRound() {
 
     // Update starting player
+    game.generateTurns(getStartingPlayer());
+
+    // Move Tiles from Pattern to Wall, and empty Floor for each player
+
+    for (PlayerBoardController p: playerBoardControllers) {
+
+      List<Tile> returnTilesWall = p.moveTileFromPatternToWall();
+
+      moveTilesToTileContainer(returnTilesWall);
+
+      p.updateScore();
+      List<Tile> returnTilesFloor = p.removeTilesFromFloor();
+
+      returnTilesFloor.remove(Tile.STARTING);
+
+
+      moveTilesToTileContainer(returnTilesFloor);
+    }
+    refillFactories();
+  }
+
+  private int getStartingPlayer() {
     int startingPlayerID = 0;
     for (int i = 0; i < playerBoardControllers.size(); i++) {
       if (playerBoardControllers.get(i).getFloorController().getFloor().getTiles().contains(Tile.STARTING)) {
@@ -168,34 +191,13 @@ public class GameBoardController implements Initializable, Mediator {
         break;
       }
     }
-    game.generateTurns(startingPlayerID);
+    return startingPlayerID;
+  }
 
-    // Move Tiles from Pattern to Wall, and empty Floor for each player
 
-    for (PlayerBoardController p: playerBoardControllers) {
-
-      List<Tile> returnTilesWall = p.moveTilesToWall();
-      game.getTilecontainer().addDiscardedTiles(returnTilesWall);
-
-      p.updateScore();
-      List<Tile> returnTilesFloor = p.removeTilesFromFloor();
-      if (returnTilesFloor.contains(Tile.STARTING)) {
-        returnTilesFloor.remove(Tile.STARTING);
-      }
-      game.getTilecontainer().addDiscardedTiles(returnTilesFloor);
-
-    }
-
-    // Re-fill Factories
-
-    for (FactoryController f: factoryControllers) {
-      try {
-        List<Tile> tilesToAdd = game.getTilecontainer().grabBagTiles(4);
-        f.getFactory().addTiles(tilesToAdd);
-      } catch (FullException e) {
-        throw new RuntimeException(e);
-      }
-    }
+  private void refillFactories() {
+    List<Tile> tileToRefill = game.getTilecontainer().grabBagTiles(4 * game.getFactoryList().size());
+    game.fillFactories(tileToRefill);
     try {
       tableController.getTable().addTile(Tile.STARTING);
     } catch (Exception e) {
@@ -250,11 +252,9 @@ public class GameBoardController implements Initializable, Mediator {
 
   }
 
-
-  @Override
-  public List<Tile> moveTilesToWall() {
-    return null;
-  }
+  /**
+   * Concrete Mediator implementation of moving tiles between different GameBoard components
+   */
 
   @Override
   public List<Tile> removeTilesFromFloor() {
@@ -262,13 +262,11 @@ public class GameBoardController implements Initializable, Mediator {
   }
 
   @Override
-  public void moveTilesToFloor(List<Tile> tiles) {
-
+  public void moveTileToWall(Tile tile, int rowIndex) {
   }
 
   @Override
-  public void moveTilesToPattern(List<Tile> tiles) {
-
+  public void moveTilesToFloor(List<Tile> tiles) {
   }
 
   @Override
@@ -276,32 +274,21 @@ public class GameBoardController implements Initializable, Mediator {
     try {
       tableController.addTilesToTable(tiles);
     } catch (FullException ignore){
-
     }
   }
 
   @Override
-  public void moveTilesToTileContainer(Tile tile) {
+  public void moveTileToTileContainer(Tile tile) {
     game.getTilecontainer().addDiscardedTiles(Collections.singletonList(tile));
+  }
+
+  @Override
+  public void moveTilesToTileContainer(List<Tile> tile) {
+    game.getTilecontainer().addDiscardedTiles(tile);
   }
 
   @Override
   public void updateScore() {
 
   }
-
-  @Override
-  public void removeTilesFromTable() {
-//    tableController.removeSelectedTilesFromTable();
-  }
-
-//  @Override
-//  public void removeTilesFromFactory(List<Tile> tiles, FactoryController factoryController) {
-//    try {
-//      tableController.addTilesToTable(tiles);
-//    } catch (FullException ignore){
-//
-//    }
-//    factoryController.emptyFactory();
-//  }
 }

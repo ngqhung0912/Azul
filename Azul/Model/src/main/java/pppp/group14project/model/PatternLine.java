@@ -46,17 +46,6 @@ public class PatternLine {
         return returnedTiles;
     }
 
-    /**
-     * Empties the PatternLine, and returns a Tile to be placed on the Wall
-     * @return the Tile to be moved to the Wall
-     */
-    public Tile moveTiles() throws NotFullException {
-        if (!isFull())
-            throw new NotFullException("The PatternLine is not yet full");
-        Tile tileToReturn = spaces.get(0);
-        empty();
-        return tileToReturn;
-    }
 
     /**
      * Returns the color of the PatternLine, null if no tiles are in the PatternLine
