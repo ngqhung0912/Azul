@@ -85,6 +85,7 @@ public class FloorIntegrationTest extends ApplicationTest {
         tileList.add(Tile.BLACK);
         tileList.add(Tile.BLACK);
         floorController.addTilesToFloor(tileList);
+        System.out.println("THIS ONE _______________ "+ floor.getTiles());
         assertEquals(tileList.size(), floor.getTiles().size());
 
         List<Tile> additionalTileList = new ArrayList<>();

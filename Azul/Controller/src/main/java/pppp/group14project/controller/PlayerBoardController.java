@@ -128,6 +128,7 @@ public class PlayerBoardController implements Initializable, Mediator {
      */
     public void activate(Tile tile, Factory factory) throws InvalidPositionException {
         patternController.highlightPossibleSpaces(tile, factory);
+        floorController.highlightFloor(tile, factory);
     }
 
     /**

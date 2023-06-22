@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
@@ -24,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import pppp.group14project.model.Wall;
 import pppp.group14project.model.exceptions.FullException;
 
+import java.util.ArrayList;
 import pppp.group14project.model.exceptions.WrongTileException;
 
 
@@ -190,5 +192,31 @@ class GameIntegrationTest extends ApplicationTest {
     }
 
 
+    @Test
+    void moveTilesFromFactoryToFloor() throws FullException {
+        List<Tile> tiles = new ArrayList<>();
+        tiles.add(Tile.BLUE);
+        tiles.add(Tile.RED);
+        tiles.add(Tile.BLUE);
+        tiles.add(Tile.WHITE);
+        factory.getTiles().clear();
+        factory.addTiles(tiles);
+
+        Button button = new Button();
+        button.getStyleClass().add("tile-option");
+
+        floorController.moveTilesToFloorFromFactory(Tile.BLUE, factory, button);
+
+        assertFalse(button.getStyleClass().contains("tile-option"));
+        assertTrue(floor.getTiles().contains(Tile.BLUE));
+        assertFalse(floor.getTiles().contains(Tile.RED));
+        assertFalse(floor.getTiles().contains(Tile.WHITE));
+        assertEquals(2, floor.getTiles().size());
+        assertTrue(table.getTiles().contains(Tile.RED));
+        assertTrue(table.getTiles().contains(Tile.WHITE));
+        assertFalse(table.getTiles().contains(Tile.BLUE));
+
+        floor.getTiles().clear();
+    }
 }
 
