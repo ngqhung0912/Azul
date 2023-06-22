@@ -152,10 +152,6 @@ public class PatternController {
         }
     }
 
-    private boolean spaceHasTile(int rowNumber, int indexNumber, Tile tileColor) throws InvalidPositionException {
-        return getSpace(rowNumber, indexNumber).getStyleClass().contains(String.valueOf(tileColor));
-    }
-
     private boolean spaceHasTile(int rowNumber, int indexNumber) throws InvalidPositionException {
         return getSpace(rowNumber, indexNumber).getStyleClass().contains("is-colored");
     }

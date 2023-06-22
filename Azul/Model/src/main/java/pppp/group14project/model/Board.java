@@ -27,10 +27,6 @@ public class Board {
     @Getter
     private IntegerProperty score;
 
-    @Getter
-    @Setter
-    private ArrayList<Tile> selected_tiles;
-
   public Board(Player player) {
     this.player = player;
     this.score = new SimpleIntegerProperty(0);

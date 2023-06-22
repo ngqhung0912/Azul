@@ -29,14 +29,6 @@ public class FactoryController {
     @Setter
     private GameBoardController gameBoardController;
 
-//    public void onTileClick(ActionEvent event) {
-//        ClickableTile tile = (ClickableTile) event.getSource();
-//        Tile selected_tile = tile.getColour();
-//        String selected_colour = selected_tile.toString();
-//        factory.grabTiles(selected_tile);
-//        setSelectedTiles(selected_colour);
-//    }
-
     /**
      * Used to update the view if the model changes
      */
@@ -98,27 +90,5 @@ public class FactoryController {
 
             });
         }
-
-
-        // Just to test changing the model (that this can be seen in the view)
-//        try {
-//            this.factory.empty();
-//
-//            TileContainer t = this.gameBoardController.getGame().getTilecontainer();
-//            List<Tile> tilesForFactory = t.grabBagTiles(4);
-//            this.factory.addTiles(tilesForFactory);
-//        } catch (FullException e) {
-//            e.printStackTrace();
-//        }
-
-        // listen to which tile has been selected
-//        this.factory.getSelected_colour().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-//                String colour = FactoryController.this.factory.getSelected_colour().getValue();
-//                FactoryController.this.selectTiles(Tile.valueOf(colour));
-//            }
-//        });
-
     }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Game {
   private static Game instance = null;
-  private int currentRound;
 
   @Getter
   @Setter
@@ -56,7 +55,6 @@ public class Game {
   }
 
   public Game() {
-    currentRound = 1;
     roundTurnCounter = 0;
   }
 
@@ -67,7 +65,6 @@ public class Game {
     return instance;
   }
   
-  //TODO (REFACTOR): This method should be throwing an exception if you want to notify that no more board can be added since its full.
   public Boolean addBoard(Board board) {
     if (boardList.size() < 4) {
       boardList.add(board);
@@ -85,7 +82,7 @@ public class Game {
   }
 
   public void fillFactories(List<Tile> tiles) {
-    Integer counter = 0;
+    int counter = 0;
     for (Factory factory: factoryList) {
       try {
         factory.addTiles(tiles.subList(counter, counter+4));
