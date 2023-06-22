@@ -254,6 +254,16 @@ public class GameBoardController implements Initializable, Mediator {
 
   }
 
+  public void endGame(){
+    for (PlayerBoardController playerBoardController : getPlayerBoardControllers()){
+      playerBoardController.emptyAllControllers();
+    }
+    game.getBoardList().clear();
+    game.getFactoryList().clear();
+    game.getTilecontainer().reset();
+    game.getPlayerNameList().clear();
+  }
+
 
 
 

@@ -163,6 +163,10 @@ public class PlayerBoardController implements Initializable, Mediator {
     return returnTiles;
   }
 
+  public void emptyAllControllers(){
+      board.resetBoard();
+  }
+
   /**
    * Method which is called by Pattern to move tiles to Floor immediately once tiles are placed
    * @param tiles
