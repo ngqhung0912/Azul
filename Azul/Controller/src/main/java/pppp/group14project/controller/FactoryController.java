@@ -72,10 +72,7 @@ public class FactoryController {
         for (Node node : tileGrid.getChildren()) {
             ObservableList<String> styleClass = node.getStyleClass();
             if (styleClass.contains("selected")) {
-                System.out.println(node.getStyleClass());
                 styleClass.remove("selected");
-                System.out.println("Removed style from Tile");
-                System.out.println(node.getStyleClass());
             }
         }
     }
@@ -90,12 +87,9 @@ public class FactoryController {
             ClickableTile clickableTile = (ClickableTile) node;
 
             clickableTile.setOnMouseClicked(event -> {
-                System.out.println("----------------");
                 Tile clickedColor = clickableTile.getColour();
-                System.out.println("Selected Tile: " + clickedColor);
 
                 // First deselect all Factories
-                System.out.println("Deselecting all factories!");
                 gameBoardController.deselectAllFactories();
 
                 // Notify the active PlayerBoard that a Tile has been selected
@@ -113,7 +107,6 @@ public class FactoryController {
 //            TileContainer t = this.gameBoardController.getGame().getTilecontainer();
 //            List<Tile> tilesForFactory = t.grabBagTiles(4);
 //            this.factory.addTiles(tilesForFactory);
-//            System.out.println("reached");
 //        } catch (FullException e) {
 //            e.printStackTrace();
 //        }

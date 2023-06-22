@@ -70,7 +70,6 @@ public class TableController {
                     node = (ClickableTile) tableGridPane.getChildren().get(currentRow);
                     opacity = node.getOpacity();
                     node.setColour(tile);
-                    System.out.println(node);
                     currentRow++;
                 }
 
@@ -104,7 +103,6 @@ public class TableController {
         for (Node node : tableGridPane.getChildren()) {
             ObservableList<String> style = node.getStyleClass();
             if (style.contains(colour) || style.contains("STARTING")) {
-                System.out.println("SELECTED");
                 style.add("selected");
             } else {
                 style.remove("selected");
@@ -134,8 +132,6 @@ public class TableController {
         this.table = new Table();
 
         displayTilesOnTheTable(); // To display the STARTING Tile
-
-        System.out.println("Created event listeners for Table");
 
         this.table.getTiles().addListener((ListChangeListener<Tile>) change -> {
             displayTilesOnTheTable();
@@ -179,7 +175,6 @@ public class TableController {
                 // Handle the tile click event here
                 Tile clickedTile = clickableTile.getColour();
                 setSelectedTiles(clickedTile);
-                System.out.println("Clicked in Table: " + clickedTile);
 
                 gameBoardController.highlightCurrentPlayerBoard(clickedTile, table);
             });

@@ -94,7 +94,6 @@ public class WallController {
                 Tile color = Wall.getTileColor(rowID, columnID);
                 node.getStyleClass().add(color.toString());
                 node.getStyleClass().add("is-not-colored");
-                System.out.println(node.getStyleClass());
             }
         }
     }
@@ -116,7 +115,6 @@ public class WallController {
         resetWallView();
 
         // Rerender view if model changes
-        System.out.println("Created event listeners for Wall");
         for (int i = 0; i < 5; i++) {
             ObservableList row = wall.getWall().get(i);
             int rowNumber = i;
@@ -124,7 +122,6 @@ public class WallController {
                 while (change.next()) {
                     if (change.wasReplaced() || change.wasAdded()) {
                         for (int columnNumber = change.getFrom(); columnNumber < change.getTo(); ++columnNumber) {
-                            System.out.println("Index " + columnNumber + " changed to " + row.get(columnNumber));
                             Button b = getSpace(rowNumber, columnNumber);
                             b.getStyleClass().remove("is-not-colored");
                             b.getStyleClass().add("is-colored");

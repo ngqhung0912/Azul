@@ -152,8 +152,6 @@ public class Factory {
         }
 
         List<List<Tile>> returnTiles = Arrays.asList(grabTiles, tableTiles);
-        System.out.println(grabTiles);
-        System.out.println(tiles);
 
         return returnTiles;
     }
