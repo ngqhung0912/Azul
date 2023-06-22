@@ -252,6 +252,10 @@ public class GameBoardController implements Initializable, Mediator {
 
   }
 
+  /**
+   * Concrete Mediator implementation of moving tiles between different GameBoard components
+   */
+
   @Override
   public List<Tile> removeTilesFromFloor() {
     return null;
@@ -263,12 +267,6 @@ public class GameBoardController implements Initializable, Mediator {
 
   @Override
   public void moveTilesToFloor(List<Tile> tiles) {
-
-  }
-
-  @Override
-  public void moveTilesToPattern(List<Tile> tiles) {
-
   }
 
   @Override
@@ -276,7 +274,6 @@ public class GameBoardController implements Initializable, Mediator {
     try {
       tableController.addTilesToTable(tiles);
     } catch (FullException ignore){
-
     }
   }
 

@@ -117,10 +117,6 @@ public class PlayerBoardController implements Initializable, Mediator {
     }
 
     /**
-     * Concrete Mediator implementation of moving tiles between different GameBoard components
-     */
-
-    /**
      * Activates this PlayerBoard for interactivity, and highlights possible spaces for some passed tile
      *
      * @param tile
@@ -149,33 +145,23 @@ public class PlayerBoardController implements Initializable, Mediator {
             }
         } catch (FullException | WrongTileException ignored) {
             throw new RuntimeException(ignored);
-            // TODO PLEASE NEVER THROW A FUCKING RUNTIME EXCEPTION!!!!!!
         }
 
         return returnTiles;
     }
 
     /**
-     * Method which is called by the GameBoardController after every round to move tiles from Pattern to Wall
+     * Concrete Mediator implementation of moving tiles between different GameBoard components
      */
+
     @Override
     public void moveTileToWall(Tile tile, int rowIndex) throws WrongTileException, FullException {
         wallController.addTileToWall(tile, rowIndex);
     }
 
-
-    /**
-     * Method which is called by Pattern to move tiles to Floor immediately once tiles are placed
-     *
-     * @param tiles
-     */
     @Override
     public void moveTilesToFloor(List<Tile> tiles) {
         floorController.addTilesToFloor(tiles);
-    }
-
-    @Override
-    public void moveTilesToPattern(List<Tile> tiles) {
     }
 
     @Override
@@ -184,7 +170,6 @@ public class PlayerBoardController implements Initializable, Mediator {
 
     @Override
     public void moveTilesToTileContainer(List<Tile> tile) {
-
     }
 
     @Override
@@ -192,9 +177,6 @@ public class PlayerBoardController implements Initializable, Mediator {
         gameBoardController.moveTileToTileContainer(tile);
     }
 
-    /**
-     * Get score AT THE END OF EVERY TURN!
-     */
     @Override
     public void updateScore() {
         board.updateScore();

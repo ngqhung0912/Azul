@@ -11,7 +11,6 @@ public interface Mediator {
 
   void moveTileToWall(Tile tile, int rowIndex) throws WrongTileException, FullException;
   void moveTilesToFloor(List<Tile> tiles);
-  void moveTilesToPattern(List<Tile> tiles) throws InvalidPositionException;
 
   void moveTilesToTable(List<Tile> tiles);
 
