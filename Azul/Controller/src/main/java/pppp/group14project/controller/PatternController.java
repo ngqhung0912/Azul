@@ -111,33 +111,37 @@ public class PatternController {
         Space s = getSpace(rowNumber, indexNumber);
         s.getStyleClass().add("tile-option");
         s.setOnAction(e -> {
-            try {
-                // Grab from Factory model or Table
-                List<List<Tile>> returnTiles = factory.grabTiles(tile);
-                List<Tile> grabbedTiles = returnTiles.get(0);
-                List<Tile> tableTiles = returnTiles.get(1);
-
-                playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
-
-                /**
-                 * Moving tiles after a Space has been clicked on the Pattern
-                 */
-                if (grabbedTiles.contains(Tile.STARTING)){
-                    grabbedTiles.remove(Tile.STARTING);
-                    List<Tile> startingTile = new ArrayList<>();
-                    startingTile.add(Tile.STARTING);
-                    playerBoardController.moveTilesToFloor(startingTile);
-                }
-
-                List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
-                playerBoardController.moveTilesToFloor(excessTiles);
-
-            } catch (WrongTileException ex) {
-                throw new RuntimeException(ex);
-            }
-            playerBoardController.getGameBoardController().finishPlayerTurn();
-            unhighlightAllSpaces();
+            patternMoveTiles(factory, tile, rowNumber);
         });
+    }
+
+    public void patternMoveTiles(Factory factory, Tile tile, int rowNumber){
+        try {
+            // Grab from Factory model or Table
+            List<List<Tile>> returnTiles = factory.grabTiles(tile);
+            List<Tile> grabbedTiles = returnTiles.get(0);
+            List<Tile> tableTiles = returnTiles.get(1);
+
+            playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
+
+            /**
+             * Moving tiles after a Space has been clicked on the Pattern
+             */
+            if (grabbedTiles.contains(Tile.STARTING)){
+                grabbedTiles.remove(Tile.STARTING);
+                List<Tile> startingTile = new ArrayList<>();
+                startingTile.add(Tile.STARTING);
+                playerBoardController.moveTilesToFloor(startingTile);
+            }
+
+            List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
+            playerBoardController.moveTilesToFloor(excessTiles);
+
+        } catch (WrongTileException ex) {
+            throw new RuntimeException(ex);
+        }
+        playerBoardController.getGameBoardController().finishPlayerTurn();
+        unhighlightAllSpaces();
     }
 
     private void unhighlightAllSpaces() {
@@ -176,7 +180,7 @@ public class PatternController {
         for (int i = 0; i < numberOfTiles; i++) {
 
             Space s = getSpace(rowNumber, i);
-            System.out.println("Styles: " + s.getStyleClass());
+//            System.out.println("Styles: " + s.getStyleClass());
             s.getStyleClass().clear();
             s.getStyleClass().add("button");
             s.getStyleClass().add("pattern-tile-box");
@@ -213,7 +217,7 @@ public class PatternController {
                     Tile tileColor = pattern.getPatternLines().get(rowNumber).getTileType();
                     try {
                         // Update views
-                        System.out.println("Number of full spaces " + tileColor + numberOfTiles);
+//                        System.out.println("Number of full spaces " + tileColor + numberOfTiles);
                         resetTiles(rowNumber);
                         setTiles(rowNumber, numberOfTiles, tileColor);
                     } catch (InvalidPositionException e) {
