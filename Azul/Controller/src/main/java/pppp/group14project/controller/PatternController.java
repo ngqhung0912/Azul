@@ -109,12 +109,17 @@ public class PatternController {
         Space s = getSpace(rowNumber, indexNumber);
         s.getStyleClass().add("tile-option");
         s.setOnAction(e -> {
-            patternMoveTiles(factory, tile, rowNumber);
+            try {
+                patternMoveTiles(factory, tile, rowNumber);
+            }catch (WrongTileException ex) {
+                throw new RuntimeException(ex);
+            }
+            playerBoardController.getGameBoardController().finishPlayerTurn();
+            unhighlightAllSpaces();
         });
     }
 
-    public void patternMoveTiles(Factory factory, Tile tile, int rowNumber){
-        try {
+    public void patternMoveTiles(Factory factory, Tile tile, int rowNumber) throws WrongTileException {
             // Grab from Factory model or Table
             List<List<Tile>> returnTiles = factory.grabTiles(tile);
             List<Tile> grabbedTiles = returnTiles.get(0);
@@ -135,11 +140,6 @@ public class PatternController {
             List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
             playerBoardController.moveTilesToFloor(excessTiles);
 
-        } catch (WrongTileException ex) {
-            throw new RuntimeException(ex);
-        }
-        playerBoardController.getGameBoardController().finishPlayerTurn();
-        unhighlightAllSpaces();
     }
 
     private void unhighlightAllSpaces() {
