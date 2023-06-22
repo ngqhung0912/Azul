@@ -93,10 +93,10 @@ public class Game {
     }
   }
 
-  public void resetGame() {
-    instance = new Game();
-
-//    factoryList.clear();
-//    tilecontainer.reset();
-  }
+//  public void resetGame() {
+//    instance = new Game();
+//
+////    factoryList.clear();
+////    tilecontainer.reset();
+//  }
 }

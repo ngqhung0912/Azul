@@ -136,7 +136,8 @@ class ViewGameIntegrationTest extends ApplicationTest {
         FxToolkit.hideStage();
         release(new KeyCode[]{});
         release(new MouseButton[]{});
-        game.resetGame();
+
+//        game.resetGame();
     }
 
 
