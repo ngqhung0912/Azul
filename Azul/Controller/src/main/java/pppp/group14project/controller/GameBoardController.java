@@ -176,7 +176,10 @@ public class GameBoardController implements Initializable, Mediator {
     for (PlayerBoardController p: playerBoardControllers) {
 
       List<Tile> returnTilesWall = p.moveTileFromPatternToWall();
-      game.getTilecontainer().addDiscardedTiles(returnTilesWall); // TODO: call existing function
+
+      for (Tile tile: returnTilesWall) {
+        moveTilesToTileContainer(tile);
+      }
 
       p.updateScore();
       List<Tile> returnTilesFloor = p.removeTilesFromFloor();
