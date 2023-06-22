@@ -27,25 +27,22 @@ public class Board {
     @Getter
     private IntegerProperty score;
 
-    @Getter
-    @Setter
-    private ArrayList<Tile> selected_tiles;
+    public Board(Player player) {
+        this.player = player;
+        this.score = new SimpleIntegerProperty(0);
+        this.floor = new Floor();
+        this.pattern = new Pattern();
+        this.wall = new Wall();
+    }
 
-  public Board(Player player) {
-    this.player = player;
-    this.score = new SimpleIntegerProperty(0);
-    this.floor = new Floor();
-    this.pattern = new Pattern();
-    this.wall = new Wall();
-  }
+    public void updateScore() {
+        int floorScore = this.getFloor().getFloorScore();
+        int wallScore = this.getWall().getWallScore();
+        this.score.set(Math.max(floorScore + wallScore, 0));
+    }
 
-  public void updateScore() {
-      int floorScore = this.getFloor().getFloorScore();
-      int wallScore = this.getWall().getWallScore();
-      this.score.set(Math.max(floorScore + wallScore, 0));
-  }
+    public void useTeam13Wall() {
+        this.wall = new WallAdapter();
+    }
 
-  public void useTeam13Wall() {
-    this.wall = new WallAdapter();
-  }
 }

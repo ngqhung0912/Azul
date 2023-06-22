@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -36,6 +37,8 @@ public class PatternIntegrationTest extends ApplicationTest {
             GitlabCISupport.headless();
         }
     }
+
+
 
     @Override
     public void start(Stage stage) throws Exception {

@@ -15,7 +15,6 @@ public class Floor {
   @Getter
   private ObservableList<Tile> tiles;
 
-
   @Getter
   private int floorScore;
 
@@ -47,7 +46,6 @@ public class Floor {
   public void updateFloorScore(int IndexOfTilesAdded) {
     this.floorScore += tilePoints.get(IndexOfTilesAdded);
   }
-
 
 
   public List<Tile> emptyFloor() {

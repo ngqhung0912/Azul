@@ -160,8 +160,6 @@ public class GameBoardController implements Initializable, Mediator {
 
   private void finishRound() {
 
-    System.out.println("All Factories and Table are empty");
-
     // Update starting player
     int startingPlayerID = 0;
     for (int i = 0; i < playerBoardControllers.size(); i++) {
@@ -171,7 +169,6 @@ public class GameBoardController implements Initializable, Mediator {
       }
     }
     game.generateTurns(startingPlayerID);
-    System.out.println("Player " + startingPlayerID + " starts the next round!");
 
     // Move Tiles from Pattern to Wall, and empty Floor for each player
 
@@ -180,7 +177,6 @@ public class GameBoardController implements Initializable, Mediator {
       List<Tile> returnTilesWall = p.moveTilesToWall();
       game.getTilecontainer().addDiscardedTiles(returnTilesWall);
 
-//      System.out.println("Wall score: " + p.getFloorController().getFloor().getScore());
       p.updateScore();
       List<Tile> returnTilesFloor = p.removeTilesFromFloor();
       if (returnTilesFloor.contains(Tile.STARTING)) {
@@ -253,8 +249,6 @@ public class GameBoardController implements Initializable, Mediator {
     }
 
   }
-
-
 
 
   @Override

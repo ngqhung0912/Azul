@@ -17,14 +17,9 @@ public class PatternLine {
     private ObservableList<Tile> spaces;
 
     public PatternLine(int numberOfTiles) {
-        // Constant number of elements
-//        this.spaces = new ArrayList<>(Collections.nCopies(numberOfTiles, null));
-
         // Constant number of elements, observable
         this.spaces = FXCollections.observableArrayList();
         spaces.addAll(Collections.nCopies(numberOfTiles, null));
-
-
     }
 
     /**
@@ -76,10 +71,7 @@ public class PatternLine {
      * Empties the PatternLine
      */
     public void empty() {
-//        this.spaces.removeAll();
-        System.out.println("Before: " + spaces);
         Collections.fill(this.spaces, null);
-        System.out.println("After: " + spaces);
     }
 
     /**

@@ -29,14 +29,6 @@ public class FactoryController {
     @Setter
     private GameBoardController gameBoardController;
 
-//    public void onTileClick(ActionEvent event) {
-//        ClickableTile tile = (ClickableTile) event.getSource();
-//        Tile selected_tile = tile.getColour();
-//        String selected_colour = selected_tile.toString();
-//        factory.grabTiles(selected_tile);
-//        setSelectedTiles(selected_colour);
-//    }
-
     /**
      * Used to update the view if the model changes
      */
@@ -72,10 +64,7 @@ public class FactoryController {
         for (Node node : tileGrid.getChildren()) {
             ObservableList<String> styleClass = node.getStyleClass();
             if (styleClass.contains("selected")) {
-                System.out.println(node.getStyleClass());
                 styleClass.remove("selected");
-                System.out.println("Removed style from Tile");
-                System.out.println(node.getStyleClass());
             }
         }
     }
@@ -90,12 +79,9 @@ public class FactoryController {
             ClickableTile clickableTile = (ClickableTile) node;
 
             clickableTile.setOnMouseClicked(event -> {
-                System.out.println("----------------");
                 Tile clickedColor = clickableTile.getColour();
-                System.out.println("Selected Tile: " + clickedColor);
 
                 // First deselect all Factories
-                System.out.println("Deselecting all factories!");
                 gameBoardController.deselectAllFactories();
 
                 // Notify the active PlayerBoard that a Tile has been selected
@@ -104,28 +90,5 @@ public class FactoryController {
 
             });
         }
-
-
-        // Just to test changing the model (that this can be seen in the view)
-//        try {
-//            this.factory.empty();
-//
-//            TileContainer t = this.gameBoardController.getGame().getTilecontainer();
-//            List<Tile> tilesForFactory = t.grabBagTiles(4);
-//            this.factory.addTiles(tilesForFactory);
-//            System.out.println("reached");
-//        } catch (FullException e) {
-//            e.printStackTrace();
-//        }
-
-        // listen to which tile has been selected
-//        this.factory.getSelected_colour().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-//                String colour = FactoryController.this.factory.getSelected_colour().getValue();
-//                FactoryController.this.selectTiles(Tile.valueOf(colour));
-//            }
-//        });
-
     }
 }

@@ -28,28 +28,6 @@ public class Factory {
         this.tiles = FXCollections.observableArrayList();
     }
 
-//    public List<Tile> selectGrabbedTiles(Tile tile){
-//        this.grabList = FXCollections.observableArrayList();
-//        if (this.tiles.contains(Tile.STARTING)){
-//            this.grabList.add(Tile.STARTING);
-//        }
-//        for (Tile t: this.tiles) {
-//            if (t == tile) {
-//                grabList.add(t);
-//            }
-//        }
-//
-//        return grabList;
-//    }
-
-//    public void removeTiles(){
-//        ObservableList<Tile> newTileList = FXCollections.observableArrayList(tiles);
-//        if(!newTileList.isEmpty() && !grabList.isEmpty()) {
-//            newTileList.removeAll(grabList);
-//            this.tiles = newTileList;
-//        }
-//    }
-
     /**
      * Adds tiles from a list to the factory
      * @param tiles the tiles to add to the factory
@@ -94,41 +72,14 @@ public class Factory {
         return this.tiles.size();
     }
 
-    /**
-     * Counts how many tiles of a certain colour are on the factory
-     * @param tile the colour to count
-     * @return the number of tiles of the given colour
-     */
-    public int countColour(Tile tile) {
-        int counter = 0;
-        for(Tile t: this.tiles) {
-            if (t == tile) {
-                counter++;
-            }
-        }
-        return counter;
-    }
-
     public void empty() {
-//        this.selected_colour = new SimpleStringProperty();
         this.tiles.clear();
     }
 
-        public List<Tile> getAllCurrentTiles(){
+    public List<Tile> getAllCurrentTiles(){
             return this.tiles;
         }
 
-//    /**
-//     * Checks if the passed tile exist in the factory,
-//     * and sets the selected_colour to this tile's colour
-//     * if it is.
-//     * @param tile the selected tile
-//     */
-//    public void updateTile(Tile tile) {
-//        if(this.tiles.contains(tile)) {
-//            this.selected_colour.set(tile.toString());
-//        }
-//    }
 
     public List<List<Tile>> grabTiles(Tile tile) {
         List<Tile> grabTiles = new ArrayList<>();
@@ -152,8 +103,6 @@ public class Factory {
         }
 
         List<List<Tile>> returnTiles = Arrays.asList(grabTiles, tableTiles);
-        System.out.println(grabTiles);
-        System.out.println(tiles);
 
         return returnTiles;
     }
