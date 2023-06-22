@@ -55,7 +55,6 @@ viewTest-job:
    - cd ../View
    - mvn dependency:tree
    - mvn verify $MAVEN_CLI_OPTS
-
  artifacts:
    when: always
    reports:
@@ -114,6 +113,7 @@ coverage-job:
   image: haynes/jacoco2cobertura:1.0.7
   script:
     # convert report from jacoco to cobertura, using relative project path
+    - pwd
     - python3 /opt/cover2cover.py target/site/jacoco/jacoco.xml /Azul/Model/src/main/java/ > cobertura-coverage.xml
   needs: ["modelTest-job"]
   dependencies:
