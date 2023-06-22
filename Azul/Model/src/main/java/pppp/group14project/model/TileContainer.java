@@ -11,11 +11,6 @@ import java.util.Random;
 public class TileContainer {
 
     private static final int DEFAULT_NUMBER_OF_TILES_PER_COLOR = 20;
-    private static TileContainer tileContainer = new TileContainer();
-
-    public static TileContainer getTileContainer() {
-        return TileContainer.getTileContainer();
-    }
 
     @Getter
     @Setter

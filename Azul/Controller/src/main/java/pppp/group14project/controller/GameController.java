@@ -62,7 +62,6 @@ public class GameController implements Initializable {
     Game game = Game.getInstance();
     List<Factory> factories = game.getFactoryList();
     factories.add(new Factory());
-    TileContainer container = game.getTilecontainer();
 
     try {
       Parent root = FXMLLoader.load(getClass().getResource("/game-board-view.fxml"));

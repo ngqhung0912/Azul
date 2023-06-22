@@ -44,43 +44,6 @@ public class WallController {
         wall.addTile(tile, row);
     }
 
-
-    /**
-     * Finds a Rectangle in GridPane for a given tile in a row
-     * @param rowNumber the number of the row for finding the tile
-     * @param tile the tile of which location is needed
-     * @return the Rectangle associated with that tile
-     */
-    public Rectangle findTileLocationInRow(int rowNumber, Tile tile) {
-        String color = tile.toString();
-        Rectangle tileToWall = null;
-        for (Node node : wallGridPane.getChildren()) {
-            double opacityNoTile = 0.5;
-            if (node.getId().equals(color)
-                    && GridPane.getRowIndex(node) == rowNumber
-                    && node.getOpacity() == opacityNoTile) {
-                tileToWall = (Rectangle) node;
-            }
-        }
-        return tileToWall;
-    }
-
-    /**
-     * Resets all the tiles back to original look
-     */
-    public void colorTile(int row, int column) {
-        for (Node node : wallGridPane.getChildren()) {
-            if (node instanceof Button) {
-                int rowID = GridPane.getRowIndex(node);
-                int columnID = GridPane.getColumnIndex(node);
-                if (row == rowID & column == columnID) {
-                    node.getStyleClass().add("is-colored");
-                    return;
-                }
-            }
-        }
-    }
-
     /**
      * Resets all the tiles back to original look
      */
@@ -129,10 +92,7 @@ public class WallController {
                     }
                 }
             });
-
         }
-
-
     }
 
 }
