@@ -26,21 +26,18 @@ stages:
 
 variables:
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -Dgitlab-ci=true -DIS_COMPILE_PANGO=true  -DtrimStackTrace=false"
-build-job:
-  tags:
-    - pppp
-  stage: build
-  script:
-    - echo "Hello"
 
+  
 modelTest-job:
   tags:
     - pppp
   stage: test
   script:
     - cd Azul/Model
-    - mvn verify
+    - mvn test org.jacoco:jacoco-maven-plugin:prepare-agent test jacoco:report
   artifacts:
+    paths:
+      - target/site/jacoco/jacoco.xml
     when: always
     reports:
       junit:
@@ -108,6 +105,23 @@ sigridpublish:
     when: always
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+coverage-job:
+  # Must be in a stage later than test-jdk11's stage.
+  # The `visualize` stage does not exist by default.
+  # Please define it first, or choose an existing stage like `deploy`.
+  stage: report
+  image: haynes/jacoco2cobertura:1.0.7
+  script:
+    # convert report from jacoco to cobertura, using relative project path
+    - python /opt/cover2cover.py target/site/jacoco/jacoco.xml $CI_PROJECT_DIR/Azul/Model/src/main/java/ > Azul/Model/target/site/cobertura.xml
+  needs: ["modelTest-job"]
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: Azul/Model/target/site/cobertura.xml
+
 
 
 
