@@ -177,17 +177,15 @@ public class GameBoardController implements Initializable, Mediator {
 
       List<Tile> returnTilesWall = p.moveTileFromPatternToWall();
 
-      for (Tile tile: returnTilesWall) {
-        moveTilesToTileContainer(tile);
-      }
+      moveTilesToTileContainer(returnTilesWall);
 
       p.updateScore();
       List<Tile> returnTilesFloor = p.removeTilesFromFloor();
       if (returnTilesFloor.contains(Tile.STARTING)) {
         returnTilesFloor.remove(Tile.STARTING);
       }
-      game.getTilecontainer().addDiscardedTiles(returnTilesFloor);
 
+      moveTilesToTileContainer(returnTilesFloor);
     }
 
     // Re-fill Factories
@@ -283,8 +281,13 @@ public class GameBoardController implements Initializable, Mediator {
   }
 
   @Override
-  public void moveTilesToTileContainer(Tile tile) {
+  public void moveTileToTileContainer(Tile tile) {
     game.getTilecontainer().addDiscardedTiles(Collections.singletonList(tile));
+  }
+
+  @Override
+  public void moveTilesToTileContainer(List<Tile> tile) {
+    game.getTilecontainer().addDiscardedTiles(tile);
   }
 
   @Override

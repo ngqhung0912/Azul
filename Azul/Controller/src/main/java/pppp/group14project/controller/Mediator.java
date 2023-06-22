@@ -15,7 +15,9 @@ public interface Mediator {
 
   void moveTilesToTable(List<Tile> tiles);
 
-  void moveTilesToTileContainer(Tile tile);
+  void moveTileToTileContainer(Tile tile);
+
+  void moveTilesToTileContainer(List<Tile> tile);
 
   void updateScore();
 
