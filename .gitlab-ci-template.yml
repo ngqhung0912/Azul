@@ -21,8 +21,8 @@ image:  ngqhung0912/java19-maven3.8.7-monocle
 stages:
   - build
   - test
-  - deploy
   - report
+  - visualize
 
 variables:
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -Dgitlab-ci=true -DIS_COMPILE_PANGO=true  -DtrimStackTrace=false"
@@ -34,7 +34,7 @@ modelTest-job:
   stage: test
   script:
     - cd Azul/Model
-    - mvn test org.jacoco:jacoco-maven-plugin:prepare-agent test jacoco:report
+    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test jacoco:report
   artifacts:
     paths:
       - target/site/jacoco/jacoco.xml
@@ -110,12 +110,14 @@ coverage-job:
   # Must be in a stage later than test-jdk11's stage.
   # The `visualize` stage does not exist by default.
   # Please define it first, or choose an existing stage like `deploy`.
-  stage: report
+  stage: visualize
   image: haynes/jacoco2cobertura:1.0.7
   script:
     # convert report from jacoco to cobertura, using relative project path
     - python /opt/cover2cover.py Azul/Model/target/site/jacoco/jacoco.xml $CI_PROJECT_DIR/Azul/Model/src/main/java/ > Azul/Model/target/site/cobertura.xml
   needs: ["modelTest-job"]
+  dependencies:
+    - "modelTest-job"
   artifacts:
     reports:
       coverage_report:
