@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameIntegrationTest extends ApplicationTest {
 
-    private GameBoardController gameBoardController;
+    private static GameBoardController gameBoardController;
 
     private static TableController tableController;
 
@@ -217,5 +217,6 @@ class GameIntegrationTest extends ApplicationTest {
 
         floor.getTiles().clear();
     }
+
 }
 
