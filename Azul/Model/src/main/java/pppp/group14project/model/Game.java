@@ -94,8 +94,11 @@ public class Game {
   }
 
   public void resetGame(){
-    boardList.clear();
-    factoryList.clear();
-    tilecontainer.reset();
+//    boardList.clear();
+    getBoardList().clear();
+    getFactoryList().clear();
+    getTilecontainer().reset();
+//    factoryList.clear();
+//    tilecontainer.reset();
   }
 }
