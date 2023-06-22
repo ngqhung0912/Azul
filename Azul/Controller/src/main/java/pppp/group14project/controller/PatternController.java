@@ -130,16 +130,20 @@ public class PatternController {
             /**
              * Moving tiles after a Space has been clicked on the Pattern
              */
-            if (grabbedTiles.contains(Tile.STARTING)){
-                grabbedTiles.remove(Tile.STARTING);
-                List<Tile> startingTile = new ArrayList<>();
-                startingTile.add(Tile.STARTING);
-                playerBoardController.moveTilesToFloor(startingTile);
-            }
+            patternHandleStarting(grabbedTiles, playerBoardController);
 
             List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
             playerBoardController.moveTilesToFloor(excessTiles);
 
+    }
+
+    private void patternHandleStarting(List<Tile> grabbedTiles, PlayerBoardController playerBoardController){
+        if (grabbedTiles.contains(Tile.STARTING)){
+            grabbedTiles.remove(Tile.STARTING);
+            List<Tile> startingTile = new ArrayList<>();
+            startingTile.add(Tile.STARTING);
+            playerBoardController.moveTilesToFloor(startingTile);
+        }
     }
 
     private void unhighlightAllSpaces() {
