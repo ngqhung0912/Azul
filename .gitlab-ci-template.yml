@@ -123,11 +123,11 @@ coverage-job:
   needs: ["modelTest-job"]
   dependencies:
     - "modelTest-job"
-  artifacts:
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: cobertura-coverage.xml
+  # artifacts:
+  #   reports:
+  #     coverage_report:
+  #       coverage_format: cobertura
+  #       path: cobertura-coverage.xml
 
 
 
