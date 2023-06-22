@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameIntegrationTest extends ApplicationTest {
 
-    private GameBoardController gameBoardController;
+    private static GameBoardController gameBoardController;
 
     private static TableController tableController;
 
@@ -181,7 +181,6 @@ class GameIntegrationTest extends ApplicationTest {
         table.empty();
         assertEquals(0, table.size());
         tableController.addTilesToTable(tileList);
-
         playerBoardController.activate(Tile.BLUE, table);
 
         patternController.patternMoveTiles(table, Tile.BLUE, 1);
@@ -218,5 +217,6 @@ class GameIntegrationTest extends ApplicationTest {
 
         floor.getTiles().clear();
     }
+
 }
 

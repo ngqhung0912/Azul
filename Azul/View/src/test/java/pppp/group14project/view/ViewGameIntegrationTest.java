@@ -210,6 +210,92 @@ class ViewGameIntegrationTest extends ApplicationTest {
     }
 
     @Test
+    void selectAndUnselectTilesTable() throws FullException {
+        List<Tile> tileList = new ArrayList<>();
+        tileList.add(Tile.BLUE);
+        tileList.add(Tile.BLACK);
+        tileList.add(Tile.BLUE);
+        tableController.addTilesToTable(tileList);
+
+        GridPane tableGrid = (GridPane) gameBoardPane.lookup("#tableGridPane");
+
+        mouseEnterHandling(tableGrid.getChildren().get(1));
+
+        List<Tile> tableTileSelected = new ArrayList<>();
+        List<Tile> tableTileUnselected = new ArrayList<>();
+
+        List<Tile> expectedTableTileSelected = new ArrayList<>();
+        List<Tile> expectedTableTileUnselected = new ArrayList<>();
+        expectedTableTileSelected.add(Tile.STARTING);
+        expectedTableTileSelected.add(Tile.BLUE);
+        expectedTableTileSelected.add(Tile.BLUE);
+        expectedTableTileUnselected.add(Tile.BLACK);
+
+        for (Node node : tableGrid.getChildren()) {
+            if (node instanceof ClickableTile && node.getOpacity() == 1) {
+                Tile color = ((ClickableTile) node).getColour();
+                if (node.getStyleClass().contains("selected")) {
+                    tableTileSelected.add(color);
+                } else {
+                    tableTileUnselected.add(color);
+                }
+            }
+        }
+
+        assertEquals(expectedTableTileSelected, tableTileSelected);
+        assertEquals(expectedTableTileUnselected, tableTileUnselected);
+
+        mouseExitedHandling(tableGrid.getChildren().get(1));
+        expectedTableTileSelected.clear();
+        expectedTableTileUnselected.clear();
+        tableTileSelected.clear();
+        tableTileUnselected.clear();
+
+        expectedTableTileUnselected.add(Tile.STARTING);
+        expectedTableTileUnselected.addAll(tileList);
+
+        for (Node node : tableGrid.getChildren()) {
+            if (node instanceof ClickableTile && node.getOpacity() == 1) {
+                Tile color = ((ClickableTile) node).getColour();
+                if (node.getStyleClass().contains("selected")) {
+                    tableTileSelected.add(color);
+                } else {
+                    tableTileUnselected.add(color);
+                }
+            }
+        }
+        assertEquals(expectedTableTileSelected, tableTileSelected);
+        assertEquals(expectedTableTileUnselected, tableTileUnselected);
+
+        mouseClickHandling(tableGrid.getChildren().get(2));
+
+        expectedTableTileSelected.clear();
+        expectedTableTileUnselected.clear();
+        tableTileSelected.clear();
+        tableTileUnselected.clear();
+
+        expectedTableTileSelected.add(Tile.STARTING);
+        expectedTableTileSelected.add(Tile.BLACK);
+        expectedTableTileUnselected.add(Tile.BLUE);
+        expectedTableTileUnselected.add(Tile.BLUE);
+
+        for (Node node : tableGrid.getChildren()) {
+            if (node instanceof ClickableTile && node.getOpacity() == 1) {
+                Tile color = ((ClickableTile) node).getColour();
+                if (node.getStyleClass().contains("selected")) {
+                    tableTileSelected.add(color);
+                } else {
+                    tableTileUnselected.add(color);
+                }
+            }
+        }
+
+        assertEquals(expectedTableTileSelected, tableTileSelected);
+        assertEquals(expectedTableTileUnselected, tableTileUnselected);
+
+    }
+
+    @Test
     void moveTilesFromFactory() {
         factory.empty();
         List<Tile> tileList = new ArrayList<>();
@@ -280,6 +366,18 @@ class ViewGameIntegrationTest extends ApplicationTest {
                 0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true,
                 true, true, true, true, true, true, null));
 
+    }
+
+    void mouseEnterHandling(Node node){
+        Event.fireEvent(node, new MouseEvent(MouseEvent.MOUSE_ENTERED, 0,
+                0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true,
+                true, true, true, true, true, true, null));
+    }
+
+    void mouseExitedHandling(Node node){
+        Event.fireEvent(node, new MouseEvent(MouseEvent.MOUSE_EXITED, 0,
+                0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true,
+                true, true, true, true, true, true, null));
     }
 
     void mouseClickSpaceHandling(Space space) {

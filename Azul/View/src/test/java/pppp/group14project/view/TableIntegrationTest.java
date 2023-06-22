@@ -77,7 +77,6 @@ public class TableIntegrationTest extends ApplicationTest {
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
-        //TODO remove the tiles from the initialization
         try {
             tableController.addTilesToTable(tileList);
         } catch (FullException e) {
