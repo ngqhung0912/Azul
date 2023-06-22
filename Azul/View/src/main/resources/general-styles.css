@@ -113,3 +113,15 @@ ClickableTile {
 #welcomeText {
     -fx-font-size: 30;
 }
+
+/* Effects for tiles that the player can choose to place a tile on */
+.tile-option:hover {
+    -fx-background-color: rgb(199, 178, 153);
+    /*-fx-effect: dropshadow(gaussian, rgb(170, 170, 170), 30, 0.4, 0, 0);*/
+}
+
+.tile-option {
+    -fx-cursor: hand;
+    -fx-border-width: 2;
+    /*-fx-effect: dropshadow(gaussian, rgb(200, 200, 200), 30, 0.4, 0, 0);*/
+}
