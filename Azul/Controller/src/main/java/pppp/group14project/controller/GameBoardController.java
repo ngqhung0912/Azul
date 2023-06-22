@@ -162,14 +162,7 @@ public class GameBoardController implements Initializable, Mediator {
   private void finishRound() {
 
     // Update starting player
-    int startingPlayerID = 0;
-    for (int i = 0; i < playerBoardControllers.size(); i++) {
-      if (playerBoardControllers.get(i).getFloorController().getFloor().getTiles().contains(Tile.STARTING)) {
-        startingPlayerID = i;
-        break;
-      }
-    }
-    game.generateTurns(startingPlayerID);
+    game.generateTurns(getStartingPlayer());
 
     // Move Tiles from Pattern to Wall, and empty Floor for each player
 
@@ -181,15 +174,28 @@ public class GameBoardController implements Initializable, Mediator {
 
       p.updateScore();
       List<Tile> returnTilesFloor = p.removeTilesFromFloor();
-      if (returnTilesFloor.contains(Tile.STARTING)) {
-        returnTilesFloor.remove(Tile.STARTING);
-      }
+
+      returnTilesFloor.remove(Tile.STARTING);
+
 
       moveTilesToTileContainer(returnTilesFloor);
     }
+    refillFactories();
+  }
 
-    // Re-fill Factories
+  private int getStartingPlayer() {
+    int startingPlayerID = 0;
+    for (int i = 0; i < playerBoardControllers.size(); i++) {
+      if (playerBoardControllers.get(i).getFloorController().getFloor().getTiles().contains(Tile.STARTING)) {
+        startingPlayerID = i;
+        break;
+      }
+    }
+    return startingPlayerID;
+  }
 
+
+  private void refillFactories() {
     for (FactoryController f: factoryControllers) {
       try {
         List<Tile> tilesToAdd = game.getTilecontainer().grabBagTiles(4);
