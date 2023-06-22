@@ -97,6 +97,5 @@ public class Game {
     boardList.clear();
     factoryList.clear();
     tilecontainer.reset();
-
   }
 }

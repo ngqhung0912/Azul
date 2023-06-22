@@ -45,10 +45,10 @@ public class Board {
     this.wall = new WallAdapter();
   }
 
-  public void resetBoard(){
-      this.score = new SimpleIntegerProperty(0);
-      this.floor = new Floor();
-      this.pattern = new Pattern();
-      this.wall = new Wall();
-  }
+//  public void resetBoard(){
+//      this.score = new SimpleIntegerProperty(0);
+//      this.floor = new Floor();
+//      this.pattern = new Pattern();
+//      this.wall = new Wall();
+//  }
 }
