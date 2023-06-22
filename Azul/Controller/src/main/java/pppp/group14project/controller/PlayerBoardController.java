@@ -187,11 +187,6 @@ public class PlayerBoardController implements Initializable, Mediator {
         gameBoardController.moveTilesToTileContainer(tile);
     }
 
-    @Override
-    public void removeTilesFromTable() {
-
-    }
-
     /**
      * Get score AT THE END OF EVERY TURN!
      */

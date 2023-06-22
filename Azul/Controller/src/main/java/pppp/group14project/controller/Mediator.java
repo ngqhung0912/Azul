@@ -19,7 +19,6 @@ public interface Mediator {
 
   void updateScore();
 
-  void removeTilesFromTable();
   List<Tile> removeTilesFromFloor();
 
 

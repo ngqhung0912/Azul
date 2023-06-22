@@ -288,9 +288,4 @@ public class GameBoardController implements Initializable, Mediator {
   public void updateScore() {
 
   }
-
-  @Override
-  public void removeTilesFromTable() {
-//    tableController.removeSelectedTilesFromTable();
-  }
 }
