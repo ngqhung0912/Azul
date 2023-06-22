@@ -76,7 +76,6 @@ public class Wall {
      * @param row    row on which the tile should be added
      */
     public void addTile(Tile tile, int row) throws FullException, WrongTileException {
-
         if (isTileInRow(tile, row)) throw new FullException();
         int col = getTileColorColumn(tile, row);
         addTile(tile, row, col);

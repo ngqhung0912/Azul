@@ -110,32 +110,37 @@ public class PatternController {
         s.getStyleClass().add("tile-option");
         s.setOnAction(e -> {
             try {
-                // Grab from Factory model or Table
-                List<List<Tile>> returnTiles = factory.grabTiles(tile);
-                List<Tile> grabbedTiles = returnTiles.get(0);
-                List<Tile> tableTiles = returnTiles.get(1);
-
-                playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
-
-                /**
-                 * Moving tiles after a Space has been clicked on the Pattern
-                 */
-                if (grabbedTiles.contains(Tile.STARTING)){
-                    grabbedTiles.remove(Tile.STARTING);
-                    List<Tile> startingTile = new ArrayList<>();
-                    startingTile.add(Tile.STARTING);
-                    playerBoardController.moveTilesToFloor(startingTile);
-                }
-
-                List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
-                playerBoardController.moveTilesToFloor(excessTiles);
-
-            } catch (WrongTileException ex) {
+                patternMoveTiles(factory, tile, rowNumber);
+            }catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
             playerBoardController.getGameBoardController().finishPlayerTurn();
             unhighlightAllSpaces();
         });
+    }
+
+    public void patternMoveTiles(Factory factory, Tile tile, int rowNumber) throws WrongTileException {
+            // Grab from Factory model or Table
+            List<List<Tile>> returnTiles = factory.grabTiles(tile);
+            List<Tile> grabbedTiles = returnTiles.get(0);
+            List<Tile> tableTiles = returnTiles.get(1);
+
+            playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
+
+            patternHandleStarting(grabbedTiles, playerBoardController);
+
+            List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
+            playerBoardController.moveTilesToFloor(excessTiles);
+
+    }
+
+    private void patternHandleStarting(List<Tile> grabbedTiles, PlayerBoardController playerBoardController){
+        if (grabbedTiles.contains(Tile.STARTING)){
+            grabbedTiles.remove(Tile.STARTING);
+            List<Tile> startingTile = new ArrayList<>();
+            startingTile.add(Tile.STARTING);
+            playerBoardController.moveTilesToFloor(startingTile);
+        }
     }
 
     private void unhighlightAllSpaces() {
@@ -173,7 +178,6 @@ public class PatternController {
             s.getStyleClass().clear();
             s.getStyleClass().add("button");
             s.getStyleClass().add("pattern-tile-box");
-
         }
 
     }

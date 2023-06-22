@@ -251,8 +251,6 @@ public class GameBoardController implements Initializable, Mediator {
   }
 
 
-
-
   @Override
   public List<Tile> moveTilesToWall() {
     return null;

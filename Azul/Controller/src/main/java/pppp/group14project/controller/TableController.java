@@ -11,14 +11,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 
-import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Table;
 import pppp.group14project.model.Tile;
-import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TableController {
@@ -69,11 +66,11 @@ public class TableController {
                 while (opacity == 1 && currentRow < tableGridPane.getChildren().size()) {
                     node = (ClickableTile) tableGridPane.getChildren().get(currentRow);
                     opacity = node.getOpacity();
-                    node.setColour(tile);
                     currentRow++;
                 }
 
                 if (node != null) {
+                    node.setColour(tile);
                     node.getStyleClass().add(String.valueOf(tile));
                     node.setOpacity(1);
                 }
