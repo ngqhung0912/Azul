@@ -117,7 +117,7 @@ coverage-job:
     # - python3 /opt/cover2cover.py Azul/Model/target/site/jacoco/jacoco.xml /Azul/Model/src/main/java/ > cobertura-coverage.xml
     # - cat cobertura-coverage.xml
     - apt update && apt install -y gawk
-    - ./Azul/jacoco-summary.sh Azul/Model/target/site/jacoco/jacoco.csv
+    - chmod ./Azul/jacoco-summary.sh Azul/Model/target/site/jacoco/jacoco.csv
   # Use this regular expression to create the badge.
   coverage: '/^s*Instructions:s*d+.d+\%/'
   needs: ["modelTest-job"]
