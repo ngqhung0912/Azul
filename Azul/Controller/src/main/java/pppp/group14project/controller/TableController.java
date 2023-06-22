@@ -11,14 +11,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 
-import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Table;
 import pppp.group14project.model.Tile;
-import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TableController {
@@ -69,12 +66,11 @@ public class TableController {
                 while (opacity == 1 && currentRow < tableGridPane.getChildren().size()) {
                     node = (ClickableTile) tableGridPane.getChildren().get(currentRow);
                     opacity = node.getOpacity();
-                    node.setColour(tile);
-                    System.out.println(node);
                     currentRow++;
                 }
 
                 if (node != null) {
+                    node.setColour(tile);
                     node.getStyleClass().add(String.valueOf(tile));
                     node.setOpacity(1);
                 }
@@ -104,7 +100,6 @@ public class TableController {
         for (Node node : tableGridPane.getChildren()) {
             ObservableList<String> style = node.getStyleClass();
             if (style.contains(colour) || style.contains("STARTING")) {
-                System.out.println("SELECTED");
                 style.add("selected");
             } else {
                 style.remove("selected");
@@ -135,7 +130,7 @@ public class TableController {
 
         displayTilesOnTheTable(); // To display the STARTING Tile
 
-        System.out.println("Created event listeners for Table");
+//        System.out.println("Created event listeners for Table");
 
         this.table.getTiles().addListener((ListChangeListener<Tile>) change -> {
             displayTilesOnTheTable();

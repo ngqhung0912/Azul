@@ -80,7 +80,7 @@ public class Wall {
         int col = getTileColorColumn(tile, row);
         addTile(tile, row, col);
         updateWallScore(row, col);
-        System.out.println(tile + " " + wallScore);
+//        System.out.println(tile + " " + wallScore);
 
     }
 
@@ -226,7 +226,7 @@ public class Wall {
         if (horizontalNeighboringTiles == 0 && verticalNeighboringTiles == 0) {
             wallScore += 1;
         }
-        System.out.println(wallScore);
+//        System.out.println(wallScore);
 
     }
 
