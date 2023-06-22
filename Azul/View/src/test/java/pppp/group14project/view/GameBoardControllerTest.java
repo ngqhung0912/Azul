@@ -52,6 +52,9 @@ public class GameBoardControllerTest extends ApplicationTest {
         player2 = new Player("test2");
 
         game = Game.getInstance();
+        game.getBoardList().clear();
+        game.getTilecontainer().reset();
+        game.getFactoryList().clear();
         board1 = new Board(player1);
         game.addBoard(board1);
 

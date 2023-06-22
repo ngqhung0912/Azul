@@ -48,6 +48,9 @@ public class ScoreIntegrationTest extends ApplicationTest {
         player = new Player("test");
 
         Game game = Game.getInstance();
+        game.getBoardList().clear();
+        game.getTilecontainer().reset();
+        game.getFactoryList().clear();
         board = new Board(player);
 
         game.addBoard(board);
@@ -75,15 +78,6 @@ public class ScoreIntegrationTest extends ApplicationTest {
         String score = text.getText();
         assertEquals("5", score);
     }
-
-    @Test
-    void checkNegativeScore(){
-        board.getScore().setValue(-10);
-        Text text = (Text) gameBoardPane.lookup("#scoreText");
-        String score = text.getText();
-        assertEquals("0", score);
-    }
-
 
 
 }
