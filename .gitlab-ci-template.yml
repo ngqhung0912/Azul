@@ -115,7 +115,7 @@ coverage-job:
   script:
     # convert report from jacoco to cobertura, using relative project path
     - python3 /opt/cover2cover.py Azul/Model/target/site/jacoco/jacoco.xml /Azul/Model/src/main/java/ > cobertura-coverage.xml
-    - cat cobertura-coverage.xml
+    - cat cobertura-coverage.xml  | grep -o '/Total.*?([0-9]{1,3})%/'
     # - apt update && apt install -y gawk
     # - chmod +x ./Azul/jacoco-summary.sh Azul/Model/target/site/jacoco/jacoco.csv
   # Use this regular expression to create the badge.
