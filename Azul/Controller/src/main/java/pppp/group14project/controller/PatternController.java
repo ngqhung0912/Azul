@@ -127,9 +127,6 @@ public class PatternController {
 
             playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
 
-            /**
-             * Moving tiles after a Space has been clicked on the Pattern
-             */
             patternHandleStarting(grabbedTiles, playerBoardController);
 
             List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);

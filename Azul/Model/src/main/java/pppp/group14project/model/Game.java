@@ -92,4 +92,11 @@ public class Game {
       counter = counter+4;
     }
   }
+
+  public void resetGame(){
+    boardList.clear();
+    factoryList.clear();
+    tilecontainer.reset();
+
+  }
 }
