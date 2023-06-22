@@ -114,6 +114,7 @@ coverage-job:
   script:
     # convert report from jacoco to cobertura, using relative project path
     - pwd
+    - ls
     - python3 /opt/cover2cover.py target/site/jacoco/jacoco.xml /Azul/Model/src/main/java/ > cobertura-coverage.xml
   needs: ["modelTest-job"]
   dependencies:
