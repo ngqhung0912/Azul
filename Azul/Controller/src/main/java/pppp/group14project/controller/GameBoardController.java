@@ -250,13 +250,6 @@ public class GameBoardController implements Initializable, Mediator {
 
   }
 
-  public void endGame(){
-    game.resetGame();
-
-  }
-
-
-
 
   @Override
   public List<Tile> moveTilesToWall() {
