@@ -45,7 +45,9 @@ public class PatternController {
     @Getter
     private PlayerBoardController playerBoardController;
 
-
+    /**
+     * Check if pattern have possible spaces
+     */
     private boolean patternHasPossibleSpaces(Tile tileToAdd) {
         for (int i = 0; i < 5; i++) {
             PatternLine p = pattern.getPatternLines().get(i);
@@ -56,13 +58,15 @@ public class PatternController {
         return false;
     }
 
+
+
     public void highlightPossibleSpaces(Tile tile, Factory factory) throws InvalidPositionException {
         unhighlightAllSpaces();
 
         if (patternHasPossibleSpaces(tile)) {
             for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
                 // Go to next row if the row has a tile, but it is not equal to the tile color given
-                if ((rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile)) || playerBoardController.wallContainsTile(tile, rowIndex))
+                if (tileDoesNotFitsRow(tile, rowIndex))
                     continue;
 
                 for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
@@ -74,20 +78,16 @@ public class PatternController {
             }
         } else {
             moveTilesWhenPatternHasNoSpace(tile, factory);
-
-//            List<List<Tile>> returnTiles = factory.grabTiles(tile);
-//            List<Tile> grabbedTiles = returnTiles.get(0);
-//            List<Tile> tableTiles = returnTiles.get(1);
-//
-//            playerBoardController.moveTilesToTable(tableTiles);
-//            playerBoardController.moveTilesToFloor(grabbedTiles);
-//
-//            playerBoardController.getGameBoardController().finishPlayerTurn();
-//            unhighlightAllSpaces();
         }
     }
 
+    private boolean tileDoesNotFitsRow (Tile tile, int row) throws InvalidPositionException {
+        return (rowHasTile(row) && !rowHasTile(row, tile) )|| playerBoardController.wallContainsTile(tile, row);
+    }
 
+    /**
+     * Move tiles to Table and floor when pattern has no space
+     */
     private void moveTilesWhenPatternHasNoSpace(Tile tile, Factory factory) {
         List<List<Tile>> returnTiles = factory.grabTiles(tile);
         List<Tile> grabbedTiles = returnTiles.get(0);
