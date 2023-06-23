@@ -78,8 +78,6 @@ class PlayerWallViewTest extends ApplicationTest {
     @Test
     void correctInitialTileOpacity() {
 
-        int expectedRows = 25;
-        int displayedTiles = 0;
 
         for (Node node : wallGridPane.getChildren()) {
             if (node instanceof Button) {

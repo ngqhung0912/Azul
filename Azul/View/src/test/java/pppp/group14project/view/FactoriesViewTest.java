@@ -48,29 +48,26 @@ public class FactoriesViewTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
+    @Test
+    void tilesLookClickable() {
 
-    // TODO: Fix test, a space is currently only clickable if it actually has a Tile
-//    @Test
-//    public void tilesLookClickable() {
-//
-//        GridPane tileGrid = lookup("#tileGrid").query();
-//        GridPane factoryGrid = lookup("#factoryGrid").query();
-//        moveTo(tileGrid.getChildren().get(3));
-//        for(Node n : tileGrid.getChildren()) {
-//            ClickableTile tile = (ClickableTile) n;
-//            Paint bordercolour = tile.getBorder().getStrokes().get(0).getLeftStroke();
-//            Paint backgroundcolor = tile.getBackground().getFills().get(0).getFill();
-//            assertNotEquals(bordercolour, backgroundcolor);
-//            moveTo(tile);
-//            WaitForAsyncUtils.waitForFxEvents();
-//            backgroundcolor = tile.getBackground().getFills().get(0).getFill();
-//            assertEquals(bordercolour, backgroundcolor);
-//        }
-//
-//    }
+        GridPane tileGrid = lookup("#tileGrid").query();
+        moveTo(tileGrid.getChildren().get(3));
+        for(Node n : tileGrid.getChildren()) {
+            ClickableTile tile = (ClickableTile) n;
+            Paint bordercolour = tile.getBorder().getStrokes().get(0).getLeftStroke();
+            Paint backgroundcolor = tile.getBackground().getFills().get(0).getFill();
+            assertNotEquals(bordercolour, backgroundcolor);
+            moveTo(tile);
+            WaitForAsyncUtils.waitForFxEvents();
+            backgroundcolor = tile.getBackground().getFills().get(0).getFill();
+            assertEquals(bordercolour, backgroundcolor);
+        }
+
+    }
 
     @Test
-    public void tilesAreClickable() {
+    void tilesAreClickable() {
         GridPane tileGrid = lookup("#tileGrid").query();
         int expected = 4;
         int actual = 0;
