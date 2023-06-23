@@ -222,22 +222,37 @@ public class GameBoardController implements Initializable, Mediator {
       int playerscore = wall.getWallScore();
       winner = (playerscore > winner.getBoard().getWall().getWallScore()) ? player : winner;
     }
-    // display the winner
+    displayWinner(winner);
+    Platform.runLater(() -> {
+      String winnername = game.winner.getPlayer().getName();
+      alertGameEnd(winnername);
+    });
+  }
+
+  /**
+   * Adds all necessary styling to show who won the game.
+   *
+   * @param winner The PlayerBoardController associated to the winner of the game
+   */
+  private void displayWinner(PlayerBoardController winner) {
     game.setWinner(winner.getBoard());
     winner.playerName.getStyleClass().add("winnerText");
     winner.boardBackground.getStyleClass().clear();
     winner.boardBackground.getStyleClass().add("winnerBoard");
     winner.getScoreController().scoreText.getStyleClass().add("winnerText");
+  }
 
-    // alert that the game has ended
-    Platform.runLater(() -> {
+  /**
+   * Creates an alert to notify the game's players that the game has ended.
+   *
+   * @param winnername The name of the winner of the game, can be null
+   */
+  private void alertGameEnd(String winnername) {
       Alert a = new Alert(Alert.AlertType.INFORMATION);
-      Game game = Game.getInstance();
-      String winnername = game.winner.getPlayer().getName();
       winnername = (winnername == null || winnername == "") ? "Anonymous" : winnername;
       a.setContentText("The game has ended, and " + winnername + " has won! \n Restart the game to play again.");
       a.show();
-    });
+
   }
 
   private int getStartingPlayer() {
