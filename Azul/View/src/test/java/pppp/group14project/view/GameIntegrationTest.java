@@ -116,6 +116,7 @@ class GameIntegrationTest extends ApplicationTest {
 
         pattern = patternController.getPattern();
 
+        wall = wallController.getWall();
 
         stage.setScene(new Scene(root, 1250, 700));
         stage.show();
@@ -216,6 +217,17 @@ class GameIntegrationTest extends ApplicationTest {
         assertFalse(table.getTiles().contains(Tile.BLUE));
 
         floor.getTiles().clear();
+    }
+
+    @Test
+    public void testEndGame() throws WrongTileException, FullException {
+        wall.addTile(Tile.WHITE, 0);
+        wall.addTile(Tile.BLUE, 0);
+        wall.addTile(Tile.RED, 0);
+        wall.addTile(Tile.BLACK, 0);
+        wall.addTile(Tile.ORANGE, 0);
+
+        assertTrue(gameBoardController.endConditionMet());
     }
 
 }

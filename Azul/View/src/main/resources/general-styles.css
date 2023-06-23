@@ -125,3 +125,12 @@ ClickableTile {
     -fx-border-width: 2;
     /*-fx-effect: dropshadow(gaussian, rgb(200, 200, 200), 30, 0.4, 0, 0);*/
 }
+
+.winnertext {
+    -fx-text-fill: #D9AB38;
+}
+
+.winnerboard {
+    -fx-border-width: 7;
+    -fx-border-color: #D9AB38;
+}

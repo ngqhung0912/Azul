@@ -141,7 +141,7 @@ public class Wall {
      *
      * @return number of full rows
      */
-    private int getFullRows() {
+    public int getFullRows() {
         int fullRows = 0;
         for (int i = 0; i < WALL_SIZE; i++) {
             if (isRowFull(i)) {

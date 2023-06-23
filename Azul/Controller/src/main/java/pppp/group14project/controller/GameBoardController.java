@@ -177,10 +177,49 @@ public class GameBoardController implements Initializable, Mediator {
 
       returnTilesFloor.remove(Tile.STARTING);
 
-
       moveTilesToTileContainer(returnTilesFloor);
     }
-    refillFactories();
+
+    // check if the game has ended
+    if(endConditionMet()) {
+      endGame();
+    } else {
+      refillFactories();
+    }
+  }
+
+  /**
+   * Checks if a player has a full row, which is the end-condition of Azul
+   *
+   * @return whether the game should end
+   */
+  public boolean endConditionMet() {
+    for(Board board: game.getBoardList()) {
+      Wall wall = board.getWall();
+      if(wall.getFullRows() > 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Manages the end of the game
+   */
+  private void endGame() {
+    // calculate the final scores
+    PlayerBoardController winner = playerBoardControllers.get(0);
+    for(PlayerBoardController player : playerBoardControllers) {
+      Board board = player.getBoard();
+      Wall wall = board.getWall();
+      wall.updateScoreAtEndGame();
+      int playerscore = wall.getWallScore();
+      winner = (playerscore > winner.getBoard().getWall().getWallScore()) ? player : winner;
+    }
+    // display the winner
+    winner.playerName.getStyleClass().add("winnertext");
+    winner.boardBackground.getStyleClass().add("winnerboard");
+    winner.getScoreController().scoreText.getStyleClass().add("winnertext");
   }
 
   private int getStartingPlayer() {

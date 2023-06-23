@@ -8,7 +8,7 @@ import pppp.group14project.model.Board;
 public class ScoreController {
 
   @FXML
-  private Text scoreText;
+  public Text scoreText;
 
   @Setter
   private Board board;
