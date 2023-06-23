@@ -6,7 +6,6 @@ import lombok.Setter;
 public class Player {
 
     @Getter
-    @Setter
     private String name;
 
     public Player(String name) {
