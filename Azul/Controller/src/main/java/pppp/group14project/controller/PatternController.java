@@ -1,17 +1,13 @@
 package pppp.group14project.controller;
 
 import javafx.collections.ListChangeListener;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.SneakyThrows;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
 import pppp.group14project.model.Factory;
 import pppp.group14project.model.Pattern;
@@ -20,7 +16,6 @@ import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.WrongTileException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PatternController {
@@ -59,7 +54,6 @@ public class PatternController {
     }
 
 
-
     public boolean highlightPossibleSpaces(Tile tile, Factory factory) throws InvalidPositionException {
         unhighlightAllSpaces();
 
@@ -82,8 +76,8 @@ public class PatternController {
         return false;
     }
 
-    private boolean tileDoesNotFitsRow (Tile tile, int row) throws InvalidPositionException {
-        return (rowHasTile(row) && !rowHasTile(row, tile) )|| playerBoardController.wallContainsTile(tile, row);
+    private boolean tileDoesNotFitsRow(Tile tile, int row) throws InvalidPositionException {
+        return (rowHasTile(row) && !rowHasTile(row, tile)) || playerBoardController.wallContainsTile(tile, row);
     }
 
     /**
@@ -103,6 +97,7 @@ public class PatternController {
 
     /**
      * Gets a Space
+     *
      * @param rowNumber   row number, starting from 0 at the top
      * @param indexNumber index number, starting from 0 at the right
      * @return

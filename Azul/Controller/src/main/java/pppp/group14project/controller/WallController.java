@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Rectangle;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +13,6 @@ import pppp.group14project.model.Tile;
 import pppp.group14project.model.Wall;
 import pppp.group14project.model.exceptions.FullException;
 import pppp.group14project.model.exceptions.WrongTileException;
-
 
 
 public class WallController {
@@ -37,8 +35,9 @@ public class WallController {
 
     /**
      * Adds a tile to a wall
+     *
      * @param tile the tile that should be added
-     * @param row on which row it should be added
+     * @param row  on which row it should be added
      */
     public void addTileToWall(Tile tile, int row) throws FullException, WrongTileException {
         wall.addTile(tile, row);
@@ -70,10 +69,10 @@ public class WallController {
         return spaces[row][column];
     }
 
-    public void postInitialize(){
+    public void postInitialize() {
 
         // Create a 2D list from the 1D list of children, to make it easier to find the spaces
-        for (Node n: wallGridPane.getChildren()) {
+        for (Node n : wallGridPane.getChildren()) {
             int rowIndex = GridPane.getRowIndex(n);
             int columnIndex = GridPane.getColumnIndex(n);
             spaces[rowIndex][columnIndex] = (Button) n;

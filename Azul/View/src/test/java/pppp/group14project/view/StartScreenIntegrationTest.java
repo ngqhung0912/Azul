@@ -20,7 +20,6 @@ import pppp.group14project.model.Game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 public class StartScreenIntegrationTest extends ApplicationTest {
     @BeforeAll
@@ -31,15 +30,15 @@ public class StartScreenIntegrationTest extends ApplicationTest {
     }
 
     @Override
-    public void start (Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/start-screen-view.fxml"));
-        stage.setScene(new Scene(root,1250, 700));
+        stage.setScene(new Scene(root, 1250, 700));
         stage.show();
         stage.toFront();
     }
 
     @BeforeEach
-    public void setUp () throws Exception {
+    public void setUp() throws Exception {
         Game game = Game.getInstance();
         game.getBoardList().clear();
         game.getFactoryList().clear();
@@ -60,7 +59,7 @@ public class StartScreenIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    public void testPlayerName() {
+    void testPlayerName() {
         clickOn("#usernameTextField");
         write("Bob");
         clickOn("#addPlayerButton");
@@ -75,7 +74,7 @@ public class StartScreenIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    public void testNoName() {
+    void testNoName() {
         clickOn("#addPlayerButton");
         WaitForAsyncUtils.waitForFxEvents();
 
@@ -88,7 +87,7 @@ public class StartScreenIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    public void correctNumberOfElementsTwoPlayers() {
+    void correctNumberOfElementsTwoPlayers() {
         clickOn("#addPlayerButton");
         clickOn("#addPlayerButton");
         WaitForAsyncUtils.waitForFxEvents();
@@ -103,7 +102,7 @@ public class StartScreenIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    public void correctNumberOfElementsThreePlayers() {
+    void correctNumberOfElementsThreePlayers() {
         clickOn("#addPlayerButton");
         clickOn("#addPlayerButton");
         clickOn("#addPlayerButton");
@@ -119,7 +118,7 @@ public class StartScreenIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    public void correctNumberOfElementsFourPlayers() {
+    void correctNumberOfElementsFourPlayers() {
         clickOn("#addPlayerButton");
         clickOn("#addPlayerButton");
         clickOn("#addPlayerButton");
@@ -137,8 +136,8 @@ public class StartScreenIntegrationTest extends ApplicationTest {
 
     private int countObjectInGrid(String id, GridPane grid) {
         int count = 0;
-        for(Node n: grid.getChildren()) {
-            if(n.getId().equals(id)) {
+        for (Node n : grid.getChildren()) {
+            if (n.getId().equals(id)) {
                 count++;
             }
         }

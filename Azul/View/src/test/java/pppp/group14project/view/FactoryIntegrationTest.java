@@ -47,6 +47,7 @@ class FactoryIntegrationTest extends ApplicationTest {
         game = Game.getInstance();
         board = new Board(player);
         game.addBoard(board);
+        game.getFactoryList().clear();
 
         List<Factory> factories = game.getFactoryList();
 
@@ -71,7 +72,7 @@ class FactoryIntegrationTest extends ApplicationTest {
     }
 
     @BeforeEach
-    public void beforeEach(){
+    public void beforeEach() {
         //if not cleared more tiles are added
         factory.empty();
     }
@@ -96,14 +97,25 @@ class FactoryIntegrationTest extends ApplicationTest {
         assertEquals(tileList.size(), factory.size());
         assertEquals(tileList, factoryController.getFactory().getTiles());
         factory.empty();
-        //TODO catch exception
-//        tileList.add(Tile.BLUE);
-//        game.fillFactories(tileList);
+    }
+
+    @Test
+    void moveTooManyTilesToFactory() {
+        List<Tile> tileList = new ArrayList<>();
+        tileList.add(Tile.RED);
+        tileList.add(Tile.RED);
+        tileList.add(Tile.BLUE);
+        tileList.add(Tile.ORANGE);
+        tileList.add(Tile.BLUE);
+
+        assertThrows(FullException.class, () -> {
+            game.getFactoryList().get(0).addTiles(tileList);
+        });
 
     }
 
     @Test
-    void removeTilesFromFactory(){
+    void removeTilesFromFactory() {
         List<Tile> tileList = new ArrayList<>();
         tileList.add(Tile.RED);
         tileList.add(Tile.RED);

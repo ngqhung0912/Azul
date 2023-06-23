@@ -12,7 +12,6 @@ public class StartScreenView extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StartScreenView.class.getResource("/start-screen-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-//        stage.setMaximized(true);
         stage.setMinWidth(1250);
         stage.setMaxWidth(1250);
         stage.setMinHeight(700);

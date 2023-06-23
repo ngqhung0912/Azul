@@ -14,31 +14,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.util.WaitForAsyncUtils;
 import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
 import org.junit.jupiter.api.Test;
 import pppp.group14project.model.Wall;
 import pppp.group14project.model.exceptions.FullException;
 
-import static org.testfx.api.FxAssert.verifyThat;
-
 import javafx.event.Event;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import pppp.group14project.model.exceptions.WrongTileException;
 
-
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.testfx.util.NodeQueryUtils.isVisible;
 
 class ViewGameIntegrationTest extends ApplicationTest {
 
@@ -74,6 +65,8 @@ class ViewGameIntegrationTest extends ApplicationTest {
 
     private GridPane gameBoardPane;
 
+    private static Parent root;
+
 
     @BeforeAll
     public static void headless() {
@@ -92,7 +85,7 @@ class ViewGameIntegrationTest extends ApplicationTest {
 
         List<Factory> factories = game.getFactoryList();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/game-board-view.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/game-board-view.fxml"));
         FXMLLoader gameBoard = new FXMLLoader(getClass().getResource("/game-board-view.fxml"));
 
 
@@ -105,6 +98,7 @@ class ViewGameIntegrationTest extends ApplicationTest {
         gameBoardController = gameBoard.getController();
 
         tableController = gameBoardController.getTableController();
+
         table = tableController.getTable();
 
         factoryController = gameBoardController.getFactoryControllers().get(0);
@@ -123,7 +117,6 @@ class ViewGameIntegrationTest extends ApplicationTest {
         floor = floorController.getFloor();
 
         pattern = patternController.getPattern();
-
 
         stage.setScene(new Scene(root, 1250, 700));
         stage.show();
@@ -326,39 +319,94 @@ class ViewGameIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    void moveTilesFromTableToPattern() throws FullException, WrongTileException {
+    void moveTilesFromTableToPattern() throws FullException {
+        factory.empty();
+
+        GridPane tableGridP = (GridPane) gameBoardPane.lookup("#tableGridPane");
+        StackPane patternPaneP = (StackPane) gameBoardPane.lookup("#patternPane");
+        GridPane floorGridP = (GridPane) gameBoardPane.lookup("#floorGridPane");
+
         List<Tile> tileList = new ArrayList<>();
-        tileList.add(Tile.BLUE);
-        tileList.add(Tile.ORANGE);
-        tileList.add(Tile.BLUE);
         tileList.add(Tile.RED);
+        tileList.add(Tile.ORANGE);
+        tileList.add(Tile.BLACK);
+        tileList.add(Tile.RED);
+
         tableController.addTilesToTable(tileList);
-        floor.emptyFloor();
+
         assertEquals(tileList.size() + 1, table.size());
-        List<Tile> tableTile = new ArrayList<>();
+
+        ClickableTile clickedTile = (ClickableTile) tableGridP.getChildren().get(1);
+        mouseClickHandling(clickedTile);
+
+        VBox row = (VBox) patternPaneP.getChildren().get(0);
+        HBox col = (HBox) row.getChildren().get(0);
+        Node space = col.getChildren().get(0);
+
+        Node node = floorGridP.getChildren().get(7);
+
+        assertTrue(space.getStyleClass().contains("tile-option"));
+        assertTrue(node.getStyleClass().contains("tile-option"));
+
+    }
+
+    @Test
+    void moveTilesFromFactoryToPatternFloorTableWall() throws WrongTileException {
+        factory.empty();
+        List<Tile> tileList = new ArrayList<>();
+        tileList.add(Tile.RED);
+        tileList.add(Tile.RED);
+        tileList.add(Tile.RED);
+        tileList.add(Tile.BLUE);
+        game.fillFactories(tileList);
+
+        assertEquals(tileList, factory.getTiles());
+
+        patternController.grabTilesWhenPatternHaveSpaces(factory, Tile.RED, 1);
+
         GridPane tableGrid = (GridPane) gameBoardPane.lookup("#tableGridPane");
         StackPane patternPane = (StackPane) gameBoardPane.lookup("#patternPane");
         GridPane floorGrid = (GridPane) gameBoardPane.lookup("#floorGridPane");
-        assertTrue(patternPane.isVisible());
-        assertNotEquals(null, patternPane);
-        assertTrue(tableGrid.isVisible());
-        assertNotEquals(null, tableGrid);
+        GridPane wallGrid = (GridPane) gameBoardPane.lookup("#wallGridPane");
 
-        ClickableTile clickedTile = (ClickableTile) tableGrid.getChildren().get(1);
-        mouseClickHandling(clickedTile);
+        VBox row = (VBox) patternPane.getChildren().get(0);
+        HBox col = (HBox) row.getChildren().get(1);
+        Node space = col.getChildren().get(0);
 
+        assertTrue(space.getStyleClass().contains("RED"));
+        assertTrue(patternController.getPattern().getPatternLines().get(1).isFull());
 
-        VBox row = (VBox) patternPane.lookup("#rows");
-        HBox col = (HBox) row.getChildren().get(0);
-        Space space = (Space) col.getChildren().get(0);
-        //TODO ask how the pattern works
-        mouseClickSpaceHandling(space);
-        System.out.println(space);
-        System.out.println(pattern.getPatternLines().get(0).getSpaces().get(0));
+        Node node = floorGrid.getChildren().get(7);
 
-//        assertTrue(pattern.getPatternLines().get(0).isFull());
-//        assertEquals(floor.getTiles(), Tile.STARTING);
+        System.out.println(floor.getTiles());
+
+        assertTrue(node.getStyleClass().contains("RED"));
+        assertEquals(Tile.RED, floorController.getFloor().getTiles().get(0));
+
+        ClickableTile tableTile = (ClickableTile) tableGrid.getChildren().get(1);
+
+        List<Tile> tableList = new ArrayList<>();
+        tableList.add(Tile.STARTING);
+        tableList.add(Tile.BLUE);
+
+        assertTrue(tableTile.getStyleClass().contains("BLUE"));
+        assertEquals(tableList, table.getAllCurrentTiles());
+
+        playerBoardController.moveTileFromPatternToWall();
+
+        Node wallTile = null;
+
+        for (Node tile : wallGrid.getChildren()) {
+            if (wallGrid.getRowIndex(tile) == 1 && wallGrid.getColumnIndex(tile) == 3) {
+                wallTile = tile;
+                break;
+            }
+        }
+
+        assertEquals(1, wallTile.getOpacity());
+        assertEquals(Tile.RED, wall.getTilesInWall().get(0));
     }
+
 
     @Test
     public void endGame() throws WrongTileException, FullException {
@@ -385,20 +433,14 @@ class ViewGameIntegrationTest extends ApplicationTest {
 
     }
 
-    void mouseEnterHandling(Node node){
+    void mouseEnterHandling(Node node) {
         Event.fireEvent(node, new MouseEvent(MouseEvent.MOUSE_ENTERED, 0,
                 0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true,
                 true, true, true, true, true, true, null));
     }
 
-    void mouseExitedHandling(Node node){
+    void mouseExitedHandling(Node node) {
         Event.fireEvent(node, new MouseEvent(MouseEvent.MOUSE_EXITED, 0,
-                0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true,
-                true, true, true, true, true, true, null));
-    }
-
-    void mouseClickSpaceHandling(Space space) {
-        Event.fireEvent(space, new MouseEvent(MouseEvent.MOUSE_CLICKED, 0,
                 0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true,
                 true, true, true, true, true, true, null));
     }

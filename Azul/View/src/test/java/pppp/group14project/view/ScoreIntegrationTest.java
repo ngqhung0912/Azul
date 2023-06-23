@@ -4,23 +4,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
-import pppp.group14project.model.exceptions.WrongTileException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ScoreIntegrationTest extends ApplicationTest {
 
@@ -72,7 +65,7 @@ public class ScoreIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    void checkScore(){
+    void checkScore() {
         board.getScore().setValue(5);
         Text text = (Text) gameBoardPane.lookup("#scoreText");
         String score = text.getText();

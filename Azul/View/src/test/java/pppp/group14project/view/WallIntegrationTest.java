@@ -17,9 +17,6 @@ import pppp.group14project.model.exceptions.WrongTileException;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 class WallIntegrationTest extends ApplicationTest {
 
     private static GameBoardController gameBoardController;
@@ -74,9 +71,8 @@ class WallIntegrationTest extends ApplicationTest {
     }
 
 
-
     @Test
-    void wallReset()  {
+    void wallReset() {
         try {
             wallController.addTileToWall(Tile.ORANGE, 0);
             wallController.addTileToWall(Tile.ORANGE, 1);
@@ -101,7 +97,8 @@ class WallIntegrationTest extends ApplicationTest {
         try {
             wallController.addTileToWall(Tile.RED, 2);
             fail("Expect FullException and WrongTileException");
-        } catch (FullException | WrongTileException ignored) {}
+        } catch (FullException | WrongTileException ignored) {
+        }
 
         assertEquals(1, wall.getTilesInWall().size());
 

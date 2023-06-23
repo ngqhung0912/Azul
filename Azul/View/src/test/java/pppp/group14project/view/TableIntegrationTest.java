@@ -4,13 +4,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
-import pppp.group14project.model.exceptions.EmptyException;
 import pppp.group14project.model.exceptions.FullException;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ public class TableIntegrationTest extends ApplicationTest {
     private static Board board;
 
     private static Player player;
-
 
 
     @BeforeAll
@@ -71,7 +68,7 @@ public class TableIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    void tableRemoveAllAddedTiles()  {
+    void tableRemoveAllAddedTiles() {
         List<Tile> tileList = new ArrayList<>();
         tileList.add(Tile.BLUE);
         tileList.add(Tile.BLUE);
