@@ -121,13 +121,15 @@ public class PlayerBoardController implements Initializable, Mediator {
      * @param factory
      */
     public void activate(Tile tile, Factory factory) throws InvalidPositionException {
-        patternController.highlightPossibleSpaces(tile, factory);
+        boolean hasPlacedAutomatically = patternController.highlightPossibleSpaces(tile, factory);
+        if (hasPlacedAutomatically) return;
         floorController.highlightFloor(tile, factory);
     }
 
     public void deactivate() {
         floorController.unhighlightEntireFloor();
         patternController.unhighlightAllSpaces();
+        gameBoardController.finishPlayerTurn();
     }
 
     public List<Tile> moveTileFromPatternToWall() {

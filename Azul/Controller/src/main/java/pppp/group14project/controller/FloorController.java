@@ -85,19 +85,23 @@ public class FloorController {
     }
   }
 
+  /**
+   * Always highlight the floor even if its full.
+   */
+
   public void highlightFloor(Tile tile, Factory factory) {
     // check if we have enough space
-    int num_current_tiles = floor.getTiles().size();
-    int num_tiles_to_place = Collections.frequency(factory.getTiles(),tile);
-    if(num_current_tiles + num_tiles_to_place > 7) {
-      return;
+    List<Node> buttons = floorGridPane.getChildren().stream().filter((a) -> a instanceof Button).toList();
+
+    for (Node n : buttons) {
+      Button b = (Button) n;
+      b.getStyleClass().add("tile-option");
+      b.setOnAction(e -> {
+        moveTilesToFloorFromFactory(tile, factory);
+        playerBoardController.deactivate();
+      });
+
     }
-    Button first_empty_tile = (Button) floorGridPane.getChildren().get(num_current_tiles+7);
-    first_empty_tile.getStyleClass().add("tile-option");
-    first_empty_tile.setOnAction(e -> {
-      moveTilesToFloorFromFactory(tile, factory, first_empty_tile);
-      playerBoardController.deactivate();
-    });
   }
 
   public void unhighlightEntireFloor() {
@@ -107,13 +111,11 @@ public class FloorController {
       Button b = (Button) n;
       b.setOnAction(null);
 
-      if (b.getStyleClass().contains("tile-option")) {
-        b.getStyleClass().remove("tile-option");
-      }
+      b.getStyleClass().remove("tile-option");
     }
   }
 
-  public void moveTilesToFloorFromFactory(Tile tile, Factory factory, Button clickedSpace) {
+  public void moveTilesToFloorFromFactory(Tile tile, Factory factory) {
     List<List<Tile>> returnTiles = factory.grabTiles(tile);
     List<Tile> grabbedTiles = returnTiles.get(0);
     List<Tile> tableTiles = returnTiles.get(1);
@@ -121,8 +123,6 @@ public class FloorController {
     playerBoardController.moveTilesToTable(tableTiles);
 
     addTilesToFloor(grabbedTiles);
-    playerBoardController.getGameBoardController().finishPlayerTurn();
-    clickedSpace.getStyleClass().remove("tile-option");
   }
 
 
