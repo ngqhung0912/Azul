@@ -194,8 +194,6 @@ public class GameBoardController implements Initializable, Mediator {
    * @return whether the game should end
    */
   public boolean endConditionMet() {
-    System.out.println(game.getTilecontainer().getBagTiles());
-    System.out.println(game.getTilecontainer().getDiscardedTiles());
     for(Board board: game.getBoardList()) {
       Wall wall = board.getWall();
       if(wall.getFullRows() > 0) {
