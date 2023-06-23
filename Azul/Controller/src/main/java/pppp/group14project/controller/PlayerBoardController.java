@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import lombok.Getter;
@@ -20,7 +19,6 @@ import pppp.group14project.model.exceptions.WrongTileException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -125,6 +123,11 @@ public class PlayerBoardController implements Initializable, Mediator {
     public void activate(Tile tile, Factory factory) throws InvalidPositionException {
         patternController.highlightPossibleSpaces(tile, factory);
         floorController.highlightFloor(tile, factory);
+    }
+
+    public void deactivate() {
+        floorController.unhighlightEntireFloor();
+        patternController.unhighlightAllSpaces();
     }
 
     public List<Tile> moveTileFromPatternToWall() {

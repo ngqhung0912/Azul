@@ -128,8 +128,8 @@ public class PatternController {
             } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
+            playerBoardController.deactivate();
             playerBoardController.getGameBoardController().finishPlayerTurn();
-            unhighlightAllSpaces();
         });
     }
 
@@ -157,7 +157,7 @@ public class PatternController {
         }
     }
 
-    private void unhighlightAllSpaces() {
+    public void unhighlightAllSpaces() {
         for (Node row : rows.getChildren()) {
             HBox r = (HBox) row;
             for (Node space : r.getChildren()) {

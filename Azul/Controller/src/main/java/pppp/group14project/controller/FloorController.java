@@ -13,9 +13,7 @@ import pppp.group14project.model.Factory;
 import pppp.group14project.model.Floor;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
-import pppp.group14project.model.exceptions.WrongTileException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -89,14 +87,30 @@ public class FloorController {
 
   public void highlightFloor(Tile tile, Factory factory) {
     // check if we have enough space
-    Integer num_current_tiles = floor.getTiles().size();
-    Integer num_tiles_to_place = Collections.frequency(factory.getTiles(),tile);
+    int num_current_tiles = floor.getTiles().size();
+    int num_tiles_to_place = Collections.frequency(factory.getTiles(),tile);
     if(num_current_tiles + num_tiles_to_place > 7) {
       return;
     }
     Button first_empty_tile = (Button) floorGridPane.getChildren().get(num_current_tiles+7);
     first_empty_tile.getStyleClass().add("tile-option");
-    first_empty_tile.setOnAction(e -> {moveTilesToFloorFromFactory(tile, factory, first_empty_tile); });
+    first_empty_tile.setOnAction(e -> {
+      moveTilesToFloorFromFactory(tile, factory, first_empty_tile);
+      playerBoardController.deactivate();
+    });
+  }
+
+  public void unhighlightEntireFloor() {
+    for (Node n : floorGridPane.getChildren()) {
+      if (!(n instanceof Button)) continue;
+
+      Button b = (Button) n;
+      b.setOnAction(null);
+
+      if (b.getStyleClass().contains("tile-option")) {
+        b.getStyleClass().remove("tile-option");
+      }
+    }
   }
 
   public void moveTilesToFloorFromFactory(Tile tile, Factory factory, Button clickedSpace) {
