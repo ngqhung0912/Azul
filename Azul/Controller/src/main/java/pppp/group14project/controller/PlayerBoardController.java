@@ -166,6 +166,7 @@ public class PlayerBoardController implements Initializable, Mediator {
 
     @Override
     public void moveTilesToTable(List<Tile> tiles) {
+        gameBoardController.moveTilesToTable(tiles);
     }
 
     @Override
@@ -185,5 +186,10 @@ public class PlayerBoardController implements Initializable, Mediator {
     @Override
     public List<Tile> removeTilesFromFloor() {
         return floorController.getFloor().emptyFloor();
+    }
+
+
+    public boolean wallContainsTile(Tile tile, int row) {
+        return  wallController.wallContainsTile(tile, row);
     }
 }

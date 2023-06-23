@@ -44,6 +44,11 @@ public class WallController {
         wall.addTile(tile, row);
     }
 
+
+    public boolean wallContainsTile(Tile tile, int row) {
+        return wall.isTileInRow(tile, row);
+    }
+
     /**
      * Resets all the tiles back to original look
      */

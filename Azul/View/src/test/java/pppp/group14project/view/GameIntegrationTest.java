@@ -183,7 +183,7 @@ class GameIntegrationTest extends ApplicationTest {
         tableController.addTilesToTable(tileList);
         playerBoardController.activate(Tile.BLUE, table);
 
-        patternController.patternMoveTiles(table, Tile.BLUE, 1);
+        patternController.grabTilesWhenPatternHaveSpaces(table, Tile.BLUE, 1);
 
         assertTrue(patternController.getPattern().getPatternLines().get(1).isFull());
 

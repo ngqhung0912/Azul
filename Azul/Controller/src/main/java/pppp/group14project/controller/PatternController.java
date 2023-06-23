@@ -45,50 +45,64 @@ public class PatternController {
     @Getter
     private PlayerBoardController playerBoardController;
 
+    /**
+     * Check if pattern have possible spaces
+     */
+    private boolean patternHasPossibleSpaces(Tile tileToAdd) {
+        for (int i = 0; i < 5; i++) {
+            PatternLine p = pattern.getPatternLines().get(i);
+            if ((p.isEmpty() || (p.getTileType() == tileToAdd && !p.isFull())) && !playerBoardController.wallContainsTile(tileToAdd, i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
     public void highlightPossibleSpaces(Tile tile, Factory factory) throws InvalidPositionException {
         unhighlightAllSpaces();
 
-        boolean patternHasPossibleSpaces = false;
-
-        for (int i = 0; i < 5; i++) {
-            PatternLine p = pattern.getPatternLines().get(i);
-            boolean wallContainsTile = playerBoardController.getWallController().getWall().isTileInRow(tile, i);
-            if ((p.isEmpty() || (p.getTileType() == tile && !p.isFull())) && !wallContainsTile)
-                patternHasPossibleSpaces = true;
-        }
-
-
-        if (patternHasPossibleSpaces) {
+        if (patternHasPossibleSpaces(tile)) {
             for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
                 // Go to next row if the row has a tile, but it is not equal to the tile color given
-                boolean wallContainsTile = playerBoardController.getWallController().getWall().isTileInRow(tile, rowIndex);
-                if ((rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile)) || wallContainsTile)
+                if (tileDoesNotFitsRow(tile, rowIndex))
                     continue;
 
                 for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
                     if (!spaceHasTile(rowIndex, tileIndex)) {
-                        highlightSpace(rowIndex, tileIndex, tile, factory);
+                        highlightSpaceAndGrabTiles(rowIndex, tileIndex, tile, factory);
                         break;
                     }
                 }
             }
         } else {
-
-            List<List<Tile>> returnTiles = factory.grabTiles(tile);
-            List<Tile> grabbedTiles = returnTiles.get(0);
-            List<Tile> tableTiles = returnTiles.get(1);
-
-            playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
-            playerBoardController.moveTilesToFloor(grabbedTiles);
-
-            playerBoardController.getGameBoardController().finishPlayerTurn();
-            unhighlightAllSpaces();
+            grabTilesWhenPatternHasNoSpace(tile, factory);
         }
+    }
+
+    private boolean tileDoesNotFitsRow (Tile tile, int row) throws InvalidPositionException {
+        return (rowHasTile(row) && !rowHasTile(row, tile) )|| playerBoardController.wallContainsTile(tile, row);
+    }
+
+    /**
+     * Move tiles to Table and floor when pattern has no space
+     */
+    private void grabTilesWhenPatternHasNoSpace(Tile tile, Factory factory) {
+        List<List<Tile>> returnTiles = factory.grabTiles(tile);
+        List<Tile> grabbedTiles = returnTiles.get(0);
+        playerBoardController.moveTilesToFloor(grabbedTiles);
+
+        List<Tile> tableTiles = returnTiles.get(1);
+        playerBoardController.moveTilesToTable(tableTiles);
+
+        playerBoardController.getGameBoardController().finishPlayerTurn();
+        unhighlightAllSpaces();
     }
 
     /**
      * Gets a Space
-     * @param rowNumber row number, starting from 0 at the top
+     * @param rowNumber   row number, starting from 0 at the top
      * @param indexNumber index number, starting from 0 at the right
      * @return
      * @throws InvalidPositionException
@@ -105,13 +119,13 @@ public class PatternController {
         return space;
     }
 
-    private void highlightSpace(int rowNumber, int indexNumber, Tile tile, Factory factory) throws InvalidPositionException {
+    private void highlightSpaceAndGrabTiles(int rowNumber, int indexNumber, Tile tile, Factory factory) throws InvalidPositionException {
         Space s = getSpace(rowNumber, indexNumber);
         s.getStyleClass().add("tile-option");
         s.setOnAction(e -> {
             try {
-                patternMoveTiles(factory, tile, rowNumber);
-            }catch (WrongTileException ex) {
+                grabTilesWhenPatternHaveSpaces(factory, tile, rowNumber);
+            } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
             playerBoardController.getGameBoardController().finishPlayerTurn();
@@ -119,23 +133,23 @@ public class PatternController {
         });
     }
 
-    public void patternMoveTiles(Factory factory, Tile tile, int rowNumber) throws WrongTileException {
-            // Grab from Factory model or Table
-            List<List<Tile>> returnTiles = factory.grabTiles(tile);
-            List<Tile> grabbedTiles = returnTiles.get(0);
-            List<Tile> tableTiles = returnTiles.get(1);
+    public void grabTilesWhenPatternHaveSpaces(Factory factory, Tile tile, int rowNumber) throws WrongTileException {
+        // Grab from Factory model or Table
+        List<List<Tile>> returnTiles = factory.grabTiles(tile);
+        List<Tile> grabbedTiles = returnTiles.get(0);
+        List<Tile> tableTiles = returnTiles.get(1);
 
-            playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
+        playerBoardController.moveTilesToTable(tableTiles);
 
-            patternHandleStarting(grabbedTiles, playerBoardController);
+        patternHandleStarting(grabbedTiles, playerBoardController);
 
-            List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
-            playerBoardController.moveTilesToFloor(excessTiles);
+        List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
+        playerBoardController.moveTilesToFloor(excessTiles);
 
     }
 
-    private void patternHandleStarting(List<Tile> grabbedTiles, PlayerBoardController playerBoardController){
-        if (grabbedTiles.contains(Tile.STARTING)){
+    private void patternHandleStarting(List<Tile> grabbedTiles, PlayerBoardController playerBoardController) {
+        if (grabbedTiles.contains(Tile.STARTING)) {
             grabbedTiles.remove(Tile.STARTING);
             List<Tile> startingTile = new ArrayList<>();
             startingTile.add(Tile.STARTING);
