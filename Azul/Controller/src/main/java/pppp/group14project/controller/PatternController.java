@@ -91,10 +91,10 @@ public class PatternController {
     private void moveTilesWhenPatternHasNoSpace(Tile tile, Factory factory) {
         List<List<Tile>> returnTiles = factory.grabTiles(tile);
         List<Tile> grabbedTiles = returnTiles.get(0);
-        List<Tile> tableTiles = returnTiles.get(1);
-
-        playerBoardController.moveTilesToTable(tableTiles);
         playerBoardController.moveTilesToFloor(grabbedTiles);
+
+        List<Tile> tableTiles = returnTiles.get(1);
+        playerBoardController.moveTilesToTable(tableTiles);
 
         playerBoardController.getGameBoardController().finishPlayerTurn();
         unhighlightAllSpaces();
@@ -139,7 +139,7 @@ public class PatternController {
         List<Tile> grabbedTiles = returnTiles.get(0);
         List<Tile> tableTiles = returnTiles.get(1);
 
-        playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
+        playerBoardController.moveTilesToTable(tableTiles);
 
         patternHandleStarting(grabbedTiles, playerBoardController);
 

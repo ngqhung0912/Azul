@@ -104,7 +104,7 @@ public class FloorController {
     List<Tile> grabbedTiles = returnTiles.get(0);
     List<Tile> tableTiles = returnTiles.get(1);
 
-    playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
+    playerBoardController.moveTilesToTable(tableTiles);
 
     addTilesToFloor(grabbedTiles);
     playerBoardController.getGameBoardController().finishPlayerTurn();
