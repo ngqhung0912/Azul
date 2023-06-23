@@ -2,8 +2,6 @@ package pppp.group14project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pppp.group14project.model.Tile;
-import pppp.group14project.model.TileContainer;
 import pppp.group14project.model.exceptions.EmptyException;
 
 import java.util.List;
@@ -25,7 +23,7 @@ class TileContainerTest {
     @Test
     void TestTileContainerCreation() {
 
-        assertEquals(tileContainer.getBagTiles().size(), 100);
+        assertEquals(100, tileContainer.getBagTiles().size());
 
     }
 
@@ -36,8 +34,8 @@ class TileContainerTest {
     void TestTileGrabbing() throws EmptyException {
 
         List<Tile> result = tileContainer.grabBagTiles(10);
-        assertEquals(tileContainer.getBagTiles().size(), 90);
-        assertEquals(result.size(), 10);
+        assertEquals(90, tileContainer.getBagTiles().size());
+        assertEquals(10, result.size());
 
     }
 

@@ -1,7 +1,6 @@
 package pppp.group14project.controller;
 
 import javafx.scene.control.Button;
-import pppp.group14project.model.Factory;
 import pppp.group14project.model.Tile;
 
 public class ClickableTile extends Button {

@@ -100,7 +100,7 @@ class FactoryIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    void moveTooManyTilesToFactory(){
+    void moveTooManyTilesToFactory() {
         List<Tile> tileList = new ArrayList<>();
         tileList.add(Tile.RED);
         tileList.add(Tile.RED);

@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.controller.*;
@@ -37,6 +36,7 @@ public class FloorIntegrationTest extends ApplicationTest {
             GitlabCISupport.headless();
         }
     }
+
     @Override
     public void start(Stage stage) throws Exception {
         player = new Player("test");
@@ -57,7 +57,6 @@ public class FloorIntegrationTest extends ApplicationTest {
 
         floorController = playerBoardController.getFloorController();
         floor = floorController.getFloor();
-
 
 
         stage.setScene(new Scene(root, 120, 600));
@@ -85,7 +84,7 @@ public class FloorIntegrationTest extends ApplicationTest {
         tileList.add(Tile.BLACK);
         tileList.add(Tile.BLACK);
         floorController.addTilesToFloor(tileList);
-        System.out.println("THIS ONE _______________ "+ floor.getTiles());
+        System.out.println("THIS ONE _______________ " + floor.getTiles());
         assertEquals(tileList.size(), floor.getTiles().size());
 
         List<Tile> additionalTileList = new ArrayList<>();
@@ -99,7 +98,6 @@ public class FloorIntegrationTest extends ApplicationTest {
         floor.emptyFloor();
         assertEquals(0, floor.getTiles().size());
     }
-
 
 
 }

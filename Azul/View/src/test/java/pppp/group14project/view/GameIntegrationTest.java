@@ -2,20 +2,14 @@ package pppp.group14project.view;
 
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.controller.*;
@@ -26,10 +20,9 @@ import pppp.group14project.model.Wall;
 import pppp.group14project.model.exceptions.FullException;
 
 import java.util.ArrayList;
+
 import pppp.group14project.model.exceptions.WrongTileException;
 
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

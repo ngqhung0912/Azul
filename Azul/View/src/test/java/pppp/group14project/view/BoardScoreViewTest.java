@@ -15,28 +15,28 @@ import static org.testfx.util.NodeQueryUtils.hasText;
 
 public class BoardScoreViewTest extends ApplicationTest {
 
-  @BeforeAll
-  public static void headless() {
-    if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
-      GitlabCISupport.headless();
+    @BeforeAll
+    public static void headless() {
+        if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
+            GitlabCISupport.headless();
+        }
     }
-  }
 
-  @Override
-  public void start(Stage stage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("/player-board-view.fxml"));
-    stage.setScene(new Scene(root, 500, 500));
-    stage.show();
-    stage.toFront();
-  }
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/player-board-view.fxml"));
+        stage.setScene(new Scene(root, 500, 500));
+        stage.show();
+        stage.toFront();
+    }
 
-  @AfterEach
-  public void tearDown() throws Exception {
-    FxToolkit.hideStage();
-  }
+    @AfterEach
+    public void tearDown() throws Exception {
+        FxToolkit.hideStage();
+    }
 
-  @Test
-  public void whenGameStartsThenScoreIsZero() {
-    verifyThat("#scoreText", hasText("0"));
-  }
+    @Test
+    void whenGameStartsThenScoreIsZero() {
+        verifyThat("#scoreText", hasText("0"));
+    }
 }

@@ -52,13 +52,15 @@ class WallTest {
             wall.addTile(Tile.BLACK, 0);
             fail();
 
-        } catch (WrongTileException | FullException ignored) {}
+        } catch (WrongTileException | FullException ignored) {
+        }
 
         try {
             wall.addTile(Tile.RED, 0);
             fail();
 
-        } catch (WrongTileException | FullException ignored) {}
+        } catch (WrongTileException | FullException ignored) {
+        }
 
         assertNotEquals(5, wall.countTilesInRow(0));
     }
@@ -135,6 +137,7 @@ class WallTest {
             fail();
         }
     }
+
     @Test
     void testScoringSameRow() {
         try {
@@ -180,6 +183,7 @@ class WallTest {
             fail();
         }
     }
+
     @Test
     void testScoringAtEndGame() {
         try {

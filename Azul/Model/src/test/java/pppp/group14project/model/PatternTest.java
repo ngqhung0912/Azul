@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PatternTest {
+class PatternTest {
 
     private Pattern pattern;
 
@@ -33,13 +33,14 @@ public class PatternTest {
         List<Tile> returnedTiles3 = pattern.addTiles(3, tilesToAdd);
         List<Tile> returnedTiles4 = pattern.addTiles(4, tilesToAdd);
 
-        assertEquals(returnedTiles0.size(), 4);
-        assertEquals(returnedTiles1.size(), 3);
-        assertEquals(returnedTiles2.size(), 2);
-        assertEquals(returnedTiles3.size(), 1);
-        assertEquals(returnedTiles4.size(), 0);
+        assertEquals(4, returnedTiles0.size());
+        assertEquals(3, returnedTiles1.size());
+        assertEquals(2, returnedTiles2.size());
+        assertEquals(1, returnedTiles3.size());
+        assertEquals(0, returnedTiles4.size());
 
     }
+
     @Test
     void testAddAndRemoveCorrectTilesToPattern() {
         List<Tile> tileList = new ArrayList<>();
@@ -76,7 +77,8 @@ public class PatternTest {
         try {
             pattern.addTiles(1, tileList);
             fail("Expect WrongTileException");
-        } catch (WrongTileException ignored) {}
+        } catch (WrongTileException ignored) {
+        }
     }
 
 

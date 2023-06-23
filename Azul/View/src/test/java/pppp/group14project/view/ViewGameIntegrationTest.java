@@ -1,10 +1,7 @@
 package pppp.group14project.view;
 
 
-import javafx.application.Platform;
-import javafx.collections.transformation.TransformationList;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,31 +14,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.util.WaitForAsyncUtils;
 import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
 import org.junit.jupiter.api.Test;
 import pppp.group14project.model.Wall;
 import pppp.group14project.model.exceptions.FullException;
 
-import static org.testfx.api.FxAssert.verifyThat;
-
 import javafx.event.Event;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import pppp.group14project.model.exceptions.WrongTileException;
 
-
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.testfx.util.NodeQueryUtils.isVisible;
 
 class ViewGameIntegrationTest extends ApplicationTest {
 
@@ -332,7 +320,7 @@ class ViewGameIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    void moveTilesFromTableToPattern() throws FullException{
+    void moveTilesFromTableToPattern() throws FullException {
         factory.empty();
 
         GridPane tableGridP = (GridPane) gameBoardPane.lookup("#tableGridPane");
@@ -409,8 +397,8 @@ class ViewGameIntegrationTest extends ApplicationTest {
 
         Node wallTile = null;
 
-        for(Node tile : wallGrid.getChildren()){
-            if (wallGrid.getRowIndex(tile) == 1 && wallGrid.getColumnIndex(tile) == 3){
+        for (Node tile : wallGrid.getChildren()) {
+            if (wallGrid.getRowIndex(tile) == 1 && wallGrid.getColumnIndex(tile) == 3) {
                 wallTile = tile;
                 break;
             }

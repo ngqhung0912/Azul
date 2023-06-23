@@ -7,7 +7,7 @@ import pppp.group14project.model.exceptions.WrongTileException;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class BoardTest {
+class BoardTest {
 
     private Board board;
 
@@ -21,7 +21,7 @@ public class BoardTest {
     @Test
     void testUseTeam13WallAndUpdateScore() {
         board.useTeam13Wall();
-        assert(board.getWall() instanceof WallAdapter);
+        assert (board.getWall() instanceof WallAdapter);
 
         assertBoardScore(0);
 
@@ -45,9 +45,9 @@ public class BoardTest {
             assertBoardScore(6);
             board.getFloor().emptyFloor();
         } catch (FullException | WrongTileException e) {
-            fail("Should not throw");;
+            fail("Should not throw");
+            ;
         }
-
 
 
     }
@@ -57,7 +57,7 @@ public class BoardTest {
      * Expected behavior: Before the round ends, the negative score count. However, aft
      */
     @Test
-    void testUpdateScore()  {
+    void testUpdateScore() {
 
         assertBoardScore(0);
 
@@ -81,7 +81,8 @@ public class BoardTest {
             assertBoardScore(6);
             board.getFloor().emptyFloor();
         } catch (FullException | WrongTileException e) {
-            fail("Should not throw");;
+            fail("Should not throw");
+            ;
         }
 
     }
@@ -89,11 +90,8 @@ public class BoardTest {
 
     void assertBoardScore(int score) {
         board.updateScore();
-        assert(board.getScore().intValue() == score);
+        assert (board.getScore().intValue() == score);
     }
-
-
-
 
 
 }
