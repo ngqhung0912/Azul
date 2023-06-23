@@ -71,13 +71,13 @@ public class PatternController {
 
                 for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
                     if (!spaceHasTile(rowIndex, tileIndex)) {
-                        highlightSpace(rowIndex, tileIndex, tile, factory);
+                        highlightSpaceAndGrabTiles(rowIndex, tileIndex, tile, factory);
                         break;
                     }
                 }
             }
         } else {
-            moveTilesWhenPatternHasNoSpace(tile, factory);
+            grabTilesWhenPatternHasNoSpace(tile, factory);
         }
     }
 
@@ -88,7 +88,7 @@ public class PatternController {
     /**
      * Move tiles to Table and floor when pattern has no space
      */
-    private void moveTilesWhenPatternHasNoSpace(Tile tile, Factory factory) {
+    private void grabTilesWhenPatternHasNoSpace(Tile tile, Factory factory) {
         List<List<Tile>> returnTiles = factory.grabTiles(tile);
         List<Tile> grabbedTiles = returnTiles.get(0);
         playerBoardController.moveTilesToFloor(grabbedTiles);
@@ -119,12 +119,12 @@ public class PatternController {
         return space;
     }
 
-    private void highlightSpace(int rowNumber, int indexNumber, Tile tile, Factory factory) throws InvalidPositionException {
+    private void highlightSpaceAndGrabTiles(int rowNumber, int indexNumber, Tile tile, Factory factory) throws InvalidPositionException {
         Space s = getSpace(rowNumber, indexNumber);
         s.getStyleClass().add("tile-option");
         s.setOnAction(e -> {
             try {
-                patternMoveTiles(factory, tile, rowNumber);
+                grabTilesWhenPatternHaveSpaces(factory, tile, rowNumber);
             } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
@@ -133,7 +133,7 @@ public class PatternController {
         });
     }
 
-    public void patternMoveTiles(Factory factory, Tile tile, int rowNumber) throws WrongTileException {
+    public void grabTilesWhenPatternHaveSpaces(Factory factory, Tile tile, int rowNumber) throws WrongTileException {
         // Grab from Factory model or Table
         List<List<Tile>> returnTiles = factory.grabTiles(tile);
         List<Tile> grabbedTiles = returnTiles.get(0);
