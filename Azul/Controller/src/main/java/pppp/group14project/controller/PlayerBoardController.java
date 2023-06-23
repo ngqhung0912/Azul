@@ -186,4 +186,9 @@ public class PlayerBoardController implements Initializable, Mediator {
     public List<Tile> removeTilesFromFloor() {
         return floorController.getFloor().emptyFloor();
     }
+
+
+    public boolean wallContainsTile(Tile tile, int row) {
+        return  wallController.wallContainsTile(tile, row);
+    }
 }

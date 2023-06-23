@@ -52,8 +52,7 @@ public class PatternController {
 
         for (int i = 0; i < 5; i++) {
             PatternLine p = pattern.getPatternLines().get(i);
-            boolean wallContainsTile = playerBoardController.getWallController().getWall().isTileInRow(tile, i);
-            if ((p.isEmpty() || (p.getTileType() == tile && !p.isFull())) && !wallContainsTile) {
+            if ((p.isEmpty() || (p.getTileType() == tile && !p.isFull())) && !playerBoardController.wallContainsTile(tile, i)) {
                 patternHasPossibleSpaces = true;
                 break;
             }
