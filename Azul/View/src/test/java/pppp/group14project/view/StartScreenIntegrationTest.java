@@ -65,6 +65,10 @@ public class StartScreenIntegrationTest extends ApplicationTest {
         write("Bob");
         clickOn("#addPlayerButton");
         WaitForAsyncUtils.waitForFxEvents();
+        clickOn("#usernameTextField");
+        write("Robbert");
+        clickOn("#addPlayerButton");
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("#startButton");
         WaitForAsyncUtils.waitForFxEvents();
         verifyThat("#playerName", NodeQueryUtils.hasText("Bob"));
@@ -74,6 +78,10 @@ public class StartScreenIntegrationTest extends ApplicationTest {
     public void testNoName() {
         clickOn("#addPlayerButton");
         WaitForAsyncUtils.waitForFxEvents();
+
+        clickOn("#addPlayerButton");
+        WaitForAsyncUtils.waitForFxEvents();
+
         clickOn("#startButton");
         WaitForAsyncUtils.waitForFxEvents();
         verifyThat("#playerName", NodeQueryUtils.hasText(""));

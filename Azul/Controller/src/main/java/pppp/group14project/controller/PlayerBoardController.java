@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import lombok.Getter;
@@ -20,7 +19,6 @@ import pppp.group14project.model.exceptions.WrongTileException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -76,6 +74,7 @@ public class PlayerBoardController implements Initializable, Mediator {
             GridPane playerFloor = floorLoader.load();
             GridPane playerScore = scoreLoader.load();
             GridPane playerWall = wallLoader.load();
+            playerScore.setMouseTransparent(true);
 
             playerBoardGrid.add(playerPattern, 1, 1);
             playerBoardGrid.add(playerFloor, 1, 2);
@@ -123,8 +122,15 @@ public class PlayerBoardController implements Initializable, Mediator {
      * @param factory
      */
     public void activate(Tile tile, Factory factory) throws InvalidPositionException {
-        patternController.highlightPossibleSpaces(tile, factory);
+        boolean hasPlacedAutomatically = patternController.highlightPossibleSpaces(tile, factory);
+        if (hasPlacedAutomatically) return;
         floorController.highlightFloor(tile, factory);
+    }
+
+    public void deactivate() {
+        floorController.unhighlightEntireFloor();
+        patternController.unhighlightAllSpaces();
+        gameBoardController.finishPlayerTurn();
     }
 
     public List<Tile> moveTileFromPatternToWall() {

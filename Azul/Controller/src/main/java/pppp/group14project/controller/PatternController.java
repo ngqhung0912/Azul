@@ -60,12 +60,11 @@ public class PatternController {
 
 
 
-    public void highlightPossibleSpaces(Tile tile, Factory factory) throws InvalidPositionException {
+    public boolean highlightPossibleSpaces(Tile tile, Factory factory) throws InvalidPositionException {
         unhighlightAllSpaces();
 
         if (patternHasPossibleSpaces(tile)) {
             for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
-                // Go to next row if the row has a tile, but it is not equal to the tile color given
                 if (tileDoesNotFitsRow(tile, rowIndex))
                     continue;
 
@@ -78,7 +77,9 @@ public class PatternController {
             }
         } else {
             grabTilesWhenPatternHasNoSpace(tile, factory);
+            return true;
         }
+        return false;
     }
 
     private boolean tileDoesNotFitsRow (Tile tile, int row) throws InvalidPositionException {
@@ -89,15 +90,15 @@ public class PatternController {
      * Move tiles to Table and floor when pattern has no space
      */
     private void grabTilesWhenPatternHasNoSpace(Tile tile, Factory factory) {
+
         List<List<Tile>> returnTiles = factory.grabTiles(tile);
         List<Tile> grabbedTiles = returnTiles.get(0);
         playerBoardController.moveTilesToFloor(grabbedTiles);
 
         List<Tile> tableTiles = returnTiles.get(1);
         playerBoardController.moveTilesToTable(tableTiles);
+        playerBoardController.deactivate();
 
-        playerBoardController.getGameBoardController().finishPlayerTurn();
-        unhighlightAllSpaces();
     }
 
     /**
@@ -128,8 +129,6 @@ public class PatternController {
             } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
-            playerBoardController.getGameBoardController().finishPlayerTurn();
-            unhighlightAllSpaces();
         });
     }
 
@@ -145,6 +144,7 @@ public class PatternController {
 
         List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
         playerBoardController.moveTilesToFloor(excessTiles);
+        playerBoardController.deactivate();
 
     }
 
@@ -157,7 +157,7 @@ public class PatternController {
         }
     }
 
-    private void unhighlightAllSpaces() {
+    public void unhighlightAllSpaces() {
         for (Node row : rows.getChildren()) {
             HBox r = (HBox) row;
             for (Node space : r.getChildren()) {

@@ -29,6 +29,9 @@ public class GameController implements Initializable {
   @FXML
   private Button addPlayerButton;
 
+  @FXML
+  private Button startButton;
+
   public void onAddPlayerButtonClick() {
     Game game = Game.getInstance();
     Player player = new Player(usernameTextField.getText());
@@ -53,9 +56,14 @@ public class GameController implements Initializable {
 
     usernameTextField.setText(null);
 
-    if(game.getPlayerNameList().size() == 4) {
+    if (game.getPlayerNameList().size() < 2) {
+      startButton.setDisable(true);
+    } else if (game.getPlayerNameList().size() == 4) {
       addPlayerButton.setDisable(true);
+    } else {
+      startButton.setDisable(false);
     }
+
   }
 
   public void onStartGameButtonClick() {

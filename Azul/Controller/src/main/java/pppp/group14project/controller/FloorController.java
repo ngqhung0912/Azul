@@ -13,9 +13,7 @@ import pppp.group14project.model.Factory;
 import pppp.group14project.model.Floor;
 import pppp.group14project.model.Tile;
 import pppp.group14project.model.exceptions.FullException;
-import pppp.group14project.model.exceptions.WrongTileException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -33,7 +31,7 @@ public class FloorController {
    */
   @Getter
   @Setter
-  Floor floor;
+  private Floor floor;
 
   @Setter
   @Getter
@@ -87,19 +85,37 @@ public class FloorController {
     }
   }
 
+  /**
+   * Always highlight the floor even if its full.
+   */
+
   public void highlightFloor(Tile tile, Factory factory) {
     // check if we have enough space
-    Integer num_current_tiles = floor.getTiles().size();
-    Integer num_tiles_to_place = Collections.frequency(factory.getTiles(),tile);
-    if(num_current_tiles + num_tiles_to_place > 7) {
-      return;
+    List<Node> buttons = floorGridPane.getChildren().stream().filter((a) -> a instanceof Button).toList();
+
+    for (Node n : buttons) {
+      Button b = (Button) n;
+      b.getStyleClass().add("tile-option");
+      b.setOnAction(e -> {
+        moveTilesToFloorFromFactory(tile, factory);
+        playerBoardController.deactivate();
+      });
+
     }
-    Button first_empty_tile = (Button) floorGridPane.getChildren().get(num_current_tiles+7);
-    first_empty_tile.getStyleClass().add("tile-option");
-    first_empty_tile.setOnAction(e -> {moveTilesToFloorFromFactory(tile, factory, first_empty_tile); });
   }
 
-  public void moveTilesToFloorFromFactory(Tile tile, Factory factory, Button clickedSpace) {
+  public void unhighlightEntireFloor() {
+    for (Node n : floorGridPane.getChildren()) {
+      if (!(n instanceof Button)) continue;
+
+      Button b = (Button) n;
+      b.setOnAction(null);
+
+      b.getStyleClass().remove("tile-option");
+    }
+  }
+
+  public void moveTilesToFloorFromFactory(Tile tile, Factory factory) {
     List<List<Tile>> returnTiles = factory.grabTiles(tile);
     List<Tile> grabbedTiles = returnTiles.get(0);
     List<Tile> tableTiles = returnTiles.get(1);
@@ -107,8 +123,6 @@ public class FloorController {
     playerBoardController.moveTilesToTable(tableTiles);
 
     addTilesToFloor(grabbedTiles);
-    playerBoardController.getGameBoardController().finishPlayerTurn();
-    clickedSpace.getStyleClass().remove("tile-option");
   }
 
 

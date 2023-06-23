@@ -25,7 +25,7 @@ public class TableController {
 
     @Setter
     @Getter
-    Table table;
+    private Table table;
 
     @Setter
     @Getter
