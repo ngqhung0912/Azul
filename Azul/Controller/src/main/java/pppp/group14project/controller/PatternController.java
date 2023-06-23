@@ -59,22 +59,10 @@ public class PatternController {
     public void highlightPossibleSpaces(Tile tile, Factory factory) throws InvalidPositionException {
         unhighlightAllSpaces();
 
-//        boolean patternHasPossibleSpaces = false;
-
-//        for (int i = 0; i < 5; i++) {
-//            PatternLine p = pattern.getPatternLines().get(i);
-//            if ((p.isEmpty() || (p.getTileType() == tile && !p.isFull())) && !playerBoardController.wallContainsTile(tile, i)) {
-//                patternHasPossibleSpaces = true;
-//                break;
-//            }
-//        }
-
-
         if (patternHasPossibleSpaces(tile)) {
             for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
                 // Go to next row if the row has a tile, but it is not equal to the tile color given
-                boolean wallContainsTile = playerBoardController.getWallController().getWall().isTileInRow(tile, rowIndex);
-                if ((rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile)) || wallContainsTile)
+                if ((rowHasTile(rowIndex) && !rowHasTile(rowIndex, tile)) || playerBoardController.wallContainsTile(tile, rowIndex))
                     continue;
 
                 for (int tileIndex = 0; tileIndex <= rowIndex; tileIndex++) {
@@ -85,17 +73,31 @@ public class PatternController {
                 }
             }
         } else {
+            moveTilesWhenPatternHasNoSpace(tile, factory);
 
-            List<List<Tile>> returnTiles = factory.grabTiles(tile);
-            List<Tile> grabbedTiles = returnTiles.get(0);
-            List<Tile> tableTiles = returnTiles.get(1);
-
-            playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
-            playerBoardController.moveTilesToFloor(grabbedTiles);
-
-            playerBoardController.getGameBoardController().finishPlayerTurn();
-            unhighlightAllSpaces();
+//            List<List<Tile>> returnTiles = factory.grabTiles(tile);
+//            List<Tile> grabbedTiles = returnTiles.get(0);
+//            List<Tile> tableTiles = returnTiles.get(1);
+//
+//            playerBoardController.moveTilesToTable(tableTiles);
+//            playerBoardController.moveTilesToFloor(grabbedTiles);
+//
+//            playerBoardController.getGameBoardController().finishPlayerTurn();
+//            unhighlightAllSpaces();
         }
+    }
+
+
+    private void moveTilesWhenPatternHasNoSpace(Tile tile, Factory factory) {
+        List<List<Tile>> returnTiles = factory.grabTiles(tile);
+        List<Tile> grabbedTiles = returnTiles.get(0);
+        List<Tile> tableTiles = returnTiles.get(1);
+
+        playerBoardController.moveTilesToTable(tableTiles);
+        playerBoardController.moveTilesToFloor(grabbedTiles);
+
+        playerBoardController.getGameBoardController().finishPlayerTurn();
+        unhighlightAllSpaces();
     }
 
     /**

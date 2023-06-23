@@ -166,6 +166,7 @@ public class PlayerBoardController implements Initializable, Mediator {
 
     @Override
     public void moveTilesToTable(List<Tile> tiles) {
+        gameBoardController.moveTilesToTable(tiles);
     }
 
     @Override
