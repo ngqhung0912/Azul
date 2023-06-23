@@ -60,6 +60,8 @@ class GameIntegrationTest extends ApplicationTest {
 
     private static Game game;
 
+    private static TileContainer tileContainer;
+
     private GridPane gameBoardPane;
 
 
@@ -108,6 +110,8 @@ class GameIntegrationTest extends ApplicationTest {
         floor = floorController.getFloor();
 
         pattern = patternController.getPattern();
+
+        tileContainer = game.getTilecontainer();
 
 
         stage.setScene(new Scene(root, 1250, 700));
@@ -205,6 +209,18 @@ class GameIntegrationTest extends ApplicationTest {
         assertFalse(table.getTiles().contains(Tile.BLUE));
 
         floor.getTiles().clear();
+    }
+
+    @Test
+    void addTooManyTilesToFloor(){
+        List<Tile> tileList = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            tileList.add(Tile.RED);
+        }
+        floorController.addTilesToFloor(tileList);
+
+        assertEquals(7, floorController.getFloor().getTiles().size());
+        assertEquals(3, tileContainer.getDiscardedTiles().size());
     }
 
 }
