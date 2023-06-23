@@ -184,7 +184,7 @@ class GameIntegrationTest extends ApplicationTest {
         tableController.addTilesToTable(tileList);
         playerBoardController.activate(Tile.BLUE, table);
 
-        patternController.patternMoveTiles(table, Tile.BLUE, 1);
+        patternController.grabTilesWhenPatternHaveSpaces(table, Tile.BLUE, 1);
 
         assertTrue(patternController.getPattern().getPatternLines().get(1).isFull());
 
@@ -193,7 +193,7 @@ class GameIntegrationTest extends ApplicationTest {
 
 
     @Test
-    void moveTilesFromFactoryToFloor() throws FullException {
+    void moveTilesFromFactoryToFloor() throws FullException, InterruptedException {
         List<Tile> tiles = new ArrayList<>();
         tiles.add(Tile.BLUE);
         tiles.add(Tile.RED);
@@ -202,12 +202,8 @@ class GameIntegrationTest extends ApplicationTest {
         factory.getTiles().clear();
         factory.addTiles(tiles);
 
-        Button button = new Button();
-        button.getStyleClass().add("tile-option");
-
-        floorController.moveTilesToFloorFromFactory(Tile.BLUE, factory, button);
-
-        assertFalse(button.getStyleClass().contains("tile-option"));
+        floorController.moveTilesToFloorFromFactory(Tile.BLUE, factory);
+        playerBoardController.deactivate();
         assertTrue(floor.getTiles().contains(Tile.BLUE));
         assertFalse(floor.getTiles().contains(Tile.RED));
         assertFalse(floor.getTiles().contains(Tile.WHITE));
