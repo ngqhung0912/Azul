@@ -45,21 +45,32 @@ public class PatternController {
     @Getter
     private PlayerBoardController playerBoardController;
 
+
+    private boolean patternHasPossibleSpaces(Tile tileToAdd) {
+        for (int i = 0; i < 5; i++) {
+            PatternLine p = pattern.getPatternLines().get(i);
+            if ((p.isEmpty() || (p.getTileType() == tileToAdd && !p.isFull())) && !playerBoardController.wallContainsTile(tileToAdd, i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void highlightPossibleSpaces(Tile tile, Factory factory) throws InvalidPositionException {
         unhighlightAllSpaces();
 
-        boolean patternHasPossibleSpaces = false;
+//        boolean patternHasPossibleSpaces = false;
 
-        for (int i = 0; i < 5; i++) {
-            PatternLine p = pattern.getPatternLines().get(i);
-            if ((p.isEmpty() || (p.getTileType() == tile && !p.isFull())) && !playerBoardController.wallContainsTile(tile, i)) {
-                patternHasPossibleSpaces = true;
-                break;
-            }
-        }
+//        for (int i = 0; i < 5; i++) {
+//            PatternLine p = pattern.getPatternLines().get(i);
+//            if ((p.isEmpty() || (p.getTileType() == tile && !p.isFull())) && !playerBoardController.wallContainsTile(tile, i)) {
+//                patternHasPossibleSpaces = true;
+//                break;
+//            }
+//        }
 
 
-        if (patternHasPossibleSpaces) {
+        if (patternHasPossibleSpaces(tile)) {
             for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
                 // Go to next row if the row has a tile, but it is not equal to the tile color given
                 boolean wallContainsTile = playerBoardController.getWallController().getWall().isTileInRow(tile, rowIndex);
