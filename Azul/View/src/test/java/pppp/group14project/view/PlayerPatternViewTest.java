@@ -4,11 +4,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -57,7 +55,7 @@ class PlayerPatternViewTest extends ApplicationTest {
 
         VBox vbox = ((VBox) pattern.getChildren().get(0));
         int numberOfRows = vbox.getChildren().size();
-        assertEquals(numberOfRows, 5);
+        assertEquals(5, numberOfRows);
 
         for (int i = 0; i < numberOfRows; i++) {
             HBox h = (HBox) vbox.getChildren().get(i);
@@ -75,9 +73,9 @@ class PlayerPatternViewTest extends ApplicationTest {
         VBox vbox = ((VBox) pattern.getChildren().get(0));
         int numberOfRows = vbox.getChildren().size();
 
-        for (Node r: vbox.getChildren()) {
+        for (Node r : vbox.getChildren()) {
             HBox hbox = (HBox) r;
-            for(Node s: hbox.getChildren()) {
+            for (Node s : hbox.getChildren()) {
                 assertFalse(s.getStyleClass().contains("is-colored"));
             }
         }

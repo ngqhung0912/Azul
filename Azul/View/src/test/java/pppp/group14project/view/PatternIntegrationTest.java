@@ -8,16 +8,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import pppp.group14project.controller.*;
 import pppp.group14project.model.*;
-import pppp.group14project.model.exceptions.WrongTileException;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,14 +33,12 @@ public class PatternIntegrationTest extends ApplicationTest {
     private GridPane gameBoardPane;
 
 
-
     @BeforeAll
     public static void headless() {
         if (Boolean.parseBoolean(System.getProperty("gitlab-ci", "false"))) {
             GitlabCISupport.headless();
         }
     }
-
 
 
     @Override
@@ -68,7 +62,6 @@ public class PatternIntegrationTest extends ApplicationTest {
         pattern = patternController.getPattern();
 
 
-
         stage.setScene(new Scene(root, 120, 600));
         stage.show();
         stage.toFront();
@@ -83,7 +76,7 @@ public class PatternIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    void testSpaceLocation(){
+    void testSpaceLocation() {
         StackPane patternPane = (StackPane) gameBoardPane.lookup("#patternPane");
         VBox rows = (VBox) patternPane.lookup("#rows");
         HBox cols = (HBox) rows.getChildren().get(0);
@@ -95,7 +88,7 @@ public class PatternIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    void testSpacePlacement(){
+    void testSpacePlacement() {
         Space space = new Space();
         space.setIndex(2);
         space.setRow(3);
@@ -104,7 +97,7 @@ public class PatternIntegrationTest extends ApplicationTest {
     }
 
     @Test
-    void testSpaceIntegerProperty(){
+    void testSpaceIntegerProperty() {
         Space space = new Space();
         space.rowProperty().set(5);
         space.indexProperty().set(1);

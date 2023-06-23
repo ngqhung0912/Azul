@@ -3,15 +3,12 @@ package pppp.group14project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import pppp.group14project.model.Table;
-import pppp.group14project.model.Tile;
-
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TableTest {
+class TableTest {
 
     private Table table;
 
@@ -25,8 +22,8 @@ public class TableTest {
      */
     @Test
     void TestInitializingWithStartingTile() throws Exception {
-        assertEquals(table.size(), 1);
-        assertEquals(table.starting_tile, true);
+        assertEquals(1, table.size());
+        assertEquals(true, table.starting_tile);
     }
 
     /**
@@ -37,8 +34,8 @@ public class TableTest {
 
         List<Tile> tilesToAdd = Arrays.asList(Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.BLUE);
         table.addTiles(tilesToAdd);
-        assertEquals(table.size(), 9);
-        assertEquals(table.getMaxNumberOfTiles(), Integer.MAX_VALUE);
+        assertEquals(9, table.size());
+        assertEquals(Integer.MAX_VALUE, table.getMaxNumberOfTiles());
 
     }
 

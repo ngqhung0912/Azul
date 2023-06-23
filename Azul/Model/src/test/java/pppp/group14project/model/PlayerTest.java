@@ -2,7 +2,6 @@ package pppp.group14project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pppp.group14project.model.Player;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +21,6 @@ class PlayerTest {
      */
     @Test
     void TestPlayerCreation() {
-        assertEquals(player.getName(), playerName);
+        assertEquals(playerName, player.getName());
     }
 }

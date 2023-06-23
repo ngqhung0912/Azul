@@ -196,6 +196,6 @@ public class PlayerBoardController implements Initializable, Mediator {
 
 
     public boolean wallContainsTile(Tile tile, int row) {
-        return  wallController.wallContainsTile(tile, row);
+        return wallController.wallContainsTile(tile, row);
     }
 }

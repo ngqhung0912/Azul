@@ -33,7 +33,7 @@ public class FactoryController {
      * Used to update the view if the model changes
      */
     public void setTileColours(List<Tile> colours) {
-        for(Integer i = 0; i < colours.size(); i++) {
+        for (Integer i = 0; i < colours.size(); i++) {
             Tile colour = colours.get(i);
             ClickableTile tile = (ClickableTile) tileGrid.getChildren().get(i);
             tile.getStyleClass().clear();
@@ -52,9 +52,9 @@ public class FactoryController {
 
     public void highlightTiles(Tile selectedTile) {
         String colour = selectedTile.toString();
-        for(Node tile : tileGrid.getChildren()) {
+        for (Node tile : tileGrid.getChildren()) {
             ObservableList<String> style = tile.getStyleClass();
-            if(style.contains(colour)) {
+            if (style.contains(colour)) {
                 style.add("selected");
             }
         }

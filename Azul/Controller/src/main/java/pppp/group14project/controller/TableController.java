@@ -139,7 +139,6 @@ public class TableController {
             ClickableTile clickableTile = (ClickableTile) node;
 
 
-
             clickableTile.setOnMouseEntered(event -> {
 
                 Tile tileColor = clickableTile.getColour();
