@@ -19,11 +19,11 @@ public class FactoryController {
     // model
     @Setter
     @Getter
-    Factory factory;
+    private Factory factory;
 
     // view
     @FXML
-    GridPane tileGrid;
+    private GridPane tileGrid;
 
     @Getter
     @Setter

@@ -65,7 +65,6 @@ public class PatternController {
 
         if (patternHasPossibleSpaces(tile)) {
             for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
-                // Go to next row if the row has a tile, but it is not equal to the tile color given
                 if (tileDoesNotFitsRow(tile, rowIndex))
                     continue;
 

@@ -31,7 +31,7 @@ public class FloorController {
    */
   @Getter
   @Setter
-  Floor floor;
+  private Floor floor;
 
   @Setter
   @Getter
