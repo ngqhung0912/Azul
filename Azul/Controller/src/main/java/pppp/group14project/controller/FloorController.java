@@ -85,20 +85,23 @@ public class FloorController {
     }
   }
 
+  /**
+   * Always highlight the floor even if its full.
+   */
+
   public void highlightFloor(Tile tile, Factory factory) {
     // check if we have enough space
     List<Node> buttons = floorGridPane.getChildren().stream().filter((a) -> a instanceof Button).toList();
-    int numberOfTilesInFloor = floor.getTiles().size();
-    int numberOfTilesToPlace = Collections.frequency(factory.getTiles(),tile);
-    if(numberOfTilesInFloor + numberOfTilesToPlace > buttons.size()) {
-      return;
+
+    for (Node n : buttons) {
+      Button b = (Button) n;
+      b.getStyleClass().add("tile-option");
+      b.setOnAction(e -> {
+        moveTilesToFloorFromFactory(tile, factory);
+        playerBoardController.deactivate();
+      });
+
     }
-    Button firstEmptySpace = (Button) buttons.get(numberOfTilesInFloor);
-    firstEmptySpace.getStyleClass().add("tile-option");
-    firstEmptySpace.setOnAction(e -> {
-      moveTilesToFloorFromFactory(tile, factory, firstEmptySpace);
-      playerBoardController.deactivate();
-    });
   }
 
   public void unhighlightEntireFloor() {
@@ -112,7 +115,7 @@ public class FloorController {
     }
   }
 
-  public void moveTilesToFloorFromFactory(Tile tile, Factory factory, Button clickedSpace) {
+  public void moveTilesToFloorFromFactory(Tile tile, Factory factory) {
     List<List<Tile>> returnTiles = factory.grabTiles(tile);
     List<Tile> grabbedTiles = returnTiles.get(0);
     List<Tile> tableTiles = returnTiles.get(1);
