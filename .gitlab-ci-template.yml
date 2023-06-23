@@ -1,46 +1,25 @@
-# This file is a template, and might need editing before it works on your project.
-# This is a sample GitLab CI/CD configuration file that should run without any modifications.
-# It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
-# it uses echo commands to simulate the pipeline execution.
-#
-# A pipeline is composed of independent jobs that run scripts, grouped into stages.
-# Stages run in sequential order, but jobs within stages run in parallel.
-#
-# For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
-#
-# You can copy and paste this template into a new `.gitlab-ci.yml` file.
-# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
-#
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
-
 image:  ngqhung0912/java19-maven3.8.7-monocle
 
 stages:
   - build
   - test
-  - deploy
   - report
+  - visualize
 
 variables:
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -Dgitlab-ci=true -DIS_COMPILE_PANGO=true  -DtrimStackTrace=false"
-build-job:
-  tags:
-    - pppp
-  stage: build
-  script:
-    - echo "Hello"
 
+  
 modelTest-job:
   tags:
     - pppp
   stage: test
   script:
     - cd Azul/Model
-    - mvn verify
+    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test jacoco:report
   artifacts:
+    paths:
+      - Azul/Model/target/site/jacoco/jacoco.xml
     when: always
     reports:
       junit:
@@ -58,18 +37,11 @@ viewTest-job:
    - cd ../View
    - mvn dependency:tree
    - mvn verify $MAVEN_CLI_OPTS
-
  artifacts:
    when: always
    reports:
      junit:
        - Azul/View/target/surefire-reports/TEST-*.xml
-
-# deploy-prod:
-#   image: alpine
-#   stage: deploy
-#   script:
-#     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
 
 sigridci:
   stage: report
@@ -108,6 +80,26 @@ sigridpublish:
     when: always
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+coverage-job:
+  stage: visualize
+  image: haynes/jacoco2cobertura:1.0.7
+  tags:
+    - pppp
+  script:
+    # convert report from jacoco to cobertura, using relative project path
+    - python3 /opt/cover2cover.py Azul/Model/target/site/jacoco/jacoco.xml /Azul/Model/src/main/java/ > cobertura-coverage.xml
+  # Use this regular expression to create the badge.
+  coverage: '/^s*Instructions:s*d+.d+\%/'
+  needs: ["modelTest-job"]
+  dependencies:
+    - "modelTest-job"
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: cobertura-coverage.xml
+
 
 
 
