@@ -53,8 +53,10 @@ public class PatternController {
         for (int i = 0; i < 5; i++) {
             PatternLine p = pattern.getPatternLines().get(i);
             boolean wallContainsTile = playerBoardController.getWallController().getWall().isTileInRow(tile, i);
-            if ((p.isEmpty() || (p.getTileType() == tile && !p.isFull())) && !wallContainsTile)
+            if ((p.isEmpty() || (p.getTileType() == tile && !p.isFull())) && !wallContainsTile) {
                 patternHasPossibleSpaces = true;
+                break;
+            }
         }
 
 
@@ -88,7 +90,7 @@ public class PatternController {
 
     /**
      * Gets a Space
-     * @param rowNumber row number, starting from 0 at the top
+     * @param rowNumber   row number, starting from 0 at the top
      * @param indexNumber index number, starting from 0 at the right
      * @return
      * @throws InvalidPositionException
@@ -111,7 +113,7 @@ public class PatternController {
         s.setOnAction(e -> {
             try {
                 patternMoveTiles(factory, tile, rowNumber);
-            }catch (WrongTileException ex) {
+            } catch (WrongTileException ex) {
                 throw new RuntimeException(ex);
             }
             playerBoardController.getGameBoardController().finishPlayerTurn();
@@ -120,22 +122,22 @@ public class PatternController {
     }
 
     public void patternMoveTiles(Factory factory, Tile tile, int rowNumber) throws WrongTileException {
-            // Grab from Factory model or Table
-            List<List<Tile>> returnTiles = factory.grabTiles(tile);
-            List<Tile> grabbedTiles = returnTiles.get(0);
-            List<Tile> tableTiles = returnTiles.get(1);
+        // Grab from Factory model or Table
+        List<List<Tile>> returnTiles = factory.grabTiles(tile);
+        List<Tile> grabbedTiles = returnTiles.get(0);
+        List<Tile> tableTiles = returnTiles.get(1);
 
-            playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
+        playerBoardController.getGameBoardController().moveTilesToTable(tableTiles);
 
-            patternHandleStarting(grabbedTiles, playerBoardController);
+        patternHandleStarting(grabbedTiles, playerBoardController);
 
-            List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
-            playerBoardController.moveTilesToFloor(excessTiles);
+        List<Tile> excessTiles = this.pattern.addTiles(rowNumber, grabbedTiles);
+        playerBoardController.moveTilesToFloor(excessTiles);
 
     }
 
-    private void patternHandleStarting(List<Tile> grabbedTiles, PlayerBoardController playerBoardController){
-        if (grabbedTiles.contains(Tile.STARTING)){
+    private void patternHandleStarting(List<Tile> grabbedTiles, PlayerBoardController playerBoardController) {
+        if (grabbedTiles.contains(Tile.STARTING)) {
             grabbedTiles.remove(Tile.STARTING);
             List<Tile> startingTile = new ArrayList<>();
             startingTile.add(Tile.STARTING);
