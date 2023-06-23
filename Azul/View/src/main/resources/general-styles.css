@@ -71,6 +71,14 @@ ClickableTile {
     -fx-cursor: hand;
 }
 
+.winnerBoard {
+    -fx-arc-height: 16;
+    -fx-arc-width: 16;
+    -fx-stroke-width: 7;
+    -fx-fill: #fefaf4;
+    -fx-stroke: #D9AB38;
+}
+
 .playerBoard {
     -fx-arc-height: 16;
     -fx-arc-width: 16;
@@ -87,6 +95,11 @@ ClickableTile {
     -fx-min-height: 33;
     -fx-background-insets: 1;
     -fx-background-radius: 0;
+}
+
+.winnerText {
+    -fx-text-fill: #D9AB38;
+    -fx-fill: #D9AB38;
 }
 
 #scoreText {
@@ -124,13 +137,4 @@ ClickableTile {
     -fx-cursor: hand;
     -fx-border-width: 2;
     /*-fx-effect: dropshadow(gaussian, rgb(200, 200, 200), 30, 0.4, 0, 0);*/
-}
-
-.winnertext {
-    -fx-text-fill: #D9AB38;
-}
-
-.winnerboard {
-    -fx-border-width: 7;
-    -fx-border-color: #D9AB38;
 }

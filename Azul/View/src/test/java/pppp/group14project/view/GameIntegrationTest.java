@@ -223,7 +223,13 @@ class GameIntegrationTest extends ApplicationTest {
         wall.addTile(Tile.BLACK, 0);
         wall.addTile(Tile.ORANGE, 0);
 
+        factory.getTiles().clear();
+        table.getTiles().clear();
+
+        gameBoardController.finishPlayerTurn();
+
         assertTrue(gameBoardController.endConditionMet());
+        assertEquals(board, game.getWinner());
     }
 
 }

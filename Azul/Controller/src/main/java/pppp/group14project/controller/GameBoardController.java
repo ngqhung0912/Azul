@@ -3,6 +3,7 @@ package pppp.group14project.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.*;
 import javafx.util.Pair;
 import lombok.Getter;
@@ -221,9 +222,18 @@ public class GameBoardController implements Initializable, Mediator {
       winner = (playerscore > winner.getBoard().getWall().getWallScore()) ? player : winner;
     }
     // display the winner
-    winner.playerName.getStyleClass().add("winnertext");
-    winner.boardBackground.getStyleClass().add("winnerboard");
-    winner.getScoreController().scoreText.getStyleClass().add("winnertext");
+    game.setWinner(winner.getBoard());
+    winner.playerName.getStyleClass().add("winnerText");
+    winner.boardBackground.getStyleClass().clear();
+    winner.boardBackground.getStyleClass().add("winnerBoard");
+    winner.getScoreController().scoreText.getStyleClass().add("winnerText");
+
+    // alert that the game has ended
+    Alert a = new Alert(Alert.AlertType.INFORMATION);
+    String winnername = winner.playerName.getText();
+    winnername = (winnername == null || winnername == "") ? "Anonymous" : winnername;
+    a.setContentText("The game has ended, and " + winnername + " has won! \n Restart the game to play again.");
+    a.show();
   }
 
   private int getStartingPlayer() {

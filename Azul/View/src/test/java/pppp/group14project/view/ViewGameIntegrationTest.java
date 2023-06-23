@@ -114,6 +114,7 @@ class ViewGameIntegrationTest extends ApplicationTest {
         playerBoardController = gameBoardController.getPlayerBoardControllers().get(0);
 
         wallController = playerBoardController.getWallController();
+        wall = wallController.getWall();
 
         patternController = playerBoardController.getPatternController();
 
@@ -357,8 +358,24 @@ class ViewGameIntegrationTest extends ApplicationTest {
 
 //        assertTrue(pattern.getPatternLines().get(0).isFull());
 //        assertEquals(floor.getTiles(), Tile.STARTING);
+    }
 
+    @Test
+    public void endGame() throws WrongTileException, FullException {
+        wall.addTile(Tile.WHITE, 0);
+        wall.addTile(Tile.BLUE, 0);
+        wall.addTile(Tile.RED, 0);
+        wall.addTile(Tile.BLACK, 0);
+        wall.addTile(Tile.ORANGE, 0);
 
+        factory.getTiles().clear();
+        table.getTiles().clear();
+
+        gameBoardController.finishPlayerTurn();
+
+        assertTrue(playerBoardController.playerName.getStyleClass().contains("winnerText"));
+        assertTrue(playerBoardController.boardBackground.getStyleClass().contains("winnerBoard"));
+        assertTrue(playerBoardController.getScoreController().scoreText.getStyleClass().contains("winnerText"));
     }
 
     void mouseClickHandling(Node node) {
