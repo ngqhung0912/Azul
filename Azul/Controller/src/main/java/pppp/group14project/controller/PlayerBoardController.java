@@ -74,6 +74,7 @@ public class PlayerBoardController implements Initializable, Mediator {
             GridPane playerFloor = floorLoader.load();
             GridPane playerScore = scoreLoader.load();
             GridPane playerWall = wallLoader.load();
+            playerScore.setMouseTransparent(true);
 
             playerBoardGrid.add(playerPattern, 1, 1);
             playerBoardGrid.add(playerFloor, 1, 2);
