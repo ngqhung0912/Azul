@@ -205,6 +205,25 @@ class ViewGameIntegrationTest extends ApplicationTest {
     }
 
     @Test
+    void tryGrabStartingTile() {
+        GridPane tableGrid = (GridPane) gameBoardPane.lookup("#tableGridPane");
+        mouseClickHandling(tableGrid.getChildren().get(0));
+
+        List<Tile> tableTile = new ArrayList<>();
+        List<Tile> expectedTile = new ArrayList<>();
+
+        for (Node node : tableGrid.getChildren()) {
+            if (node instanceof ClickableTile) {
+                Tile color = ((ClickableTile) node).getColour();
+                if (color != null && node.getStyleClass().contains("selected") && node.getOpacity() == 1) {
+                    tableTile.add(color);
+                }
+            }
+        assertEquals(expectedTile, tableTile);
+        }
+    }
+
+    @Test
     void selectAndUnselectTilesTable() throws FullException {
         List<Tile> tileList = new ArrayList<>();
         tileList.add(Tile.BLUE);
