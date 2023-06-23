@@ -87,15 +87,16 @@ public class FloorController {
 
   public void highlightFloor(Tile tile, Factory factory) {
     // check if we have enough space
-    int num_current_tiles = floor.getTiles().size();
-    int num_tiles_to_place = Collections.frequency(factory.getTiles(),tile);
-    if(num_current_tiles + num_tiles_to_place > 7) {
+    List<Node> buttons = floorGridPane.getChildren().stream().filter((a) -> a instanceof Button).toList();
+    int numberOfTilesInFloor = floor.getTiles().size();
+    int numberOfTilesToPlace = Collections.frequency(factory.getTiles(),tile);
+    if(numberOfTilesInFloor + numberOfTilesToPlace > buttons.size()) {
       return;
     }
-    Button first_empty_tile = (Button) floorGridPane.getChildren().get(num_current_tiles+7);
-    first_empty_tile.getStyleClass().add("tile-option");
-    first_empty_tile.setOnAction(e -> {
-      moveTilesToFloorFromFactory(tile, factory, first_empty_tile);
+    Button firstEmptySpace = (Button) buttons.get(numberOfTilesInFloor);
+    firstEmptySpace.getStyleClass().add("tile-option");
+    firstEmptySpace.setOnAction(e -> {
+      moveTilesToFloorFromFactory(tile, factory, firstEmptySpace);
       playerBoardController.deactivate();
     });
   }
@@ -107,9 +108,7 @@ public class FloorController {
       Button b = (Button) n;
       b.setOnAction(null);
 
-      if (b.getStyleClass().contains("tile-option")) {
-        b.getStyleClass().remove("tile-option");
-      }
+      b.getStyleClass().remove("tile-option");
     }
   }
 
@@ -121,8 +120,6 @@ public class FloorController {
     playerBoardController.moveTilesToTable(tableTiles);
 
     addTilesToFloor(grabbedTiles);
-    playerBoardController.getGameBoardController().finishPlayerTurn();
-    clickedSpace.getStyleClass().remove("tile-option");
   }
 
 
