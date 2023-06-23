@@ -4,4 +4,8 @@
 ![Model test coverage](https://gitlab.utwente.nl/p4/2023Team14/badges/main/coverage.svg?job=visualize:coverage-job)
 
 
-#### More details comming soon. 
+#### How to run the game:
+
+1. Navigate to Azul/View/src/main/java/pppp/group14project/view/StartScreenView.java
+2. Run the main method in the StartScreenView class. 
+3. Enjoy the game!

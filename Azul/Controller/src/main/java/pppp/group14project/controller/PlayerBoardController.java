@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import lombok.Getter;
 import lombok.Setter;
 import pppp.group14project.controller.exceptions.InvalidPositionException;
@@ -31,6 +32,8 @@ public class PlayerBoardController implements Initializable, Mediator {
     public Label playerName;
     @FXML
     private GridPane playerBoardGrid;
+    @FXML
+    public Rectangle boardBackground;
 
     /**
      * Player board model

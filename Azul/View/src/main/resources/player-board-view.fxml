@@ -16,9 +16,9 @@
     <stylesheets>
         <URL value="@general-styles.css" />
     </stylesheets>
-    <Rectangle height="300.0" styleClass="playerBoard" width="420.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <Rectangle fx:id="boardBackground" height="300.0" styleClass="playerBoard" width="420.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <GridPane fx:id="playerBoardGrid" maxWidth="420.0">
-        <Label fx:id="playerName" text="Test" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
+        <Label fx:id="playerName" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
         <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">
             <columnConstraints>
                 <ColumnConstraints minWidth="17.0" percentWidth="100" />

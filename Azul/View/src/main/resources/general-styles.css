@@ -71,6 +71,14 @@ ClickableTile {
     -fx-cursor: hand;
 }
 
+.winnerBoard {
+    -fx-arc-height: 16;
+    -fx-arc-width: 16;
+    -fx-stroke-width: 7;
+    -fx-fill: #fefaf4;
+    -fx-stroke: #D9AB38;
+}
+
 .playerBoard {
     -fx-arc-height: 16;
     -fx-arc-width: 16;
@@ -87,6 +95,11 @@ ClickableTile {
     -fx-min-height: 33;
     -fx-background-insets: 1;
     -fx-background-radius: 0;
+}
+
+.winnerText {
+    -fx-text-fill: #D9AB38;
+    -fx-fill: #D9AB38;
 }
 
 #scoreText {
