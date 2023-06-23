@@ -1,5 +1,6 @@
 package pppp.group14project.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -229,11 +230,14 @@ public class GameBoardController implements Initializable, Mediator {
     winner.getScoreController().scoreText.getStyleClass().add("winnerText");
 
     // alert that the game has ended
-    Alert a = new Alert(Alert.AlertType.INFORMATION);
-    String winnername = winner.playerName.getText();
-    winnername = (winnername == null || winnername == "") ? "Anonymous" : winnername;
-    a.setContentText("The game has ended, and " + winnername + " has won! \n Restart the game to play again.");
-    a.show();
+    Platform.runLater(() -> {
+      Alert a = new Alert(Alert.AlertType.INFORMATION);
+      Game game = Game.getInstance();
+      String winnername = game.winner.getPlayer().getName();
+      winnername = (winnername == null || winnername == "") ? "Anonymous" : winnername;
+      a.setContentText("The game has ended, and " + winnername + " has won! \n Restart the game to play again.");
+      a.show();
+    });
   }
 
   private int getStartingPlayer() {

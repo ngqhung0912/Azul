@@ -93,6 +93,8 @@ class GameIntegrationTest extends ApplicationTest {
         factories.clear();
         factories.add(new Factory());
 
+        game.setWinner(null);
+
         gameBoardPane = gameBoard.load();
 
         gameBoardController = gameBoard.getController();
@@ -123,7 +125,6 @@ class GameIntegrationTest extends ApplicationTest {
         stage.toFront();
     }
 
-
     @AfterEach
     public void tearDown() throws Exception {
         FxToolkit.hideStage();
@@ -132,6 +133,7 @@ class GameIntegrationTest extends ApplicationTest {
         game.getFactoryList().clear();
         game.getBoardList().clear();
         game.getTilecontainer().reset();
+        game.setWinner(null);
     }
 
 
@@ -229,7 +231,7 @@ class GameIntegrationTest extends ApplicationTest {
         gameBoardController.finishPlayerTurn();
 
         assertTrue(gameBoardController.endConditionMet());
-        assertEquals(board, game.getWinner());
+        assertEquals(playerBoardController.getBoard(), game.getWinner());
     }
 
 }
