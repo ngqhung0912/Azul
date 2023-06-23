@@ -200,6 +200,10 @@ public class GameBoardController implements Initializable, Mediator {
         return true;
       }
     }
+    return tileContainerEmpty();
+  }
+
+  private boolean tileContainerEmpty() {
     return game.getTilecontainer().getBagTiles().isEmpty() && game.getTilecontainer().getDiscardedTiles().isEmpty();
   }
 
