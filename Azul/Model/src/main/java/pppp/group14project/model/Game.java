@@ -29,6 +29,10 @@ public class Game {
     @Setter
     private List<Integer> playerOrder;
 
+    @Getter
+    @Setter
+    public Board winner;
+
     public int getNextPlayerID() {
         int numberOfPlayers = boardList.size();
         int playerIndex = roundTurnCounter % numberOfPlayers;

@@ -88,6 +88,8 @@ class GameIntegrationTest extends ApplicationTest {
         factories.clear();
         factories.add(new Factory());
 
+        game.setWinner(null);
+
         gameBoardPane = gameBoard.load();
 
         gameBoardController = gameBoard.getController();
@@ -111,6 +113,7 @@ class GameIntegrationTest extends ApplicationTest {
 
         pattern = patternController.getPattern();
 
+        wall = wallController.getWall();
         tileContainer = game.getTilecontainer();
 
 
@@ -128,6 +131,7 @@ class GameIntegrationTest extends ApplicationTest {
         game.getFactoryList().clear();
         game.getBoardList().clear();
         game.getTilecontainer().reset();
+        game.setWinner(null);
     }
 
 
@@ -209,6 +213,23 @@ class GameIntegrationTest extends ApplicationTest {
         assertFalse(table.getTiles().contains(Tile.BLUE));
 
         floor.getTiles().clear();
+    }
+
+    @Test
+    public void testEndGame() throws WrongTileException, FullException {
+        wall.addTile(Tile.WHITE, 0);
+        wall.addTile(Tile.BLUE, 0);
+        wall.addTile(Tile.RED, 0);
+        wall.addTile(Tile.BLACK, 0);
+        wall.addTile(Tile.ORANGE, 0);
+
+        factory.getTiles().clear();
+        table.getTiles().clear();
+
+        gameBoardController.finishPlayerTurn();
+
+        assertTrue(gameBoardController.endConditionMet());
+        assertEquals(playerBoardController.getBoard(), game.getWinner());
     }
 
     @Test
