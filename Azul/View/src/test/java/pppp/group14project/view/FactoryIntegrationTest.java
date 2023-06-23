@@ -127,5 +127,18 @@ class FactoryIntegrationTest extends ApplicationTest {
         assertEquals(0, factory.size());
         factory.empty();
     }
+
+    @Test
+    void notEnoughTiles(){
+        List<Tile> tileList = new ArrayList<>();
+        tileList.add(Tile.RED);
+        tileList.add(Tile.RED);
+        tileList.add(Tile.BLUE);
+        game.fillFactories(tileList);
+        assertEquals(tileList.size(), factory.size());
+        factoryController.getFactory().grabTiles(Tile.RED);
+        assertEquals(0, factory.size());
+        factory.empty();
+    }
 }
 

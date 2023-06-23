@@ -60,6 +60,8 @@ class GameIntegrationTest extends ApplicationTest {
 
     private static Game game;
 
+    private static TileContainer tileContainer;
+
     private GridPane gameBoardPane;
 
 
@@ -112,11 +114,14 @@ class GameIntegrationTest extends ApplicationTest {
         pattern = patternController.getPattern();
 
         wall = wallController.getWall();
+        tileContainer = game.getTilecontainer();
+
 
         stage.setScene(new Scene(root, 1250, 700));
         stage.show();
         stage.toFront();
     }
+
 
     @AfterEach
     public void tearDown() throws Exception {
@@ -225,6 +230,18 @@ class GameIntegrationTest extends ApplicationTest {
 
         assertTrue(gameBoardController.endConditionMet());
         assertEquals(playerBoardController.getBoard(), game.getWinner());
+    }
+
+    @Test
+    void addTooManyTilesToFloor(){
+        List<Tile> tileList = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            tileList.add(Tile.RED);
+        }
+        floorController.addTilesToFloor(tileList);
+
+        assertEquals(7, floorController.getFloor().getTiles().size());
+        assertEquals(3, tileContainer.getDiscardedTiles().size());
     }
 
 }

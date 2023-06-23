@@ -88,8 +88,13 @@ public class Game {
     public void fillFactories(List<Tile> tiles) {
         int counter = 0;
         for (Factory factory : factoryList) {
+
             try {
-                factory.addTiles(tiles.subList(counter, counter + 4));
+                if (tiles.size() < 4) {
+                    factory.addTiles(tiles);
+                } else {
+                    factory.addTiles(tiles.subList(counter, counter + 4));
+                }
             } catch (FullException e) {
                 e.printStackTrace();
             }
